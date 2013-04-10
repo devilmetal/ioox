@@ -1,0 +1,41 @@
+<!-- ======================================================================
+                              Tutorial site's skin
+     ======================================================================= -->
+<skin xmlns="http://oppidoc.com/oppidum/skin">
+    <handler name="msg-or-err">
+        <predef module="oppidum">flash</predef>
+    </handler>
+    <profile name="standard" type="mesh">
+        <!-- CSS for timesheets -->
+        <link href="css/layout.css"/>
+        <link href="css/intro.css"/>
+        <link href="css/transitions.css"/>
+
+        
+        <!-- CSS for our config -->
+        <link href="css/site.css"/>
+        <link href="css/base.css"/>
+        <link href="css/cal.css"/>
+
+        <!-- JS for the Calendar -->
+        <script src="js/jquery.js"/>
+        <script src="js/cal.js"/>
+        <script src="js/wolftrap.js"/>
+        <script src="js/timesheets.js"/>
+	
+	<!--JS FOR THE RIDEAU -->
+        <script src="js/rideau.js"/>
+         
+       
+    </profile>
+
+    <profile name="standard2" type="mesh">
+        <link href="css/base.css"/>
+        <predef module="oppidum" avoid="error()">axel-1.3</predef>
+    </profile>
+    <profile name="editor">
+        <link href="css/base.css"/>
+        <predef module="oppidum" avoid="error()">axel-1.3</predef>
+    </profile>
+    
+</skin>

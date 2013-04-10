@@ -1,0 +1,9 @@
+
+footer {
+  border-bottom: solid 1px black;
+  text-align: center;
+  margin: 2em 35%;
+  font-size: 75%;
+  float:bottom;
+}
+

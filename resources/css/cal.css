@@ -1,0 +1,678 @@
+/* IE6 hack to fix width issue*/
+* html .grid-cf { overflow: hidden; }
+* html #tabs { height:30px; }
+
+/*TODO normalize with clearfix*/
+br.clear { clear: both; }
+
+.tabs, #filter { width: 100%; }
+div.tabs div.tab { color:#820B02 !important; }
+
+#hpCal img.calAjax {
+	margin: 0 auto;
+	padding: 104px 0 97px;
+	padding-top: 104px;
+	width: 16px;
+	display: block;
+}
+
+#home li a.detail { 
+	text-decoration: none;
+	width: 185px;
+/*	display: inline-block;*/
+	display: block;
+}
+#home li.barns a.detail { color:#dd3e00; }
+#home li.filene a.detail { color:#9d1b11; }
+#home li.education a.detail { color:#00743c; }
+#home li.opera a.detail { color:#017b87; }
+
+#filter {
+	background-color: #f1f3eb;
+	padding: 8px 0;
+	text-align: center;
+	font-size: 10px;
+}
+	#filter select { width:125px; }
+#calendar h2 { 
+	text-align: center;
+	padding-top: 11px;
+	color: #280f0a;
+}
+
+#tabCalendar,
+#tabList {
+	cursor: pointer;
+	padding: 3px;
+	width: auto;
+	float: left;
+	padding: 12px 21px 5px;
+	font: normal 10px Arial, Helvetica, Sans-Serif;
+	text-transform: uppercase;
+	background: transparent url(../images/bullet-arrow-red.gif) no-repeat 12px 14px;
+	color: #d13f34;
+}
+#tabCalendar { border-right: 1px solid #fff; }
+#tabCalendar.on,
+#tabList.on { 
+	border-right: 1px solid #abaca7;
+	border-bottom: none;
+	background-color: #f1f3eb;
+}
+#calendar {
+	margin:10px;
+	background-color:#fff;
+	position: relative;
+}
+
+ul.prevnext {
+	position: absolute;
+	right: 18px;
+	top: 18px;
+	font: normal 12px Georgia, "Times New Roman", Serif;
+}
+	ul.prevnext li {
+		float: left;
+		width: auto;
+		list-style: none;
+		padding: 0 0 0 15px;
+	}
+	ul.prevnext li:first-child { 
+		border-right: 1px solid #c4c5bf;
+		padding: 0 15px 0 0;
+	}
+	ul.prevnext a { 
+		color: #755232;
+		text-decoration: none;
+		border-bottom: 1px dotted #820B02;
+	}
+	p.note {
+		font: normal 10px Arial, Helvetica, Sans-Serif;
+		text-align: right;
+		margin: 0 10px 0;
+		color: #a3937b;
+	}
+	ul.utils { 
+		list-style-type: none; 
+		margin: 5px 0 0 10px;
+		padding: 0 0 15px 0; 
+	}
+	ul.utils li { margin: 0 0 3px 0; padding: 0; }
+	ul.utils .download { 
+		text-decoration: none !important; 
+		border-bottom: 1px dotted #820b02;
+		padding-bottom: 1px;
+	}
+	ul.utils li a {
+		color:#820B02;
+	}
+
+#instr { margin-top: 8px;font-size: 10px; }
+
+#cal {
+	width: 268px;
+	background-color: #f2f3e5;
+	position: relative; 
+}
+
+#calHeader {
+	background-color: #cec6b1;
+	width: 268px;
+	height: 24px;
+}
+	* html #calHeader { width: 270px; }
+	#calHeader ul {
+		margin: 0;
+		padding: 0 0 0 7px;
+		list-style: none;
+	}
+	
+	#calHeader ul li {
+		color: #000;
+		cursor: default;
+		font-size: 12px;
+		height: auto;
+		padding-top: 2px;
+		text-align: center;
+		float: left;
+		margin: 1px 0 0 1px;
+		width: 35px;
+	}
+	
+#calDays {
+	clear: left;
+	padding: 5px 0 10px 4px;
+	border-top: 4px solid #fefffd;
+	width: 268px;
+	min-height: 140px;
+}
+	* html #calDays { height: 140px; width: 263px; }
+
+	#calDays ul {
+		margin: 0 0 0 3px !important;
+		/*overflow: auto;*/ /* for Moz to properly due height */
+		padding: 0;
+		list-style: none;
+		width: 100%; /* for IE to properly due height */
+	}
+
+	#calDays ul li {
+		float: left;
+		height: 24px;
+		height: 23px;
+		margin: 1px 0 0 1px;
+		width: 35px;
+		_display: inline;
+	}
+
+	#calDays ul li.sunday { margin-left: 1px; }
+	#calDays ul li.monday { margin-left: 37px; }
+	#calDays ul li.tuesday { margin-left: 73px; }
+	#calDays ul li.wednesday { margin-left: 109px; }
+	#calDays ul li.thursday { margin-left: 145px; }
+	#calDays ul li.friday { margin-left: 181px; }
+	#calDays ul li.saturday { margin-left: 217px; }
+
+	#calDays ul li div {
+		color: #000;
+		display: block;
+		font: 10px/10px Verdana;
+		height: 23px;
+		width: 37px;
+		padding-top: 7px;
+		text-align: center;
+		text-decoration: none;
+	}
+		* html #calDays ul li div { height: 17px; width: 34px; }
+	#cal #calDays ul li div.today { /* MR */
+		color: #fff;
+		background-image:url(../images/home-cal-eventday.gif);
+		background-position:50% 1px;
+		background-repeat:no-repeat;
+	}
+	#cal #calDays ul li.today div {
+		color: #fff;
+		background-image:url(../images/home-cal-today.gif);
+		background-position:50% 1px;
+		background-repeat:no-repeat;
+	}
+	
+	/*differences from big calendar*/
+	#cal div.calDayData { display: none; }
+	
+	#cal #calDays li.data ul.calDayShort {
+		width: 280px;
+		position: absolute;
+		left: 265px;
+		top: 28px;
+	}
+ 		#cal li.data .dyn { display:none; }
+		#cal li.data .on { text-decoration: underline; color: #000; }
+		#cal li.today .on { color: #fff; }
+
+	#cal #calDays li.data .calDayShort li {
+		float: none;
+		display: block;
+		width: auto;
+		height: auto;
+		text-align: left;
+		margin: 0 0 3px 10px;
+		padding: 2px 0 2px 5px;
+		
+		/* TODO: set background colors as classes based on venue */
+		background-color: #fbe2d3;
+		color: #b45d2c;
+		position: relative;
+	}
+	#cal #calDays li.data .calDayShort li a {
+		position: absolute;
+		top: 2px;
+		right: 10px;
+		cursor: hand;
+		cursor: pointer;
+		background-image: none;
+	}
+		#cal #calDays li.data .calDayShort li a.detail { position: static; }
+		#cal #calDays li.click div.today { cursor: hand; cursor: pointer; }
+		#cal #calDays li.click div.today li { cursor: default; }
+	#cal div.more { display: none; }
+	
+/* *********************************************** BIG CALENDAR */
+
+#calBig {
+	width: 635px;
+	background-color: #f2f3e5;
+}
+
+
+#calBig #calHeader {
+	background-color: #cdcdca;
+	border: 1px;
+	border-top-color: #fff;
+	border-left-color: #fff;
+	border-right-color: #abaca7;
+	border-bottom-color: #abaca7;
+	border-style: solid;
+	padding: 4px 0 0;
+	font: 15px Georgia, "Times New Roman", Serif;
+	width: 634px;
+	height: 30px;
+}
+
+	#calBig #calHeader ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+	}
+	
+	#calBig #calHeader ul li {
+		color: #000;
+		cursor: default;
+		font-size: 15px;
+		border-right: 1px solid #abaca7;
+		border-left: 1px solid #fff;
+		margin: 0;
+		padding: 0;
+		width: 88px;
+		overflow: hidden;
+	}
+		#calBig #calHeader ul li:first-child,
+		#calBig #calHeader ul li.first-child { border-left: none; }
+		#calBig #calHeader ul li:last-child,
+		#calBig #calHeader ul li.last { border-right: none; }
+	
+#calBig #calDays {
+	clear: left;
+	padding: 9px 0 10px 4px;
+	border-top: none;
+	width: 631px;
+}
+
+	/* SERIOUSLY!! needed for IE6 */
+	* html #calBig #calDays ul li.data { overflow:hidden; }
+
+	#calBig #calDays ul {
+		margin: 0 0 0 3px !important;
+		/*overflow: auto;*/ /* for Moz to properly due height */
+		padding: 0;
+		list-style: none;
+		width: 100%; /* for IE to properly due height */
+	}
+
+	#calBig #calDays ul li {
+		background-color: #fff;
+		float: left;
+		height: 94px;
+		margin: 1px 0 0 1px;
+		margin: 0;
+		border: 2px solid #f0f3e2;
+		width: 85px;
+		_display: inline;
+	}
+	#calBig #calDays ul li.sunday { margin-left: 0; }
+	#calBig #calDays ul li.monday { margin-left: 89px; }
+	#calBig #calDays ul li.tuesday { margin-left: 178px; }
+	#calBig #calDays ul li.wednesday { margin-left: 267px; }
+	#calBig #calDays ul li.thursday { margin-left: 356px; }
+	#calBig #calDays ul li.friday { margin-left: 445px; }
+	#calBig #calDays ul li.saturday { margin-left: 534px; }
+
+	#calBig #calDays ul li div {
+		background-color: transparent;
+		color: #765332;
+		display: block;
+		font: 18px/18px Arial, Helvetica, Sans-Serif;
+		padding: 3px 0 0 3px;
+		text-align: left;
+		width: auto;
+		position: relative;
+	}
+	* html #calBig #calDays ul li div { position: static; }
+
+	#calBig #calDays li.data {
+		background-color: #fff;
+		cursor: pointer;
+	}
+		#calBig.grid #calDays li.on .calDayShort,
+		#calBig.grid #calDays li.data:hover div,
+		#calBig.grid #calDays li.data.hover div,
+		#calBig.grid #calDays li.data:hover .calDayShort,
+		#calBig.grid #calDays li.data.hover .calDayShort,
+		#calBig.grid #calDays li.today .calDayShort { color:#000; }
+
+		#calBig.grid #calDays li.data:hover,
+		#calBig.grid #calDays li.data.hover { 
+			border:2px solid #ccc;
+		}
+
+		#calBig.grid #calDays li.data div.more { color: #d13f34; }
+		#calBig.grid #calDays li.data:hover div.more,
+		#calBig.grid #calDays li.data.hover div.more,
+		#calBig.grid #calDays li.on div.more { 
+			text-decoration: underline;
+			color: #000;
+		}
+
+	#calBig #calDays li.today div.today div.more,
+	#calBig #calDays li.today { background-color: #f8e2e0 !important; }
+	
+	#calBig #calDays li.on div.today div.more { background-color: #D0CBB7 !important; }
+	
+	#calBig #calDays li.today div { color: #000; }
+
+	/* on state*/
+	#calBig #calDays li div.today { 
+		position:relative; 
+		height: 91px;
+		width: 81px;
+		overflow: hidden;
+	}
+	* html #calBig #calDays li div.today { position: static; }
+	
+	#calBig #calDays li.on div { color: #3a351f; }
+	
+	#calBig #calDays li.on div.today {
+		cursor: pointer;
+		background-color: #d0cbb7;
+		color: #000;
+		padding-left: 3px;
+		text-align: left;
+		top: -4px;
+		left: -4px;
+		border: 4px solid #d0cbb7; 
+	}
+	
+		#calBig #calDays li.data div.today div.more {
+			font-size: 10px; 
+			position: absolute; 
+			bottom: 0;
+			left: 0;
+			height: 15px;
+			width: 80px;
+			padding-bottom: 5px;
+			padding-left: 5px;
+			background-color: #fff;
+		}
+			* html #calBig #calDays li.data div.today div.more {
+				position: static;
+			}
+			
+		#calBig #calDays li.data .calDayShort {
+			display: block;
+			margin: 0 0 0 5px !important;
+			border: none;
+			padding: 0;
+			line-height: 12px;
+			font-size: 11px;
+			width: auto;
+			color: #765332;
+		}
+			#calBig #calDays li.data .calDayShort li {
+				background-color: transparent;
+				height: auto;
+				width: auto;
+				float: none;
+				border: none;
+ 				margin: 0;
+				display: none;
+				line-height: 1;
+			}
+			/* on big calendar display only first item li:first-child */
+			#calBig #calDays ul.calDayShort li:first-child,
+			#calBig #calDays ul.calDayShort li.first-child {display:list-item;}
+			#calBig #calDays ul.calDayShort li:nth-child(2) {display:list-item;}
+			#calBig #calDays ul.calDayShort li:nth-child(3) {display:list-item;}
+			#calBig.grid #calDays ul.calDayShort li.more { display:block; }
+			#calBig.grid #calDays ul.calDayShort li.more a { 
+				display: inline;
+				position: relative;
+				top: 30px;
+			}
+			
+		#calBig #calDays li.on div.calDayDetail,
+		#calBig #calDays li.data:hover div.calDayDetail,
+		#calBig #calDays li.data.hover div.calDayDetail { color: #3a351f; }
+		
+		#calBig #calDays li.data div.calDayData {
+			display: none;
+			padding: 0;
+			background-color: #fff;
+			border: 4px solid #d0cbb7;
+			font: 12px Georgia, "Times New Roman", serif;
+			width: 263px; 
+			height: 291px; 
+			overflow: hidden;
+			z-index: 10;
+			position:relative; 
+			cursor: default;
+		}
+			li.down div.calDayData { top: -106px; }
+				* html li.down div.calDayData { top: -104px; }
+			li.up div.calDayData { top: -303px; }
+				* html li.up div.calDayData { top: -305px; }
+			li.left div.calDayData { left: -271px; }
+			li.right div.calDayData { left: 85px; }
+			
+			#calBig .calDayData span.close {
+				float: right;
+				width: auto;
+				font: 10px Verdana, Arial, Helvetica, sans-serif;
+				cursor: pointer;
+				margin: 6px 4px 0 0;
+				display: none;
+			}
+			
+			#calBig .calDayData h4 {
+				margin: 0;
+				padding: 5px 0;
+				font: 15px Georgia, "Times New Roman", serif;
+				background-color: #d0cbb7;
+			}
+
+		#calBig #calDays li.data div.calDayDetail { 
+			padding: 5px 8px;
+			font-size: 12px;
+			line-height: 12px;
+			font-family: Arial, Helvetica, Sans-Serif;
+			height: 254px;
+			overflow: auto;
+
+		}
+		#calBig #calDays li.data div.calDayDetail p.detail a { font-family:Arial,Helvetica,Sans-Serif; }
+		
+		/* formatting big calendar dates and days data */
+		#calBig #calDays li.data .calDayDetail div {
+			font: 11px Arial, Helvetica, sans-serif;
+			margin: 12px 0;
+			padding: 0;
+			position: static;
+			height: auto;
+			color: #3A351F;
+		}
+			#calBig .calDayDetail p {
+				margin: 4px 0 10px 0;
+				padding: 0;
+				font-size: 10px;
+			}
+		#calBig .calDayDetail a {
+			background-color: transparent;
+			font-family: Georgia, "Times New Roman", serif;
+			text-decoration: none;
+			padding: 0 0 1px;
+			margin: 0 0 3px;
+			border: none;
+			border-bottom: 1px dotted #820B02;
+		}
+
+			.calDayDetail p { line-height: 1; }
+			p.detail .label { font-weight: bold; }
+			#calBig .calDayDetail p.detail {
+				font-size: 10px;
+				padding: 2px 0 3px;
+			}
+				* html #calBig .calDayDetail p.detail { padding: 4px 0 3px; }
+				*+html #calBig .calDayDetail p.detail { padding: 4px 0 3px; }
+
+			#calBig .calDayDetail p.detail .status a,
+			#calBig.list .calDayDetail p.detail .status a {
+				background-image: none;
+				margin: 0;
+				padding: 0;
+				float: none;
+			}
+
+			#calBig .calDayDetail .filene p.detail { 
+				border-top: 1px dotted #820B02;
+				border-bottom: 1px dotted #820B02;
+				background-color: #f8e2e0;
+				color: #990e04;
+			}
+				#calBig .calDayDetail .filene a { border-bottom:1px dotted #820B02; }
+				.filene p.detail .label { color: #e06a61; }
+				.filene p.detail .status,
+				.filene p.detail .status a { background-color: #820B02;}
+			#calBig .calDayDetail .barns p.detail { 
+				border-top: 1px dotted #ec7c39;
+				border-bottom: 1px dotted #ec7c39;
+				background-color: #fbe2d3;
+				color: #d55102;
+			}
+				#calBig .calDayDetail .barns a { border-bottom:1px dotted #ec7c39; }
+				.barns p.detail .label { color: #ec7c39; }
+				.barns p.detail .status,
+				.barns p.detail .status a {	background-color: #ec7c39;}
+			#calBig .calDayDetail .opera p.detail { 
+				border-top: 1px dotted #00a6b5;
+				border-bottom: 1px dotted #00a6b5;
+				background-color: #e5f6f7;
+				color: #057d87;
+			}
+				#calBig .calDayDetail .opera a { border-bottom:1px dotted #00a6b5; }
+				.opera p.detail .label { color: #00a6b5; }
+				.opera p.detail .status,
+				.opera p.detail .status a {	background-color: #00a6b5;}
+			#calBig .calDayDetail .education p.detail {
+				border-top: 1px dotted #0b9c55;
+				border-bottom: 1px dotted #0b9c55;
+				background-color: #e6f5ee;
+				color: #0d7540;
+			}
+				#calBig .calDayDetail .education a { border-bottom:1px dotted #0b9c55; }
+				.education p.detail .label { color: #0b9c55; }
+				.education p.detail .status,
+				.education p.detail .status a {	background-color: #0b9c55;}
+			#calBig .calDayDetail .special p.detail {
+				border-top: 1px dotted #666699;
+				border-bottom: 1px dotted #666699;
+				background-color: #C9C9FF;
+				color: #464679;
+			}
+				#calBig .calDayDetail .special a { border-bottom:1px dotted #464679; }
+				.special p.detail .label { color: #666699; }
+				.special p.detail .status,
+				.special p.detail .status a {	background-color: #464679;}
+
+			#calBig .calDayDetail p.detail a {
+				display: inline;
+				font-size: 10px;
+				border-bottom: none;
+				float: right;
+				margin-right: 60px;
+				cursor: pointer;
+			}
+				#calBig .calDayDetail p.detail a:hover { text-decoration: underline; }
+				#calBig .calDayDetail .specs { display: none; }
+				#calBig .calDayDetail .status {
+					
+				}
+				#calBig .calDayDetail .status,
+				#calBig .calDayDetail .status a {
+					color: white;
+					padding: 2px 3px;
+					margin-right: 20px;
+				}
+
+			
+	/*differences from small calendar*/
+	#calBig #calDays li.data .calDayShort  a { display: none; }
+	
+#calBig.list { }
+	/* need to undo a bunch of css */
+	#calBig.list #calDays ul li.sunday, 
+	#calBig.list #calDays ul li.monday, 
+	#calBig.list #calDays ul li.tuesday, 
+	#calBig.list #calDays ul li.wednesday, 
+	#calBig.list #calDays ul li.thursday, 
+	#calBig.list #calDays ul li.friday, 
+	#calBig.list #calDays ul li.saturday { margin-left: 0; }
+	
+	#calBig.list #calHeader,
+	#calBig.list #calDays div.today,
+	#calBig.list #calDays li { display: none; }
+
+	#calBig.list #calDays ul li { 
+		border: none; 
+		background-color: #F2F3E5;
+	}
+	
+	#calBig.list #calDays ul li div { 
+		height: auto;
+		position: static;
+	}
+	#calBig.list span.close { display:none; }
+
+	#calBig.list .calDayData h4 { background-color:	#d0cbb7; }
+
+	#calBig.list #calDays li.data div.calDayData { 
+		border-color: #d0cbb7;
+		margin-bottom: 15px;
+	}
+
+	#calBig.list #calDays li.data,
+	#calBig.list #calDays li.data div.calDayData {
+		display: block;
+		float: none;
+		width: 614px;
+		height: auto;
+	}
+
+		#calBig.list #calDays li.data {
+			height: auto;
+			float: none;
+		}
+
+	#calBig.list #calDays li.data div.calDayData {
+		position: static;
+	}
+	
+	#calBig.list li.left div.calDayData,
+	#calBig.list li.down div.calDayData,
+	#calBig.list li.up div.calDayData,
+	#calBig.list li.right div.calDayData { top: 0; left: 0;}
+
+	#calBig.list .calDayDetail p.detail a { 
+		margin-right: 8px;
+		padding-right: 10px;
+		background: transparent url(../images/bullet-arrow-red.gif) no-repeat center right;
+	}
+		#calBig.list .calDayDetail .filene p.detail a { background-image: url(../images/bullet-arrow-red.gif); }
+		#calBig.list .calDayDetail .barns p.detail a { background-image: url(../images/bullet-arrow-orange.gif); }
+		#calBig.list .calDayDetail .opera p.detail a { background-image: url(../images/bullet-arrow-blue.gif); }
+		#calBig.list .calDayDetail .education p.detail a { background-image: url(../images/bullet-arrow-green.gif); }
+	
+	#calBig.list .calDayDetail .specs { display: inline; }
+	#calBig.list #calDays li.data div.calDayDetail { height: auto; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,16 @@
+/* Put choice menu on the left */
+  div.row > select {
+    float: left;
+    vertical-align: top;
+    margin-right: 1em;
+  } 
+  fieldset {
+    border-color: black;
+  }
+  /* Rules depending on XTiger editing state (see also Preview.css) */
+  span.xtt-repeat-unset + span.virgule {
+    display: none;
+  }
+  body.preview p.PasDeTemps {
+    display: none;
+  }

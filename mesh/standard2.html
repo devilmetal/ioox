@@ -1,0 +1,48 @@
+<html xmlns:site="http://oppidoc.com/oppidum/site" xmlns="http://www.w3.org/1999/xhtml" xmlns:xt="http://ns.inria.org/xtiger">
+    <head>
+      <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/>
+        <title>XMoodle</title>
+        <site:skin force="true">
+          <link rel="stylesheet" href="../resources/css/site.css" type="text/css" charset="utf-8"/>
+        </site:skin>
+      <site:xtiger/> 
+      
+      <site:timesheets/>
+        
+    </head>
+  <body>
+      
+
+      <div id="login">
+        <p>
+        <site:login force="true"><a href="login">LOGIN</a></site:login>
+        </p>
+      </div>
+      
+      <site:menu/>
+      
+      
+      <!--  NOT REQUIRED !!! why? bho!    
+        <p>
+            <site:home force="true"><a href="#">Home</a></site:home>
+          </p>-->
+      
+        <div id="error" condition="has-error">
+          <site:error force="true"/>
+        </div>
+        <div id="message" condition="has-message">
+          <span class="ui-close" onclick="javascript:document.messageOff()">X</span>
+          <site:message force="true"/>
+        </div>
+        <div id="content">
+          <site:content>
+            <h1>Contenu</h1>
+            <p>Lore ipsum...</p>
+          </site:content>
+          <site:todolist/>
+        </div>
+        <footer>
+            <p>&#169; 2013 XMoodle</p>
+        </footer>
+    </body>
+</html>

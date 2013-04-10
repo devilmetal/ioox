@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:xt="http://ns.inria.org/xtiger"
+  xml:lang="en">
+  <head>
+
+    <meta name="description"
+      content="This XTiger XML template defines the structure of an article for publication in the Proceedings of an ACM conference. The resulting XHTML document can be formatted by the ACM-Proc-Article.css style sheet, both for display and print. It can also be transformed into a LaTeX file (style sig-alternate.cls) with ACM-Proc-Article2latex.xsl" />
+    <meta name="keywords" content="template, XTiger" />
+
+    <title>Todos modification</title>
+
+    <xt:head version="1.1" templateVersion="1.0" label="Root">
+      
+    <xt:component name="Activity">
+      <div class="ACT">
+      <h3>
+        <xt:use label="Title" types="text">Title</xt:use> <xt:menu-marker/>
+      </h3>
+    	<ul>
+    		<xt:repeat minOccurs="0" maxOccurs="*" label="Tasks">
+    		  <li>
+    			 <xt:use label="Task" types="Task"/><xt:menu-marker/>
+    		  </li>
+    		</xt:repeat>
+    	</ul>
+      </div>
+    </xt:component>  
+    
+    <xt:component name="Task">
+      <div class="TASK">
+      <h4>
+        <xt:use label="Title" types="text">title</xt:use> <xt:menu-marker/>
+        (prio:<xt:use label="Priority" types="text">0</xt:use>) 
+        <xt:use label="Deadline" types="Deadline"/>
+      </h4>
+    	<xt:repeat minOccurs="1" maxOccurs="*" label="Description">
+    	<div class="desc">
+    	  <xt:menu-marker/>
+    		<xt:use label="Parag List" types="Parag List"/>
+		</div>
+    	</xt:repeat>
+      </div>
+    </xt:component>
+    
+    <xt:component name="Deadline">
+      <xt:use label="Date" types="text">YYYY-MM-DD</xt:use>
+      <xt:use label="Time" types="text">YYYY-MM-DDTHH:00:00</xt:use>
+    </xt:component>
+    
+    <xt:component name="Parag">
+    	<p>
+    		<xt:repeat minOccurs="1" maxOccurs="*" pseudoLabel="Fragment Link">
+    			<xt:use  types="Fragment Link" label="Fragment Link"/> <xt:menu-marker/><br />
+    		</xt:repeat>
+    	</p>
+    </xt:component>
+    
+    <xt:component name="Link">
+      <xt:use label="LinkText" types="text">LinkText</xt:use>
+      <xt:use label="LinkRef" types="text">(LinkRef)</xt:use>
+    </xt:component>
+      
+    <xt:component name="List">
+    	<br/><b><xt:use label="ListHeader" types="text">ListHeader</xt:use></b>
+    	<ul>
+    		<xt:repeat minOccurs="1" maxOccurs="*" pseudoLabel="ListItem">
+    		  <li><xt:use label="ListItem" types="text" >ListItem</xt:use><xt:menu-marker/></li>
+    		</xt:repeat>
+    	</ul>
+    </xt:component>
+      
+      <xt:component name="Fragment">
+        <xt:use types="text">Fragment</xt:use>
+      </xt:component>
+      
+      <xt:component name="text">
+        <xt:use types="text">text</xt:use>
+      </xt:component>
+      
+    </xt:head>
+  </head>
+  
+  <body>
+    
+    <h2>TODO LIST</h2>
+    
+    <div class="TODOLIST">
+    <ul>
+      <xt:repeat minOccurs="0" maxOccurs="*" label="ToDoList">
+      <li>
+        <xt:use types="Activity" label="Activity"/>
+      </li>
+    </xt:repeat>
+    </ul>
+    </div>
+    
+  </body>
+</html>

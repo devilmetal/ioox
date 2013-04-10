@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:xt="http://ns.inria.org/xtiger"
+  xml:lang="en">
+  <head>
+
+    <meta name="description"
+      content="This XTiger XML template defines the structure of an article for publication in the Proceedings of an ACM conference. The resulting XHTML document can be formatted by the ACM-Proc-Article.css style sheet, both for display and print. It can also be transformed into a LaTeX file (style sig-alternate.cls) with ACM-Proc-Article2latex.xsl" />
+    <meta name="keywords" content="template, XTiger" />
+
+    <title>TODO LIST modification</title>
+
+    <xt:head version="1.1" templateVersion="1.0" label="Root">
+      
+      <xt:component name="Activity">
+        <xt:use label="Title" types="text">Title</xt:use> <br/>
+        <ul>
+        <xt:repeat minOccurs="0" maxOccurs="*" label="Tasks">
+          <li>
+            <xt:use types="Task" label="Task"></xt:use>
+          </li>
+        </xt:repeat>
+        </ul>
+      </xt:component>
+      
+      <xt:component name="Task">
+        <xt:use label="Title" types="text">Title</xt:use> <br/>
+        <xt:use label="Description" types="Description"/> <br/>
+      </xt:component>
+      
+      <xt:component name="Description">
+        <p style="background-color:gray;">
+        <xt:repeat minOccurs="0" maxOccurs="*">
+          <li>
+          <xt:use types="List Parag" label="List Parag"/>
+          </li>
+        </xt:repeat>
+        </p>
+      </xt:component>
+      
+      <xt:component name="List">
+        <xt:use label="ListHeader" types="text">ListHeader</xt:use> <br/>
+        <ul>
+        <xt:repeat minOccurs="1" maxOccurs="*">
+          <li>
+          <xt:use label="ListItem" types="text">ListItem</xt:use>
+          </li>
+        </xt:repeat>
+        </ul>
+      </xt:component>
+      
+      <xt:component name="Parag">
+        <p>
+        <xt:repeat minOccurs="1" maxOccurs="*">
+          <xt:use types="Fragment Link" label="Fragment Link">Fragment/Link</xt:use> <br/>
+         
+        </xt:repeat>
+        </p>
+      </xt:component>
+      
+      <xt:component name="Fragment">
+      	<xt:use types="text">Fragment</xt:use>
+      </xt:component>
+      
+      <xt:component name="Link">
+        <xt:use label="LinkText" types="text">LinkText</xt:use> 
+        (link: <xt:use label="LinkRef" types="text">LinkRef</xt:use> )
+      </xt:component>
+    </xt:head>
+  </head>
+  
+  <body>
+    
+    <h2>TODO LIST</h2>
+    <ul>
+    <xt:repeat minOccurs="0" maxOccurs="*" label="ToDoList">
+      <li>
+        <xt:use types="Activity" label="Activity"></xt:use>
+      </li>
+    </xt:repeat>
+    </ul>
+    
+  </body>
+</html>
