@@ -24,34 +24,6 @@
          </site:xtiger>
 
          <!-- MENU DEFINITION -->
-         <site:menu>
-            <div id="menu">
-               <ul>
-                  <li>
-                     <b>Xmoodle</b>
-                  </li>
-                  <li>
-                     <a href="home">Home</a>
-                  </li>
-                  <li>
-                     <a href="courses">Courses</a>
-                  </li>
-                  <li>
-                     <a href="todos">Todos</a>
-                  </li>
-                  <li>
-                     <a href="grades">Grades</a>
-                  </li>
-                  <li>
-                     <a href="ePPT">ePPT</a>
-                  </li>
-                  <li>
-                     <a href="recursive">Recursive</a>
-                  </li>
-               </ul>
-
-            </div>
-         </site:menu>
 
          <!-- SITE CONTENT -->
          <site:content>

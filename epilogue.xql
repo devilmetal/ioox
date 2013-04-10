@@ -141,23 +141,25 @@ declare function site:home( $cmd as element(), $view as element() ) as element()
 :)
 declare function site:navigation( $cmd as element(), $view as element() ) as element()*
 {
-  let $rights := tokenize(request:get-attribute('oppidum.rights'), ' ')
-  let $chapters := xdb:get-child-resources(concat($cmd/@db, '/chapters'))
+   let $rights := tokenize(request:get-attribute('oppidum.rights'), ' ')
   return (
-    for $c in $chapters
-    let $m := text:groups($c, '^(\d+)')
-    where count($m) > 0
-    return
-      <li>{
-        if ($cmd/resource/@name = $m[2]) then
-          <b><a href="{concat($cmd/@base-url, 'chapitres/', $m[2])}">{$m[2]}</a> *</b>
-        else
-          <a href="{concat($cmd/@base-url, 'chapitres/', $m[2])}">{$m[2]}</a>
-      }</li>,
-    if ('modifier' = $rights) then
-      <li><button onclick='javascript:window.location.href=''{concat($cmd/@base-url, "chapitres/ajouter")}'''>Ajouter</button></li>
-    else
-      ()
+  
+  <div id="menu">
+            <ul>
+                <li>
+                    <b>xmoodle_G13</b>
+                </li>
+                <li>
+                    <a href="{concat($cmd/@base-url,'home')}">Home</a>
+                </li>
+                <li>
+                    <a href="{concat($cmd/@base-url,'explorer')}">Explorer</a>
+                </li>
+                <li>
+                    <a href="{concat($cmd/@base-url,'FAQ')}">FAQ</a>
+                </li>
+            </ul>
+        </div>
   )
 };
 
