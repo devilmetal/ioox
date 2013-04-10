@@ -147,7 +147,7 @@ declare function site:navigation( $cmd as element(), $view as element() ) as ele
   <div id="menu">
             <ul>
                 <li>
-                    <b>xmoodle_G13</b>
+                    <b>IOOX</b>
                 </li>
                 <li>
                     <a href="{concat($cmd/@base-url,'home')}">Home</a>

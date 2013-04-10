@@ -24,7 +24,12 @@
          </site:xtiger>
 
          <!-- MENU DEFINITION -->
-
+         
+         <site:menu>
+            <div id="menu">
+               No menu for the moment.
+            </div>
+         </site:menu>
          <!-- SITE CONTENT -->
          <site:content>
 

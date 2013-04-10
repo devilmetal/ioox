@@ -9,67 +9,70 @@
             <!--<site:header> @gil: why was header???-->
             <site:menu>
                 <div id="menu">
-                    <ul>
-                        <li>
-                            <b>Xmoodle</b>
-                        </li>
-                        <li>
-                            <a href="home">Home</a>
-                        </li>
-                        <li>
-                            <a href="courses">Courses</a>
-                        </li>
-                        <li>
-                            <a href="todos">Todos</a>
-                        </li>
-                        <li>
-                            <a href="grades">Grades</a>
-                        </li>
-                        <li>
-                            <a href="ePPT">ePPT</a>
-                        </li>
-                        <li>
-                            <a href="recursive">Recursive</a>
-                        </li>
-                    </ul>
-                    
+                    No menu for the moment.
                 </div>
             </site:menu>
             <!-- </site:header>-->
             <site:content>
-                <!-- VARIABLES DE CREATION DE LA PAGE -->
-                <xsl:variable name="CurrentCourse">
-                    <xsl:value-of select="/Root/CoursID"/>
-                </xsl:variable>
-                <!-- FIN DES VARIABLES -->
+                <xsl:variable name="vsortKey"><xsl:choose><xsl:when test="//SortTeacher!=''">TeacherRef</xsl:when><xsl:when test="//SortID!=''">ID</xsl:when><xsl:when test="//SortName!=''">Title</xsl:when><xsl:otherwise>ID</xsl:otherwise></xsl:choose></xsl:variable>
+                <xsl:variable name="vsortOrder"><xsl:value-of select="//Sort/Order"></xsl:value-of></xsl:variable>
+                
                 <div id="menubar">
                     <h3 id="menutitle">Courses</h3>
+                    
                     <ul>
-
-                        <xsl:apply-templates select="/Root/Courses//Course" mode="menubar">
-                            <xsl:sort select="ID"/>
-                        </xsl:apply-templates>
+                        <li>
+                            <form action="explorer" method="POST">
+                                <p style="text-align: right">
+                                    <input type="hidden" name="sort_id" value="1"/>
+                                    <input type="hidden" name="order" value="{$vsortOrder}"/>
+                                    <input type="submit" value="ID Sort" class="buttoncourse"/>
+                                </p>
+                            </form>
+                        </li>
+                        <li>
+                            <form action="explorer" method="POST">
+                                <p style="text-align: right">
+                                    <input type="hidden" name="sort_name" value="1"/>
+                                    <input type="hidden" name="order" value="{$vsortOrder}"/>
+                                    <input type="submit" value="Name Sort" class="buttoncourse"/>
+                                </p>
+                            </form>
+                        </li>
+                        <li>
+                            <form action="explorer" method="POST">
+                                <p style="text-align: right">
+                                    <input type="hidden" name="sort_teacher" value="1"/>
+                                    <input type="hidden" name="order" value="{$vsortOrder}"/>
+                                    <input type="submit" value="Teacher Sort" class="buttoncourse"/>
+                                </p>
+                            </form>
+                        </li>
+                        <xsl:variable name="vOtherOrder"><xsl:choose><xsl:when test="$vsortOrder='ascending'">descending</xsl:when><xsl:otherwise>ascending</xsl:otherwise></xsl:choose></xsl:variable>
+                        <li>
+                            <form action="explorer" method="POST">
+                                <p style="text-align: right">
+                                    <input type="hidden" name="order" value="{$vOtherOrder}"/>
+                                    <input type="hidden" name="sort_name" value="{//Sort/SortName}"/>
+                                    <input type="hidden" name="sort_id" value="{//Sort/SortID}"/>
+                                    <input type="hidden" name="sort_teacher" value="{//Sort/SortTeacher}"/>
+                                    <input type="submit" value="Change Order" class="buttoncourse"/>
+                                </p>
+                            </form>
+                        </li>
                     </ul>
                 </div>
                 <div id="courseview">
-                    <xsl:apply-templates select="/Root/Courses/Course[CourseId=$CurrentCourse]"
-                        mode="view"/>
+                    <xsl:apply-templates select="/Root/Courses//Course"
+                        mode="view">
+                        <xsl:sort select="*[name() = $vsortKey]" order="{$vsortOrder}"/>
+                    </xsl:apply-templates>
                 </div>
                 
             </site:content>
         </site:view>
     </xsl:template>
 
-    <xsl:template match="Course" mode="menubar">
-        <li>
-            <form action="courses" method="POST">
-                <p style="text-align: right">
-                    <input type="hidden" name="coursid" value="{CourseId}"/>
-                    <input type="submit" value="{Acronym}" class="buttoncourse"/>
-                </p>
-            </form>
-        </li>
-    </xsl:template>
 
     <xsl:template match="Course" mode="view">
         <h3>
@@ -89,11 +92,12 @@
                 <xsl:apply-templates select="Description"/>
             </li>
         </ul>
+        <!--
         <ul>
             <xsl:for-each select="./Sessions/Session">
                 <xsl:apply-templates select="." mode="view"/>
             </xsl:for-each>
-        </ul>
+        </ul>-->
     </xsl:template>
 
     <xsl:template match="Session" mode="view">
