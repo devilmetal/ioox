@@ -31,7 +31,7 @@ declare option exist:serialize "method=xml media-type=text/xml";
 let
   $cmd := request:get-attribute('oppidum.command'),
   $new := request:get-data(),
-  $old := doc('/sites/ioox/data/db.xml')//Student[PersonRef=1]/ToDoList,
+  $old := doc('/sites/xmoodle/data/db.xml')//Student[PersonRef=1]/ToDoList,
   $tosave := $new/ToDoList
 return (
   oppidum:add-message('ACTION-UPDATE-SUCCESS', '', true()),

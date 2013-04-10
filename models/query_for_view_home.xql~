@@ -6,7 +6,7 @@ declare namespace xdb = "http://exist-db.org/xquery/xmldb";
 declare option exist:serialize "method=xml media-type=text/xml";
 
 
-let $collection := '/sites/ioox/data/'
+let $collection := '/sites/xmoodle/data/'
 let $method := request:get-method()
 let $curr-date := fn:current-date()
 let $year :=  if ($method = 'POST') then (
