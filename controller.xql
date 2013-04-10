@@ -2,9 +2,7 @@ xquery version "1.0";
 (: -----------------------------------------------
    ioox controller
 
-   Author: Stéphane Sire <s.sire@free.fr>
-
-   November 2011 - Copyright (c) Oppidoc S.A.R.L
+   Author: Carnevale Luca & Luyet Gil / UNIFR
    ----------------------------------------------- :)
 
 import module namespace gen = "http://oppidoc.com/oppidum/generator" at "../oppidum/lib/pipeline.xqm";
@@ -41,6 +39,8 @@ declare variable $actions := <actions error="models/error.xql">
 declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" startref="home" supported="login logout install" key="ioox" mode="dev">
   <!-- low level error mesh -->
   <error mesh="standard"/>
+  
+  
   <!-- /home page -->
   <item name="home" epilogue="standard" method="POST">
     <model src="models/query_for_view_home.xql"/>
@@ -52,58 +52,82 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
       <view src="views/view_of_home.xsl"/>
     </action>
   </item>
-  <!-- Courses page -->
-  <item name="courses" epilogue="standard" method="POST">
-    <model src="models/query_for_view_courses.xql"/>
-    <view src="views/view_of_courses.xsl"/>
+  
+  <!-- /explorer page -->
+  <item name="explorer" epilogue="standard" method="POST">
+    <model src="models/query_for_view_explorer.xql"/>
+    <view src="views/view_of_explorer.xsl"/>
     <action epilogue="standard" name="POST">
-      <model src="models/query_for_view_courses.xql"/>
-      <view src="views/view_of_courses.xsl"/>
+      <model src="models/query_for_view_explorer.xql"/>
+      <view src="views/view_of_explorer.xsl"/>
     </action>
   </item>
   
-<!-- Todos page -->
-  <item name="todos" epilogue="standard2" supported="modifier" method="POST" template="templates/todos">
-    <model src="models/query_for_view_todos.xql"/>
-    <view src="views/view_of_todos.xsl"/>
-    <action name="modifier" epilogue="standard2">
-      <model src="oppidum:actions/edit.xql"/>
-      <view src="views/edit.xsl">
-      </view>
-    </action>
-    <action name="POST">
-      <model src="models/save-todos.xql"/>
+  <!-- /FAQ page -->
+  <item name="FAQ" epilogue="standard" method="POST">
+    <model src="models/query_for_view_FAQ.xql"/>
+    <view src="views/view_of_FAQ.xsl"/>
+    <action epilogue="standard" name="POST">
+      <model src="models/query_for_view_FAQ.xql"/>
+      <view src="views/view_of_FAQ.xsl"/>
     </action>
   </item>
-
-<!-- Grades page -->
-  <item name="grades" epilogue="standard" method="POST">
-    <model src="models/query_for_view_grades.xql"/>
-    <view src="views/view_of_grades.xsl"/>
+    <!-- /me page (home page of ME section)-->
+  <item name="me" epilogue="standard" method="POST">
+    <model src="models/me/query_for_view_me.xql"/>
+    <view src="views/me/view_of_me.xsl"/>
     <action epilogue="standard" name="POST">
-      <model src="models/query_for_view_grades.xql"/>
-      <view src="views/view_of_grades.xsl"/>
+      <model src="models/me/query_for_view_me.xql"/>
+      <view src="views/me/view_of_me.xsl"/>
     </action>
-  </item>
-  <!-- ePPT presentation page -->
-  <item name="ePPT" epilogue="standard" method="POST">
-    <model src="models/query_for_view_ePPT.xql"/>
-    <view src="views/view_of_ePPT.xsl"/>
-    <action epilogue="standard" name="POST">
-      <model src="models/query_for_view_ePPT.xql"/>
-      <view src="views/view_of_ePPT.xsl"/>
-    </action>
-  </item>
-<!-- The Big presentation page -->
-  <item name="recursive" epilogue="standard" method="POST">
-    <model src="models/query_for_view_recursive.xql"/>
-    <view src="views/view_of_recursive.xsl"/>
-    <action epilogue="standard" name="POST">
-      <model src="models/query_for_view_recursive.xql"/>
-      <view src="views/view_of_recursive.xsl"/>
-    </action>
+        <!-- /me/mynote page -->
+        <item name="mynote" epilogue="standard" method="POST">
+            <model src="models/me/query_for_view_me_mynote.xql"/>
+            <view src="views/me/view_of_me_mynote.xsl"/>
+            <action epilogue="standard" name="POST">
+                <model src="models/me/query_for_view_me_mynote.xql"/>
+                <view src="views/me/view_of_me_mynote.xsl"/>
+             </action>
+          </item>
+         <!-- /me/todo page -->
+        <item name="todo" epilogue="standard" method="POST">
+            <model src="models/me/query_for_view_me_todo.xql"/>
+            <view src="views/me/view_of_me_todo.xsl"/>
+            <action epilogue="standard" name="POST">
+                <model src="models/me/query_for_view_me_todo.xql"/>
+                <view src="views/me/view_of_me_todo.xsl"/>
+            </action>
+        </item>
+        <!-- /me/profile page -->
+        <item name="profile" epilogue="standard" method="POST">
+            <model src="models/me/query_for_view_me_profile.xql"/>
+            <view src="views/me/view_of_me_profile.xsl"/>
+            <action epilogue="standard" name="POST">
+                <model src="models/me/query_for_view_me_profile.xql"/>
+                <view src="views/me/view_of_me_profile.xsl"/>
+            </action>
+        </item>
+        <!-- /me/courses page -->
+        <item name="courses" epilogue="standard" method="POST">
+            <model src="models/me/query_for_view_me_courses.xql"/>
+            <view src="views/me/view_of_me_courses.xsl"/>
+            <action epilogue="standard" name="POST">
+                <model src="models/me/query_for_view_me_courses.xql"/>
+                <view src="views/me/view_of_me_courses.xsl"/>
+            </action>
+        </item>
+        <!-- /me/grades page -->
+        <item name="grades" epilogue="standard" method="POST">
+            <model src="models/me/query_for_view_me_grades.xql"/>
+            <view src="views/me/view_of_me_grades.xsl"/>
+            <action epilogue="standard" name="POST">
+                <model src="models/me/query_for_view_me_grades.xql"/>
+                <view src="views/me/view_of_me_grades.xsl"/>
+            </action>
+        </item>
   </item>
   
+  <!-- Axel/Axel-Form templates-->
   <collection name="templates" db="/db/www/ioox" collection="templates">
     <model src="oppidum:models/templates.xql"/>
     <item name="todos" resource="todos.xhtml">

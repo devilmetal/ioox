@@ -1,10 +1,8 @@
 xquery version "1.0";
 (: -----------------------------------------------
-   Oppidum ioox Epilogue
+   ioox controller
 
-   Author: Stéphane Sire <s.sire@free.fr>
-
-   January 2013 - (c) Copyright 2013 Oppidoc SARL. All Rights Reserved.
+   Author: Carnevale Luca & Luyet Gil / UNIFR
    ----------------------------------------------- :)
 
 declare namespace site = "http://oppidoc.com/oppidum/site";
