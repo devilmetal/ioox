@@ -142,8 +142,8 @@ declare function site:home( $cmd as element(), $view as element() ) as element()
 declare function site:navigation( $cmd as element(), $view as element() ) as element()*
 {
    let $rights := tokenize(request:get-attribute('oppidum.rights'), ' ')
-  return (
-  
+return (
+  if(empty(session:get-attribute('id'))) then
   <div id="menu">
             <ul>
                 <li>
@@ -157,6 +157,26 @@ declare function site:navigation( $cmd as element(), $view as element() ) as ele
                 </li>
                 <li>
                     <a href="{concat($cmd/@base-url,'FAQ')}">FAQ</a>
+                </li>
+            </ul>
+        </div>
+        else
+        <div id="menu">
+            <ul>
+                <li>
+                    <b>IOOX</b>
+                </li>
+                <li>
+                    <a href="{concat($cmd/@base-url,'home')}">Home</a>
+                </li>
+                <li>
+                    <a href="{concat($cmd/@base-url,'explorer')}">Explorer</a>
+                </li>
+                <li>
+                    <a href="{concat($cmd/@base-url,'FAQ')}">FAQ</a>
+                </li>
+                <li>
+                    <a href="{concat($cmd/@base-url,'me')}">Me</a>
                 </li>
             </ul>
         </div>

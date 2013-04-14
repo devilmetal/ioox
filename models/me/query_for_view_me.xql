@@ -1,9 +1,9 @@
 xquery version "1.0";
 
 import module namespace request="http://exist-db.org/xquery/request";
+import module namespace session="http://exist-db.org/xquery/session";
 
 declare option exist:serialize "method=xml media-type=text/xml";
-
 
 let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
@@ -23,5 +23,8 @@ let $data3 := doc(concat($collection, "db.xml"))/Moodle/Persons
      {$data2}
      <CoursID>{$id}</CoursID>
      {$data3}
+     <Session>
+        <Connected>{session:get-attribute('id')}</Connected>
+     </Session>
      </Root>
    

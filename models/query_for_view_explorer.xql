@@ -1,6 +1,7 @@
 xquery version "1.0";
 
 import module namespace request="http://exist-db.org/xquery/request";
+import module namespace session="http://exist-db.org/xquery/session";
 
 declare option exist:serialize "method=xml media-type=text/xml";
 
@@ -40,8 +41,7 @@ let $order :=  if ($method = 'POST') then (
                             )
 let $data2 := doc(concat($collection, "db.xml"))/Moodle/Courses
 let $data3 := doc(concat($collection, "db.xml"))/Moodle/Persons
-                            
-
+let $session-attributes := session:get-attribute-names()
     return
     <Root>
      {$data2}
@@ -52,6 +52,10 @@ let $data3 := doc(concat($collection, "db.xml"))/Moodle/Persons
         <SortName>{$sort_name}</SortName>
         <SortTeacher>{$sort_teacher}</SortTeacher>
         <Order>{$order}</Order>
+        <Session>
+   <Connected>{session:get-attribute('id')}</Connected>
+   <ID>{session:get-id()}</ID>
+   </Session>
      </Sort>
      </Root>
    
