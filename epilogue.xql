@@ -30,7 +30,7 @@ declare function site:branch( $cmd as element(), $source as element(), $view as 
  case element(site:skin) return site:skin($cmd, $view)
  case element(site:login) return site:login($cmd)
  case element(site:home) return site:home($cmd, $view)
- case element(site:navigation) return site:navigation($cmd, $view)
+ case element(site:menu) return site:menu($cmd, $view)
  case element(site:error) return site:error($cmd, $view)
  case element(site:message) return site:message($view)
  case element(site:image) return site:image($source)
@@ -139,49 +139,100 @@ declare function site:home( $cmd as element(), $view as element() ) as element()
    Adds a button if the user has the right to create extra pages
    ======================================================================
 :)
-declare function site:navigation( $cmd as element(), $view as element() ) as element()*
+
+declare function site:menu( $cmd as element(), $view as element() ) as element()*
 {
-   let $rights := tokenize(request:get-attribute('oppidum.rights'), ' ')
-return (
-  if(empty(session:get-attribute('id'))) then
-  <div id="menu">
-            <ul>
-                <li>
-                    <b>IOOX</b>
-                </li>
-                <li>
-                    <a href="{concat($cmd/@base-url,'home')}">Home</a>
-                </li>
-                <li>
-                    <a href="{concat($cmd/@base-url,'explorer')}">Explorer</a>
-                </li>
-                <li>
-                    <a href="{concat($cmd/@base-url,'FAQ')}">FAQ</a>
-                </li>
-            </ul>
-        </div>
-        else
-        <div id="menu">
-            <ul>
-                <li>
-                    <b>IOOX</b>
-                </li>
-                <li>
-                    <a href="{concat($cmd/@base-url,'home')}">Home</a>
-                </li>
-                <li>
-                    <a href="{concat($cmd/@base-url,'explorer')}">Explorer</a>
-                </li>
-                <li>
-                    <a href="{concat($cmd/@base-url,'FAQ')}">FAQ</a>
-                </li>
-                <li>
-                    <a href="{concat($cmd/@base-url,'me')}">Me</a>
-                </li>
-            </ul>
-        </div>
-  )
+    let $rights := tokenize(request:get-attribute('oppidum.rights'), ' ')
+    return 
+    <span>
+    
+            <header>
+                <div class="navbar navbar-fixed-top">
+                    <div class="navbar-inner">
+                        <div class="container-fluid">
+                            <a class="brand" href="#">
+                            <img src="img/gCons/connections-white.png" alt=""/>
+                            iOoX</a>
+                            <ul class="nav user_menu pull-right">
+                                <li class="hidden-phone hidden-tablet">
+                                    <div class="nb_boxes clearfix">
+                                        <a href="#" class="label ttip_b" title="New messages">25 <i class="splashy-mail_light"></i></a>
+                                    </div>
+                                </li>
+                                <li class="divider-vertical hidden-phone hidden-tablet"></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gil Luyet <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                    <li><a href="user_profile.html">My Profile</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="login.html">Log Out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav" id="mobile-nav">
+								<li class="dropdown">
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-list-alt icon-white"></i> Unifr <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li><a href="http://www.unifr.ch">Home</a></li>
+										<li><a href="http://gestens.unifr.ch">Gestens</a></li>
+										<li><a href="http://moodle2.unifr.ch">Moodle 2</a></li>
+									</ul>
+								</li>
+								<li>
+								</li>
+							</ul>
+                        </div>
+                    </div>
+                    
+                </div>
+                
+            </header>
+    <!-- sidebar -->
+            <a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
+            <div class="sidebar">
+				<div class="antiScroll">
+					<div class="antiscroll-inner">
+						<div class="antiscroll-content">
+							<div class="sidebar_inner">
+								
+								<div id="side_accordion" class="accordion">
+									
+									<div class="accordion-group">
+										<div class="accordion-heading">
+											<a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+												<img src="img/gCons/home.png" alt="" /> Home
+											</a>
+										</div>
+									</div>
+									<div class="accordion-group">
+										<div class="accordion-heading">
+											<a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+												<img src="img/gCons/search.png" alt="" /> Explorer
+											</a>
+										</div>
+									</div>
+									<div class="accordion-group">
+										<div class="accordion-heading">
+											<a href="#collapseThree" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+												<img src="img/gCons/push-pin.png" alt="" /> FAQ
+											</a>
+										</div>
+									</div>
+									
+									
+									
+								</div>
+								
+
+							</div>
+							   
+						</div>
+					</div>
+				</div>
+			</div>
+                    </span>
 };
+
 
 (: ======================================================================
    Recursive rendering function

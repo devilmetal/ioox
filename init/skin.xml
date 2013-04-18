@@ -7,26 +7,48 @@
     </handler>
     <profile name="standard" type="mesh">
         <!-- CSS for timesheets -->
+
         <link href="css/layout.css"/>
         <link href="css/intro.css"/>
         <link href="css/transitions.css"/>
 
-        
         <!-- CSS for our config -->
-        <link href="css/site.css"/>
         <link href="css/base.css"/>
         <link href="css/cal.css"/>
 
+        <link href="css/site.css"/>
         <!-- JS for the Calendar -->
         <script src="js/jquery.js"/>
         <script src="js/cal.js"/>
         <script src="js/wolftrap.js"/>
         <script src="js/timesheets.js"/>
-	
-	<!--JS FOR THE RIDEAU -->
-        <script src="js/rideau.js"/>
-         
-       
+
+        <!-- Bootstrap framework -->
+        <link href="css/bootstrap.min.css"/>
+        <link href="css/bootstrap-responsive.min.css"/>
+        <!-- gebo blue theme-->
+        <link href="css/blue.css" id="link_theme"/>
+        <!-- breadcrumbs-->
+        <link href="css/BreadCrumb.css"/>
+        <!-- tooltips-->
+        <link href="css/jquery.qtip.min.css"/>
+        <!--  code prettify -->
+        <link href="css/prettify.css"/>
+        <!--  notifications -->
+        <link href="css/sticky.css"/>
+        <!--  splashy icons -->
+        <link href="css/splashy.css"/>
+        <!--  colorbox -->
+        <link href="css/colorbox.css"/>
+
+        <!--  main styles -->
+        <link href="css/style.css"/>
+
+        <link href="http://fonts.googleapis.com/css?family=PT+Sans"/>
+        
+        <!-- JS layout-->
+        
+        
     </profile>
 
     <profile name="standard2" type="mesh">
@@ -37,5 +59,5 @@
         <link href="css/base.css"/>
         <predef module="oppidum" avoid="error()">axel-1.3</predef>
     </profile>
-    
+
 </skin>

@@ -13,7 +13,9 @@
    <xsl:template match="/">
 
 
-      <xsl:variable name="PersonId"><xsl:value-of select="//UserBuildID"/></xsl:variable>
+      <xsl:variable name="PersonId">
+         <xsl:value-of select="//UserBuildID"/>
+      </xsl:variable>
 
       <!-- XTIGER DEFINITION -->
       <site:view>
@@ -24,15 +26,83 @@
          </site:xtiger>
 
          <!-- MENU DEFINITION -->
-         
-         <site:menu>
-            <div id="menu">
-               No menu for the moment.
-            </div>
-         </site:menu>
+
+         <site:menu> </site:menu>
          <!-- SITE CONTENT -->
          <site:content>
-
+            <div id="contentwrapper">
+               <div class="main_content">
+                  <div class="navbar">
+                     <div class="navbar-inner">
+                        <div class="container-fluid">
+                           <a class="brand2" href="#">
+                              Me</a>
+                           <ul class="nav" id="mobile-nav-2">
+                              <li >
+                                 <a  href="#"><img src="img/gCons-mini-white/home.png" alt="" /> MyHome </a>
+                              </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
+                              <li >
+                                 <a  href="#"><img src="img/gCons-mini-white/bookmark.png" alt="" /> Courses </a>
+                              </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
+                              <li >
+                                 <a  href="#"><img src="img/gCons-mini-white/addressbook.png" alt="" /> MyNote </a>
+                              </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
+                              <li >
+                                 <a  href="#"><img src="img/gCons-mini-white/pie-chart.png" alt="" /> Grades </a>
+                              </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
+                              <li >
+                                 <a  href="#"><img src="img/gCons-mini-white/calendar.png" alt="" /> Todos </a>
+                              </li>
+                              <li>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                     <div class="navbar-inner">
+                        <div class="container-fluid">
+                           <a class="brand2" href="#">
+                              Teacher</a>
+                           <ul class="nav">
+                              <li >
+                                 <a  href="#"><img src="img/gCons-mini-white/configuration.png" alt="" /> My Teaching </a>
+                              </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
+                              <li >
+                                 <a  href="#"><img src="img/gCons-mini-white/multi-agents.png" alt="" /> My Class </a>
+                              </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
+                              <li >
+                                 <a  href="#"><img src="img/gCons-mini-white/bar-chart.png" alt="" /> Manage Grades </a>
+                              </li>
+                              <li>
+                              </li>
+                           </ul>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
+         <div class="row-fluid">
             <!-- VARIABLES DE CREATION DE LA PAGE -->
             <!-- CES VARIABLES XSLT STOCKENT LE MOIS ET L'ANNEE POUR GENERER LE CALENDRIER -->
             <xsl:variable name="YearNo">
@@ -92,9 +162,7 @@
             <xsl:choose>
                <xsl:when test="$PersonId = -1">
                   <!-- NOT LOGGED IN  -->
-                  <div>
-                     You have to login to access this amazing page !
-                  </div>
+                  <div> You have to login to access this amazing page ! </div>
                </xsl:when>
                <xsl:otherwise>
                   <!-- Affichage du calendrier -->
@@ -110,7 +178,7 @@
                            <xsl:text> </xsl:text>
                            <xsl:value-of select="$YearNo"/>
                         </h2>
-                        
+
                         <!-- Boutons pour naviguer dans les mois -->
                         <form action="home" method="POST">
                            <p style="text-align: right">
@@ -128,7 +196,7 @@
                         </form>
                      </div>
                      <div id="tabs"/>
-                     
+
                      <!-- Important pour le calendrier -->
                      <div id="filter" class="filter" style="height:2em;">
                         <input name="ctl00$mainContent$hidden_year" type="hidden"
@@ -139,10 +207,10 @@
                            id="ctl00_mainContent_hidden_click" value="01"/>
                      </div>
                      <!-- not even sure this is where it goes -->
-                     
+
                      <!-- Calendrier -->
                      <div id="calBig" class="list">
-                        
+
                         <!-- Header -->
                         <xsl:element name="div">
                            <xsl:attribute name="id">calHeader</xsl:attribute>
@@ -159,7 +227,7 @@
                               <li>Saturday</li>
                            </ul>
                         </xsl:element>
-                        
+
                         <!-- Jours -->
                         <div id="calDays" class="clearfix">
                            <ul>
@@ -176,9 +244,9 @@
                         </div>
                      </div>
                   </div>
-                  
+
                   <div id="events">
-                     
+
                      <!-- 
 			= Equality
 			!= Not equal
@@ -196,7 +264,10 @@
                      </xsl:variable>
                      <xsl:call-template name="upcomingevent">
                         <xsl:with-param name="month">
-                           <xsl:if test="month-from-date(current-date())!=12 and month-from-date(current-date()) != 11 and month-from-date(current-date()) != 10">0</xsl:if><xsl:value-of select="month-from-date(current-date())"></xsl:value-of>
+                           <xsl:if
+                              test="month-from-date(current-date())!=12 and month-from-date(current-date()) != 11 and month-from-date(current-date()) != 10"
+                              >0</xsl:if>
+                           <xsl:value-of select="month-from-date(current-date())"/>
                         </xsl:with-param>
                         <xsl:with-param name="day">
                            <xsl:value-of select="$currDay"/>
@@ -208,24 +279,53 @@
                   </div>
                </xsl:otherwise>
             </xsl:choose>
+         </div>
+               
+            </div>  
          </site:content>
+         <site:javascript>
+            <script src="/exist/projets/ioox/static/ioox/js/jquery.min.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/jquery-migrate.min.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/jquery.debouncedresize.min.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/jquery.actual.min.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/jquery_cookie.min.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/bootstrap.min.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/bootstrap.plugins.min.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/jquery.qtip.min.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/jquery.jBreadCrumb.1.1.min.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/ios-orientationchange-fix.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/antiscroll.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/jquery-mousewheel.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/jquery.colorbox.min.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/selectNav.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/gebo_common.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/gebo_btns.js" type="text/javascript">//</script>
+            <script>
+               $(document).ready(function() {
+               setTimeout('$("html").removeClass("js")',1000);
+               });
+            </script>
+         </site:javascript>
          <xsl:choose>
             <xsl:when test="$PersonId=-1"><!-- NOTHING --></xsl:when>
             <xsl:otherwise>
                <!-- TO DO LIST -->
                <site:todolist>
-                  
                   <div id="todolist">
                      <h3 id="todotitle">TO DO LIST</h3>
-                     
-                     
-                     <xsl:apply-templates select="//Student[child::PersonRef=number($PersonId)]/ToDoList"/>
-                     
-                     
+                     <xsl:apply-templates
+                        select="//Student[child::PersonRef=number($PersonId)]/ToDoList"/>
                   </div>
                </site:todolist>
             </xsl:otherwise>
          </xsl:choose>
+         
+         <script>
+            $(document).ready(function() {
+            //* show all elements and remove preloader
+            setTimeout('$("html").removeClass("js")',1000);
+            });
+         </script>
       </site:view>
 
    </xsl:template>
@@ -278,7 +378,7 @@
             </xsl:element>
          </xsl:element>
       </xsl:if>
-      
+
       <!-- Case 2 : it exist a session for this day -->
       <xsl:if test="not(empty(/Root/Moodle/Courses/Course//Sessions//Session[Date=$FullDay]))">
          <xsl:element name="li">
@@ -343,8 +443,10 @@
    <xsl:template match="Session" mode="data">
       <xsl:element name="div">
          <xsl:attribute name="class"><xsl:value-of select="@type"/> born</xsl:attribute>
-         
-         <strong><xsl:value-of select="self::node()/parent::node()/parent::node()/Title"/></strong>
+
+         <strong>
+            <xsl:value-of select="self::node()/parent::node()/parent::node()/Title"/>
+         </strong>
          <xsl:text> - </xsl:text>
          <xsl:value-of select="./StartTime"/>
          <xsl:text> to </xsl:text>
@@ -477,7 +579,8 @@
             <xsl:attribute name="class"> task_description <xsl:text> </xsl:text> p<xsl:value-of
                   select="Priority"/>
             </xsl:attribute>
-            <xsl:value-of select="Title"/> - <xsl:value-of select="./Deadline/Date"/><xsl:text> @ </xsl:text><xsl:value-of select="./Deadline/Time"/>
+            <xsl:value-of select="Title"/> - <xsl:value-of select="./Deadline/Date"
+               /><xsl:text> @ </xsl:text><xsl:value-of select="./Deadline/Time"/>
          </xsl:element>
 
          <div class="task_description">
@@ -536,21 +639,36 @@
       <xsl:param name="month"/>
       <xsl:param name="day"/>
       <ul>
-      <xsl:call-template name="eventItem">
-         <xsl:with-param name="current"><xsl:value-of select="$day"></xsl:value-of></xsl:with-param>
-         <xsl:with-param name="last"><xsl:value-of select="//Month[No=$month]/Day[last()]/No"></xsl:value-of></xsl:with-param>
-         <xsl:with-param name="peusdoDate"><xsl:value-of select="$year"/><xsl:text>-</xsl:text><xsl:value-of select="$month"/><xsl:text>-</xsl:text></xsl:with-param>
-         
-      </xsl:call-template>
+         <xsl:call-template name="eventItem">
+            <xsl:with-param name="current">
+               <xsl:value-of select="$day"/>
+            </xsl:with-param>
+            <xsl:with-param name="last">
+               <xsl:value-of select="//Month[No=$month]/Day[last()]/No"/>
+            </xsl:with-param>
+            <xsl:with-param name="peusdoDate">
+               <xsl:value-of select="$year"/>
+               <xsl:text>-</xsl:text>
+               <xsl:value-of select="$month"/>
+               <xsl:text>-</xsl:text>
+            </xsl:with-param>
+
+         </xsl:call-template>
       </ul>
    </xsl:template>
-   
+
    <xsl:template name="eventItem">
       <xsl:param name="current"/>
       <xsl:param name="last"/>
       <xsl:param name="peusdoDate"/>
       <!-- Affichage des events -->
-      <xsl:variable name="date"><xsl:value-of select="$peusdoDate"/><xsl:if test="$current=0 or $current=1 or $current=2 or $current=3 or $current=4 or $current=5 or $current=6 or $current=7 or $current=8 or $current=9">0</xsl:if><xsl:value-of select="$current"/></xsl:variable>
+      <xsl:variable name="date">
+         <xsl:value-of select="$peusdoDate"/>
+         <xsl:if
+            test="$current=0 or $current=1 or $current=2 or $current=3 or $current=4 or $current=5 or $current=6 or $current=7 or $current=8 or $current=9"
+            >0</xsl:if>
+         <xsl:value-of select="$current"/>
+      </xsl:variable>
       <!--Partie sur les cours à venir -->
       <xsl:apply-templates select="//Session[Date=$date]" mode="upevent"/>
       <!-- Partie sur les todo -->
@@ -558,9 +676,15 @@
       <xsl:choose>
          <xsl:when test="number($current)&lt;number($last)">
             <xsl:call-template name="eventItem">
-               <xsl:with-param name="current"><xsl:value-of select="$current+1"></xsl:value-of></xsl:with-param>
-               <xsl:with-param name="last"><xsl:value-of select="$last"></xsl:value-of></xsl:with-param>
-               <xsl:with-param name="peusdoDate"><xsl:value-of select="$peusdoDate"/></xsl:with-param>
+               <xsl:with-param name="current">
+                  <xsl:value-of select="$current+1"/>
+               </xsl:with-param>
+               <xsl:with-param name="last">
+                  <xsl:value-of select="$last"/>
+               </xsl:with-param>
+               <xsl:with-param name="peusdoDate">
+                  <xsl:value-of select="$peusdoDate"/>
+               </xsl:with-param>
             </xsl:call-template>
          </xsl:when>
          <xsl:otherwise><!-- Condition d'arret --></xsl:otherwise>
@@ -569,32 +693,46 @@
 
    <xsl:template match="Session" mode="upevent">
       <li>
-         <xsl:text>[</xsl:text><xsl:value-of select="parent::node()/parent::node()/Acronym"></xsl:value-of><xsl:text>]</xsl:text><xsl:value-of select="Topic"/><xsl:text> : </xsl:text>
+         <xsl:text>[</xsl:text>
+         <xsl:value-of select="parent::node()/parent::node()/Acronym"/>
+         <xsl:text>]</xsl:text>
+         <xsl:value-of select="Topic"/>
+         <xsl:text> : </xsl:text>
          <!-- Traitement différent si la date est celle d'aujourd'hui. -->
-            <xsl:choose>
-               <xsl:when test="Date=current-date()">
-                  <b><xsl:text>today at </xsl:text><xsl:value-of select="StartTime"/></b>
-               </xsl:when>
-               <xsl:otherwise>
-                  <b><xsl:value-of select="Date"/></b>
-               </xsl:otherwise>
-            </xsl:choose>
-         
+         <xsl:choose>
+            <xsl:when test="Date=current-date()">
+               <b>
+                  <xsl:text>today at </xsl:text>
+                  <xsl:value-of select="StartTime"/>
+               </b>
+            </xsl:when>
+            <xsl:otherwise>
+               <b>
+                  <xsl:value-of select="Date"/>
+               </b>
+            </xsl:otherwise>
+         </xsl:choose>
+
       </li>
    </xsl:template>
-   
+
    <xsl:template match="Task" mode="upevent">
       <li>
-         <xsl:value-of select="Title"/><xsl:text> : </xsl:text>
+         <xsl:value-of select="Title"/>
+         <xsl:text> : </xsl:text>
          <!-- Traitement différent si la date est celle d'aujourd'hui. -->
          <xsl:choose>
             <xsl:when test="Deadline/Date=current-date()">
-               <b><xsl:text>today at </xsl:text><xsl:value-of select="Deadline/Time"/>
-                 </b>
-               
+               <b>
+                  <xsl:text>today at </xsl:text>
+                  <xsl:value-of select="Deadline/Time"/>
+               </b>
+
             </xsl:when>
             <xsl:otherwise>
-               <b><xsl:value-of select="Deadline/Date"/></b>
+               <b>
+                  <xsl:value-of select="Deadline/Date"/>
+               </b>
             </xsl:otherwise>
          </xsl:choose>
       </li>

@@ -37,7 +37,7 @@ declare variable $actions := <actions error="models/error.xql">
                   Site mappings
    ====================================================================== :)
 declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" startref="home" supported="login logout install" key="ioox" mode="dev">
-  <!-- low level error mesh -->
+(:  <!-- low level error mesh -->:)
   <error mesh="standard"/>
   
   
