@@ -26,7 +26,6 @@
          </site:xtiger>
 
          <!-- MENU DEFINITION -->
-
          <site:menu> </site:menu>
          <!-- SITE CONTENT -->
          <site:content>
@@ -35,253 +34,216 @@
                   <div class="navbar">
                      <div class="navbar-inner">
                         <div class="container-fluid">
-                           <a class="brand2" href="#">
-                              Me</a>
+                           <a class="brand2" href="#"> Me</a>
                            <ul class="nav" id="mobile-nav-2">
-                              <li >
-                                 <a  href="#"><img src="img/gCons-mini-white/home.png" alt="" /> MyHome </a>
-                              </li>
-                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
-                              <li >
-                                 <a  href="#"><img src="img/gCons-mini-white/bookmark.png" alt="" /> Courses </a>
-                              </li>
-                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
-                              <li >
-                                 <a  href="#"><img src="img/gCons-mini-white/addressbook.png" alt="" /> MyNote </a>
-                              </li>
-                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
-                              <li >
-                                 <a  href="#"><img src="img/gCons-mini-white/pie-chart.png" alt="" /> Grades </a>
-                              </li>
-                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
-                              <li >
-                                 <a  href="#"><img src="img/gCons-mini-white/calendar.png" alt="" /> Todos </a>
-                              </li>
                               <li>
+                                 <a href="#"><img src="img/gCons-mini-white/home.png" alt=""/>
+                                    MyHome </a>
                               </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"/>
+                              <li>
+                                 <a href="#"><img
+                                       src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/bookmark.png"
+                                       alt=""/> Courses </a>
+                              </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"/>
+                              <li>
+                                 <a href="#"><img
+                                       src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/addressbook.png"
+                                       alt=""/> MyNote </a>
+                              </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"/>
+                              <li>
+                                 <a href="#"><img
+                                       src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/pie-chart.png"
+                                       alt=""/> Grades </a>
+                              </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"/>
+                              <li>
+                                 <a href="#"><img
+                                       src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/calendar.png"
+                                       alt=""/> Todos </a>
+                              </li>
+                              <li> </li>
                            </ul>
                         </div>
                      </div>
                      <div class="navbar-inner">
                         <div class="container-fluid">
-                           <a class="brand2" href="#">
-                              Teacher</a>
+                           <a class="brand2" href="#"> Teacher</a>
                            <ul class="nav">
-                              <li >
-                                 <a  href="#"><img src="img/gCons-mini-white/configuration.png" alt="" /> My Teaching </a>
-                              </li>
-                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
-                              <li >
-                                 <a  href="#"><img src="img/gCons-mini-white/multi-agents.png" alt="" /> My Class </a>
-                              </li>
-                              <li class="divider-vertical hidden-phone hidden-tablet"></li>
-                              <li >
-                                 <a  href="#"><img src="img/gCons-mini-white/bar-chart.png" alt="" /> Manage Grades </a>
-                              </li>
                               <li>
+                                 <a href="#"><img
+                                       src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/configuration.png"
+                                       alt=""/> My Teaching </a>
                               </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"/>
+                              <li>
+                                 <a href="#"><img
+                                       src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/multi-agents.png"
+                                       alt=""/> My Class </a>
+                              </li>
+                              <li class="divider-vertical hidden-phone hidden-tablet"/>
+                              <li>
+                                 <a href="#"><img
+                                       src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/bar-chart.png"
+                                       alt=""/> Manage Grades </a>
+                              </li>
+                              <li> </li>
                            </ul>
                         </div>
                      </div>
                   </div>
                </div>
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-            
-         <div class="row-fluid">
-            <!-- VARIABLES DE CREATION DE LA PAGE -->
-            <!-- CES VARIABLES XSLT STOCKENT LE MOIS ET L'ANNEE POUR GENERER LE CALENDRIER -->
-            <xsl:variable name="YearNo">
-               <xsl:value-of select="/Root/DataCal/CalYearNo"/>
-            </xsl:variable>
-            <xsl:variable name="TempMonthNo">
-               <xsl:value-of select="/Root/DataCal/CalMonthNo"/>
-            </xsl:variable>
+
+               <div class="row-fluid">
+                  <!-- VARIABLES DE CREATION DE LA PAGE -->
+                  <!-- CES VARIABLES XSLT STOCKENT LE MOIS ET L'ANNEE POUR GENERER LE CALENDRIER -->
+                  <xsl:variable name="YearNo">
+                     <xsl:value-of select="/Root/DataCal/CalYearNo"/>
+                  </xsl:variable>
+                  <xsl:variable name="TempMonthNo">
+                     <xsl:value-of select="/Root/DataCal/CalMonthNo"/>
+                  </xsl:variable>
 
 
 
-            <!-- TRAITEMENT DES DATES POUR LES BOUTONS DU CALENDRIER -->
-            <xsl:variable name="NextYearNo">
-               <xsl:choose>
-                  <xsl:when test="$TempMonthNo!=12">
-                     <xsl:value-of select="$YearNo"/>
-                  </xsl:when>
-                  <xsl:otherwise>
-                     <xsl:value-of select="$YearNo+1"/>
-                  </xsl:otherwise>
-               </xsl:choose>
-            </xsl:variable>
-            <xsl:variable name="PrevYearNo">
-               <xsl:choose>
-                  <xsl:when test="$TempMonthNo!=1">
-                     <xsl:value-of select="$YearNo"/>
-                  </xsl:when>
-                  <xsl:otherwise>
-                     <xsl:value-of select="$YearNo - 1"/>
-                  </xsl:otherwise>
-               </xsl:choose>
-            </xsl:variable>
-            <xsl:variable name="NextMonthNo">
-               <xsl:choose>
-                  <xsl:when test="$TempMonthNo!=12">
-                     <xsl:value-of select="$TempMonthNo + 1"/>
-                  </xsl:when>
-                  <xsl:otherwise>1</xsl:otherwise>
-               </xsl:choose>
-            </xsl:variable>
-            <xsl:variable name="PrevMonthNo">
-               <xsl:choose>
-                  <xsl:when test="$TempMonthNo!=1">
-                     <xsl:value-of select="$TempMonthNo - 1"/>
-                  </xsl:when>
-                  <xsl:otherwise>12</xsl:otherwise>
-               </xsl:choose>
-            </xsl:variable>
-
-            <!-- Traitement final nombre du mois -->
-            <xsl:variable name="MonthNo">
-               <xsl:if test="$TempMonthNo!=10 and $TempMonthNo!=11 and $TempMonthNo!=12">0</xsl:if>
-               <xsl:value-of select="/Root/DataCal/CalMonthNo"/>
-            </xsl:variable>
-            <!-- FIN TRAITEMENT DES DATES -->
-
-            <xsl:choose>
-               <xsl:when test="$PersonId = -1">
-                  <!-- NOT LOGGED IN  -->
-                  <div> You have to login to access this amazing page ! </div>
-               </xsl:when>
-               <xsl:otherwise>
-                  <!-- Affichage du calendrier -->
-                  <div id="calendar">
-                     <div class="header">
-                        <!-- Mois et année -->
-                        <h2>
-                           <xsl:call-template name="title">
-                              <xsl:with-param name="MonthNo">
-                                 <xsl:value-of select="$MonthNo"/>
-                              </xsl:with-param>
-                           </xsl:call-template>
-                           <xsl:text> </xsl:text>
+                  <!-- TRAITEMENT DES DATES POUR LES BOUTONS DU CALENDRIER -->
+                  <xsl:variable name="NextYearNo">
+                     <xsl:choose>
+                        <xsl:when test="$TempMonthNo!=12">
                            <xsl:value-of select="$YearNo"/>
-                        </h2>
+                        </xsl:when>
+                        <xsl:otherwise>
+                           <xsl:value-of select="$YearNo+1"/>
+                        </xsl:otherwise>
+                     </xsl:choose>
+                  </xsl:variable>
+                  <xsl:variable name="PrevYearNo">
+                     <xsl:choose>
+                        <xsl:when test="$TempMonthNo!=1">
+                           <xsl:value-of select="$YearNo"/>
+                        </xsl:when>
+                        <xsl:otherwise>
+                           <xsl:value-of select="$YearNo - 1"/>
+                        </xsl:otherwise>
+                     </xsl:choose>
+                  </xsl:variable>
+                  <xsl:variable name="NextMonthNo">
+                     <xsl:choose>
+                        <xsl:when test="$TempMonthNo!=12">
+                           <xsl:value-of select="$TempMonthNo + 1"/>
+                        </xsl:when>
+                        <xsl:otherwise>1</xsl:otherwise>
+                     </xsl:choose>
+                  </xsl:variable>
+                  <xsl:variable name="PrevMonthNo">
+                     <xsl:choose>
+                        <xsl:when test="$TempMonthNo!=1">
+                           <xsl:value-of select="$TempMonthNo - 1"/>
+                        </xsl:when>
+                        <xsl:otherwise>12</xsl:otherwise>
+                     </xsl:choose>
+                  </xsl:variable>
 
-                        <!-- Boutons pour naviguer dans les mois -->
-                        <form action="home" method="POST">
-                           <p style="text-align: right">
-                              <input type="hidden" name="monthno" value="{$PrevMonthNo}"/>
-                              <input type="hidden" name="yearno" value="{$PrevYearNo}"/>
-                              <input type="submit" value="&lt;&lt;"/>
-                           </p>
-                        </form>
-                        <form action="home" method="POST">
-                           <p style="text-align: right">
-                              <input type="hidden" name="monthno" value="{$NextMonthNo}"/>
-                              <input type="hidden" name="yearno" value="{$NextYearNo}"/>
-                              <input type="submit" value="&gt;&gt;"/>
-                           </p>
-                        </form>
-                     </div>
-                     <div id="tabs"/>
+                  <!-- Traitement final nombre du mois -->
+                  <xsl:variable name="MonthNo">
+                     <xsl:if test="$TempMonthNo!=10 and $TempMonthNo!=11 and $TempMonthNo!=12"
+                        >0</xsl:if>
+                     <xsl:value-of select="/Root/DataCal/CalMonthNo"/>
+                  </xsl:variable>
+                  <!-- FIN TRAITEMENT DES DATES -->
 
-                     <!-- Important pour le calendrier -->
-                     <div id="filter" class="filter" style="height:2em;">
-                        <input name="ctl00$mainContent$hidden_year" type="hidden"
-                           id="ctl00_mainContent_hidden_year" value="{$YearNo}"/>
-                        <input name="ctl00$mainContent$hidden_month" type="hidden"
-                           id="ctl00_mainContent_hidden_month" value="{$MonthNo}"/>
-                        <input name="ctl00$mainContent$hidden_click" type="hidden"
-                           id="ctl00_mainContent_hidden_click" value="01"/>
-                     </div>
-                     <!-- not even sure this is where it goes -->
+                  <xsl:choose>
+                     <xsl:when test="$PersonId = -1">
+                        <!-- NOT LOGGED IN  -->
+                        <div> You have to login to access this amazing page ! </div>
+                     </xsl:when>
+                     <xsl:otherwise>
+                        <!-- Affichage du calendrier -->
+                        <div id="calendar">
+                           <div class="header">
+                              <!-- Mois et année -->
+                              <h2>
+                                 <xsl:call-template name="title">
+                                    <xsl:with-param name="MonthNo">
+                                       <xsl:value-of select="$MonthNo"/>
+                                    </xsl:with-param>
+                                 </xsl:call-template>
+                                 <xsl:text> </xsl:text>
+                                 <xsl:value-of select="$YearNo"/>
+                              </h2>
 
-                     <!-- Calendrier -->
-                     <div id="calBig" class="list">
+                              <!-- Boutons pour naviguer dans les mois -->
+                              <form action="home" method="POST">
+                                 <p style="text-align: right">
+                                    <input type="hidden" name="monthno" value="{$PrevMonthNo}"/>
+                                    <input type="hidden" name="yearno" value="{$PrevYearNo}"/>
+                                    <input type="submit" value="&lt;&lt;"/>
+                                 </p>
+                              </form>
+                              <form action="home" method="POST">
+                                 <p style="text-align: right">
+                                    <input type="hidden" name="monthno" value="{$NextMonthNo}"/>
+                                    <input type="hidden" name="yearno" value="{$NextYearNo}"/>
+                                    <input type="submit" value="&gt;&gt;"/>
+                                 </p>
+                              </form>
+                           </div>
+                           <div id="tabs"/>
 
-                        <!-- Header -->
-                        <xsl:element name="div">
-                           <xsl:attribute name="id">calHeader</xsl:attribute>
-                           <xsl:attribute name="class">
-                              <xsl:value-of select="//Calendar/Year[No=$YearNo]/Month/No"/>
-                           </xsl:attribute>
-                           <ul>
-                              <li>Sunday</li>
-                              <li>Monday</li>
-                              <li>Tuesday</li>
-                              <li>Wednesday</li>
-                              <li>Thursday</li>
-                              <li>Friday</li>
-                              <li>Saturday</li>
-                           </ul>
-                        </xsl:element>
+                           <!-- Important pour le calendrier -->
+                           <div id="filter" class="filter" style="height:2em;">
+                              <input name="ctl00$mainContent$hidden_year" type="hidden"
+                                 id="ctl00_mainContent_hidden_year" value="{$YearNo}"/>
+                              <input name="ctl00$mainContent$hidden_month" type="hidden"
+                                 id="ctl00_mainContent_hidden_month" value="{$MonthNo}"/>
+                              <input name="ctl00$mainContent$hidden_click" type="hidden"
+                                 id="ctl00_mainContent_hidden_click" value="01"/>
+                           </div>
+                           <!-- not even sure this is where it goes -->
 
-                        <!-- Jours -->
-                        <div id="calDays" class="clearfix">
-                           <ul>
-                              <xsl:apply-templates
-                                 select="/Root/Moodle/Calendar/Year[No=$YearNo]/Month[No=$MonthNo]/Day">
-                                 <xsl:with-param name="YearNo">
-                                    <xsl:value-of select="$YearNo"/>
-                                 </xsl:with-param>
-                                 <xsl:with-param name="MonthNo">
-                                    <xsl:value-of select="$MonthNo"/>
-                                 </xsl:with-param>
-                              </xsl:apply-templates>
-                           </ul>
+                           <!-- Calendrier -->
+                           <div id="calBig" class="list">
+
+                              <!-- Header -->
+                              <xsl:element name="div">
+                                 <xsl:attribute name="id">calHeader</xsl:attribute>
+                                 <xsl:attribute name="class">
+                                    <xsl:value-of select="//Calendar/Year[No=$YearNo]/Month/No"/>
+                                 </xsl:attribute>
+                                 <ul>
+                                    <li>Sunday</li>
+                                    <li>Monday</li>
+                                    <li>Tuesday</li>
+                                    <li>Wednesday</li>
+                                    <li>Thursday</li>
+                                    <li>Friday</li>
+                                    <li>Saturday</li>
+                                 </ul>
+                              </xsl:element>
+
+                              <!-- Jours -->
+                              <div id="calDays" class="clearfix">
+                                 <ul>
+                                    <xsl:apply-templates
+                                       select="/Root/Moodle/Calendar/Year[No=$YearNo]/Month[No=$MonthNo]/Day">
+                                       <xsl:with-param name="YearNo">
+                                          <xsl:value-of select="$YearNo"/>
+                                       </xsl:with-param>
+                                       <xsl:with-param name="MonthNo">
+                                          <xsl:value-of select="$MonthNo"/>
+                                       </xsl:with-param>
+                                    </xsl:apply-templates>
+                                 </ul>
+                              </div>
+                           </div>
                         </div>
-                     </div>
-                  </div>
+                     </xsl:otherwise>
+                  </xsl:choose>
+               </div>
 
-                  <div id="events">
-
-                     <!-- 
-			= Equality
-			!= Not equal
-			&lt;  Less than
-			&lt;=  Less than or equal
-			&gt;  Greater than
-			&lt;= Greater than or equal
-		-->
-                     <h3 id="eventtitle">Upcoming Events</h3>
-                     <xsl:variable name="date">
-                        <xsl:value-of select="current-date()"/>
-                     </xsl:variable>
-                     <xsl:variable name="currDay">
-                        <xsl:value-of select="day-from-date($date)"/>
-                     </xsl:variable>
-                     <xsl:call-template name="upcomingevent">
-                        <xsl:with-param name="month">
-                           <xsl:if
-                              test="month-from-date(current-date())!=12 and month-from-date(current-date()) != 11 and month-from-date(current-date()) != 10"
-                              >0</xsl:if>
-                           <xsl:value-of select="month-from-date(current-date())"/>
-                        </xsl:with-param>
-                        <xsl:with-param name="day">
-                           <xsl:value-of select="$currDay"/>
-                        </xsl:with-param>
-                        <xsl:with-param name="year">
-                           <xsl:value-of select="year-from-date(current-date())"/>
-                        </xsl:with-param>
-                     </xsl:call-template>
-                  </div>
-               </xsl:otherwise>
-            </xsl:choose>
-         </div>
-               
-            </div>  
+            </div>
          </site:content>
          <site:javascript>
             <script src="/exist/projets/ioox/static/ioox/js/jquery.min.js" type="text/javascript">//</script>
@@ -306,20 +268,7 @@
                });
             </script>
          </site:javascript>
-         <xsl:choose>
-            <xsl:when test="$PersonId=-1"><!-- NOTHING --></xsl:when>
-            <xsl:otherwise>
-               <!-- TO DO LIST -->
-               <site:todolist>
-                  <div id="todolist">
-                     <h3 id="todotitle">TO DO LIST</h3>
-                     <xsl:apply-templates
-                        select="//Student[child::PersonRef=number($PersonId)]/ToDoList"/>
-                  </div>
-               </site:todolist>
-            </xsl:otherwise>
-         </xsl:choose>
-         
+
          <script>
             $(document).ready(function() {
             //* show all elements and remove preloader

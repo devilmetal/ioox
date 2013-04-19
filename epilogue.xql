@@ -31,6 +31,7 @@ declare function site:branch( $cmd as element(), $source as element(), $view as 
  case element(site:login) return site:login($cmd)
  case element(site:home) return site:home($cmd, $view)
  case element(site:menu) return site:menu($cmd, $view)
+ case element(site:change) return site:change($cmd, $view)
  case element(site:error) return site:error($cmd, $view)
  case element(site:message) return site:message($view)
  case element(site:image) return site:image($source)
@@ -140,6 +141,7 @@ declare function site:home( $cmd as element(), $view as element() ) as element()
    ======================================================================
 :)
 
+
 declare function site:menu( $cmd as element(), $view as element() ) as element()*
 {
     let $rights := tokenize(request:get-attribute('oppidum.rights'), ' ')
@@ -200,21 +202,21 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
 									<div class="accordion-group">
 										<div class="accordion-heading">
 											<a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<img src="img/gCons/home.png" alt="" /> Home
+												<img src="/exist/projets/ioox/static/ioox/img/gCons/home.png" alt="" /> Home
 											</a>
 										</div>
 									</div>
 									<div class="accordion-group">
 										<div class="accordion-heading">
 											<a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<img src="img/gCons/search.png" alt="" /> Explorer
+												<img src="/exist/projets/ioox/static/ioox/img/gCons/search.png" alt="" /> Explorer
 											</a>
 										</div>
 									</div>
 									<div class="accordion-group">
 										<div class="accordion-heading">
 											<a href="#collapseThree" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<img src="img/gCons/push-pin.png" alt="" /> FAQ
+												<img src="/exist/projets/ioox/static/ioox/img/gCons/push-pin.png" alt="" /> FAQ
 											</a>
 										</div>
 									</div>
@@ -233,7 +235,14 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
                     </span>
 };
 
-
+declare function site:change( $cmd as element(), $view as element() ) as element()*
+{
+    let $rights := tokenize(request:get-attribute('oppidum.rights'), ' ')
+    return
+    (
+    
+    )
+};
 (: ======================================================================
    Recursive rendering function
    ----------------------------

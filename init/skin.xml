@@ -6,14 +6,14 @@
         <predef module="oppidum">flash</predef>
     </handler>
     <profile name="standard" type="mesh">
-        <!-- CSS for timesheets -->
+        <!-- CSS for timesheets 
 
-        <link href="css/layout.css"/>
+        <link href="css/layout.css"/>-->
         <link href="css/intro.css"/>
         <link href="css/transitions.css"/>
 
-        <!-- CSS for our config -->
-        <link href="css/base.css"/>
+        <!-- CSS for our config 
+        <link href="css/base.css"/>-->
         <link href="css/cal.css"/>
 
         <link href="css/site.css"/>
