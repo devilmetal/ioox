@@ -201,14 +201,14 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
 									
 									<div class="accordion-group">
 										<div class="accordion-heading">
-											<a href="#collapseOne" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+											<a href="home" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
 												<img src="/exist/projets/ioox/static/ioox/img/gCons/home.png" alt="" /> Home
 											</a>
 										</div>
 									</div>
 									<div class="accordion-group">
 										<div class="accordion-heading">
-											<a href="#collapseTwo" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
+											<a href="explorer" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
 												<img src="/exist/projets/ioox/static/ioox/img/gCons/search.png" alt="" /> Explorer
 											</a>
 										</div>
