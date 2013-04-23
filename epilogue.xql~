@@ -31,6 +31,7 @@ declare function site:branch( $cmd as element(), $source as element(), $view as 
  case element(site:login) return site:login($cmd)
  case element(site:home) return site:home($cmd, $view)
  case element(site:menu) return site:menu($cmd, $view)
+ case element(site:change) return site:change($cmd, $view)
  case element(site:error) return site:error($cmd, $view)
  case element(site:message) return site:message($view)
  case element(site:image) return site:image($source)
