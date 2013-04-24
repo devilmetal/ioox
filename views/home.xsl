@@ -229,7 +229,7 @@
                //* show all elements  remove preloader
                setTimeout('$("html").removeClass("js")',1000);
                //* click the style fixed
-               $('ssw_layout_fixed').click();
+               $(ssw_layout_fixed).click();
                
                });
             </script>
