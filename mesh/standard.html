@@ -20,13 +20,14 @@
       </div>
       <div id="message" condition="has-message">
         <span class="ui-close" onclick="javascript:document.messageOff()">X</span>
-        <site:message force="true"></site:message>
+        
       </div>
       <site:menu force="true">lipsum</site:menu>
       <div id="contentwrapper">
         <site:navbar></site:navbar>
         <div class="row-fluid">
           <div class="main_content">
+            <site:message force="true"></site:message>
             <site:content> </site:content>
           </div>
         </div>

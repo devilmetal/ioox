@@ -7,22 +7,22 @@
     </handler>
     <profile name="standard" type="mesh">
         <!-- Bootstrap framework -->
-        <link href="css/bootstrap.min.css"/>
-        <link href="css/bootstrap-responsive.min.css"/>
+        <link href="bootstrap/css/bootstrap.min.css"/>
+        <link href="bootstrap/css/bootstrap-responsive.min.css"/>
         <!-- gebo blue theme-->
         <link href="css/blue.css" id="link_theme"/>
         <!-- breadcrumbs-->
-        <link href="css/BreadCrumb.css"/>
+        <link href="lib/jBreadcrumbs/css/BreadCrumb.css"/>
         <!-- tooltips-->
-        <link href="css/jquery.qtip.min.css"/>
+        <link href="lib/qtip2/jquery.qtip.min.css"/>
         <!--  code prettify -->
-        <link href="css/prettify.css"/>
+        <link href="lib/sticky/sticky.css"/>
         <!--  notifications -->
-        <link href="css/sticky.css"/>
+        <link href="lib/google-code-prettify/prettify.css"/>
         <!--  splashy icons -->
-        <link href="css/splashy.css"/>
+        <link href="img/splashy/splashy.css"/>
         <!--  colorbox -->
-        <link href="css/colorbox.css"/>
+        <link href="lib/colorbox/colorbox.css"/>
         <!--  main styles -->
         <link href="css/style.css"/>
         <link href="http://fonts.googleapis.com/css?family=PT+Sans"/>

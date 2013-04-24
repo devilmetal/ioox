@@ -30,6 +30,8 @@
                document.documentElement.className += 'js';
             </script>
             <link rel="shortcut icon" href="/exist/projets/ioox/static/ioox/img/gCons/connections.png"/>
+            <!-- calendar -->
+            <link rel="stylesheet" href="/exist/projets/ioox/static/ioox/lib/fullcalendar/fullcalendar_gebo.css" />	
          </site:header>
 
          <!-- MENU DEFINITION -->
@@ -111,28 +113,58 @@
                      </xsl:when>
                      <xsl:otherwise>
                            <div>You are logged !</div>
+                        <div class="span12">
+                           <h3 class="heading">Calendar</h3>
+                           <div id="calendar"></div>
+                        </div>
                      </xsl:otherwise>
                   </xsl:choose>
          </site:content>
          <site:javascript>
-            <script src="/exist/projets/ioox/static/ioox/js/jquery.min.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/jquery-migrate.min.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/jquery.debouncedresize.min.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/jquery.actual.min.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/jquery_cookie.min.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/bootstrap.min.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/bootstrap.plugins.min.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/jquery.qtip.min.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/jquery.jBreadCrumb.1.1.min.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/ios-orientationchange-fix.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/antiscroll.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/jquery-mousewheel.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/jquery.colorbox.min.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/selectNav.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/gebo_common.js" type="text/javascript">//</script>
-            <script src="/exist/projets/ioox/static/ioox/js/gebo_btns.js" type="text/javascript">//</script>
+            <script src="/exist/projets/ioox/static/ioox/js/jquery.min.js"></script>
+            <script src="/exist/projets/ioox/static/ioox/js/jquery-migrate.min.js"></script>
+            <!-- smart resize event -->
+            <script src="/exist/projets/ioox/static/ioox/js/jquery.debouncedresize.min.js"></script>
+            <!-- hidden elements width/height -->
+            <script src="/exist/projets/ioox/static/ioox/js/jquery.actual.min.js"></script>
+            <!-- js cookie plugin -->
+            <script src="/exist/projets/ioox/static/ioox/js/jquery_cookie.min.js"></script>
+            <!-- main bootstrap js -->
+            <script src="/exist/projets/ioox/static/ioox/bootstrap/js/bootstrap.min.js"></script>
+            <!-- bootstrap plugins -->
+            <script src="/exist/projets/ioox/static/ioox/js/bootstrap.plugins.min.js"></script>
+            <!-- tooltips -->
+            <script src="/exist/projets/ioox/static/ioox/lib/qtip2/jquery.qtip.min.js"></script>
+            <!-- jBreadcrumbs -->
+            <script src="/exist/projets/ioox/static/ioox/lib/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min.js"></script>
+            <!-- sticky messages -->
+            <script src="/exist/projets/ioox/static/ioox/lib/sticky/sticky.min.js"></script>
+            <!-- fix for ios orientation change -->
+            <script src="/exist/projets/ioox/static/ioox/js/ios-orientationchange-fix.js"></script>
+            <!-- scrollbar -->
+            <script src="/exist/projets/ioox/static/ioox/lib/antiscroll/antiscroll.js"></script>
+            <script src="/exist/projets/ioox/static/ioox/lib/antiscroll/jquery-mousewheel.js"></script>
+            <!-- lightbox -->
+            <script src="/exist/projets/ioox/static/ioox/lib/colorbox/jquery.colorbox.min.js"></script>
+            <!-- mobile nav -->
+            <script src="/exist/projets/ioox/static/ioox/js/selectNav.js"></script>
+            <!-- common functions -->
+            <script src="/exist/projets/ioox/static/ioox/js/gebo_common.js"></script>
+            
+            <!-- jQuery UI -->
+            <script src="/exist/projets/ioox/static/ioox/lib/jquery-ui/jquery-ui-1.10.0.custom.min.js"></script>
+            <!-- touch events for jQuery UI -->
+            <script src="/exist/projets/ioox/static/ioox/js/forms/jquery.ui.touch-punch.min.js"></script>
+            calendar 
+            <script src="/exist/projets/ioox/static/ioox/lib/fullcalendar/fullcalendar.js"></script>
+            <!--<script src="lib/fullcalendar/gcal.js"></script>-->
+            
+            <!-- calendar functions -->
+            <script src="/exist/projets/ioox/static/ioox/js/gebo_calendar.js"></script>
+            
             <script>
                $(document).ready(function() {
+               //* show all elements  remove preloader
                setTimeout('$("html").removeClass("js")',1000);
                });
             </script>

@@ -135840,7 +135840,6 @@
             <Role>Student</Role>
             <Username>FooBarZ</Username>
             <Password>123456</Password>
-
         </Person>
         <Person>
             <PersonId>2</PersonId>
@@ -135969,6 +135968,16 @@
             <Role>Professor</Role>
             <Username>ameier</Username>
             <Password>CierTh98</Password>
+        </Person>
+        
+        <Person>
+            <PersonId>16</PersonId>
+            <Sex>N-A</Sex>
+            <Lastname>admin</Lastname>
+            <Firstname>admin</Firstname>
+            <Role>Admin</Role>
+            <Username>admin</Username>
+            <Password></Password>
         </Person>
     </Persons>
 </Moodle>

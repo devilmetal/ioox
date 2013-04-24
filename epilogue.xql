@@ -75,13 +75,86 @@ declare function site:login( $cmd as element() ) as element()*
  return
    if ($user = 'guest')  then
      if (not(ends-with($uri, '/login'))) then
-       <a class="login" href="{$cmd/@base-url}login?url={$uri}">LOGIN</a>
+     
+       <header>
+                <div class="navbar navbar-fixed-top">
+                    <div class="navbar-inner">
+                        <div class="container-fluid">
+                            <a class="brand" href="#">
+                            <img src="{$cmd/@base-url}static/ioox/img/gCons/connections-white.png" alt=""/>
+                            iOoX</a>
+                            <ul class="nav user_menu pull-right">
+                                <!--<li class="hidden-phone hidden-tablet">
+                                    <div class="nb_boxes clearfix">
+                                        <a href="#" class="label ttip_b" title="New messages">25 <i class="splashy-mail_light"></i></a>
+                                    </div>
+                                </li>-->
+                                <li class="divider-vertical hidden-phone hidden-tablet"></li>
+                                <li class="dropdown">
+                                    <a class="login" href="{$cmd/@base-url}login?url={$uri}">Login</a>
+                                </li>
+                            </ul>
+                            <ul class="nav" id="mobile-nav">
+								<li class="dropdown">
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-list-alt icon-white"></i> Unifr <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li><a href="http://www.unifr.ch">Home</a></li>
+										<li><a href="http://gestens.unifr.ch">Gestens</a></li>
+										<li><a href="http://moodle2.unifr.ch">Moodle 2</a></li>
+									</ul>
+								</li>
+								<li>
+								</li>
+							</ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
      else
        ()
    else
     (
-    <span>{$user}</span>,
-    <a class="login" href="{$cmd/@base-url}logout?url={$cmd/@base-url}">LOGOUT</a>
+    <header>
+                <div class="navbar navbar-fixed-top">
+                    <div class="navbar-inner">
+                        <div class="container-fluid">
+                            <a class="brand" href="#">
+                            <img src="{$cmd/@base-url}static/ioox/img/gCons/connections-white.png" alt=""/>
+                            iOoX</a>
+                            <ul class="nav user_menu pull-right">
+                                <!--<li class="hidden-phone hidden-tablet">
+                                    <div class="nb_boxes clearfix">
+                                        <a href="#" class="label ttip_b" title="New messages">25 <i class="splashy-mail_light"></i></a>
+                                    </div>
+                                </li>-->
+                                <li class="divider-vertical hidden-phone hidden-tablet"></li>
+                                <li class="dropdown">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$user} <b class="caret"></b></a>
+                                    <ul class="dropdown-menu">
+                                    <li><a href="user_profile.html">My Profile</a></li>
+                                    <li class="divider"></li>
+                                    <li><a class="login" href="{$cmd/@base-url}logout?url={$cmd/@base-url}">Log Out</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                            <ul class="nav" id="mobile-nav">
+								<li class="dropdown">
+									<a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-list-alt icon-white"></i> Unifr <b class="caret"></b></a>
+									<ul class="dropdown-menu">
+										<li><a href="http://www.unifr.ch">Home</a></li>
+										<li><a href="http://gestens.unifr.ch">Gestens</a></li>
+										<li><a href="http://moodle2.unifr.ch">Moodle 2</a></li>
+									</ul>
+								</li>
+								<li>
+								</li>
+							</ul>
+                        </div>
+                    </div>
+                </div>
+            </header>
+    
+    
     )
 };
 
@@ -147,47 +220,7 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
     return 
     <span>
     
-            <header>
-                <div class="navbar navbar-fixed-top">
-                    <div class="navbar-inner">
-                        <div class="container-fluid">
-                            <a class="brand" href="#">
-                            <img src="img/gCons/connections-white.png" alt=""/>
-                            iOoX</a>
-                            <ul class="nav user_menu pull-right">
-                                <li class="hidden-phone hidden-tablet">
-                                    <div class="nb_boxes clearfix">
-                                        <a href="#" class="label ttip_b" title="New messages">25 <i class="splashy-mail_light"></i></a>
-                                    </div>
-                                </li>
-                                <li class="divider-vertical hidden-phone hidden-tablet"></li>
-                                <li class="dropdown">
-                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Gil Luyet <b class="caret"></b></a>
-                                    <ul class="dropdown-menu">
-                                    <li><a href="user_profile.html">My Profile</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="login.html">Log Out</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                            <ul class="nav" id="mobile-nav">
-								<li class="dropdown">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#"><i class="icon-list-alt icon-white"></i> Unifr <b class="caret"></b></a>
-									<ul class="dropdown-menu">
-										<li><a href="http://www.unifr.ch">Home</a></li>
-										<li><a href="http://gestens.unifr.ch">Gestens</a></li>
-										<li><a href="http://moodle2.unifr.ch">Moodle 2</a></li>
-									</ul>
-								</li>
-								<li>
-								</li>
-							</ul>
-                        </div>
-                    </div>
-                    
-                </div>
-                
-            </header>
+            
     <!-- sidebar -->
             <a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
             <div class="sidebar">
