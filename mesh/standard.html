@@ -1,49 +1,37 @@
 <html xmlns:site="http://oppidoc.com/oppidum/site" xmlns="http://www.w3.org/1999/xhtml"
   xmlns:xt="http://ns.inria.org/xtiger">
   <head>
-    <!--[if lte IE 8]>
-  <link  href="css/ie.css" />
-  <script src="js/ie/html5.js"></script>
- 	 <script src="js/ie/respond.min.js"></script>
-  <![endif]-->
-    <script type="application/javascript">
-            //* hide all elements and show preloader
-            document.documentElement.className += 'js';
-        </script>
     <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8" />
     <title>iOoX</title>
-    <link rel="icon" type="image/png"
-      href="http://static.freepik.com/free-photo/quill-pen-and-inkwell-icon-psd_30-2572.jpg" />
-    <site:skin force="true">
-      <link rel="stylesheet" href="../resources/css/site.css" type="text/css" charset="utf-8" />
-    </site:skin>
-    <site:xtiger></site:xtiger>
-    <site:timesheets></site:timesheets>
+    <site:skin force="true"></site:skin>
+    <site:header></site:header>
   </head>
-  <!--  class="carousel" is required for the slideshow!
-        if you wish delete this class, consider the cascade's edits to do in all css-->
-  <body data-template="#" class="carousel">
-
-    <div id="login">
-      <p>
-        <site:login force="true"><a href="login">LOGIN</a></site:login>
-      </p>
-    </div>
-
+  <body>
     <div id="error" condition="has-error">
       <site:error force="true"></site:error>
-    </div>
-    <div id="message" condition="has-message">
-      <span class="ui-close" onclick="javascript:document.messageOff()">X</span>
-      <site:message force="true"></site:message>
     </div>
     <div id="loading_layer" style="display:none"><img src="img/ajax_loader.gif" alt="" /></div>
     <site:change force="true"></site:change>
     <div id="maincontainer" class="clearfix">
+      <div id="login">
+        <p>
+          <site:login force="true"><a href="login">LOGIN</a></site:login>
+        </p>
+      </div>
+      <div id="message" condition="has-message">
+        <span class="ui-close" onclick="javascript:document.messageOff()">X</span>
+        <site:message force="true"></site:message>
+      </div>
       <site:menu force="true">lipsum</site:menu>
-      <site:content></site:content>
+      <div id="contentwrapper">
+        <site:navbar></site:navbar>
+        <div class="row-fluid">
+          <div class="main_content">
+            <site:content> </site:content>
+          </div>
+        </div>
+      </div>
       <site:javascript></site:javascript>
-      <site:todolist></site:todolist>
     </div>
     <footer>
       <p>&#169; 2013 XMoodle</p>

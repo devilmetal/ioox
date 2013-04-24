@@ -38,102 +38,94 @@ declare variable $actions := <actions error="models/error.xql">
    ====================================================================== :)
 declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" startref="home" supported="login logout install" key="ioox" mode="dev">
 (:  <!-- low level error mesh -->:)
-  <error mesh="standard"/>
+    <error mesh="standard"/>
   
-  
-  <!-- /home page -->
-  <item name="home" epilogue="standard" method="POST">
-    <model src="models/query_for_view_home.xql"/>
-    <view src="views/view_of_home.xsl">
-        <param name="skin" value="home"/>
-    </view>
-    <action epilogue="standard" name="POST">
-      <model src="models/query_for_view_home.xql"/>
-      <view src="views/view_of_home.xsl"/>
-    </action>
-  </item>
-  
-  <!-- /explorer page -->
-  <item name="explorer" epilogue="standard" method="POST">
-    <model src="models/query_for_view_explorer.xql"/>
-    <view src="views/view_of_explorer.xsl"/>
-    <action epilogue="standard" name="POST">
-      <model src="models/query_for_view_explorer.xql"/>
-      <view src="views/view_of_explorer.xsl"/>
-    </action>
-  </item>
-  
-  <!-- /FAQ page -->
-  <item name="FAQ" epilogue="standard" method="POST">
-    <model src="models/query_for_view_FAQ.xql"/>
-    <view src="views/view_of_FAQ.xsl"/>
-    <action epilogue="standard" name="POST">
-      <model src="models/query_for_view_FAQ.xql"/>
-      <view src="views/view_of_FAQ.xsl"/>
-    </action>
-  </item>
-    <!-- /me page (home page of ME section)-->
-  <item name="me" epilogue="standard" method="POST">
-    <model src="models/me/query_for_view_me.xql"/>
-    <view src="views/me/view_of_me.xsl"/>
-    <action epilogue="standard" name="POST">
-      <model src="models/me/query_for_view_me.xql"/>
-      <view src="views/me/view_of_me.xsl"/>
-    </action>
-        <!-- /me/mynote page -->
-        <item name="mynote" epilogue="standard" method="POST">
-            <model src="models/me/query_for_view_me_mynote.xql"/>
-            <view src="views/me/view_of_me_mynote.xsl"/>
-            <action epilogue="standard" name="POST">
-                <model src="models/me/query_for_view_me_mynote.xql"/>
-                <view src="views/me/view_of_me_mynote.xsl"/>
-             </action>
-          </item>
-         <!-- /me/todo page -->
-        <item name="todo" epilogue="standard" method="POST">
-            <model src="models/me/query_for_view_me_todo.xql"/>
-            <view src="views/me/view_of_me_todo.xsl"/>
-            <action epilogue="standard" name="POST">
-                <model src="models/me/query_for_view_me_todo.xql"/>
-                <view src="views/me/view_of_me_todo.xsl"/>
-            </action>
-        </item>
-        <!-- /me/profile page -->
-        <item name="profile" epilogue="standard" method="POST">
-            <model src="models/me/query_for_view_me_profile.xql"/>
-            <view src="views/me/view_of_me_profile.xsl"/>
-            <action epilogue="standard" name="POST">
-                <model src="models/me/query_for_view_me_profile.xql"/>
-                <view src="views/me/view_of_me_profile.xsl"/>
-            </action>
-        </item>
-        <!-- /me/courses page -->
-        <item name="courses" epilogue="standard" method="POST">
-            <model src="models/me/query_for_view_me_courses.xql"/>
-            <view src="views/me/view_of_me_courses.xsl"/>
-            <action epilogue="standard" name="POST">
-                <model src="models/me/query_for_view_me_courses.xql"/>
-                <view src="views/me/view_of_me_courses.xsl"/>
-            </action>
-        </item>
-        <!-- /me/grades page -->
-        <item name="grades" epilogue="standard" method="POST">
-            <model src="models/me/query_for_view_me_grades.xql"/>
-            <view src="views/me/view_of_me_grades.xsl"/>
-            <action epilogue="standard" name="POST">
-                <model src="models/me/query_for_view_me_grades.xql"/>
-                <view src="views/me/view_of_me_grades.xsl"/>
-            </action>
-        </item>
-  </item>
-  
-  <!-- Axel/Axel-Form templates-->
-  <collection name="templates" db="/db/www/ioox" collection="templates">
-    <model src="oppidum:models/templates.xql"/>
-    <item name="todos" resource="todos.xhtml">
-      <model src="oppidum:models/template.xql"/>
+    <!-- /home page -->
+    <item name="home" epilogue="standard">
+        <model src="models/home.xql"/>
+        <view src="views/home.xsl"/>
     </item>
-  </collection>
+  
+    <!-- /explorer page -->
+    <item name="explorer" epilogue="standard">
+        <model src="models/explorer.xql"/>
+        <view src="views/explorer.xsl"/>
+    </item>
+  
+    <!-- /FAQ page -->
+    <item name="faq" epilogue="standard">
+        <model src="models/faq.xql"/>
+        <view src="views/faq.xsl"/>
+    </item>
+  
+    <!-- /contact page -->
+    <item name="contact" epilogue="standard">
+        <model src="models/contact.xql"/>
+    <view src="views/contact.xsl"/>
+    </item>
+  
+    <!-- /me page (home page of ME section)-->
+    <item name="me" epilogue="standard">
+    <model src="models/me/me.xql"/>
+    <view src="views/me/me.xsl"/>
+    
+        <!-- /me/mynote page -->
+        <collection name="mynote">
+            <!-- Vue globale des notes prises + séléction -->
+            <model src="models/me/mynote.xql"/>
+            <view src="views/me/mynote.xsl"/>
+            <!-- détail / modification de chaque note-->
+            <item>
+                <model src="models/me/note.xql"/>
+                <view src="views/me/note.xsl"/>
+            </item>
+          </collection>
+          
+         <!-- /me/todo page -->
+        <item name="todo" epilogue="standard">
+            <model src="models/me/todo.xql"/>
+            <view src="views/me/todo.xsl"/>
+        </item>
+        
+        <!-- /me/profile page -->
+        <item name="profile" epilogue="standard">
+            <model src="models/me/profile.xql"/>
+            <view src="views/me/profile.xsl"/>
+        </item>
+        
+        <!-- /me/grades page -->
+        <collection name="grades">
+            <!-- Vue global des notes / modification si prof-->
+            <model src="models/me/grades.xql"/>
+            <view src="views/me/grades.xsl"/>
+            <!-- détail de chaque note (note précise + compte rendu du prof)-->
+            <item>
+                <model src="models/me/grade.xql"/>
+                <view src="views/me/grade.xsl"/>
+            </item>
+          </collection>
+          
+        <!-- /me/courses page -->
+        <collection name="mynote">
+            <model src="models/me/courses.xql"/>
+            <view src="views/me/courses.xsl"/>
+            <!-- détail de chaque cours -->
+            <item>
+                <model src="models/me/course.xql"/>
+                <view src="views/me/course.xsl"/>
+            </item>
+          </collection>
+    </item>
+    
+    <item name="css">
+        <model src="models/css/css.xql"/>
+        <view src="views/css/css.xsl"/>
+    </item>
+    
+    <item name="test" epilogue="standard">
+        <model src="models/css/test.xql"/>
+        <view src="views/css/test.xsl"/>
+    </item>
 </site>;
 
 (: call oppidum:process with false() to disable ?debug=true mode :)

@@ -219,19 +219,13 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
 											</a>
 										</div>
 									</div>
-									
-									
-									
 								</div>
-								
-
 							</div>
-							   
 						</div>
 					</div>
 				</div>
 			</div>
-                    </span>
+         </span>
 };
 
 declare function site:change( $cmd as element(), $view as element() ) as element()*

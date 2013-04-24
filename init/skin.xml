@@ -6,23 +6,6 @@
         <predef module="oppidum">flash</predef>
     </handler>
     <profile name="standard" type="mesh">
-        <!-- CSS for timesheets 
-
-        <link href="css/layout.css"/>-->
-        <link href="css/intro.css"/>
-        <link href="css/transitions.css"/>
-
-        <!-- CSS for our config 
-        <link href="css/base.css"/>-->
-        <link href="css/cal.css"/>
-
-        <link href="css/site.css"/>
-        <!-- JS for the Calendar -->
-        <script src="js/jquery.js"/>
-        <script src="js/cal.js"/>
-        <script src="js/wolftrap.js"/>
-        <script src="js/timesheets.js"/>
-
         <!-- Bootstrap framework -->
         <link href="css/bootstrap.min.css"/>
         <link href="css/bootstrap-responsive.min.css"/>
@@ -40,15 +23,9 @@
         <link href="css/splashy.css"/>
         <!--  colorbox -->
         <link href="css/colorbox.css"/>
-
         <!--  main styles -->
         <link href="css/style.css"/>
-
         <link href="http://fonts.googleapis.com/css?family=PT+Sans"/>
-        
-        <!-- JS layout-->
-        
-        
     </profile>
 
     <profile name="standard2" type="mesh">
