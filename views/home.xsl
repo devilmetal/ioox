@@ -10,6 +10,9 @@
    xmlns="http://www.w3.org/1999/xhtml" xmlns:site="http://oppidoc.com/oppidum/site"
    extension-element-prefixes="date" version="2.0">
    <xsl:output method="xml" media-type="text/xhtml" omit-xml-declaration="yes" indent="no"/>
+   
+   <xsl:param name="xslt.rights"/>
+   <xsl:param name="xslt.base-url">/</xsl:param>
    <xsl:template match="/">
 
 
@@ -19,7 +22,66 @@
 
       <!-- XTIGER DEFINITION -->
       <site:view>
+         <site:change>
+            <div class="style_switcher">
+               <!--<div class="sepH_c">
+                  <p>Colors:</p>
+                  <div class="clearfix">
+                     <a href="javascript:void(0)" class="style_item jQclr blue_theme style_active" title="blue">blue</a>
+                     <a href="javascript:void(0)" class="style_item jQclr dark_theme" title="dark">dark</a>
+                     <a href="javascript:void(0)" class="style_item jQclr green_theme" title="green">green</a>
+                     <a href="javascript:void(0)" class="style_item jQclr brown_theme" title="brown">brown</a>
+                     <a href="javascript:void(0)" class="style_item jQclr eastern_blue_theme" title="eastern_blue">eastern blue</a>
+                     <a href="javascript:void(0)" class="style_item jQclr tamarillo_theme" title="tamarillo">tamarillo</a>
+                  </div>
+               </div>-->
+               <div class="sepH_c">
+                  <p>Backgrounds:</p>
+                  <div class="clearfix">
+                     <span class="style_item jQptrn style_active ptrn_def" title=""></span>
+                     <span class="ssw_ptrn_a style_item jQptrn" title="ptrn_a"></span>
+                     <span class="ssw_ptrn_b style_item jQptrn" title="ptrn_b"></span>
+                     <span class="ssw_ptrn_c style_item jQptrn" title="ptrn_c"></span>
+                     <span class="ssw_ptrn_d style_item jQptrn" title="ptrn_d"></span>
+                     <span class="ssw_ptrn_e style_item jQptrn" title="ptrn_e"></span>
+                  </div>
+               </div>
+               <div class="sepH_c">
+                  <p>Layout:</p>
+                  <div class="clearfix">
+                     <label class="radio inline"><input type="radio" name="ssw_layout" id="ssw_layout_fluid" value=""  /> Fluid</label>
+                     <label class="radio inline"><input type="radio" name="ssw_layout" id="ssw_layout_fixed" value="gebo-fixed" /> Fixed</label>
+                  </div>
+               </div>
+               <div class="sepH_c">
+                  <p>Sidebar position:</p>
+                  <div class="clearfix">
+                     <label class="radio inline"><input type="radio" name="ssw_sidebar" id="ssw_sidebar_left" value=""  /> Left</label>
+                     <label class="radio inline"><input type="radio" name="ssw_sidebar" id="ssw_sidebar_right" value="sidebar_right" /> Right</label>
+                  </div>
+               </div>
+               <div class="sepH_c">
+                  <p>Show top menu on:</p>
+                  <div class="clearfix">
+                     <label class="radio inline"><input type="radio" name="ssw_menu" id="ssw_menu_click" value=""  /> Click</label>
+                     <label class="radio inline"><input type="radio" name="ssw_menu" id="ssw_menu_hover" value="menu_hover" /> Hover</label>
+                  </div>
+               </div>
+               
+               <div class="gh_button-group">
+                  <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
+                  <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
+               </div>
+               <div class="hide">
+                  <ul id="ssw_styles">
+                     <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
+                     <li class="small ssw_lColor sepH_a" style="display:none">a { color: #<span></span> }</li>
+                  </ul>
+               </div>
+            </div>
+         </site:change>
          <site:header>
+            
             <!--[if lte IE 8]>
             <link  href="css/ie.css" />
                 <script src="js/ie/html5.js"></script>
@@ -46,7 +108,7 @@
                         <a class="brand2" href="#"> Me</a>
                         <ul class="nav" id="mobile-nav-2">
                            <li>
-                              <a href="#"><img src="img/gCons-mini-white/home.png" alt=""/>
+                              <a href="#"><img src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/home.png" alt=""/>
                                  MyHome </a>
                            </li>
                            <li class="divider-vertical hidden-phone hidden-tablet"/>
@@ -109,10 +171,9 @@
                   <xsl:choose>
                      <xsl:when test="$PersonId = -1">
                         <!-- NOT LOGGED IN  -->
-                        <div> You have to login to access this amazing page ! </div>
+                        <div> You have to login to access this page. </div>
                      </xsl:when>
                      <xsl:otherwise>
-                           <div>You are logged !</div>
                         <div class="span12">
                            <h3 class="heading">Calendar</h3>
                            <div id="calendar"></div>
@@ -160,8 +221,9 @@
             <!--<script src="lib/fullcalendar/gcal.js"></script>-->
             
             <!-- calendar functions -->
-            <script src="/exist/projets/ioox/static/ioox/js/gebo_calendar.js"></script>
+            <script src="/exist/projets/ioox/eventsjs"></script>
             
+            <script src="/exist/projets/ioox/static/ioox/js/gebo_btns.js"></script>
             <script>
                $(document).ready(function() {
                //* show all elements  remove preloader

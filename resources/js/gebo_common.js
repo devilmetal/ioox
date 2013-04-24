@@ -320,7 +320,7 @@
 					$(this).closest('div').find('.style_item').removeClass('style_active');
 					$(this).addClass('style_active');
 					var style_selected = $(this).attr('title');
-					$('#link_theme').attr('href','css/'+style_selected+'.css');
+					$('#link_theme').attr('href','/exist/projets/ioox/static/ioox/css/'+style_selected+'.css');
 				});
 				
 				// backgrounds

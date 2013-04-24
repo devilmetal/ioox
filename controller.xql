@@ -117,15 +117,11 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
           </collection>
     </item>
     
-    <item name="css">
-        <model src="models/css/css.xql"/>
-        <view src="views/css/css.xsl"/>
+    <item name="eventsjs">
+        <model src="models/js/eventsjs.xql"/>
+        <view src="views/js/eventsjs.xsl"/>
     </item>
     
-    <item name="test" epilogue="standard">
-        <model src="models/css/test.xql"/>
-        <view src="views/css/test.xsl"/>
-    </item>
 </site>;
 
 (: call oppidum:process with false() to disable ?debug=true mode :)

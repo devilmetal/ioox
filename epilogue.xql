@@ -265,9 +265,7 @@ declare function site:change( $cmd as element(), $view as element() ) as element
 {
     let $rights := tokenize(request:get-attribute('oppidum.rights'), ' ')
     return
-    (
-    
-    )
+    ()
 };
 (: ======================================================================
    Recursive rendering function
