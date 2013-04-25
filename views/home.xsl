@@ -14,27 +14,10 @@
    <xsl:param name="xslt.rights"/>
    <xsl:param name="xslt.base-url">/</xsl:param>
    <xsl:template match="/">
-
-
-      <xsl:variable name="PersonId">
-         <xsl:value-of select="//UserBuildID"/>
-      </xsl:variable>
-
-      <!-- XTIGER DEFINITION -->
+      <xsl:variable name="xslt-ressource-url"><xsl:value-of select="$xslt.base-url"/>static/ioox</xsl:variable>
       <site:view>
          <site:change>
             <div class="style_switcher">
-               <!--<div class="sepH_c">
-                  <p>Colors:</p>
-                  <div class="clearfix">
-                     <a href="javascript:void(0)" class="style_item jQclr blue_theme style_active" title="blue">blue</a>
-                     <a href="javascript:void(0)" class="style_item jQclr dark_theme" title="dark">dark</a>
-                     <a href="javascript:void(0)" class="style_item jQclr green_theme" title="green">green</a>
-                     <a href="javascript:void(0)" class="style_item jQclr brown_theme" title="brown">brown</a>
-                     <a href="javascript:void(0)" class="style_item jQclr eastern_blue_theme" title="eastern_blue">eastern blue</a>
-                     <a href="javascript:void(0)" class="style_item jQclr tamarillo_theme" title="tamarillo">tamarillo</a>
-                  </div>
-               </div>-->
                <div class="sepH_c">
                   <p>Backgrounds:</p>
                   <div class="clearfix">
@@ -91,9 +74,9 @@
                //* hide all elements and show preloader
                document.documentElement.className += 'js';
             </script>
-            <link rel="shortcut icon" href="/exist/projets/ioox/static/ioox/img/gCons/connections.png"/>
+            <link rel="shortcut icon" href="{$xslt-ressource-url}/img/gCons/connections.png"/>
             <!-- calendar -->
-            <link rel="stylesheet" href="/exist/projets/ioox/static/ioox/lib/fullcalendar/fullcalendar_gebo.css" />	
+            <link rel="stylesheet" href="{$xslt-ressource-url}/lib/fullcalendar/fullcalendar_gebo.css" />	
          </site:header>
 
          <!-- MENU DEFINITION -->
@@ -103,73 +86,77 @@
             
             <div class="main_content">
                <div class="navbar">
+                  <xsl:if test="//Session/Role != '-1'">
                   <div class="navbar-inner">
                      <div class="container-fluid">
                         <a class="brand2" href="#"> Me</a>
                         <ul class="nav" id="mobile-nav-2">
                            <li>
-                              <a href="#"><img src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/home.png" alt=""/>
+                              <a href="#"><img src="{$xslt-ressource-url}/img/gCons-mini-white/home.png" alt=""/>
                                  MyHome </a>
                            </li>
                            <li class="divider-vertical hidden-phone hidden-tablet"/>
                            <li>
                               <a href="#"><img
-                                 src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/bookmark.png"
+                                 src="{$xslt-ressource-url}/img/gCons-mini-white/bookmark.png"
                                  alt=""/> Courses </a>
                            </li>
                            <li class="divider-vertical hidden-phone hidden-tablet"/>
                            <li>
                               <a href="#"><img
-                                 src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/addressbook.png"
+                                 src="{$xslt-ressource-url}/img/gCons-mini-white/addressbook.png"
                                  alt=""/> MyNote </a>
                            </li>
                            <li class="divider-vertical hidden-phone hidden-tablet"/>
                            <li>
                               <a href="#"><img
-                                 src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/pie-chart.png"
+                                 src="{$xslt-ressource-url}/img/gCons-mini-white/pie-chart.png"
                                  alt=""/> Grades </a>
                            </li>
                            <li class="divider-vertical hidden-phone hidden-tablet"/>
                            <li>
                               <a href="#"><img
-                                 src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/calendar.png"
+                                 src="{$xslt-ressource-url}/img/gCons-mini-white/calendar.png"
                                  alt=""/> Todos </a>
                            </li>
                            <li> </li>
                         </ul>
                      </div>
                   </div>
+                  </xsl:if>
+                  <xsl:if test="//Session/Role != 'Student' and //Session/Role != '-1' ">
                   <div class="navbar-inner">
                      <div class="container-fluid">
                         <a class="brand2" href="#"> Teacher</a>
                         <ul class="nav">
                            <li>
                               <a href="#"><img
-                                 src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/configuration.png"
+                                 src="{$xslt-ressource-url}/img/gCons-mini-white/configuration.png"
                                  alt=""/> My Teaching </a>
                            </li>
                            <li class="divider-vertical hidden-phone hidden-tablet"/>
                            <li>
                               <a href="#"><img
-                                 src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/multi-agents.png"
+                                 src="{$xslt-ressource-url}/img/gCons-mini-white/multi-agents.png"
                                  alt=""/> My Class </a>
                            </li>
                            <li class="divider-vertical hidden-phone hidden-tablet"/>
                            <li>
                               <a href="#"><img
-                                 src="/exist/projets/ioox/static/ioox/img/gCons-mini-white/bar-chart.png"
+                                 src="{$xslt-ressource-url}/img/gCons-mini-white/bar-chart.png"
                                  alt=""/> Manage Grades </a>
                            </li>
                            <li> </li>
                         </ul>
                      </div>
                   </div>
+                  </xsl:if>
                </div>
             </div>
          </site:navbar>
          <site:content>
                   <xsl:choose>
-                     <xsl:when test="$PersonId = -1">
+                     <xsl:when test="//Session/Id = '-1'">
                         <!-- NOT LOGGED IN  -->
                         <div> You have to login to access this page. </div>
                      </xsl:when>
@@ -182,52 +169,52 @@
                   </xsl:choose>
          </site:content>
          <site:javascript>
-            <script src="/exist/projets/ioox/static/ioox/js/jquery.min.js"></script>
-            <script src="/exist/projets/ioox/static/ioox/js/jquery-migrate.min.js"></script>
+            <script src="{$xslt-ressource-url}/js/jquery.min.js"></script>
+            <script src="{$xslt-ressource-url}/js/jquery-migrate.min.js"></script>
             <!-- smart resize event -->
-            <script src="/exist/projets/ioox/static/ioox/js/jquery.debouncedresize.min.js"></script>
+            <script src="{$xslt-ressource-url}/js/jquery.debouncedresize.min.js"></script>
             <!-- hidden elements width/height -->
-            <script src="/exist/projets/ioox/static/ioox/js/jquery.actual.min.js"></script>
+            <script src="{$xslt-ressource-url}/js/jquery.actual.min.js"></script>
             <!-- js cookie plugin -->
-            <script src="/exist/projets/ioox/static/ioox/js/jquery_cookie.min.js"></script>
+            <script src="{$xslt-ressource-url}/js/jquery_cookie.min.js"></script>
             <!-- main bootstrap js -->
-            <script src="/exist/projets/ioox/static/ioox/bootstrap/js/bootstrap.min.js"></script>
+            <script src="{$xslt-ressource-url}/bootstrap/js/bootstrap.min.js"></script>
             <!-- bootstrap plugins -->
-            <script src="/exist/projets/ioox/static/ioox/js/bootstrap.plugins.min.js"></script>
+            <script src="{$xslt-ressource-url}/js/bootstrap.plugins.min.js"></script>
             <!-- tooltips -->
-            <script src="/exist/projets/ioox/static/ioox/lib/qtip2/jquery.qtip.min.js"></script>
+            <script src="{$xslt-ressource-url}/lib/qtip2/jquery.qtip.min.js"></script>
             <!-- jBreadcrumbs -->
-            <script src="/exist/projets/ioox/static/ioox/lib/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min.js"></script>
+            <script src="{$xslt-ressource-url}/lib/jBreadcrumbs/js/jquery.jBreadCrumb.1.1.min.js"></script>
             <!-- sticky messages -->
-            <script src="/exist/projets/ioox/static/ioox/lib/sticky/sticky.min.js"></script>
+            <script src="{$xslt-ressource-url}/lib/sticky/sticky.min.js"></script>
             <!-- fix for ios orientation change -->
-            <script src="/exist/projets/ioox/static/ioox/js/ios-orientationchange-fix.js"></script>
+            <script src="{$xslt-ressource-url}/js/ios-orientationchange-fix.js"></script>
             <!-- scrollbar -->
-            <script src="/exist/projets/ioox/static/ioox/lib/antiscroll/antiscroll.js"></script>
-            <script src="/exist/projets/ioox/static/ioox/lib/antiscroll/jquery-mousewheel.js"></script>
+            <script src="{$xslt-ressource-url}/lib/antiscroll/antiscroll.js"></script>
+            <script src="{$xslt-ressource-url}/lib/antiscroll/jquery-mousewheel.js"></script>
             <!-- lightbox -->
-            <script src="/exist/projets/ioox/static/ioox/lib/colorbox/jquery.colorbox.min.js"></script>
+            <script src="{$xslt-ressource-url}/lib/colorbox/jquery.colorbox.min.js"></script>
             <!-- mobile nav -->
-            <script src="/exist/projets/ioox/static/ioox/js/selectNav.js"></script>
+            <script src="{$xslt-ressource-url}/js/selectNav.js"></script>
             <!-- common functions -->
-            <script src="/exist/projets/ioox/static/ioox/js/gebo_common.js"></script>
+            <script src="{$xslt-ressource-url}/js/gebo_common.js"></script>
             
             <!-- jQuery UI -->
-            <script src="/exist/projets/ioox/static/ioox/lib/jquery-ui/jquery-ui-1.10.0.custom.min.js"></script>
+            <script src="{$xslt-ressource-url}/lib/jquery-ui/jquery-ui-1.10.0.custom.min.js"></script>
             <!-- touch events for jQuery UI -->
-            <script src="/exist/projets/ioox/static/ioox/js/forms/jquery.ui.touch-punch.min.js"></script>
+            <script src="{$xslt-ressource-url}/js/forms/jquery.ui.touch-punch.min.js"></script>
             calendar 
-            <script src="/exist/projets/ioox/static/ioox/lib/fullcalendar/fullcalendar.js"></script>
+            <script src="{$xslt-ressource-url}/lib/fullcalendar/fullcalendar.js"></script>
             <!--<script src="lib/fullcalendar/gcal.js"></script>-->
             
             <!-- calendar functions -->
-            <script src="/exist/projets/ioox/eventsjs"></script>
+            <script src="{$xslt.base-url}eventsjs"></script>
             
-            <script src="/exist/projets/ioox/static/ioox/js/gebo_btns.js"></script>
+            <script src="{$xslt-ressource-url}/js/gebo_btns.js"></script>
             <script>
                $(document).ready(function() {
                //* show all elements  remove preloader
-               setTimeout('$("html").removeClass("js")',1000);
+               setTimeout('$("html").removeClass("js")',0);
                //* click the style fixed
                $(ssw_layout_fixed).click();
                

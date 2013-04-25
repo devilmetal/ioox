@@ -2,6 +2,7 @@ xquery version "1.0";
 
 import module namespace request="http://exist-db.org/xquery/request";
 declare namespace xdb = "http://exist-db.org/xquery/xmldb";
+import module namespace session="http://exist-db.org/xquery/session";
 
 declare option exist:serialize "method=xml media-type=text/xml";
 
@@ -25,12 +26,18 @@ let $month :=  if ($method = 'POST') then (
                         else(
                             fn:month-from-date($curr-date)
                             )
-let $user := xdb:get-current-user()
-let $currentID := if ($user = 'guest') then (
-                            -1
+                            
+let $role := if (session:get-attribute('role')) then (
+                            session:get-attribute('role')
                             )
                         else(
-                            doc(concat($collection, "db.xml"))//Person[Username=$user]/PersonId
+                            -1
+                            )
+let $id := if (session:get-attribute('id')) then (
+                            session:get-attribute('id')
+                            )
+                        else(
+                            -1
                             )
                             
 
@@ -47,8 +54,9 @@ let $currentID := if ($user = 'guest') then (
         <CalYearNo>{$year}</CalYearNo>
     </DataCal>
     {$data3}
-    <UserBuildID>
-    {$currentID}
-    </UserBuildID>
+    <Session>
+        <Id>{$id}</Id>
+        <Role>{$role}</Role>
+   </Session>
     </Root>
    

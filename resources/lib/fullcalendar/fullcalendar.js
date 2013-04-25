@@ -39,7 +39,7 @@ var defaults = {
 	ignoreTimezone: false,
 	
 	// event ajax
-	lazyFetching: false,
+	lazyFetching: true,
 	startParam: 'start',
 	endParam: 'end',
 	

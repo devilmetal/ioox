@@ -8,6 +8,8 @@
     <xsl:param name="xslt.rights"/>
     <xsl:param name="xslt.base-url">/</xsl:param>
     <xsl:template match="/">
+        <xsl:variable name="Month">04</xsl:variable>
+        <xsl:variable name="Year">2013</xsl:variable>
         /* [ ---- Gebo Admin Panel - calendar ---- ] */
         
         $(document).ready(function() {
@@ -64,57 +66,10 @@
         },
         editable: true,
         theme: false,
-        events: [
-        {
-        title: 'All Day Event',
-        start: new Date(y, m, 1),
-        color: '#aedb97',
-        textColor: '#3d641b'
-        },
-        {
-        title: 'Long Event',
-        start: new Date(y, m, d-5),
-        end: new Date(y, m, d-2)
-        },
-        {
-        id: 999,
-        title: 'Repeating Event',
-        start: new Date(y, m, d+8, 16, 0),
-        allDay: false
-        },
-        {
-        id: 999,
-        title: 'Repeating Event',
-        start: new Date(y, m, d+15, 16, 0),
-        allDay: false
-        },
-        {
-        title: 'Meeting',
-        start: new Date(y, m, d+12, 15, 0),
-        allDay: false,
-        color: '#aedb97',
-        textColor: '#3d641b'
-        },
-        {
-        title: 'Lunch',
-        start: new Date(y, m, d, 12, 0),
-        end: new Date(y, m, d, 14, 0),
-        allDay: false
-        },
-        {
-        title: 'Birthday Party',
-        start: new Date(y, m, d+1, 19, 0),
-        end: new Date(y, m, d+1, 22, 30),
-        allDay: false,
-        color: '#cea97e',
-        textColor: '#5e4223'
-        },
-        {
-        title: 'Click for Google',
-        start: new Date(y, m, 28),
-        end: new Date(y, m, 29),
-        url: 'http://google.com/'
-        }
+        events: [<xsl:apply-templates select="/Root/Year[No=$Year]/Month[No=$Month]//Day">
+            <xsl:with-param name="YearNo"><xsl:value-of select="$Year"/></xsl:with-param>
+            <xsl:with-param name="MonthNo"><xsl:value-of select="$Month"/></xsl:with-param>
+        </xsl:apply-templates>
         ],
         eventColor: '#bcdeee'
         })
@@ -146,5 +101,50 @@
         })
         }
         };
-    </xsl:template>    
+    </xsl:template>   
+    
+    
+    <!-- TEMPLATE POUR CHAQUE JOUR DU MOIS -->
+    <xsl:template match="Day">
+        <xsl:param name="YearNo"/>
+        <xsl:param name="MonthNo"/>
+        <xsl:variable name="DayNo">
+            <xsl:value-of select="./No"/>
+        </xsl:variable>
+        <xsl:variable name="FullDay">
+            <xsl:value-of select="$YearNo"/>
+            <xsl:text>-</xsl:text>
+            <xsl:value-of select="$MonthNo"/>
+            <xsl:text>-</xsl:text>
+            <xsl:value-of select="$DayNo"/>
+        </xsl:variable>
+        
+        <xsl:variable name="FullDate">
+            <xsl:value-of select="$YearNo"/>
+            <xsl:text>-</xsl:text>
+            <xsl:value-of select="$MonthNo"/>
+            <xsl:text>-</xsl:text>
+            <xsl:value-of select="$DayNo"/>
+        </xsl:variable>
+        <!-- Case : it exist a session for this day -->
+        <xsl:if test="not(empty(//Session[Date=$FullDay]))">
+                        <xsl:apply-templates
+                            select="//Session[Date=$FullDay]">
+                            <xsl:sort select="StartTime"/>
+                            <xsl:with-param name="FullDate"><xsl:value-of select="$FullDate"/></xsl:with-param>
+                        </xsl:apply-templates>
+        </xsl:if>
+    </xsl:template>
+    
+    <!-- MISE EN PAGE DES EVENTS D'UN JOUR AFFICHAGE DANS LE CALENDRIER-->
+    <xsl:template match="Session"><xsl:param name="FullDate"></xsl:param>
+        {
+        title: '<xsl:value-of select="./Topic"/>',
+        start: '<xsl:value-of select="$FullDate"/><xsl:text> </xsl:text><xsl:value-of select="StartTime"/>',
+        end: '<xsl:value-of select="$FullDate"/><xsl:text> </xsl:text><xsl:value-of select="EndTime"/>',
+        allDay: false,
+        url: '<xsl:value-of select="$xslt.base-url"/>me/courses/<xsl:value-of select="ancestor::Course/CourseId"/>#<xsl:value-of select="SessionId"/>'
+        },</xsl:template>
+    
+    
 </xsl:stylesheet>
