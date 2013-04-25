@@ -42,13 +42,13 @@ let $currentID := if ($user = 'guest') then (
     </Calendar>
      {$data2}
     </Moodle>
-    <DataCal>
-        <CalMonthNo>{$month}</CalMonthNo>
-        <CalYearNo>{$year}</CalYearNo>
-    </DataCal>
     {$data3}
     <UserBuildID>
     {$currentID}
     </UserBuildID>
+    <DataCal>
+        <CalMonthNo>{$month}</CalMonthNo>
+        <CalYearNo>{$year}</CalYearNo>
+    </DataCal>
     </Root>
    

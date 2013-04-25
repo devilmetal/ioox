@@ -21,18 +21,10 @@ let $month :=  if ($method = 'GET') then (
                         else(
                             fn:month-from-date($curr-date)
                             )                           
-let $data1 := doc(concat($collection, "db.xml"))/Moodle/Calendar/Year[No=$year]
-let $data2 := doc(concat($collection, "db.xml"))/Moodle/Courses
-let $data3 := doc(concat($collection, "db.xml"))/Moodle/Students
 
     return
-    <Root>
-     {$data1}
-     {$data2}
-     {$data3}
      <Date>
         <Year>{$year}</Year>
         <Month>{$month}</Month>
      </Date>
-     </Root>
    

@@ -10,6 +10,7 @@ declare option exist:serialize "method=xml media-type=text/xml";
 let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
 let $curr-date := fn:current-date()
+
 let $year :=  if ($method = 'POST') then (
                             request:get-parameter('yearno', '')
                             )
@@ -25,6 +26,13 @@ let $month :=  if ($method = 'POST') then (
                             )
                         else(
                             fn:month-from-date($curr-date)
+                            )
+
+let $year :=  if ($method = 'POST') then (
+                            request:get-parameter('yearno', '')
+                            )
+                        else(
+                            fn:year-from-date($curr-date)
                             )
                             
 let $role := if (session:get-attribute('role')) then (
@@ -49,14 +57,14 @@ let $id := if (session:get-attribute('id')) then (
     </Calendar>
      {$data2}
     </Moodle>
-    <DataCal>
-        <CalMonthNo>{$month}</CalMonthNo>
-        <CalYearNo>{$year}</CalYearNo>
-    </DataCal>
     {$data3}
     <Session>
         <Id>{$id}</Id>
         <Role>{$role}</Role>
    </Session>
+    <DataCal>
+        <CalMonthNo>{$month}</CalMonthNo>
+        <CalYearNo>{$year}</CalYearNo>
+    </DataCal>
     </Root>
    

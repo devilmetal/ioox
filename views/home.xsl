@@ -162,6 +162,79 @@
                      </xsl:when>
                      <xsl:otherwise>
                         <div class="span12">
+                           <!-- BOUTONS POUR NAVIGATION -->
+                           <!-- CES VARIABLES XSLT STOCKENT LE MOIS ET L'ANNEE POUR GENERER LE CALENDRIER -->
+                           <xsl:variable name="YearNo">
+                              <xsl:value-of select="/Root/DataCal/CalYearNo"/>
+                           </xsl:variable>
+                           <xsl:variable name="TempMonthNo">
+                              <xsl:value-of select="/Root/DataCal/CalMonthNo"/>
+                           </xsl:variable>
+                           
+                           
+                           
+                           <!-- TRAITEMENT DES DATES POUR LES BOUTONS DU CALENDRIER -->
+                           <xsl:variable name="NextYearNo">
+                              <xsl:choose>
+                                 <xsl:when test="$TempMonthNo!=12">
+                                    <xsl:value-of select="$YearNo"/>
+                                 </xsl:when>
+                                 <xsl:otherwise>
+                                    <xsl:value-of select="$YearNo+1"/>
+                                 </xsl:otherwise>
+                              </xsl:choose>
+                           </xsl:variable>
+                           <xsl:variable name="PrevYearNo">
+                              <xsl:choose>
+                                 <xsl:when test="$TempMonthNo!=1">
+                                    <xsl:value-of select="$YearNo"/>
+                                 </xsl:when>
+                                 <xsl:otherwise>
+                                    <xsl:value-of select="$YearNo - 1"/>
+                                 </xsl:otherwise>
+                              </xsl:choose>
+                           </xsl:variable>
+                           <xsl:variable name="NextMonthNo">
+                              <xsl:choose>
+                                 <xsl:when test="$TempMonthNo!=12">
+                                    <xsl:value-of select="$TempMonthNo + 1"/>
+                                 </xsl:when>
+                                 <xsl:otherwise>1</xsl:otherwise>
+                              </xsl:choose>
+                           </xsl:variable>
+                           <xsl:variable name="PrevMonthNo">
+                              <xsl:choose>
+                                 <xsl:when test="$TempMonthNo!=1">
+                                    <xsl:value-of select="$TempMonthNo - 1"/>
+                                 </xsl:when>
+                                 <xsl:otherwise>12</xsl:otherwise>
+                              </xsl:choose>
+                           </xsl:variable>
+                           
+                           <!-- Traitement final nombre du mois -->
+                           <xsl:variable name="MonthNo">
+                              <xsl:if test="$TempMonthNo!=10 and $TempMonthNo!=11 and $TempMonthNo!=12"
+                                 >0</xsl:if>
+                              <xsl:value-of select="/Root/DataCal/CalMonthNo"/>
+                           </xsl:variable>
+                           <!-- FIN TRAITEMENT DES DATES -->
+                           
+                           <!-- Boutons pour naviguer dans les mois -->
+                           <form action="home" method="POST">
+                              <p style="text-align: right">
+                                 <input type="hidden" name="monthno" value="{$PrevMonthNo}"/>
+                                 <input type="hidden" name="yearno" value="{$PrevYearNo}"/>
+                                 <input type="submit" value="&lt;&lt;"/>
+                              </p>
+                           </form>
+                           <form action="home" method="POST">
+                              <p style="text-align: right">
+                                 <input type="hidden" name="monthno" value="{$NextMonthNo}"/>
+                                 <input type="hidden" name="yearno" value="{$NextYearNo}"/>
+                                 <input type="submit" value="&gt;&gt;"/>
+                              </p>
+                           </form>
+                        
                            <h3 class="heading">Calendar</h3>
                            <div id="calendar"></div>
                         </div>
@@ -203,12 +276,14 @@
             <script src="{$xslt-ressource-url}/lib/jquery-ui/jquery-ui-1.10.0.custom.min.js"></script>
             <!-- touch events for jQuery UI -->
             <script src="{$xslt-ressource-url}/js/forms/jquery.ui.touch-punch.min.js"></script>
-            calendar 
+            <xsl:variable name="year"><xsl:value-of select="//DataCal/CalYearNo"/></xsl:variable>
+            <xsl:variable name="month"><xsl:if test="//DataCal/CalMonthNo!=10 and //DataCal/CalMonthNo!=11 and //DataCal/CalMonthNo!=12"
+               >0</xsl:if><xsl:value-of select="//DataCal/CalMonthNo"/></xsl:variable>
+            <script src="{$xslt.base-url}eventsjs?year={$year}&#38;month={$month}"></script>
             <script src="{$xslt-ressource-url}/lib/fullcalendar/fullcalendar.js"></script>
             <!--<script src="lib/fullcalendar/gcal.js"></script>-->
             
             <!-- calendar functions -->
-            <script src="{$xslt.base-url}eventsjs"></script>
             
             <script src="{$xslt-ressource-url}/js/gebo_btns.js"></script>
             <script>

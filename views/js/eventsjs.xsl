@@ -8,10 +8,10 @@
     <xsl:param name="xslt.rights"/>
     <xsl:param name="xslt.base-url">/</xsl:param>
     <xsl:template match="/">
-        <xsl:variable name="Month">04</xsl:variable>
-        <xsl:variable name="Year">2013</xsl:variable>
+        <xsl:variable name="Month"><xsl:value-of select="//Date/Month"/></xsl:variable>
+        <xsl:variable name="Year"><xsl:value-of select="//Date/Year"/></xsl:variable>
         /* [ ---- Gebo Admin Panel - calendar ---- ] */
-        
+        var bigdate = (new Date()).setFullYear(<xsl:value-of select="$Year"/>,<xsl:value-of select="$Month"/>-1,01);
         $(document).ready(function() {
         gebo_calendar.regular();
         gebo_calendar.google();

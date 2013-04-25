@@ -41,9 +41,13 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
     <error mesh="standard"/>
   
     <!-- /home page -->
-    <item name="home" epilogue="standard">
+    <item name="home" epilogue="standard" method="POST">
         <model src="models/home.xql"/>
         <view src="views/home.xsl"/>
+        <action epilogue="standard" name="POST">
+            <model src="models/home.xql"/>
+            <view src="views/home.xsl"/>
+        </action>
     </item>
   
     <!-- /explorer page -->
@@ -126,6 +130,10 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
         <view src="views/js/eventsjs.xsl"/>
     </item>
     
+    <item name="caljs">
+        <model src="models/js/caljs.xql"/>
+        <view src="views/js/caljs.xsl"/>
+    </item>
 </site>;
 
 (: call oppidum:process with false() to disable ?debug=true mode :)
