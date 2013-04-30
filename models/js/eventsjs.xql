@@ -1,27 +1,35 @@
 xquery version "1.0";
+declare namespace me="http://me.com/me";
+declare namespace request="http://exist-db.org/xquery/request";
+import module namespace functx = "http://www.functx.com" at "../../resources/library/functx.xq";
+declare option exist:serialize "method=xhtml media-type=text/html indent=yes";
 
-import module namespace request="http://exist-db.org/xquery/request";
-
-declare option exist:serialize "method=xml media-type=text/xml";
 
 
+ 
+(:~ convert epoch seconds to dateTime :)
+declare function me:convert-UTS($v) as xs:dateTime
+{
+  functx:dateTime('1970','01','01','00','00','00')
+  + functx:dayTimeDuration(xs:decimal(0),xs:decimal(0),xs:decimal(0),xs:decimal($v))
+};
 
 let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
 let $curr-date := fn:current-date()
-let $year :=  if ($method = 'GET') then (
-                            request:get-parameter('year', '')
+let $start :=  if ($method = 'GET') then (
+                            request:get-parameter('start', '')
                             )
-                        else(
-                            fn:year-from-date($curr-date)
-                            )
-let $month :=  if ($method = 'GET') then (
-                            request:get-parameter('month', '')
-                            )
-                        else(
-                            fn:month-from-date($curr-date)
-                            )                           
-let $data1 := doc(concat($collection, "db.xml"))/Moodle/Calendar/Year[No=$year]
+                        else('1365051600')
+
+let $readblestart := string(me:convert-UTS($start))
+
+let $datestart := concat(substring-before($readblestart,'T'),'+00:00')
+
+let $year := year-from-date(xs:date($datestart))
+let $month := month-from-date(xs:date($datestart))
+
+let $data1 := doc(concat($collection, "db.xml"))/Moodle/Calendar/Year[No=$year]/Month[No=$month]
 let $data2 := doc(concat($collection, "db.xml"))/Moodle/Courses
 let $data3 := doc(concat($collection, "db.xml"))/Moodle/Students
 

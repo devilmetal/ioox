@@ -39,7 +39,7 @@ var defaults = {
 	ignoreTimezone: false,
 	
 	// event ajax
-	lazyFetching: true,
+	lazyFetching: false,
 	startParam: 'start',
 	endParam: 'end',
 	
@@ -193,11 +193,11 @@ function Calendar(element, options, eventSources) {
 	t.changeView = changeView;
 	t.select = select;
 	t.unselect = unselect;
-	//t.prev = prev;
-	//t.next = next;
-	//t.prevYear = prevYear;
-	//t.nextYear = nextYear;
-	//t.today = today;
+	t.prev = prev;
+	t.next = next;
+	t.prevYear = prevYear;
+	t.nextYear = nextYear;
+	t.today = today;
 	t.gotoDate = gotoDate;
 	t.incrementDate = incrementDate;
 	t.formatDate = function(format, date) { return formatDate(format, date, options) };
@@ -227,7 +227,7 @@ function Calendar(element, options, eventSources) {
 	var absoluteViewElement;
 	var resizeUID = 0;
 	var ignoreWindowResize = 0;
-	var date = bigdate;
+	var date = new Date();
 	var events = [];
 	var _dragElement;
 	
