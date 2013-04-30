@@ -27,7 +27,7 @@ let $readblestart := string(me:convert-UTS($start))
 let $datestart := concat(substring-before($readblestart,'T'),'+00:00')
 
 let $year := year-from-date(xs:date($datestart))
-let $month := month-from-date(xs:date($datestart))
+let $month := month-from-date(xs:date($datestart))+1
 
 let $data1 := doc(concat($collection, "db.xml"))/Moodle/Calendar/Year[No=$year]/Month[No=$month]
 let $data2 := doc(concat($collection, "db.xml"))/Moodle/Courses
