@@ -20,7 +20,7 @@ let $year :=  if ($method = 'POST') then (
 let $data1 := doc(concat($collection, "db.xml"))/Moodle/Calendar/Year[No=$year]
 let $data2 := doc(concat($collection, "db.xml"))/Moodle/Courses
 let $data3 := doc(concat($collection, "db.xml"))/Moodle/Students
-
+let $user := xdb:get-current-user()
 let $month :=  if ($method = 'POST') then (
                             request:get-parameter('monthno', '')
                             )
@@ -61,6 +61,7 @@ let $id := if (session:get-attribute('id')) then (
     <Session>
         <Id>{$id}</Id>
         <Role>{$role}</Role>
+        <Username>{$user}</Username>
    </Session>
     <DataCal>
         <CalMonthNo>{$month}</CalMonthNo>

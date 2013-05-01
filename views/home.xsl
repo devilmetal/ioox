@@ -89,7 +89,7 @@
                   <xsl:if test="//Session/Role != '-1'">
                   <div class="navbar-inner">
                      <div class="container-fluid">
-                        <a class="brand2" href="#"> Me</a>
+                        <!--<a class="brand2" href="#"> Me</a>-->
                         <ul class="nav" id="mobile-nav-2">
                            <li>
                               <a href="#"><img src="{$xslt-ressource-url}/img/gCons-mini-white/home.png" alt=""/>

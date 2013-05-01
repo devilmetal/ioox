@@ -9,13 +9,13 @@
     <xsl:param name="xslt.base-url">/</xsl:param>
     <xsl:template match="/">
         <xsl:variable name="Year"><xsl:value-of select="//Date/Year"/></xsl:variable>
-        <xsl:variable name="Month"><xsl:if test="count(//Date/Month)!=2">0</xsl:if><xsl:value-of select="//Date/Month"/></xsl:variable>
-        [{}
+        <xsl:variable name="Month"><xsl:if test="string-length(//Date/Month)!=2">0</xsl:if><xsl:value-of select="//Date/Month"/></xsl:variable>
+        [
        <xsl:apply-templates select="//Month[No=$Month]//Day">
             <xsl:with-param name="YearNo"><xsl:value-of select="$Year"/></xsl:with-param>
             <xsl:with-param name="MonthNo"><xsl:value-of select="$Month"/></xsl:with-param>
         </xsl:apply-templates>
-        ]
+        {}]
     </xsl:template>   
     
     
@@ -53,14 +53,16 @@
     
     <!-- MISE EN PAGE DES EVENTS D'UN JOUR AFFICHAGE DANS LE CALENDRIER-->
     <xsl:template match="Session"><xsl:param name="FullDate"></xsl:param>
-        ,{
-        "title" : "<xsl:value-of select="./Topic"/>",
+        {
+        <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
+        <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
+        "title" : "<xsl:value-of select="translate(./Topic,$t,$newt)"/>",
         "start" : "<xsl:value-of select="$FullDate"/><xsl:text> </xsl:text><xsl:value-of select="StartTime"/>",
         "end"   : "<xsl:value-of select="$FullDate"/><xsl:text> </xsl:text><xsl:value-of select="EndTime"/>",
         "allDay": false,
         "url"   : "<xsl:value-of select="$xslt.base-url"/>me/courses/<xsl:value-of select="ancestor::Course/CourseId"/>#<xsl:value-of select="SessionId"/>"
         
-        }</xsl:template>
+        },</xsl:template>
     
     
 </xsl:stylesheet>

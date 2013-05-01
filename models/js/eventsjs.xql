@@ -11,7 +11,8 @@ declare option exist:serialize "method=xhtml media-type=text/html indent=yes";
 declare function me:convert-UTS($v) as xs:dateTime
 {
   functx:dateTime('1970','01','01','00','00','00')
-  + functx:dayTimeDuration(xs:decimal(0),xs:decimal(0),xs:decimal(0),xs:decimal($v))
+  + functx:dayTimeDuration(xs:decimal(0),xs:decimal(0),xs:decimal(0),xs:decimal(number($v)+864000))
+  (:Here we add 10 days to be sur we are in the middle of the month to retrive the month no.:)
 };
 
 let $collection := '/sites/ioox/data/'
@@ -20,14 +21,14 @@ let $curr-date := fn:current-date()
 let $start :=  if ($method = 'GET') then (
                             request:get-parameter('start', '')
                             )
-                        else('1365051600')
+                        else('')
 
 let $readblestart := string(me:convert-UTS($start))
 
 let $datestart := concat(substring-before($readblestart,'T'),'+00:00')
 
 let $year := year-from-date(xs:date($datestart))
-let $month := month-from-date(xs:date($datestart))+1
+let $month := month-from-date(xs:date($datestart))
 
 let $data1 := doc(concat($collection, "db.xml"))/Moodle/Calendar/Year[No=$year]/Month[No=$month]
 let $data2 := doc(concat($collection, "db.xml"))/Moodle/Courses
