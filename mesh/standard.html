@@ -18,16 +18,17 @@
           <site:login force="true"><a href="login">LOGIN</a></site:login>
         </p>
       </div>
-      <div id="message" condition="has-message">
-        <span class="ui-close" onclick="javascript:document.messageOff()">X</span>
-        
-      </div>
+
       <site:menu force="true">lipsum</site:menu>
       <div id="contentwrapper">
         <site:navbar></site:navbar>
         <div class="main_content">
           <div class="row-fluid">
-            <site:message force="true"></site:message>
+            <div class="alert alert-info" condition="has-message">
+              <a class="close" data-dismiss="alert">×</a>
+              <site:message force="true"></site:message>
+            </div>
+            
             <site:content> </site:content>
           </div>
         </div>
