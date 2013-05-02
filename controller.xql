@@ -78,10 +78,14 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
     <view src="views/me/me.xsl"/>
     
         <!-- /me/mynote page -->
-        <collection name="mynote" epilogue="standard">
+        <collection name="mynote" epilogue="standard" supported="modifier" method="POST" template="templates/note">
             <!-- Vue globale des notes prises + séléction -->
             <model src="models/me/mynote.xql"/>
             <view src="views/me/mynote.xsl"/>
+            <action name="modifier" epilogue="standard">
+                <model src="oppidum:actions/edit.xql"/>
+                <view src="oppidum:views/edit.xsl"/>
+            </action>
             <!-- détail / modification de chaque note-->
             <item>
                 <model src="models/me/note.xql"/>
@@ -134,6 +138,15 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
         <model src="models/js/caljs.xql"/>
         <view src="views/js/caljs.xsl"/>
     </item>
+    
+    
+  <collection name="templates" db="/db/www/xmoodle" collection="templates">
+    <model src="oppidum:models/templates.xql"/>
+    <item name="note" resource="note.xhtml">
+      <model src="oppidum:models/template.xql"/>
+    </item>
+  </collection>
+  
 </site>;
 
 (: call oppidum:process with false() to disable ?debug=true mode :)

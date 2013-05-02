@@ -20,8 +20,13 @@ let $data3 := doc(concat($collection, "db.xml"))/Moodle/Persons
 
     return
     <Root>
-     {$data2}
-     <CoursID>{$id}</CoursID>
-     {$data3}
+     <Note>
+        <Title>test</Title>
+        <Content>
+            <Parag>
+                <Fragment>Test</Fragment>
+            </Parag>
+        </Content>
+     </Note>
      </Root>
    
