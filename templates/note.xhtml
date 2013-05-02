@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:xt="http://ns.inria.org/xtiger"
+  xml:lang="en">
+  <head>
+
+    <meta name="description"
+      content="This XTiger XML template defines the structure of an article for publication in the Proceedings of an ACM conference. The resulting XHTML document can be formatted by the ACM-Proc-Article.css style sheet, both for display and print. It can also be transformed into a LaTeX file (style sig-alternate.cls) with ACM-Proc-Article2latex.xsl" />
+    <meta name="keywords" content="template, XTiger" />
+
+    <title>Note modification</title>
+
+    <xt:head version="1.1" templateVersion="1.0" label="Root">
+       
+    
+    <xt:component name="Note">
+      <div class="Note">
+      <h4>
+        <xt:use label="Title" types="text">title</xt:use> <xt:menu-marker/>
+      </h4>
+    	<xt:repeat minOccurs="1" maxOccurs="*" label="Content">
+    	<div class="desc">
+    	  <xt:menu-marker/>
+    		<xt:use label="Parag List" types="Parag List"/>
+		</div>
+    	</xt:repeat>
+      </div>
+    </xt:component>
+    
+    <xt:component name="Parag">
+      <xt:use  param="filter=wiki;type=textarea;shape=parent" /> <xt:menu-marker/>
+    </xt:component>
+    
+    <xt:component name="List">
+    	<br/><b><xt:use label="ListHeader" types="text">ListHeader</xt:use></b>
+    	<ul>
+    		<xt:repeat minOccurs="1" maxOccurs="*" pseudoLabel="ListItem">
+    		  <li><xt:use label="ListItem" types="text" >ListItem</xt:use><xt:menu-marker/></li>
+    		</xt:repeat>
+    	</ul>
+    </xt:component>
+      
+      <xt:component name="Fragment">
+        <xt:use types="text" >Fragment</xt:use>
+      </xt:component>
+      
+      <xt:component name="text">
+        <xt:use types="text">text</xt:use>
+      </xt:component>
+      
+    </xt:head>
+  </head>
+  
+  <body>
+    
+    <h2>TODO LIST</h2>
+    
+    <div class="Note">
+        <xt:use types="Note" label="Note"/>
+    </div>
+    
+  </body>
+</html>

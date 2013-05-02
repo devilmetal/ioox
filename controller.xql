@@ -78,7 +78,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
     <view src="views/me/me.xsl"/>
     
         <!-- /me/mynote page -->
-        <collection name="mynote">
+        <collection name="mynote" epilogue="standard">
             <!-- Vue globale des notes prises + séléction -->
             <model src="models/me/mynote.xql"/>
             <view src="views/me/mynote.xsl"/>

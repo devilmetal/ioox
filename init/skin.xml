@@ -26,6 +26,8 @@
         <!--  main styles -->
         <link href="css/style.css"/>
         <link href="http://fonts.googleapis.com/css?family=PT+Sans"/>
+        
+        <predef module="oppidum" avoid="error()">axel-1.3</predef>
     </profile>
 
     <profile name="standard2" type="mesh">
