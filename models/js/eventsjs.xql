@@ -1,7 +1,8 @@
 xquery version "1.0";
+import module namespace session="http://exist-db.org/xquery/session";
+import module namespace functx = "http://www.functx.com" at "../../resources/library/functx.xq";
 declare namespace me="http://me.com/me";
 declare namespace request="http://exist-db.org/xquery/request";
-import module namespace functx = "http://www.functx.com" at "../../resources/library/functx.xq";
 declare option exist:serialize "method=xhtml media-type=text/html indent=yes";
 
 
@@ -33,7 +34,18 @@ let $month := month-from-date(xs:date($datestart))
 let $data1 := doc(concat($collection, "db.xml"))/Moodle/Calendar/Year[No=$year]/Month[No=$month]
 let $data2 := doc(concat($collection, "db.xml"))/Moodle/Courses
 let $data3 := doc(concat($collection, "db.xml"))/Moodle/Students
-
+let $role := if (session:get-attribute('role')) then (
+                            session:get-attribute('role')
+                            )
+                        else(
+                            '-1'
+                            )
+let $id := if (session:get-attribute('id')) then (
+                            session:get-attribute('id')
+                            )
+                        else(
+                            '-1'
+                            )
     return
     <Root>
      {$data1}
@@ -43,5 +55,9 @@ let $data3 := doc(concat($collection, "db.xml"))/Moodle/Students
         <Year>{$year}</Year>
         <Month>{$month}</Month>
      </Date>
+    <Session>
+        <Id>{$id}</Id>
+        <Role>{$role}</Role>
+   </Session>
      </Root>
    

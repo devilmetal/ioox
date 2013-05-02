@@ -898,3 +898,12 @@
 			.sidebar_right .sidebar {right:50%;margin-left:0;margin-right:-840px}
 			.sidebar_right .sidebar_switch {left:auto;right:50%;margin-left:0;margin-right:-836px}
 		}
+		
+		/** CSS IOOX **/
+		
+		.faq_right{
+		    float:right;
+		}
+		.faq_left{
+		    float:left;
+		}
