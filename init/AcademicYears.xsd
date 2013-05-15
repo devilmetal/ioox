@@ -6,11 +6,12 @@
             <xs:sequence>
                 <xs:element name="Holidays">
                     <xs:complexType>
-                        <xs:sequence>
+                        <xs:sequence maxOccurs="unbounded" minOccurs="0">
                             <xs:element name="Holiday">
                                 <xs:complexType>
                                     <xs:sequence>
-                                        <xs:element name="Date" type="xs:date"/>
+                                        <xs:element name="Start" type="xs:date"/>
+                                        <xs:element name="End" type="xs:date"/>
                                         <xs:element name="Explanation" type="xs:string"/>
                                     </xs:sequence>
                                 </xs:complexType>
