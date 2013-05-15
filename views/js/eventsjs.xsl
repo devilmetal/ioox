@@ -63,7 +63,7 @@
     <xsl:template match="Session">
         <xsl:param name="FullDate"></xsl:param>
         <xsl:variable name="CourseId"><xsl:value-of select="ancestor::Course/CourseId"/></xsl:variable>
-        <xsl:if test="not(empty(//Students/Student[PersonRef=$UserId]/RegisteredCourses/CourseRef[./text()=$CourseId]))">
+        <xsl:if test="not(empty(//Person[PersonId=$UserId]/Engagments//Engagment[CoursRef=$CourseId]))">
             {
             <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
             <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>

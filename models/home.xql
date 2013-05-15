@@ -19,7 +19,7 @@ let $year :=  if ($method = 'POST') then (
                             )
 let $data1 := doc(concat($collection, "Calendar.xml"))/Calendar/Year[No=$year]
 let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course
-let $data3 := doc(concat($collection, "Persons.xml"))/Persons//Person[Engaments/Engament/Role='Student']
+let $data3 := doc(concat($collection, "Persons.xml"))//Person[Engagments/Engagment/Role='Student']
 let $user := xdb:get-current-user()
 let $month :=  if ($method = 'POST') then (
                             request:get-parameter('monthno', '')

@@ -31,9 +31,10 @@ let $datestart := concat(substring-before($readblestart,'T'),'+00:00')
 let $year := year-from-date(xs:date($datestart))
 let $month := month-from-date(xs:date($datestart))
 
-let $data1 := doc(concat($collection, "db.xml"))/Moodle/Calendar/Year[No=$year]/Month[No=$month]
-let $data2 := doc(concat($collection, "db.xml"))/Moodle/Courses
-let $data3 := doc(concat($collection, "db.xml"))/Moodle/Students
+
+let $data1 := doc(concat($collection, "Calendar.xml"))/Calendar/Year[No=$year]
+let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course
+let $data3 := doc(concat($collection, "Persons.xml"))//Person[Engagments/Engagment/Role='Student']
 let $role := if (session:get-attribute('role')) then (
                             session:get-attribute('role')
                             )
@@ -48,9 +49,15 @@ let $id := if (session:get-attribute('id')) then (
                             )
     return
     <Root>
+    <Calendar>
      {$data1}
-     {$data2}
-     {$data3}
+    </Calendar>
+    <Courses>
+        {$data2}
+    </Courses>
+    <Persons>
+        {$data3}
+    </Persons>
      <Date>
         <Year>{$year}</Year>
         <Month>{$month}</Month>

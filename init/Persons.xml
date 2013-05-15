@@ -2,10 +2,10 @@
 <Persons xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:noNamespaceSchemaLocation="file:./Persons.xsd">
     <Person>
-        <PersonId>50</PersonId>
+        <PersonId>1</PersonId>
         <Lastname>Luyet</Lastname>
         <Firstname>Gil</Firstname>
-        <Username>luyetg</Username>
+        <Username>FooBarZ</Username>
         <Password>123</Password>
         <Engagments>
             <Engagment>
