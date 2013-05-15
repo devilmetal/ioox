@@ -1,0 +1,334 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="AcademicYears">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Holidays">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Holiday">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="Date" type="xs:date"/>
+                                        <xs:element name="Explanation" type="xs:string"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Period">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="Name" type="xs:string"/>
+                            <xs:element name="Start" type="xs:date"/>
+                            <xs:element name="End" type="xs:date"/>
+                            <xs:element minOccurs="0" name="Courses">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0"
+                                            name="Course">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="CourseId" type="IdType"/>
+                                                  <xs:element name="CourseNo" type="xs:string"/>
+                                                  <xs:element name="Title" type="xs:string"/>
+                                                  <xs:element minOccurs="0" name="Acronym"
+                                                  type="xs:string"/>
+                                                  <xs:element name="Description" type="ContentType"/>
+                                                  <xs:element name="Evaluation">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element minOccurs="0" name="Exam">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="Weight" type="WeightType"/>
+                                                  <xs:element name="Date" type="xs:date"/>
+                                                  <xs:element name="StartTime" type="xs:time"/>
+                                                  <xs:element name="EndTime" type="xs:time"/>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element minOccurs="0" name="Project">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="Weight" type="WeightType"/>
+                                                  <xs:element name="Title" type="xs:string"/>
+                                                  <xs:element name="Description" type="ContentType"/>
+                                                  <xs:element maxOccurs="unbounded" name="Steps">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="Step">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="Title" type="xs:string"/>
+                                                  <xs:element name="Deadline" type="DeadlineType"/>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="Report">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="Weight" type="WeightType"/>
+                                                  <xs:element name="Description" type="ContentType"
+                                                  />
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="Presentation">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="Weight" type="WeightType"/>
+                                                  <xs:element name="Description" type="ContentType"
+                                                  />
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element minOccurs="0" name="Exercices">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="Weight" type="WeightType"/>
+                                                  <xs:element name="Description" type="ContentType"
+                                                  />
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="Sessions">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element maxOccurs="unbounded" minOccurs="0"
+                                                  name="Session">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="SessionNumber"
+                                                  type="xs:positiveInteger"/>
+                                                  <xs:element name="Topic" type="xs:string"/>
+                                                  <xs:element name="Description" type="ContentType"/>
+                                                  <xs:element name="Date" type="xs:date"/>
+                                                  <xs:element minOccurs="1" name="StartTime"
+                                                  type="xs:time"/>
+                                                  <xs:element minOccurs="1" name="EndTime"
+                                                  type="xs:time"/>
+                                                  <xs:element name="Room"/>
+                                                  <xs:element name="Resources">
+                                                  <xs:complexType>
+                                                  <xs:sequence maxOccurs="unbounded" minOccurs="0">
+                                                  <xs:element name="Ressource">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:choice>
+                                                  <xs:element name="Link" type="CommentedLinkType"/>
+                                                  <xs:element name="ExternalDoc"
+                                                  type="DocumentRefType"/>
+                                                  </xs:choice>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="Exercise">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="ExerciceId"/>
+                                                  <xs:element name="Description"/>
+                                                  <xs:element name="Data">
+                                                  <xs:complexType>
+                                                  <xs:choice>
+                                                  <xs:element name="Link" type="CommentedLinkType"/>
+                                                  <xs:element name="ExternalDoc"
+                                                  type="DocumentRefType"/>
+                                                  </xs:choice>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element minOccurs="1" name="Deliverables">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="Deliverable">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="PersonRef"/>
+                                                  <xs:element minOccurs="0" name="Grade"/>
+                                                  <xs:element name="File"/>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="IdType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="-1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="MonthNoType">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="12"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DayNoType">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="31"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="WeightType">
+        <xs:annotation>
+            <xs:documentation>Percentage: nb between 1 and 100</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="GradeType">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="6"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="PriorityType">
+        <xs:annotation>
+            <xs:documentation>To specify a priority for the to do list actions</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="RoleType">
+        <xs:annotation>
+            <xs:documentation>To specify access rigths</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Professor"/>
+            <xs:enumeration value="Student"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="FragmentType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="FragmentKind" type="xs:string" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="LinkType">
+        <xs:sequence>
+            <xs:element name="LinkText" type="xs:string"/>
+            <xs:element name="LinkRef" type="xs:anyURI"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ParagType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="Fragment" type="FragmentType"/>
+            <xs:element name="Link" type="LinkType"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="ListType">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="ListHeader" type="xs:string"/>
+            <xs:choice>
+                <xs:element maxOccurs="unbounded" name="ListItem">
+                    <xs:complexType>
+                        <xs:choice maxOccurs="unbounded">
+                            <xs:element name="Fragment" type="FragmentType"/>
+                            <xs:element name="Link" type="LinkType"/>
+                        </xs:choice>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" name="SubList">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="SubListHeader" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" name="SubListItem">
+                                <xs:complexType>
+                                    <xs:choice maxOccurs="unbounded">
+                                        <xs:element name="Fragment" type="FragmentType"/>
+                                        <xs:element name="Link" type="LinkType"/>
+                                    </xs:choice>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DocumentRefType">
+        <xs:sequence>
+            <xs:element name="Title" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="1" name="Access">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Location" type="xs:anyURI"/>
+                        <xs:element name="Format" type="FileFormatType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="FileFormatType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Undefined"/>
+            <xs:enumeration value="DOC"/>
+            <xs:enumeration value="HTML"/>
+            <xs:enumeration value="PDF"/>
+            <xs:enumeration value="RTF"/>
+            <xs:enumeration value="XLS"/>
+            <xs:enumeration value="XML"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="DeadlineType">
+        <xs:sequence>
+            <xs:element name="Date" type="xs:date"/>
+            <xs:element minOccurs="0" name="Time" type="xs:time"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CommentedLinkType">
+        <xs:complexContent>
+            <xs:extension base="LinkType">
+                <xs:sequence>
+                    <xs:element minOccurs="0" name="Comment" type="xs:string"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:complexType name="ContentType">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="Parag" type="ParagType"/>
+            <xs:element name="List" type="ListType"/>
+        </xs:choice>
+    </xs:complexType>
+</xs:schema>

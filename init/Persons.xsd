@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="Persons">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Person">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="PersonId" type="IdType"/>
+                            <xs:element name="Lastname" type="xs:string"/>
+                            <xs:element name="Firstname" type="xs:string"/>
+                            <xs:element name="Username" type="xs:string"/>
+                            <xs:element name="Password" type="xs:string"/>
+                            <xs:element name="Engagments">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0"
+                                            name="Engagment">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="EngagementId"/>
+                                                  <xs:element name="Role"/>
+                                                  <xs:element name="CoursRef"/>
+                                                  <xs:element maxOccurs="1" minOccurs="0"
+                                                  name="Grade">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element minOccurs="0" name="ProjectGrades">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element maxOccurs="unbounded" name="Step">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="StepNo"
+                                                  type="xs:nonNegativeInteger"/>
+                                                  <xs:element name="StepGrade" type="GradeType"/>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element minOccurs="0" name="ExamGrade"
+                                                  type="GradeType"/>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="ToDoList">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element maxOccurs="unbounded" minOccurs="0"
+                                            name="Activity">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                  <xs:element name="Title" type="xs:string"/>
+                                                  <xs:element name="Tasks">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element maxOccurs="unbounded" minOccurs="0"
+                                                  name="Task">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="Title" type="xs:string"/>
+                                                  <xs:element name="Description" type="ContentType"/>
+                                                  <xs:element name="Priority" type="PriorityType"/>
+                                                  <xs:element minOccurs="0" name="Deadline"
+                                                  type="DeadlineType"/>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:simpleType name="IdType">
+        <xs:restriction base="xs:integer">
+            <xs:minInclusive value="-1"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="WeightType">
+        <xs:annotation>
+            <xs:documentation>Percentage: nb between 1 and 100</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="100"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="GradeType">
+        <xs:restriction base="xs:decimal">
+            <xs:minInclusive value="0"/>
+            <xs:maxInclusive value="6"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="ContentType">
+        <xs:choice maxOccurs="unbounded" minOccurs="0">
+            <xs:element name="Parag" type="ParagType"/>
+            <xs:element name="List" type="ListType"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:simpleType name="PriorityType">
+        <xs:annotation>
+            <xs:documentation>To specify a priority for the to do list actions</xs:documentation>
+        </xs:annotation>
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="3"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:complexType name="DeadlineType">
+        <xs:sequence>
+            <xs:element name="Date" type="xs:date"/>
+            <xs:element minOccurs="0" name="Time" type="xs:time"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="ParagType">
+        <xs:choice maxOccurs="unbounded">
+            <xs:element name="Fragment" type="FragmentType"/>
+            <xs:element name="Link" type="LinkType"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="ListType">
+        <xs:sequence>
+            <xs:element minOccurs="0" name="ListHeader" type="xs:string"/>
+            <xs:choice>
+                <xs:element maxOccurs="unbounded" name="ListItem">
+                    <xs:complexType>
+                        <xs:choice maxOccurs="unbounded">
+                            <xs:element name="Fragment" type="FragmentType"/>
+                            <xs:element name="Link" type="LinkType"/>
+                        </xs:choice>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element maxOccurs="unbounded" name="SubList">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element minOccurs="0" name="SubListHeader" type="xs:string"/>
+                            <xs:element maxOccurs="unbounded" name="SubListItem">
+                                <xs:complexType>
+                                    <xs:choice maxOccurs="unbounded">
+                                        <xs:element name="Fragment" type="FragmentType"/>
+                                        <xs:element name="Link" type="LinkType"/>
+                                    </xs:choice>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:choice>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LinkType">
+        <xs:sequence>
+            <xs:element name="LinkText" type="xs:string"/>
+            <xs:element name="LinkRef" type="xs:anyURI"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="DocumentRefType">
+        <xs:sequence>
+            <xs:element name="Title" type="xs:string"/>
+            <xs:element maxOccurs="unbounded" minOccurs="1" name="Access">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Location" type="xs:anyURI"/>
+                        <xs:element name="Format" type="FileFormatType"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FragmentType">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="FragmentKind" type="xs:string" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:simpleType name="FileFormatType">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="Undefined"/>
+            <xs:enumeration value="DOC"/>
+            <xs:enumeration value="HTML"/>
+            <xs:enumeration value="PDF"/>
+            <xs:enumeration value="RTF"/>
+            <xs:enumeration value="XLS"/>
+            <xs:enumeration value="XML"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>

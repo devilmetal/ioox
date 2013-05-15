@@ -17,9 +17,9 @@ let $year :=  if ($method = 'POST') then (
                         else(
                             fn:year-from-date($curr-date)
                             )
-let $data1 := doc(concat($collection, "db.xml"))/Moodle/Calendar/Year[No=$year]
-let $data2 := doc(concat($collection, "db.xml"))/Moodle/Courses
-let $data3 := doc(concat($collection, "db.xml"))/Moodle/Students
+let $data1 := doc(concat($collection, "Calendar.xml"))/Calendar/Year[No=$year]
+let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course
+let $data3 := doc(concat($collection, "Persons.xml"))/Persons//Person[Engaments/Engament/Role='Student']
 let $user := xdb:get-current-user()
 let $month :=  if ($method = 'POST') then (
                             request:get-parameter('monthno', '')
@@ -51,13 +51,15 @@ let $id := if (session:get-attribute('id')) then (
 
     return
     <Root>
-    <Moodle>
     <Calendar>
      {$data1}
     </Calendar>
-     {$data2}
-    </Moodle>
-    {$data3}
+    <Courses>
+        {$data2}
+    </Courses>
+    <Persons>
+        {$data3}
+    </Persons>
     <Session>
         <Id>{$id}</Id>
         <Role>{$role}</Role>

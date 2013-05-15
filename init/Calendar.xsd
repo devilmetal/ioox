@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+    <xs:element name="Calendar" type="CalendarType"/>
+    <xs:complexType name="CalendarType">
+        <xs:sequence>
+            <xs:element maxOccurs="unbounded" minOccurs="0" name="Year">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="No" type="xs:positiveInteger"> </xs:element>
+                        <xs:element maxOccurs="12" minOccurs="12" name="Month">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="No" type="MonthNoType"/>
+                                    <xs:element maxOccurs="31" name="Day">
+                                        <xs:complexType>
+                                            <xs:sequence>
+                                                <xs:element name="No" type="DayNoType"/>
+                                                <xs:element minOccurs="0" name="Holiday"
+                                                  type="xs:string"/>
+                                            </xs:sequence>
+                                        </xs:complexType>
+                                    </xs:element>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:simpleType name="MonthNoType">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="12"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <xs:simpleType name="DayNoType">
+        <xs:restriction base="xs:positiveInteger">
+            <xs:minInclusive value="1"/>
+            <xs:maxInclusive value="31"/>
+        </xs:restriction>
+    </xs:simpleType>
+</xs:schema>
