@@ -35,17 +35,11 @@ let $year :=  if ($method = 'POST') then (
                             fn:year-from-date($curr-date)
                             )
                             
-let $role := if (session:get-attribute('role')) then (
-                            session:get-attribute('role')
-                            )
-                        else(
-                            -1
-                            )
 let $id := if (session:get-attribute('id')) then (
                             session:get-attribute('id')
                             )
                         else(
-                            -1
+                            '-1'
                             )
                             
 
@@ -62,7 +56,6 @@ let $id := if (session:get-attribute('id')) then (
     </Persons>
     <Session>
         <Id>{$id}</Id>
-        <Role>{$role}</Role>
         <Username>{$user}</Username>
    </Session>
     <DataCal>
