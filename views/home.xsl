@@ -86,7 +86,7 @@
             
             <div class="main_content">
                <div class="navbar">
-                  <xsl:if test="//Session/Role != '-1'">
+                  
                   <div class="navbar-inner">
                      <div class="container-fluid">
                         <!--<a class="brand2" href="#"> Me</a>-->
@@ -123,7 +123,7 @@
                         </ul>
                      </div>
                   </div>
-                  </xsl:if>
+                  
                   <xsl:if test="//Session/Role != 'Student' and //Session/Role != '-1' ">
                   <div class="navbar-inner">
                      <div class="container-fluid">

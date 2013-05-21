@@ -19,8 +19,10 @@ let $year :=  if ($method = 'POST') then (
                             )
 let $data1 := doc(concat($collection, "Calendar.xml"))/Calendar/Year[No=$year]
 let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course
-let $data3 := doc(concat($collection, "Persons.xml"))//Person[Engagments/Engagment/Role='Student']
-let $user := xdb:get-current-user()
+let $data3 := doc(concat($collection, "Persons.xml"))//Person[PersonId=session:get-attribute('id')]
+let $teacher := doc(concat($collection, "Persons.xml"))//Person[PersonId=session:get-attribute('id')]/Engagements/Engagement[Role='Teacher' ]
+let $tutor := doc(concat($collection, "Persons.xml"))//Person[PersonId=session:get-attribute('id')]/Engagements/Engagement[Role='Tutor']
+let $user := empty(doc(concat($collection, "Persons.xml"))//Person[PersonId=session:get-attribute('id')]/Engagements/Engagement[Role='Student'])
 let $month :=  if ($method = 'POST') then (
                             request:get-parameter('monthno', '')
                             )
@@ -45,22 +47,15 @@ let $id := if (session:get-attribute('id')) then (
 
     return
     <Root>
-    <Calendar>
-     {$data1}
-    </Calendar>
-    <Courses>
-        {$data2}
-    </Courses>
-    <Persons>
-        {$data3}
-    </Persons>
+
     <Session>
         <Id>{$id}</Id>
         <Username>{$user}</Username>
-   </Session>
-    <DataCal>
-        <CalMonthNo>{$month}</CalMonthNo>
-        <CalYearNo>{$year}</CalYearNo>
-    </DataCal>
+        <CurrentRole>
+            <Teacher>{$teacher}</Teacher>
+            <Tutor>{$tutor}</Tutor>
+            <Student>{$user}</Student>
+        </CurrentRole>
+   </Session>    
     </Root>
    
