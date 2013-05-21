@@ -22,7 +22,7 @@ let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course
 let $data3 := doc(concat($collection, "Persons.xml"))//Person[PersonId=session:get-attribute('id')]
 let $teacher := doc(concat($collection, "Persons.xml"))//Person[PersonId=session:get-attribute('id')]/Engagements/Engagement[Role='Teacher' ]
 let $tutor := doc(concat($collection, "Persons.xml"))//Person[PersonId=session:get-attribute('id')]/Engagements/Engagement[Role='Tutor']
-let $user := empty(doc(concat($collection, "Persons.xml"))//Person[PersonId=session:get-attribute('id')]/Engagements/Engagement[Role='Student'])
+let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=session:get-attribute('id')]/Engagements/Engagement[Role='Student'])
 let $month :=  if ($method = 'POST') then (
                             request:get-parameter('monthno', '')
                             )
