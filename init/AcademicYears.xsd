@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
 
-    <xs:element name="AcademicYears">
+    <xs:element name="AcademicYear">
         <xs:complexType>
             <xs:sequence>
                 <xs:element name="Holidays">
@@ -11,8 +11,9 @@
                                 <xs:complexType>
                                     <xs:sequence>
                                         <xs:element name="Start" type="xs:date"/>
-                                        <xs:element name="End" type="xs:date"/>
                                         <xs:element name="Explanation" type="xs:string"/>
+                                        <xs:element name="End" type="xs:date" maxOccurs="1"
+                                            minOccurs="0"/>
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
@@ -113,14 +114,10 @@
                                                   <xs:sequence>
                                                   <xs:element name="SessionNumber"
                                                   type="xs:positiveInteger"/>
+                                                  <xs:element name="Topics">
+                                                  <xs:complexType>
+                                                  <xs:sequence maxOccurs="unbounded">
                                                   <xs:element name="Topic" type="xs:string"/>
-                                                  <xs:element name="Description" type="ContentType"/>
-                                                  <xs:element name="Date" type="xs:date"/>
-                                                  <xs:element minOccurs="1" name="StartTime"
-                                                  type="xs:time"/>
-                                                  <xs:element minOccurs="1" name="EndTime"
-                                                  type="xs:time"/>
-                                                  <xs:element name="Room"/>
                                                   <xs:element name="Resources">
                                                   <xs:complexType>
                                                   <xs:sequence maxOccurs="unbounded" minOccurs="0">
@@ -138,6 +135,16 @@
                                                   </xs:sequence>
                                                   </xs:complexType>
                                                   </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  <xs:element name="Description" type="ContentType"/>
+                                                  <xs:element name="Date" type="xs:date"/>
+                                                  <xs:element minOccurs="1" name="StartTime"
+                                                  type="xs:time"/>
+                                                  <xs:element minOccurs="1" name="EndTime"
+                                                  type="xs:time"/>
+                                                  <xs:element name="Room"/>
                                                   <xs:element name="Exercise">
                                                   <xs:complexType>
                                                   <xs:sequence>
@@ -185,6 +192,8 @@
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
+                <xs:element name="StartAY" type="xs:date"/>
+                <xs:element name="EndAY" type="xs:date"/>
             </xs:sequence>
         </xs:complexType>
     </xs:element>
