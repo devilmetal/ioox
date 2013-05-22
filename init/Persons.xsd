@@ -112,6 +112,7 @@
                                     </xs:sequence>
                                 </xs:complexType>
                             </xs:element>
+                            <xs:element name="Token" type="xs:string"/>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>
