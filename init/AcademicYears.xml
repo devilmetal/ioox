@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<AcademicYears xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<AcademicYear xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
  xsi:noNamespaceSchemaLocation="file:./AcademicYears.xsd">
     <Holidays>
         <Holiday>
@@ -1600,4 +1600,4 @@
         <Start>2014-02-17</Start>
         <End>2014-05-28</End>
     </Period>
-</AcademicYears>
+</AcademicYear>

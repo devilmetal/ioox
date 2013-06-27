@@ -14,6 +14,7 @@ declare variable $access := <access>
   <rule action="install" role="u:admin" message="administrateur"/>
   <rule action="ajouter modifier" role="u:admin g:site-member" message="membre"/>
   <rule action="POST" role="all" message="tous"/>
+  <rule action="home" role="u:admin" message="administrateur"/>
 </access>;
 
 (: ======================================================================
@@ -30,6 +31,9 @@ declare variable $actions := <actions error="models/error.xql">
   <!-- NOTE: unplug this action from @supported on mapping's root node in production -->
   <action name="install" depth="0">
     <model src="scripts/install.xql"/>
+  </action>
+  <action name="home" depth="0">
+    <model src="models/home.xql"/>
   </action>
 </actions>;
 

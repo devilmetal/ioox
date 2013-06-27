@@ -29,6 +29,7 @@
          <site:menu> </site:menu>
          <!-- SITE CONTENT -->
          <site:content>
+            
             <div id="contentwrapper">
                <div class="main_content">
                   <div class="navbar">
