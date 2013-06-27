@@ -22,4 +22,4 @@ let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$re
     <Root>
      {$data2}
      </Root>
-   
+    
