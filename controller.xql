@@ -111,20 +111,20 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
             <model src="models/me/grades.xql"/>
             <view src="views/me/grades.xsl"/>
             <!-- détail de chaque note (note précise + compte rendu du prof)-->
-            <item>
+            <item >
                 <model src="models/me/grade.xql"/>
                 <view src="views/me/grade.xsl"/>
             </item>
           </collection>
           
         <!-- /me/courses page -->
-        <collection name="courses">
+        <collection name="courses" epilogue="standard">
             <model src="models/me/courses.xql"/>
             <view src="views/me/courses.xsl"/>
             <!-- détail de chaque cours -->
-            <item>
-                <model src="models/course.xql"/>
-                <view src="views/course.xsl"/>
+            <item epilogue="standard">
+                <model src="models/me/course.xql"/>
+                <view src="views/me/course.xsl"/>
             </item>
           </collection>
     </item>
