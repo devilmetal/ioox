@@ -31,6 +31,11 @@
                 <Role>Tutor</Role>
                 <CoursRef>4112</CoursRef>
             </Engagment>
+            <Engagment>
+                <EngagementId>3</EngagementId>
+                <Role>Student</Role>
+                <CoursRef>51</CoursRef>
+            </Engagment>
         </Engagments>
         <ToDoList/>
     </Person>
@@ -45,6 +50,12 @@
                 <EngagementId>3</EngagementId>
                 <Role>Tutor</Role>
                 <CoursRef>4112</CoursRef>
+            </Engagment>
+            
+            <Engagment>
+                <EngagementId>3</EngagementId>
+                <Role>Teacher</Role>
+                <CoursRef>51</CoursRef>
             </Engagment>
         </Engagments>
         <ToDoList>

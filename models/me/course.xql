@@ -17,9 +17,13 @@ let $id :=  if ($method = 'POST') then (
 let $data3 := doc(concat($collection, "db.xml"))/Moodle/Persons
 let $ref := request:get-attribute('oppidum.command')/resource/@name
 let $ref2 := string($ref)
-let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$ref2]
+let $course := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$ref2]
+let $teachers := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagment[(Role='Tutor' or Role='Teacher') and CoursRef=$ref2]/ancestor::Person
     return
     <Root>
-     {$data2}
+        <Teachers>
+            {$teachers}
+        </Teachers>
+     {$course}
      </Root>
     
