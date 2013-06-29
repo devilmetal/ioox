@@ -55,6 +55,23 @@
                                                   </xs:element>
                                                   <xs:element minOccurs="0" name="ExamGrade"
                                                   type="GradeType"/>
+                                                  <xs:element minOccurs="0" name="ExercicesGrades">
+                                                  <xs:complexType>
+                                                  <xs:sequence maxOccurs="1" minOccurs="1">
+                                                  <xs:element maxOccurs="unbounded" name="Exercice"
+                                                  minOccurs="0">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="ExerciceId"
+                                                  type="xs:nonNegativeInteger"/>
+                                                  <xs:element name="ExerciceGrade" type="GradeType"
+                                                  />
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
                                                   </xs:sequence>
                                                   </xs:complexType>
                                                   </xs:element>

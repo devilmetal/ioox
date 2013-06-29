@@ -110,12 +110,12 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
         </item>
         
         <!-- /me/grades page -->
-        <collection name="grades">
+        <collection name="grades" epilogue="standard">
             <!-- Vue global des notes / modification si prof-->
             <model src="models/me/grades.xql"/>
             <view src="views/me/grades.xsl"/>
             <!-- détail de chaque note (note précise + compte rendu du prof)-->
-            <item >
+            <item epilogue="standard">
                 <model src="models/me/grade.xql"/>
                 <view src="views/me/grade.xsl"/>
             </item>
@@ -129,6 +129,15 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
             <item epilogue="standard">
                 <model src="models/me/course.xql"/>
                 <view src="views/me/course.xsl"/>
+                <!-- Détail de chaque exercice (rendu et donnée) -->
+                <item epilogue="standard" method="POST">
+                    <model src="models/me/exercice.xql"/>
+                    <view src="views/me/exercice.xsl"/>
+                    <action epilogue="standard" name="POST">
+                        <model src="models/me/exercice.xql"/>
+                        <view src="views/me/exercice.xsl"/>
+                    </action>
+                </item>
             </item>
           </collection>
     </item>

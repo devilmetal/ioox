@@ -15,15 +15,29 @@
                 <Grade>
                     <ProjectGrades>
                         <Step>
-                            <StepNo>75</StepNo>
+                            <StepNo>1</StepNo>
                             <StepGrade>5</StepGrade>
                         </Step>
                         <Step>
-                            <StepNo>25</StepNo>
+                            <StepNo>2</StepNo>
                             <StepGrade>4</StepGrade>
+                        </Step>
+                        <Step>
+                            <StepNo>3</StepNo>
+                            <StepGrade>6</StepGrade>
                         </Step>
                     </ProjectGrades>
                     <ExamGrade>6</ExamGrade>
+                    <ExercicesGrades>
+                        <Exercice>
+                            <ExerciceId>1</ExerciceId>
+                            <ExerciceGrade>5</ExerciceGrade>
+                        </Exercice>
+                        <Exercice>
+                            <ExerciceId>2</ExerciceId>
+                            <ExerciceGrade>4</ExerciceGrade>
+                        </Exercice>
+                    </ExercicesGrades>
                 </Grade>
             </Engagment>
             <Engagment>
@@ -35,6 +49,9 @@
                 <EngagementId>3</EngagementId>
                 <Role>Student</Role>
                 <CoursRef>51</CoursRef>
+                <Grade>
+                    <ExamGrade>4.5</ExamGrade>
+                </Grade>
             </Engagment>
         </Engagments>
         <ToDoList/>
@@ -273,6 +290,47 @@
                 <EngagementId>4</EngagementId>
                 <Role>Teacher</Role>
                 <CoursRef>4112</CoursRef>
+            </Engagment>
+            <Engagment>
+                <EngagementId>7</EngagementId>
+                <Role>Student</Role>
+                <CoursRef>51</CoursRef>
+                <Grade>
+                    <ExamGrade>3.5</ExamGrade>
+                </Grade>
+            </Engagment>
+        </Engagments>
+        <ToDoList/>
+    </Person>
+    <Person>
+        <PersonId>542</PersonId>
+        <Lastname>Foo</Lastname>
+        <Firstname>FooZu</Firstname>
+        <Username>hubert</Username>
+        <Password>123</Password>
+        <Engagments>
+            <Engagment>
+                <EngagementId>7</EngagementId>
+                <Role>Student</Role>
+                <CoursRef>51</CoursRef>
+                <Grade>
+                    <ExamGrade>3.5</ExamGrade>
+                    
+                    <ProjectGrades>
+                        <Step>
+                            <StepNo>1</StepNo>
+                            <StepGrade>3</StepGrade>
+                        </Step>
+                        <Step>
+                            <StepNo>2</StepNo>
+                            <StepGrade>3.5</StepGrade>
+                        </Step>
+                        <Step>
+                            <StepNo>3</StepNo>
+                            <StepGrade>5</StepGrade>
+                        </Step>
+                    </ProjectGrades>
+                </Grade>
             </Engagment>
         </Engagments>
         <ToDoList/>

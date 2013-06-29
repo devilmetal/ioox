@@ -296,8 +296,7 @@
                             </Ressource>
                         </Resources>
                         <Exercise>
-                            <ExerciceId>
-                            </ExerciceId>
+                            <ExerciceId>1</ExerciceId>
                             <Description>
                             </Description>
                             <Data>
@@ -402,8 +401,7 @@
                             </Ressource>
                         </Resources>
                         <Exercise>
-                            <ExerciceId>
-                            </ExerciceId>
+                            <ExerciceId>2</ExerciceId>
                             <Description>
                             </Description>
                             <Data>
