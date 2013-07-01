@@ -167,7 +167,7 @@
                                                   <xs:sequence>
                                                   <xs:element name="PersonRef"/>
                                                   <xs:element minOccurs="0" name="Grade"/>
-                                                  <xs:element name="File"/>
+                                                  <xs:element name="File" type="LinkType"/>
                                                   </xs:sequence>
                                                   </xs:complexType>
                                                   </xs:element>

@@ -1,16 +1,10 @@
 /* [ ---- Gebo Admin Panel - charts ---- ] */
 
 	$(document).ready(function() {
-        //* pie chart
-		gebo_charts.fl_a();
-		//* multiple axes
-		gebo_charts.fl_b();
-		//* bars
-		gebo_charts.fl_c();
+       
 		//* combined
 		gebo_charts.fl_d();
-		//* pyramid
-		gebo_charts.fl_e();
+
 	});
 	
 	//* charts
