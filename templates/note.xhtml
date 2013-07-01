@@ -1,56 +1,95 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:xt="http://ns.inria.org/xtiger"
-  xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xt="http://ns.inria.org/xtiger" lang="en" xml:lang="en">
   <head>
-
-    <meta name="description"
-      content="This XTiger XML template defines the structure of an article for publication in the Proceedings of an ACM conference. The resulting XHTML document can be formatted by the ACM-Proc-Article.css style sheet, both for display and print. It can also be transformed into a LaTeX file (style sig-alternate.cls) with ACM-Proc-Article2latex.xsl" />
-    <meta name="keywords" content="template, XTiger" />
-
-    <title>Note modification</title>
-
+    <meta name="description" content="This XTiger XML template defines the structure of an article for publication in the Proceedings of an ACM conference. The resulting XHTML document can be formatted by the ACM-Proc-Article.css style sheet, both for display and print. It can also be transformed into a LaTeX file (style sig-alternate.cls) with ACM-Proc-Article2latex.xsl"/>
+    <meta name="keywords" content="template, XTiger"/>
+    <title>My Note</title>
     <xt:head version="1.1" templateVersion="1.0" label="Root">
-
-
+      
       <xt:component name="Note">
-        <div class="Note">
-          <h4>
-            <xt:use label="Title" types="text">title</xt:use>
-            <xt:menu-marker></xt:menu-marker>
-          </h4>
-          <xt:repeat minOccurs="1" maxOccurs="*" label="Content">
-            <div class="content">
-              <xt:menu-marker></xt:menu-marker>
-              <xt:use label="Parag List" types="Parag List"></xt:use>
-            </div>
-          </xt:repeat>
-        </div>
-      </xt:component>
-
-      <xt:component name="Parag">
-        <xt:use param="filter=wiki;type=textarea;shape=parent"></xt:use>
-        <xt:menu-marker></xt:menu-marker>
-      </xt:component>
-
-      <xt:component name="List">
-        <br />
-        <b><xt:use label="ListHeader" types="text">ListHeader</xt:use></b>
+        <span style="display:none">
+          <xt:use label="NoteId" types="text" class="xtt-off"/>
+          <xt:use label="CourseRef" types="text" class="xtt-off"/>
+          <xt:use label="SessionRef" types="text" class="xtt-off"/>
+        </span>
         <ul>
-          <xt:repeat minOccurs="1" maxOccurs="*" pseudoLabel="ListItem">
-            <li><xt:use label="ListItem" types="text"
-              >ListItem</xt:use><xt:menu-marker></xt:menu-marker></li>
+          <xt:repeat minOccurs="0" maxOccurs="*" label="Content">
+            <li>
+              <xt:use label="Parag List" types="Parag List"/>
+              <xt:menu-marker/>
+            </li>
           </xt:repeat>
         </ul>
       </xt:component>
-
-
+      
+     
+      <xt:component name="Parag">
+        <p>
+          <!--<xt:repeat minOccurs="1" maxOccurs="*" label="Parag">-->
+          <!--                        <xt:use types="Fragment Link" label="Fragment Link"/>-->
+          <xt:use types="text" param="type=textarea;filter=wiki;shape=parent">Cliquez pour éditer</xt:use>
+          <!--                        <xt:menu-marker/>
+                        <br/>
+                    </xt:repeat>-->
+        </p>
+      </xt:component>
+      
+      <xt:component name="Link">
+        <xt:use label="LinkText" types="text">LinkText</xt:use>
+        <xt:use label="LinkRef" types="text">(LinkRef)</xt:use>
+      </xt:component>
+      
+      <xt:component name="List">
+        <p>
+          <b>
+            <xt:use label="ListHeader" types="text">ListHeader</xt:use>
+          </b>
+        </p>
+        <ul>
+          <xt:repeat minOccurs="1" maxOccurs="*" pseudoLabel="ListItem">
+            <li>
+              <xt:use label="ListItem" types="ListItem"/>
+              <xt:menu-marker/>
+            </li>
+          </xt:repeat>
+        </ul>
+      </xt:component>
+      
+      <xt:component name="ListItem">
+        <xt:use label="Fragment SubList" types="Fragment SubList"/>
+      </xt:component>
+      
+      <xt:component name="SubList">
+        <p>
+          <b>
+            <xt:use label="SubListHeader" types="text">ListHeader</xt:use>
+          </b>
+        </p>
+        <ul>
+          <xt:repeat minOccurs="1" maxOccurs="*" pseudoLabel="ListItem">
+            <li>
+              <xt:use label="SubListItem" types="SubListItem"/>
+              <xt:menu-marker/>
+            </li>
+          </xt:repeat>
+        </ul>
+      </xt:component>
+      
+      <xt:component name="SubListItem">
+        <xt:use label="Fragment" types="Fragment"/>
+      </xt:component>
+      
+      <xt:component name="Fragment">
+        <xt:use types="text">Fragment</xt:use>
+      </xt:component>
+      
+      <xt:component name="text">
+        <xt:use types="text">text</xt:use>
+      </xt:component>
     </xt:head>
   </head>
-
   <body>
-    <h2>Note Edition</h2>
-    <xt:use types="text" label="Note"></xt:use>
+    <h2>Note creator</h2>
+    <xt:use label="Note" types="Note"/>
+    
   </body>
 </html>
