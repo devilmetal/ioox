@@ -21,32 +21,51 @@ let $id := if (session:get-attribute('id')) then (
                         else(
                             '-1'
                             )
+   (:: On va controler si la personne est bien liée au cours. Ceci va donc aussi faire preuve de controle de login
+        Dans le cas d'un non-login ou que la personne n'est pas liée, l'element Root sera simplement vide::)
+let $engament :=  doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]//Engagments
+let $session := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid][CourseId=$engament//Engagment/CoursRef]/Sessions/Session[SessionNumber=$sessionNumber]
+
 let $method := request:get-method()
 let $done := if ($method='POST') then (
                 (: make sure you use the right user permissions that has write access to this collection => done with the registration (group=site-member):)
-                let $collection := '/db/test'
+                let $collection := concat(concat(concat('/db/courses/',$courseid),'/'),$sessionNumber)
                 let $filename := request:get-uploaded-file-name('file')
  
-                (: make sure you use the right user permissions that has write access to this collection :)
-                let $login := xdb:login($collection, 'admin', 'my-admin-password')
+                (: make sure you use the right user permissions that has write access to this collection 
+                let $login := xdb:login($collection, 'admin', 'my-admin-password'):)
                 let $store := xdb:store($collection, $filename, request:get-uploaded-file-data('file'))
- 
+ 		(: From here, the file has been stored into the database, we must now upload the info into the Course element :)
+		let $newDeliv := <Deliverable><PersonRef>{$id}</PersonRef><File><LinkText>{$filename}</LinkText><LinkRef>/exist/rest//db/courses/{$courseid}/{$sessionNumber}/{$filename}</LinkRef></File></Deliverable>
+		let $query := if (exists($session/Exercise/Deliverables/Deliverable[PersonRef=$id]))
+		then update insert $newDeliv into $session/Exercise/Deliverables
+		else update replace $session/Exercise/Deliverables/Deliverable[PersonRef=$id] with $newDeliv
             return
                 <results>
-                    <message>File {$filename} has been stored at collection={$collection}.</message>
+                    <message>File {$filename} has been stored.</message>
                 </results>
                 )
             else
             <False/>
             
-    (:: On va controler si la personne est bien liée au cours. Ceci va donc aussi faire preuve de controle de login
-        Dans le cas d'un non-login ou que la personne n'est pas liée, l'element Root sera simplement vide::)
-let $engament :=  doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]//Engagments
-let $session := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid][CourseId=$engament//Engagment/CoursRef]/Sessions/Session[SessionNumber=$sessionNumber]
+ 
     return
+
     <Root>
         <Upload>
             {$done}
         </Upload>
         {$session}
+	<Infos>
+		<CurrentUserId>
+		{$id}
+		</CurrentUserId>
+		<CourseId>
+		{$courseid}
+		</CourseId>
+		<SessionId>
+		{$sessionNumber}
+		</SessionId>
+	</Infos>
+		
      </Root>

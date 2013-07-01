@@ -316,8 +316,10 @@
                                 <Deliverable>
                                     <PersonRef>1</PersonRef>
                                     <File>
+					<Link>
                                             <LinkText>LinkText18</LinkText>
                                             <LinkRef>http://www.oxygenxml.com/</LinkRef>
+                                        </Link>
 				    </File>
                                 </Deliverable>
                             </Deliverables>
