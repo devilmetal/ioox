@@ -411,7 +411,7 @@
     </xsl:template>
     
     <xsl:template match="Exercise">
-	<xsl:variable name="id1"><xsl:value-of select="ancestor::Course/CourseId"/></xsl:variable>
+	<xsl:variable name="id1"><xsl:value-of select="CourseId"/></xsl:variable>
 	<xsl:variable name="id2"><xsl:value-of select="ancestor::Session/SessionNumber"/></xsl:variable>
         <p><a href="{$xslt.base-url}me/courses/{$id1}/{$id2}">Link to the course</a></p>
     </xsl:template>

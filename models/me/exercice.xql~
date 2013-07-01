@@ -27,8 +27,8 @@ let $done := if ($method='POST') then (
                 let $collection := '/db/test'
                 let $filename := request:get-uploaded-file-name('file')
  
-                (: make sure you use the right user permissions that has write access to this collection 
-                let $login := xdb:login($collection, 'admin', 'my-admin-password'):)
+                (: make sure you use the right user permissions that has write access to this collection :)
+                let $login := xdb:login($collection, 'admin', 'my-admin-password')
                 let $store := xdb:store($collection, $filename, request:get-uploaded-file-data('file'))
  
             return
