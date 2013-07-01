@@ -82,18 +82,26 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
     <view src="views/me/me.xsl"/>
     
         <!-- /me/mynote page -->
-        <collection name="mynote" epilogue="standard" supported="modifier" method="POST" template="templates/note">
-            <!-- Vue globale des notes prises + séléction -->
-            <model src="models/me/mynote.xql"/>
-            <view src="views/me/mynote.xsl"/>
-            <action name="modifier" epilogue="standard">
-                <model src="oppidum:actions/edit.xql"/>
-                <view src="oppidum:views/edit.xsl"/>
-            </action>
-            <!-- détail / modification de chaque note-->
-            <item>
-                <model src="models/me/note.xql"/>
-                <view src="views/me/note.xsl"/>
+        <collection name="mynotes" epilogue="standard">
+            <!-- affichage de tous les cours dispos avec une "mynote" -->
+            <model src="models/me/mynotes.xql"/>
+            <view src="views/me/mynotes.xsl"/>
+            <!-- détail de chaque cours -->
+            <item epilogue="standard">
+                <model src="models/me/mynotes_courses.xql"/>
+                <view src="views/me/mynotes_courses.xsl"/>
+                <!-- Détail de chaque note (par session) -->
+                <item epilogue="standard" supported="modifier" method="POST" template="templates/note">
+                    <model src="models/me/mynotes_session.xql"/>
+                    <view src="views/me/mynotes_session.xsl"/>
+                    <action epilogue="standard" name="modifier">
+                        <model src="oppidum:actions/edit.xql"/>
+                        <view src="views/edit.xsl"/>
+                    </action>
+                    <action name="POST">
+                        <model src="models/save_note.xql"/>
+                    </action>
+                </item>
             </item>
           </collection>
           
@@ -153,7 +161,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
     </item>
     
     
-  <collection name="templates" db="/db/www/xmoodle" collection="templates">
+  <collection name="templates" db="/db/www/ioox" collection="templates">
     <model src="oppidum:models/templates.xql"/>
     <item name="note" resource="note.xhtml">
       <model src="oppidum:models/template.xql"/>

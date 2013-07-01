@@ -55,6 +55,37 @@
             </Engagment>
         </Engagments>
         <ToDoList/>
+        <Notes>
+            <Note>
+                <NoteId>1</NoteId>
+                <CourseRef>51</CourseRef>
+                <SessionRef>50</SessionRef>
+                <Content>
+                    <Parag>
+                        <Fragment>BlaBlaBla</Fragment>
+                        <Link>
+                            <LinkText>bidule</LinkText>
+                            <LinkRef>http://www.bidule.com</LinkRef>
+                        </Link>
+                    </Parag>
+                    <List>
+                        <ListItem>
+                            <Fragment>1</Fragment>
+                        </ListItem>
+                        <ListItem>
+                            <Fragment>2</Fragment>
+                        </ListItem>
+                        <ListItem>
+                            <Fragment>3</Fragment>
+                        </ListItem>
+                    </List>
+                    <Parag>
+                        <Fragment>Hahahahha</Fragment>
+                        <Fragment>Hohohohoho</Fragment>
+                    </Parag>
+                </Content>
+            </Note>
+        </Notes>
     </Person>
     <Person>
         <PersonId>51</PersonId>

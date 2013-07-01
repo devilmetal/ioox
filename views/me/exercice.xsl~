@@ -231,7 +231,7 @@
 		<xsl:apply-templates select="Exercise/Description"/>
 	<h3>Data</h3>
 		<xsl:apply-templates select="Exercise/Data"/>
-	<form enctype="multipart/form-data" method="POST" action="#">
+	<form enctype="multipart/form-data" method="POST" action="http://localhost:8080/exist/projets/ioox/me/courses/51/50">
                                 <fieldset>
                                     <legend>Upload Document:</legend>
                                     <input type="file" name="file"/>

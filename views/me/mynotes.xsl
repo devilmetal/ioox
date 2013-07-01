@@ -162,10 +162,10 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <div class="span12">
-                            <!-- On va appliquer le template suivant le retour du XQuery soit : Null => pas loggé/pas incrit
-                                                                                         soit : Courses => on affiche -->
-                            <xsl:apply-templates select="/Root/Session"></xsl:apply-templates>
-                        
+                            <!-- ENTER CONTENT HERE ! -->
+                            <ul>
+                                <xsl:apply-templates select=".//Course"/>
+                            </ul>
                         </div>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -218,123 +218,10 @@
             </site:javascript>
         </site:view>
         
-        
-        
     </xsl:template>
     
-    
-    <xsl:template match="Session">
-        <!-- Affichage de l'exercice -->
-	<h2>Exercise</h2>
-	<h2>Topic : <xsl:value-of select="Topic"/></h2>
-	<h3>Description</h3>
-		<xsl:apply-templates select="Exercise/Description"/>
-	<h3>Data</h3>
-		<xsl:apply-templates select="Exercise/Data"/>
-	<form enctype="multipart/form-data" method="POST" action="#">
-                                <fieldset>
-                                    <legend>Upload Document:</legend>
-                                    <input type="file" name="file"/>
-                                    <input type="submit" value="Upload"/>
-                                </fieldset>
-        </form>
-	<h3>Previous Uploaded document :</h3>
-		<xsl:apply-templates select="Exercise/Deliverables/Deliverable[PersonRef=/Root/Infos/CurrentUserId]"/>
+    <xsl:template match="Course">
+        <xsl:variable name="courseid"><xsl:value-of select="CourseId"/></xsl:variable>
+        <li><a href="{$xslt.base-url}me/mynotes/{$courseid}">Link to the "notes" for : <xsl:value-of select="Title"></xsl:value-of></a></li>
     </xsl:template>
-    
-    <!-- Affichage du lien vers l'ancien rendu d'exercice --> 
-    <xsl:template match="Deliverable">
-	<xsl:element name="a">
-            <xsl:attribute name="href">
-                <xsl:value-of select="File/LinkRef"/>
-            </xsl:attribute>
-            <xsl:value-of select="File/LinkText"/>
-        </xsl:element>
-    </xsl:template>
-
-    <!-- Affichage des données de l'exercice -->
-    <xsl:template match="Data"> 	
-	<xsl:apply-templates select="child::node()"/>
-    </xsl:template>	
-
-	
-    <!-- Affichage d'un content type -->
-    <xsl:template match="Description">
-        <xsl:for-each select="./child::node()">
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
-    </xsl:template>
-    
-    <xsl:template match="Parag">
-        <p>
-            <xsl:for-each select="./child::node()">
-                <xsl:apply-templates select="."/>
-            </xsl:for-each>
-        </p>
-    </xsl:template>
-    
-    <xsl:template match="List">
-        <ul>
-            <xsl:for-each select="./child::node()">
-                <li><xsl:apply-templates select="."/></li>
-            </xsl:for-each>
-        </ul>
-    </xsl:template>
-    
-    <xsl:template match="ListHeader">
-        <span class="ListHeader">
-            <xsl:value-of select="."/>
-        </span>
-    </xsl:template>
-    
-    
-    <xsl:template match="Fragment">
-        <xsl:value-of select="."/>
-        <!--<br/>
-         THIS IS TRUE??? -->
-    </xsl:template>
-    
-    <xsl:template match="Link">
-        <xsl:element name="a">
-            <xsl:attribute name="href">
-                <xsl:value-of select="./LinkRef"/>
-            </xsl:attribute>
-            <xsl:value-of select="./LinkText"/>
-        </xsl:element>
-    </xsl:template>
-    
-    
-    
-    <xsl:template match="ListItem">
-        <ol>
-            <xsl:for-each select="./child::node()">
-                <li><xsl:apply-templates select="."/></li>
-            </xsl:for-each>
-        </ol>
-    </xsl:template>
-    
-    <xsl:template match="SubList">
-        <xsl:if test="count(./SubListHeader)!=0">
-            <span class="SubListHeader">
-                <xsl:value-of select="./SubListHeader"/>
-            </span>
-        </xsl:if>
-        <ol>
-            <xsl:for-each select="./SubListItem">
-                <li><xsl:apply-templates select="./child::node()"/></li>
-            </xsl:for-each>
-        </ol>
-    </xsl:template>
-    
-    <xsl:template match="ExternalDoc">
-	<xsl:apply-templates select=".//Access"/><br/>
-    </xsl:template>
-	 
-    <xsl:template match="Access">
-    	 <xsl:element name="a">
-            <xsl:attribute name="href"><xsl:value-of select="Location"/></xsl:attribute>
-            <xsl:value-of select="ancestor::ExternalDoc/Title"/>
-        </xsl:element>
-    </xsl:template>
-    
 </xsl:stylesheet>
