@@ -39,10 +39,15 @@ let $done := if ($method='POST') then (
 		let $newDeliv := <Deliverable><PersonRef>{$id}</PersonRef><File><LinkText>{$filename}</LinkText><LinkRef>/exist/rest//db/courses/{$courseid}/{$sessionNumber}/{$filename}</LinkRef></File></Deliverable>
 		let $query := if (exists($session/Exercise/Deliverables/Deliverable[PersonRef=$id]))
 		then (
-		      (:remove the current document ::)
-		      xdb:remove($collection,$session/Exercise/Deliverables/Deliverable[PersonRef=$id]/File/LinkText),
+		      (:remove the current document if it exists :)
+		      if(exists(doc(concat($collection,$session/Exercise/Deliverables/Deliverable[PersonRef=$id]/File/LinkText)))) then (
+		      xdb:remove($collection,$session/Exercise/Deliverables/Deliverable[PersonRef=$id]/File/LinkText)
+		      )
+		          else
+		              ((:if the docuement does not exist, we do not have to delete it :)),
 		      (:update the status:)
 		      update replace $session/Exercise/Deliverables/Deliverable[PersonRef=$id] with $newDeliv)
+		      
 		else (update insert $newDeliv into $session/Exercise/Deliverables)
             return
                 <results>

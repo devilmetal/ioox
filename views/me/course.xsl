@@ -217,19 +217,6 @@
                 <script src="{$xslt-ressource-url}/lib/jquery-ui/jquery-ui-1.10.0.custom.min.js"/>
                 <!-- touch events for jQuery UI -->
                 <script src="{$xslt-ressource-url}/js/forms/jquery.ui.touch-punch.min.js"/>
-                
-                <!-- charts -->
-                <script src="lib/flot/jquery.flot.min.js"></script>
-                <script src="lib/flot/jquery.flot.resize.min.js"></script>
-                <script src="lib/flot/jquery.flot.pie.min.js"></script>
-                <script src="lib/flot/jquery.flot.curvedLines.min.js"></script>
-                <script src="lib/flot/jquery.flot.orderBars.min.js"></script>
-                <script src="lib/flot/jquery.flot.multihighlight.min.js"></script>
-                <script src="lib/flot/jquery.flot.pyramid.min.js"></script>
-                <script src="lib/moment_js/moment.min.js"></script>
-                <!-- charts functions -->
-                <script src="js/gebo_charts.js"></script>
-
                 <script>
                     $(document).ready(function() {
                     //* show all elements  remove preloader
@@ -239,6 +226,8 @@
                     
                     });
                 </script>
+                <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+                <xsl:apply-templates select="/Root/Grades"></xsl:apply-templates>
             </site:javascript>
         </site:view>
 
@@ -289,11 +278,7 @@
                                 <xsl:apply-templates select="Evaluation"/>
                             </dl>
                             <h3 class="heading">Grades</h3>
-                            <div class="span6">
-                                <h3 class="heading">Combined chart</h3>
-                                <div id="fl_d" style="height: 270px; width: 90%; margin: 15px auto 0px; padding: 0px; position: relative; " aria-describedby="ui-tooltip-6"><canvas class="base" width="603" height="270"></canvas><canvas class="overlay" width="603" height="270" style="position: absolute; left: 0px; top: 0px; "></canvas><div class="tickLabels" style="font-size:smaller"><div class="xAxis x1Axis" style="color:#545454"><div class="tickLabel" style="position:absolute;text-align:center;left:-8px;top:252px;width:67px">May 22</div><div class="tickLabel" style="position:absolute;text-align:center;left:59px;top:252px;width:67px">May 23</div><div class="tickLabel" style="position:absolute;text-align:center;left:127px;top:252px;width:67px">May 24</div><div class="tickLabel" style="position:absolute;text-align:center;left:195px;top:252px;width:67px">May 25</div><div class="tickLabel" style="position:absolute;text-align:center;left:263px;top:252px;width:67px">May 26</div><div class="tickLabel" style="position:absolute;text-align:center;left:330px;top:252px;width:67px">May 27</div><div class="tickLabel" style="position:absolute;text-align:center;left:398px;top:252px;width:67px">May 28</div><div class="tickLabel" style="position:absolute;text-align:center;left:466px;top:252px;width:67px">May 29</div><div class="tickLabel" style="position:absolute;text-align:center;left:534px;top:252px;width:67px">May 30</div></div><div class="yAxis y1Axis" style="color:#545454"><div class="tickLabel" style="position:absolute;text-align:right;top:236px;right:585px;width:18px">0</div><div class="tickLabel" style="position:absolute;text-align:right;top:202px;right:585px;width:18px">100</div><div class="tickLabel" style="position:absolute;text-align:right;top:167px;right:585px;width:18px">200</div><div class="tickLabel" style="position:absolute;text-align:right;top:133px;right:585px;width:18px">300</div><div class="tickLabel" style="position:absolute;text-align:right;top:98px;right:585px;width:18px">400</div><div class="tickLabel" style="position:absolute;text-align:right;top:64px;right:585px;width:18px">500</div><div class="tickLabel" style="position:absolute;text-align:right;top:29px;right:585px;width:18px">600</div><div class="tickLabel" style="position:absolute;text-align:right;top:-5px;right:585px;width:18px">700</div></div><div class="yAxis y2Axis" style="color:#545454"><div class="tickLabel" style="position:absolute;text-align:left;top:236px;left:579px;width:24px">1150</div><div class="tickLabel" style="position:absolute;text-align:left;top:206px;left:579px;width:24px">1200</div><div class="tickLabel" style="position:absolute;text-align:left;top:176px;left:579px;width:24px">1250</div><div class="tickLabel" style="position:absolute;text-align:left;top:146px;left:579px;width:24px">1300</div><div class="tickLabel" style="position:absolute;text-align:left;top:116px;left:579px;width:24px">1350</div><div class="tickLabel" style="position:absolute;text-align:left;top:85px;left:579px;width:24px">1400</div><div class="tickLabel" style="position:absolute;text-align:left;top:55px;left:579px;width:24px">1450</div><div class="tickLabel" style="position:absolute;text-align:left;top:25px;left:579px;width:24px">1500</div><div class="tickLabel" style="position:absolute;text-align:left;top:-5px;left:579px;width:24px">1550</div></div></div><div class="legend"><div style="position: absolute; width: 95px; height: 40px; top: 9px; left: 30px; background-color: rgb(255, 255, 255); opacity: 0.85; "> </div><table style="position:absolute;top:9px;left:30px;;font-size:smaller;color:#545454"><tbody><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(140,199,224);overflow:hidden"></div></div></td><td class="legendLabel">Unique visitors</td></tr><tr><td class="legendColorBox"><div style="border:1px solid #ccc;padding:1px"><div style="width:4px;height:0;border:5px solid rgb(60,160,202);overflow:hidden"></div></div></td><td class="legendLabel">Sale</td></tr></tbody></table></div></div>
-                            </div>
-                            <div id="ui-tooltip-6" class="ui-tooltip qtip ui-tooltip-default ui-tooltip-shadow ui-tooltip-tipsy ui-tooltip-pos-tl" style="z-index: 15005; width: 133px; " tracking="true" role="alert" aria-live="polite" aria-atomic="false" aria-describedby="ui-tooltip-6-content" aria-hidden="true"><div class="ui-tooltip-content" id="ui-tooltip-6-content" aria-atomic="true">Unique visitors: 550</div></div>
+                            <div id="chart_div"/>
                         </div>
                         <div class="tab-pane" id="tab_br3">
                             <dl class="dl-horizontal">

@@ -122,7 +122,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
             <!-- Vue global des notes / modification si prof-->
             <model src="models/me/grades.xql"/>
             <view src="views/me/grades.xsl"/>
-            <!-- détail de chaque note (note précise + compte rendu du prof)-->
+            <!-- détail de chaque note (note précise + compte rendu du prof, On renvoye sur la page du cours ??? )-->
             <item epilogue="standard">
                 <model src="models/me/grade.xql"/>
                 <view src="views/me/grade.xsl"/>
