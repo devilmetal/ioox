@@ -23,7 +23,8 @@ let $course := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$r
 let $teachers := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagment[(Role='Tutor' or Role='Teacher') and CoursRef=$ref2]/ancestor::Person
 let $person := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
 let $grades :=  $person//Engagment[Grade][CoursRef=$ref2]
-                            
+let $everygrades :=  doc(concat($collection, "Persons.xml"))//Engagment[Grade][CoursRef=$ref2]
+                         
 
 
     return
@@ -35,5 +36,8 @@ let $grades :=  $person//Engagment[Grade][CoursRef=$ref2]
      <Grades>
         {$grades}
      </Grades>
+     <EverybodyGrades>
+        {$everygrades}
+     </EverybodyGrades>
      </Root>
     

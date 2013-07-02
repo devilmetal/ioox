@@ -227,7 +227,7 @@
                     });
                 </script>
                 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-                <xsl:apply-templates select="/Root/Grades"></xsl:apply-templates>
+                <xsl:apply-templates select="/Root/Grades" mode="javascript"></xsl:apply-templates>
             </site:javascript>
         </site:view>
 
@@ -625,6 +625,7 @@
             <a href="{$xslt.base-url}me/courses/{$id1}/{$id2}">Link to the course</a>
         </p>
     </xsl:template>
+    
 
     <xsl:template match="Link">
         <xsl:element name="a">
@@ -639,4 +640,50 @@
     </xsl:template>
 
 
+    <!-- code pour la génération du graphique simplifié des notes le tout est géré par Google Charts-->
+    <xsl:template match="Grades" mode="javascript">
+        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+        <script type="text/javascript">
+            google.load("visualization", "1", {packages:["corechart"]});
+            google.setOnLoadCallback(drawChart);
+            function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+            ['Type', 'Grade', 'Global Mean']
+            <xsl:apply-templates select="Engagment/Grade/child::node()" mode="javascript"/>
+            ]);
+            
+            var options = {
+            title: 'Course Grades',
+            hAxis: {title: 'Type', titleTextStyle: {color: 'red'}},
+            vAxis: {maxValue: 6, minValue: 0}
+            };
+            
+            var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+            chart.draw(data, options);
+            }
+        </script>
+    </xsl:template>
+    
+    <xsl:template match="ExamGrade" mode="javascript">
+        <!-- Calculer la moyenne des notes des examens des autres -->
+        <xsl:variable name="mean"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ExamGrade) div count(//EverybodyGrades//Engagment/Grade/ExamGrade)"></xsl:value-of></xsl:variable>
+        ,['Exam' ,<xsl:value-of select="."/>,<xsl:value-of select="$mean"/>]
+    </xsl:template>
+    <xsl:template match="ExercicesGrades" mode="javascript">
+        <!-- Moyenne des notes des exercices de tous les autres -->
+        <xsl:variable name="mean"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ExercicesGrades/Exercice/ExerciceGrade) div count(//EverybodyGrades//Engagment/Grade/ExercicesGrades/Exercice/ExerciceGrade)"></xsl:value-of></xsl:variable>
+        
+        <!-- Moyenne des notes des exercices-->
+        <xsl:variable name="mean"><xsl:value-of select="sum(.//Exercice/ExerciceGrade) div count(.//Exercice/ExerciceGrade)"/></xsl:variable>
+        ,['Exercises' ,<xsl:value-of select="$mean"/>]
+    </xsl:template>
+    <xsl:template match="ProjectGrades" mode="javascript">
+        <!-- Moyenne des notes des project steps de tous les autres -->
+        <xsl:variable name="mean"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ProjectGrades/Step/StepGrade) div count(//EverybodyGrades//Engagment/Grade/ProjectGrades/Step/StepGrade)"></xsl:value-of></xsl:variable>
+        
+        
+        <!-- Moyenne des notes des steps -->
+        <xsl:variable name="mean"><xsl:value-of select="sum(.//Step/StepGrade) div count(.//Step/StepGrade)"/></xsl:variable>
+        ,['Project' ,<xsl:value-of select="$mean"/>]
+    </xsl:template>
 </xsl:stylesheet>
