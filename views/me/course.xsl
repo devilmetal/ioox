@@ -642,6 +642,8 @@
 
     <!-- code pour la génération du graphique simplifié des notes le tout est géré par Google Charts-->
     <xsl:template match="Grades" mode="javascript">
+        <!-- Si Grades est vide, donc on est pas connecté, donc on affichge pas ça. -->
+        <xsl:if test="/Root/Grades != ''">
         <script type="text/javascript" src="https://www.google.com/jsapi"></script>
         <script type="text/javascript">
             google.load("visualization", "1", {packages:["corechart"]});
@@ -662,6 +664,7 @@
             chart.draw(data, options);
             }
         </script>
+        </xsl:if>
     </xsl:template>
     
     <xsl:template match="ExamGrade" mode="javascript">
