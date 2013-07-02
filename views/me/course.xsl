@@ -669,24 +669,24 @@
     
     <xsl:template match="ExamGrade" mode="javascript">
         <!-- Calculer la moyenne des notes des examens des autres -->
-        <xsl:variable name="mean"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ExamGrade) div count(//EverybodyGrades//Engagment/Grade/ExamGrade)"></xsl:value-of></xsl:variable>
-        ,['Exam' ,<xsl:value-of select="."/>,<xsl:value-of select="$mean"/>]
+        <xsl:variable name="meanO"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ExamGrade) div count(//EverybodyGrades//Engagment/Grade/ExamGrade)"></xsl:value-of></xsl:variable>
+        ,['Exam' ,<xsl:value-of select="."/>,<xsl:value-of select="$meanO"/>]
     </xsl:template>
     <xsl:template match="ExercicesGrades" mode="javascript">
         <!-- Moyenne des notes des exercices de tous les autres -->
-        <xsl:variable name="mean"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ExercicesGrades/Exercice/ExerciceGrade) div count(//EverybodyGrades//Engagment/Grade/ExercicesGrades/Exercice/ExerciceGrade)"></xsl:value-of></xsl:variable>
+        <xsl:variable name="meanO"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ExercicesGrades/Exercice/ExerciceGrade) div count(//EverybodyGrades//Engagment/Grade/ExercicesGrades/Exercice/ExerciceGrade)"></xsl:value-of></xsl:variable>
         
         <!-- Moyenne des notes des exercices-->
         <xsl:variable name="mean"><xsl:value-of select="sum(.//Exercice/ExerciceGrade) div count(.//Exercice/ExerciceGrade)"/></xsl:variable>
-        ,['Exercises' ,<xsl:value-of select="$mean"/>]
+        ,['Exercises' ,<xsl:value-of select="$mean"/>,<xsl:value-of select="$meanO"/>]
     </xsl:template>
     <xsl:template match="ProjectGrades" mode="javascript">
         <!-- Moyenne des notes des project steps de tous les autres -->
-        <xsl:variable name="mean"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ProjectGrades/Step/StepGrade) div count(//EverybodyGrades//Engagment/Grade/ProjectGrades/Step/StepGrade)"></xsl:value-of></xsl:variable>
+        <xsl:variable name="meanO"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ProjectGrades/Step/StepGrade) div count(//EverybodyGrades//Engagment/Grade/ProjectGrades/Step/StepGrade)"></xsl:value-of></xsl:variable>
         
         
         <!-- Moyenne des notes des steps -->
         <xsl:variable name="mean"><xsl:value-of select="sum(.//Step/StepGrade) div count(.//Step/StepGrade)"/></xsl:variable>
-        ,['Project' ,<xsl:value-of select="$mean"/>]
+        ,['Project' ,<xsl:value-of select="$mean"/>,<xsl:value-of select="$meanO"/>]
     </xsl:template>
 </xsl:stylesheet>
