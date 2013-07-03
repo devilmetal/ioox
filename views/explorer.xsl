@@ -73,38 +73,37 @@
             <site:content>
                 <!-- main content -->
                 <div id="contentwrapper">
-
+<site:nav>
                     <div class="navbar">
                         <div class="navbar-inner">
                             <div class="container-fluid">
-                                <a class="brand2" href="#"> Me</a>
                                 <ul class="nav" id="mobile-nav-2">
                                     <li>
-                                        <a href="#"><img
+                                        <a href="me/"><img
                                                 src="{$xslt-ressource-url}/img/gCons-mini-white/home.png"
                                                 alt=""/> MyHome </a>
                                     </li>
                                     <li class="divider-vertical hidden-phone hidden-tablet"/>
                                     <li>
-                                        <a href="#"><img
+                                        <a href="me/courses/"><img
                                                 src="{$xslt-ressource-url}/img/gCons-mini-white/bookmark.png"
                                                 alt=""/> Courses </a>
                                     </li>
                                     <li class="divider-vertical hidden-phone hidden-tablet"/>
                                     <li>
-                                        <a href="#"><img
+                                        <a href="me/mynotes/"><img
                                                 src="{$xslt-ressource-url}/img/gCons-mini-white/addressbook.png"
                                                 alt=""/> MyNote </a>
                                     </li>
                                     <li class="divider-vertical hidden-phone hidden-tablet"/>
                                     <li>
-                                        <a href="#"><img
+                                        <a href="me/grades"><img
                                                 src="{$xslt-ressource-url}/img/gCons-mini-white/pie-chart.png"
                                                 alt=""/> Grades </a>
                                     </li>
                                     <li class="divider-vertical hidden-phone hidden-tablet"/>
                                     <li>
-                                        <a href="#"><img
+                                        <a href="me/todo"><img
                                                 src="{$xslt-ressource-url}/img/gCons-mini-white/calendar.png"
                                                 alt=""/> Todos </a>
                                     </li>
@@ -139,7 +138,7 @@
                             </div>
                         </div>
                     </div>
-
+</site:nav>
                     <h3 class="heading"> Explorer </h3>
                     <div class="row-fluid">
 

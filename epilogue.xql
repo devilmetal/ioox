@@ -83,13 +83,8 @@ declare function site:login( $cmd as element() ) as element()*
                         <div class="container-fluid">
                             <a class="brand" href="#">
                             <img src="{$cmd/@base-url}static/ioox/img/gCons/connections-white.png" alt=""/>
-                            iOoX</a>
+                            Klakxon</a>
                             <ul class="nav user_menu pull-right">
-                                <!--<li class="hidden-phone hidden-tablet">
-                                    <div class="nb_boxes clearfix">
-                                        <a href="#" class="label ttip_b" title="New messages">25 <i class="splashy-mail_light"></i></a>
-                                    </div>
-                                </li>-->
                                 <li class="divider-vertical hidden-phone hidden-tablet"></li>
                                 <li class="dropdown">
                                     <a class="login" href="{$cmd/@base-url}login?url={$uri}">Login</a>
@@ -121,18 +116,13 @@ declare function site:login( $cmd as element() ) as element()*
                         <div class="container-fluid">
                             <a class="brand" href="#">
                             <img src="{$cmd/@base-url}static/ioox/img/gCons/connections-white.png" alt=""/>
-                            iOoX</a>
+                            Klaxon</a>
                             <ul class="nav user_menu pull-right">
-                                <!--<li class="hidden-phone hidden-tablet">
-                                    <div class="nb_boxes clearfix">
-                                        <a href="#" class="label ttip_b" title="New messages">25 <i class="splashy-mail_light"></i></a>
-                                    </div>
-                                </li>-->
                                 <li class="divider-vertical hidden-phone hidden-tablet"></li>
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$user} <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                    <li><a href="user_profile.html">My Profile</a></li>
+                                    <li><a href="#">My Profile</a></li>
                                     <li class="divider"></li>
                                     <li><a class="login" href="{$cmd/@base-url}logout?url={$cmd/@base-url}">Log Out</a></li>
                                     </ul>
@@ -230,29 +220,30 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
 						<div class="antiscroll-content">
 							<div class="sidebar_inner">
 								
-								<div id="side_accordion" class="accordion">
-									
-									<div class="accordion-group">
-										<div class="accordion-heading">
-											<a href="home" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<img src="{$cmd/@base-url}static/ioox/img/gCons/home.png" alt="" /> Home
-											</a>
-										</div>
-									</div>
-									<div class="accordion-group">
-										<div class="accordion-heading">
-											<a href="explorer" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<img src="{$cmd/@base-url}static/ioox/img/gCons/search.png" alt="" /> Explorer
-											</a>
-										</div>
-									</div>
-									<div class="accordion-group">
-										<div class="accordion-heading">
-											<a href="faq" data-parent="#side_accordion" data-toggle="collapse" class="accordion-toggle">
-												<img src="{$cmd/@base-url}static/ioox/img/gCons/push-pin.png" alt="" /> FAQ
-											</a>
-										</div>
-									</div>
+								<div class="globalmenu">
+								<ul class="gmul">
+								
+								    <li class="gitem">
+								    <a href="home" >
+										<img src="{$cmd/@base-url}static/ioox/img/gCons/home.png" alt="" /> Home
+								    </a>
+								    </li>
+								
+								
+								    <li class="gitem">
+								    <a href="explorer" >
+										<img src="{$cmd/@base-url}static/ioox/img/gCons/search.png" alt="" /> Explorer
+								    </a>
+								    </li>
+								
+								
+								    <li class="gitem">
+								    <a href="faq" >
+										<img src="{$cmd/@base-url}static/ioox/img/gCons/push-pin.png" alt="" /> FAQ
+									</a>
+									</li>
+								
+								</ul>
 								</div>
 							</div>
 						</div>

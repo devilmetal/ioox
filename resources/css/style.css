@@ -950,3 +950,43 @@ span.square_unsub{
 	width:1.61em;
 	height:1.61em;
 }
+
+.globalmenu .gitem{
+	cursor: pointer;
+	-webkit-transition: background-color 0.2s ease-in-out;
+	-moz-transition: background-color 0.2s ease-in-out;
+	-o-transition: background-color 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out;
+}
+
+ul.gmul{
+	list-style-type:none;
+	padding:0;
+	margin:0;
+}
+ul.gmul li{
+	
+
+	background: #e0e0e0;
+	-webkit-box-shadow: inset 0px 1px 0px 0px #ececec;
+	box-shadow: inset 0px 1px 0px 0px #ececec;
+
+}
+ul.gmul li a:hover, ul.gmul li a:active{
+	background-color:#cfcfcf;
+
+}
+ul.gmul li a {
+	padding: 8px 15px;
+	margin:0;
+
+	color:#222;
+	display:block;
+	width:100%;
+	text-decoration: none;
+	text-shadow: 1px 1px 0 #efefef;
+	-webkit-transition: background-color 0.2s ease-in-out;
+	-moz-transition: background-color 0.2s ease-in-out;
+	-o-transition: background-color 0.2s ease-in-out;
+	transition: background-color 0.2s ease-in-out;
+}
