@@ -12,8 +12,10 @@
     <xsl:variable name="UserId"><xsl:value-of select="//Session/Id"/></xsl:variable>
     <xsl:template match="/">
         [
+        <!-- Si la personne est connectée, on affiche quelque chose, sinon rien -->
         <xsl:choose>
             <xsl:when test="$UserId!='-1'">
+                <!-- Affichage des jours de cours -->
                 <xsl:apply-templates select="//Month[No=$Month]//Day">
                     <xsl:with-param name="YearNo"><xsl:value-of select="$Year"/></xsl:with-param>
                     <xsl:with-param name="MonthNo"><xsl:value-of select="$Month"/></xsl:with-param>
@@ -57,6 +59,7 @@
                             <xsl:with-param name="FullDate"><xsl:value-of select="$FullDate"/></xsl:with-param>
                         </xsl:apply-templates>
         </xsl:if>
+        <xsl:apply-templates select="//ToDoListPerson/ToDoList//Task[Deadline/Date=$FullDay]"/>
     </xsl:template>
     
     <!-- MISE EN PAGE DES EVENTS D'UN JOUR AFFICHAGE DANS LE CALENDRIER-->
@@ -77,4 +80,17 @@
         </xsl:template>
     
     
+    <xsl:template match="ToDoList">
+        <xsl:apply-templates select=".//Task"/>
+    </xsl:template>
+    
+    <xsl:template match="Task">
+        {
+        "title" : "<xsl:value-of select="Title"/>",
+        "start" : "<xsl:value-of select="Deadline/Date"/><xsl:text> 01:00:00</xsl:text>",
+        "end" : "<xsl:value-of select="Deadline/Date"/><xsl:text> 02:00:00</xsl:text>",
+        "allDay": false,
+        "url"   : "<xsl:value-of select="$xslt.base-url"/>me/todo"
+        }, 
+    </xsl:template>
 </xsl:stylesheet>

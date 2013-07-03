@@ -92,7 +92,9 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                     <view src="views/me/mynotes_session.xsl"/>
                     <action epilogue="standard" name="modifier">
                         <model src="oppidum:actions/edit.xql"/>
-                        <view src="views/edit.xsl"/>
+                        <view src="views/edit.xsl">
+                            <param name="skin" value="editor"/>
+                        </view>
                     </action>
                     <action name="POST">
                         <model src="models/save_note.xql"/>
@@ -102,9 +104,16 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
           </collection>
           
          <!-- /me/todo page -->
-        <item name="todo" epilogue="standard">
+        <item name="todo" epilogue="standard" supported="modifier" method="POST" template="templates/todo">
             <model src="models/me/todo.xql"/>
             <view src="views/me/todo.xsl"/>
+            <action name="modifier" epilogue="standard">
+                <model src="oppidum:actions/edit.xql"/>
+                <view src="views/edit.xsl"/>
+            </action>
+            <action name="POST">
+                <model src="models/save_todo.xql"/>
+            </action>
         </item>
         
         <!-- /me/profile page -->
@@ -164,6 +173,9 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
   <collection name="templates" db="/db/www/ioox" collection="templates">
     <model src="oppidum:models/templates.xql"/>
     <item name="note" resource="note.xhtml">
+      <model src="oppidum:models/template.xql"/>
+    </item>
+    <item name="todo" resource="todo.xhtml">
       <model src="oppidum:models/template.xql"/>
     </item>
   </collection>

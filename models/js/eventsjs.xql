@@ -35,36 +35,34 @@ let $month := month-from-date(xs:date($datestart))
 let $data1 := doc(concat($collection, "Calendar.xml"))/Calendar/Year[No=$year]
 let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course
 let $data3 := doc(concat($collection, "Persons.xml"))//Person[Engagments/Engagment/Role='Student']
-let $role := if (session:get-attribute('role')) then (
-                            session:get-attribute('role')
-                            )
-                        else(
-                            '-1'
-                            )
 let $id := if (session:get-attribute('id')) then (
                             session:get-attribute('id')
                             )
                         else(
                             '-1'
                             )
+let $todolist := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]//ToDoList
+
     return
     <Root>
-    <Calendar>
-     {$data1}
-    </Calendar>
-    <Courses>
-        {$data2}
-    </Courses>
-    <Persons>
-        {$data3}
-    </Persons>
-     <Date>
-        <Year>{$year}</Year>
-        <Month>{$month}</Month>
-     </Date>
-    <Session>
-        <Id>{$id}</Id>
-        <Role>{$role}</Role>
-   </Session>
+        <Calendar>
+            {$data1}
+        </Calendar>
+        <Courses>
+            {$data2}
+        </Courses>
+        <Persons>
+            {$data3}
+        </Persons>
+        <Date>
+            <Year>{$year}</Year>
+            <Month>{$month}</Month>
+        </Date>
+        <Session>
+            <Id>{$id}</Id>
+        </Session>
+        <ToDoListPerson>
+            {$todolist}
+        </ToDoListPerson>
      </Root>
    

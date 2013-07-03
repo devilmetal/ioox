@@ -54,7 +54,9 @@
                 </Grade>
             </Engagment>
         </Engagments>
-        <ToDoList/>
+        <ToDoList>
+            <Activity/>
+        </ToDoList>
         <Notes>
             <Note>
                 <NoteId>1</NoteId>
@@ -374,6 +376,25 @@
         <Password>123</Password>
         <Engagments>
         </Engagments>
-        <ToDoList/>
+        <ToDoList>
+            <Activity>
+                <Title>Random Test</Title>
+                <Tasks>
+                    <Task>
+                        <Title>Test Calendar</Title>
+                        <Description>
+                            <Parag>
+                                <Fragment>test</Fragment>
+                            </Parag>
+                        </Description>
+                        <Priority>1</Priority>
+                        <Deadline>
+                            <Date>2013-07-10</Date>
+                        </Deadline>
+                    </Task>
+                </Tasks>
+            </Activity>
+        </ToDoList>
+        <Notes/>
     </Person>
 </Persons>

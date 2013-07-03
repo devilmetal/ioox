@@ -25,7 +25,7 @@ let $id := if (session:get-attribute('id')) then (
 let $person := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
 
 (: 1 On test si une note existe déjà :)
-let $noteExist := exists($person//Note[CourseRef=$courseid][SessionRef=$sessionNumber])
+let $noteExist := exists($person//Notes/Note[CourseRef=$courseid][SessionRef=$sessionNumber])
 
 (: 2 On test si la personne est enregristrée au cours (et par la même occasion si la combinaison des IDs cours/session existe bien) :)
 let $courseTest := exists($person/Engagments/Engagment[CoursRef=$courseid]) and exists(doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]//Session[SessionNumber=$sessionNumber])
