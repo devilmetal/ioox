@@ -5,7 +5,7 @@
     extension-element-prefixes="date" version="2.0">
     <xsl:output method="xml" media-type="text/html" omit-xml-declaration="yes" indent="no"/>
     <xsl:variable name="xslt-ressource-url"><xsl:value-of select="$xslt.base-url"
-    />static/ioox</xsl:variable>
+        />static/ioox</xsl:variable>
     <xsl:param name="xslt.rights"/>
     <xsl:param name="xslt.base-url">/</xsl:param>
     <xsl:template match="/">
@@ -27,30 +27,30 @@
                         <p>Layout:</p>
                         <div class="clearfix">
                             <label class="radio inline"><input type="radio" name="ssw_layout"
-                                id="ssw_layout_fluid" value=""/> Fluid</label>
+                                    id="ssw_layout_fluid" value=""/> Fluid</label>
                             <label class="radio inline"><input type="radio" name="ssw_layout"
-                                id="ssw_layout_fixed" value="gebo-fixed"/> Fixed</label>
+                                    id="ssw_layout_fixed" value="gebo-fixed"/> Fixed</label>
                         </div>
                     </div>
                     <div class="sepH_c">
                         <p>Sidebar position:</p>
                         <div class="clearfix">
                             <label class="radio inline"><input type="radio" name="ssw_sidebar"
-                                id="ssw_sidebar_left" value=""/> Left</label>
+                                    id="ssw_sidebar_left" value=""/> Left</label>
                             <label class="radio inline"><input type="radio" name="ssw_sidebar"
-                                id="ssw_sidebar_right" value="sidebar_right"/> Right</label>
+                                    id="ssw_sidebar_right" value="sidebar_right"/> Right</label>
                         </div>
                     </div>
                     <div class="sepH_c">
                         <p>Show top menu on:</p>
                         <div class="clearfix">
                             <label class="radio inline"><input type="radio" name="ssw_menu"
-                                id="ssw_menu_click" value=""/> Click</label>
+                                    id="ssw_menu_click" value=""/> Click</label>
                             <label class="radio inline"><input type="radio" name="ssw_menu"
-                                id="ssw_menu_hover" value="menu_hover"/> Hover</label>
+                                    id="ssw_menu_hover" value="menu_hover"/> Hover</label>
                         </div>
                     </div>
-                    
+
                     <div class="gh_button-group">
                         <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
                         <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
@@ -58,8 +58,8 @@
                     <div class="hide">
                         <ul id="ssw_styles">
                             <li class="small ssw_mbColor sepH_a" style="display:none">body {<span
-                                class="ssw_mColor sepH_a" style="display:none"> color:
-                                #<span/>;</span>
+                                    class="ssw_mColor sepH_a" style="display:none"> color:
+                                    #<span/>;</span>
                                 <span class="ssw_bColor" style="display:none">background-color:
                                     #<span/>
                                 </span>}</li>
@@ -139,19 +139,58 @@
                             </div>
                         </div>
                     </div>
-                   
-                    <h3 class="heading">
-                        Explorer
-                    </h3>
+
+                    <h3 class="heading"> Explorer </h3>
                     <div class="row-fluid">
 
-                        <div class="span6">
-                            asiojasdjaosidj
+                        <div class="span12">
+
+                            <div class="tabbable">
+                                <ul class="nav nav-tabs">
+                                    <li class="active">
+                                        <a href="#current" data-toggle="tab">
+                                            <xsl:value-of select="//CurrentPeriod/Period[1]/Name"/>
+                                        </a>
+                                    </li>
+                                    <xsl:apply-templates select="//PastPeriod"/>
+                                </ul>
+                                <div class="tab-content">
+                                    <div class="tab-pane active" id="current">
+                                        <p>
+                                            <strong>Section 1</strong><br/>Lorem ipsum dolor sit
+                                            amet, consectetur adipiscing elit. </p>
+                                    </div>
+                                    <div class="tab-pane" id="tab_dr2">
+                                        <p>
+                                            <strong>Section 2</strong><br/>Lorem ipsum dolor sit
+                                            amet, consectetur adipiscing elit. </p>
+                                    </div>
+                                    <div class="tab-pane" id="tab_dr3">
+                                        <p>
+                                            <strong>Section 3</strong><br/>Lorem ipsum dolor sit
+                                            amet, consectetur adipiscing elit. </p>
+                                    </div>
+                                    <div class="tab-pane" id="tab_dr4">
+                                        <p>
+                                            <strong>Section 4</strong><br/>Lorem ipsum dolor sit
+                                            amet, consectetur adipiscing elit. </p>
+                                    </div>
+                                    <div class="tab-pane" id="tab_dr5">
+                                        <p>
+                                            <strong>Section 5</strong><br/>Lorem ipsum dolor sit
+                                            amet, consectetur adipiscing elit. </p>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="span6">
-                            asiojasdjaosidj
-                        </div>
-                        
+
+
+
+
+
+
+
+
                     </div>
 
                 </div>
@@ -185,151 +224,28 @@
     </xsl:template>
 
 
-    <xsl:template match="Course" mode="view">
-        <h3>
-            <xsl:value-of select="Title"/>
-        </h3>
-        <ul id="description">
-            <xsl:variable name="Teacher">
-                <xsl:value-of select="TeacherRef"/>
-            </xsl:variable>
-            <li>
-                <strong>Professor : </strong>
-                <xsl:apply-templates select="/Root/Persons/Person[PersonId = $Teacher]" mode="name"
-                />
-            </li>
-            <li>
-                <strong>Description : </strong>
-                <xsl:apply-templates select="Description"/>
-            </li>
-        </ul>
-        <!--
-        <ul>
-            <xsl:for-each select="./Sessions/Session">
-                <xsl:apply-templates select="." mode="view"/>
-            </xsl:for-each>
-        </ul>-->
+    <xsl:template match="PastPeriod">
+        <xsl:apply-templates select="Period[1]" mode="tab"/>
+        <xsl:apply-templates select="Period[2]" mode="tab"/>
+        <xsl:apply-templates select="Period" mode="dropdown"/>
     </xsl:template>
-
-    <xsl:template match="Session" mode="view">
+    
+    <xsl:template match="Period" mode="tab">
         <li>
-            <div class="session">
-                <h5>
-                    <xsl:value-of select="Title"/>
-                </h5>
-                <div> This course is going to take place the <xsl:value-of select="Day"/> from
-                        <xsl:value-of select="StartTime"/> to <xsl:value-of select="EndTime"/><xsl:text> the </xsl:text>
-                    <xsl:value-of select="Date"/>. </div>
-                <div class="topic">
-                    <h5>Topic : </h5>
-                    <xsl:apply-templates select="Topic"/>
-                </div>
-                <xsl:if test="Resources/child::node()">
-                    <div class="ressources">
-                        <h5>Ressources : </h5>
-                        <ul>
-                            <xsl:for-each select="Resources/child::node()">
-                                <li>
-                                    <xsl:apply-templates select="."/>
-                                </li>
-                            </xsl:for-each>
-                        </ul>
-                    </div>
-                </xsl:if>
-            </div>
+            <xsl:element name="a">
+                <xsl:attribute name="href">#<xsl:value-of select="./End"/></xsl:attribute>
+                <xsl:attribute name="data-toggle">tab</xsl:attribute>
+                <xsl:value-of select="./Name"/>
+            </xsl:element>
         </li>
     </xsl:template>
-
-    <xsl:template match="Topic">
-        <xsl:value-of select="."/>
+    
+    <xsl:template match="Period" mode="dropdown">
+        
     </xsl:template>
 
 
-    <!-- Template de base pour l'affichage d'une structure composée de Parag -->
-    <xsl:template match="Description">
-        <xsl:apply-templates select=".//Parag"/>
-    </xsl:template>
-
-    <xsl:template match="Parag">
-        <xsl:value-of select="."/>
-    </xsl:template>
 
 
-    <xsl:template match="Person" mode="name">
-        <xsl:choose>
-            <xsl:when test="Role='student' and Sexe='M'">Mr.</xsl:when>
-            <xsl:when test="Role='student' and Sexe='F'">Mme.</xsl:when>
-            <xsl:when test="Role='professor'">Prof.</xsl:when>
-        </xsl:choose>
-        <xsl:text> </xsl:text>
-        <xsl:value-of select="Lastname"/>
-        <xsl:text> </xsl:text>
-        <xsl:value-of select="Firstname"/>
-    </xsl:template>
-
-    <xsl:template match="Description">
-        <xsl:for-each select="./child::node()">
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
-    </xsl:template>
-
-    <xsl:template match="Parag">
-        <p>
-            <xsl:for-each select="node()">
-                <xsl:apply-templates select="."/>
-            </xsl:for-each>
-        </p>
-    </xsl:template>
-
-    <xsl:template match="Fragment">
-        <xsl:value-of select="."/>
-        <br/>
-        <!-- THIS IS TRUE??? -->
-    </xsl:template>
-
-    <xsl:template match="Link">
-        <xsl:element name="a">
-            <xsl:attribute name="href">
-                <xsl:value-of select="./LinkRef"/>
-            </xsl:attribute>
-            <xsl:value-of select="./LinkText"/>
-        </xsl:element>
-    </xsl:template>
-
-    <xsl:template match="List">
-        <xsl:if test="count(./ListHeader)!=0">
-            <span class="ListHeader">
-                <xsl:value-of select="./ListHeader"/>
-            </span>
-        </xsl:if>
-        <ol>
-            <xsl:for-each select="./ListItem">
-                <li>
-                    <xsl:value-of select="."/>
-                </li>
-            </xsl:for-each>
-        </ol>
-    </xsl:template>
-
-    <xsl:template match="ExternalDoc">
-        <xsl:element name="a">
-            <xsl:attribute name="href">
-                <xsl:value-of select="Access/Location"/>
-            </xsl:attribute>
-            <xsl:value-of select="Title"/>
-        </xsl:element>
-    </xsl:template>
-
-    <xsl:template match="Link">
-        <xsl:element name="a">
-            <xsl:attribute name="href">
-                <xsl:value-of select="LinkRef"/>
-            </xsl:attribute>
-            <xsl:attribute name="alt">
-                <xsl:value-of select="Comment"/>
-            </xsl:attribute>
-            <xsl:value-of select="LinkText"/>
-        </xsl:element>
-    </xsl:template>
 
 </xsl:stylesheet>
