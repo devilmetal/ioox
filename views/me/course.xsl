@@ -239,7 +239,7 @@
             <!-- test -->
             <div class="span12">
                 <h3 class="heading">
-                    <xsl:value-of select="Title"/>
+                    Course <xsl:value-of select="//Root/Period/Courses/Course[CourseId=//Root/Course/CourseId]/Title"/>
                 </h3>
                 <div class="tabbable">
                     <ul class="nav nav-tabs">
@@ -304,7 +304,7 @@
                             <dl class="dl-horizontal">
                                 <dt>Cours name</dt>
                                 <dd>
-                                    <xsl:value-of select="Title"/>
+                                    <xsl:value-of select="//Root/Period/Courses/Course[CourseId=//Root/Course/CourseId]/Title"/>
                                 </dd>
                                 <dt>Acronym</dt>
                                 <dd>
@@ -437,8 +437,8 @@
                 <xsl:apply-templates select="Topic"/>
             </h3>
             <div class="row-fluid">
-                <div class="span8">
-            <dl class="dl-horizontal">
+                <div class="span9">
+                    <dl class="dl-horizontal dl-modif">
                 <dt>Date-Time</dt>
                 <dd>the <xsl:value-of select="format-date(./Date, '[D1].[M1].[Y01]')"/>, start
                         <xsl:value-of select="format-time(./StartTime,'[H1]:[m01]')"/> - end
@@ -451,18 +451,15 @@
                 <xsl:apply-templates select="./Resources"/>
             </dl>
             </div>
-            <div class="span4">
-                    <xsl:variable name="Notelocation"><xsl:value-of select="$xslt.base-url"/>me/mynotes/<xsl:value-of select="./ancestor::Course/CourseId"/>/<xsl:value-of select="SessionNumber"/></xsl:variable>
-                    <button onclick="javascript:window.location = '{$Notelocation}'">Note</button>
+            <div class="span3">
+                <xsl:variable name="Notelocation"><xsl:value-of select="$xslt.base-url"/>me/mynotes/<xsl:value-of select="./ancestor::Course/CourseId"/>/<xsl:value-of select="SessionNumber"/></xsl:variable>
+                <a href="{$Notelocation}" class="btn btn-inverse m0010">Note</a><br/>
+                <xsl:apply-templates select="Exercise" mode="link"/>
             </div>
             
             </div>
             <h4 class="heading">Description</h4>
             <xsl:apply-templates select="Description"/>
-
-            <h4 class="heading">Exercise</h4>
-            <xsl:apply-templates select="Exercise"/>
-
         
         </div>
     </xsl:template>
@@ -639,17 +636,17 @@
             <xsl:value-of select="Title"/>
         </xsl:element>
     </xsl:template>
-
-    <xsl:template match="Exercise">
+    
+    <xsl:template match="Exercise" mode="link">
         <xsl:variable name="id1">
             <xsl:value-of select="ancestor::Course/CourseId"/>
         </xsl:variable>
         <xsl:variable name="id2">
             <xsl:value-of select="ancestor::Session/SessionNumber"/>
         </xsl:variable>
-        <p>
-            <a href="{$xslt.base-url}me/courses/{$id1}/{$id2}">Link to the course</a>
-        </p>
+        
+        <a href="{$xslt.base-url}me/courses/{$id1}/{$id2}" class="btn btn-inverse">Exercise</a>
+        
     </xsl:template>
     
 

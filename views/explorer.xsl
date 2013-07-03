@@ -150,43 +150,21 @@
                                     <!-- Generate the tab menu ofr the current and other tabs -->
                                     <xsl:apply-templates select="//CurrentPeriod"/>
                                     <xsl:apply-templates select="//PastPeriod"/>
+                                    <li>
+                                        <a href="#legend" data-toggle="tab">Legend</a>
+                                    </li>
+
                                 </ul>
                                 <div class="tab-content">
-                                    <xsl:apply-templates select="//CurrentPeriod/Period[1]" mode="full">
+                                    <xsl:apply-templates select="//CurrentPeriod/Period[1]"
+                                        mode="full">
                                         <xsl:with-param name="class">active</xsl:with-param>
                                     </xsl:apply-templates>
                                     <xsl:apply-templates select="//PastPeriod/Period" mode="full"/>
-                                    
-                                    <div class="tab-pane" id="tab_dr2">
-                                        <p>
-                                            <strong>Section 2</strong><br/>Lorem ipsum dolor sit
-                                            amet, consectetur adipiscing elit. </p>
-                                    </div>
-                                    <div class="tab-pane" id="tab_dr3">
-                                        <p>
-                                            <strong>Section 3</strong><br/>Lorem ipsum dolor sit
-                                            amet, consectetur adipiscing elit. </p>
-                                    </div>
-                                    <div class="tab-pane" id="tab_dr4">
-                                        <p>
-                                            <strong>Section 4</strong><br/>Lorem ipsum dolor sit
-                                            amet, consectetur adipiscing elit. </p>
-                                    </div>
-                                    <div class="tab-pane" id="tab_dr5">
-                                        <p>
-                                            <strong>Section 5</strong><br/>Lorem ipsum dolor sit
-                                            amet, consectetur adipiscing elit. </p>
-                                    </div>
+                                    <div class="tab-pane" id="legend"> Testo leggenda </div>
                                 </div>
                             </div>
                         </div>
-
-
-
-
-
-
-
 
                     </div>
 
@@ -221,19 +199,19 @@
     </xsl:template>
 
     <xsl:template match="CurrentPeriod">
-        <xsl:apply-templates select="Period[1]" mode="tab" >
-            <xsl:with-param  name="class" >active</xsl:with-param>
+        <xsl:apply-templates select="Period[1]" mode="tab">
+            <xsl:with-param name="class">active</xsl:with-param>
         </xsl:apply-templates>
     </xsl:template>
-    
+
     <xsl:template match="PastPeriod">
         <xsl:apply-templates select="Period[1]" mode="tab"/>
         <xsl:apply-templates select="Period[2]" mode="tab"/>
         <xsl:apply-templates select="Period[3]" mode="dropdown"/>
     </xsl:template>
-    
+
     <xsl:template match="Period" mode="tab">
-        <xsl:param name="class" />
+        <xsl:param name="class"/>
         <li class="{$class}">
             <xsl:element name="a">
                 <xsl:attribute name="href">#<xsl:value-of select="./End"/></xsl:attribute>
@@ -242,10 +220,11 @@
             </xsl:element>
         </li>
     </xsl:template>
-    
+
     <xsl:template match="Period" mode="dropdown">
         <li class="dropdown">
-            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Archive <b class="caret"></b></a>
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Archive <b class="caret"
+                /></a>
             <ul class="dropdown-menu">
                 <li>
                     <xsl:element name="a">
@@ -257,91 +236,106 @@
                 <xsl:for-each select="following-sibling::Period">
                     <li>
                         <xsl:element name="a">
-                            <xsl:attribute name="href">#<xsl:value-of select="./End"/></xsl:attribute>
+                            <xsl:attribute name="href">#<xsl:value-of select="./End"
+                                /></xsl:attribute>
                             <xsl:attribute name="data-toggle">tab</xsl:attribute>
                             <xsl:value-of select="./Name"/>
                         </xsl:element>
                     </li>
                 </xsl:for-each>
-                
             </ul>
         </li>
     </xsl:template>
-    
+
     <xsl:template match="Period" mode="full">
         <xsl:param name="class"/>
-        <xsl:variable name="id_tab"><xsl:value-of select="./End"/></xsl:variable>
+        <xsl:variable name="id_tab">
+            <xsl:value-of select="./End"/>
+        </xsl:variable>
         <div class="tab-pane {$class}" id="{$id_tab}">
             <xsl:apply-templates select="Courses"/>
         </div>
-        
+
     </xsl:template>
-    
+
     <xsl:template match="Courses">
         <div id="accordion1" class="accordion">
             <xsl:for-each select="Course">
-                <xsl:variable name="acc_uni"><xsl:value-of select="ancestor::Period/End"/>-<xsl:value-of select="CourseId"/></xsl:variable>
+                <xsl:variable name="acc_uni"><xsl:value-of select="ancestor::Period/End"
+                        />-<xsl:value-of select="CourseId"/></xsl:variable>
                 <div class="accordion-group">
-                    <xsl:variable name="CN"><xsl:value-of select="./CourseId"/></xsl:variable>
-                    <xsl:variable name="class"><xsl:value-of select="//Engagment[CoursRef=$CN]/Role"></xsl:value-of></xsl:variable>
-                    
+                    <xsl:variable name="CN">
+                        <xsl:value-of select="./CourseId"/>
+                    </xsl:variable>
+                    <xsl:variable name="class">
+                        <xsl:value-of select="//Engagment[CoursRef=$CN]/Role"/>
+                    </xsl:variable>
+
                     <div class="accordion-heading">
-                        <a href="#{$acc_uni}" data-parent="#accordion1" data-toggle="collapse" class="accordion-toggle  {$class}">
+                        <!-- data-parent="#accordion1" deleted -->
+                        <a href="#{$acc_uni}" data-toggle="collapse"
+                            class="accordion-toggle  {$class}">
                             <xsl:value-of select="CourseNo"/> - <xsl:value-of select="Title"/>
                         </a>
                     </div>
                     <div class="accordion-body collapse" id="{$acc_uni}">
                         <div class="accordion-inner">
                             <div class="row-fluid">
-                            <div class="span5">
-                                <dl class="dl-horizontal dl-modif">
-                                    <dt>Cours name</dt>
-                                    <dd>
-                                        <xsl:value-of select="Title"/>
-                                    </dd>
-                                    <dt>Acronym</dt>
-                                    <dd>
-                                        <xsl:value-of select="Acronym"/>
-                                    </dd>
-                                    <dt>Cours number</dt>
-                                    <dd>
-                                        <xsl:value-of select="CourseNo"/>
-                                    </dd>
-                                    <dt>Teacher</dt>
-                                    <dd>
-                                        <xsl:apply-templates select="CourseId" mode="teacher"></xsl:apply-templates>
-                                    </dd>
-                                    <xsl:variable name="linkcourse"><xsl:value-of select="$xslt.base-url"/>me/courses/<xsl:value-of select="CourseId"/></xsl:variable>
-                                    <dd><button class="btn btn-inverse"  onclick="javascript:window.location = '{$linkcourse}';">Go to cours</button></dd>
-                                </dl>
+                                <div class="span5">
+                                    <dl class="dl-horizontal dl-modif">
+                                        <dt>Cours name</dt>
+                                        <dd>
+                                            <xsl:value-of select="Title"/>
+                                        </dd>
+                                        <dt>Acronym</dt>
+                                        <dd>
+                                            <xsl:value-of select="Acronym"/>
+                                        </dd>
+                                        <dt>Cours number</dt>
+                                        <dd>
+                                            <xsl:value-of select="CourseNo"/>
+                                        </dd>
+                                        <dt>Teacher</dt>
+                                        <dd>
+                                            <xsl:apply-templates select="CourseId" mode="teacher"/>
+                                        </dd>
+                                        <xsl:variable name="linkcourse"><xsl:value-of
+                                                select="$xslt.base-url"/>me/courses/<xsl:value-of
+                                                select="CourseId"/></xsl:variable>
+                                        <dd>
+                                            <button class="btn btn-inverse"
+                                                onclick="javascript:window.location = '{$linkcourse}';"
+                                                >Go to cours</button>
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="span7">
+                                    <dl>
+                                        <dt>Description</dt>
+                                        <dd>
+                                            <xsl:apply-templates select="Description"/>
+                                        </dd>
+                                    </dl>
+                                </div>
                             </div>
-                            <div class="span7">
-                                <dl>
-                                <dt>Description</dt>
-                                <dd>
-                                    <xsl:apply-templates select="Description"/>
-                                </dd>
-                                </dl>
-                            </div>
-                            </div>
-                            
+
                         </div>
                     </div>
                 </div>
             </xsl:for-each>
         </div>
     </xsl:template>
-    
-    
-    
-    
+
+
+
+
     <!-- code copie -->
     <xsl:template match="Description">
         <xsl:for-each select="./child::node()">
             <xsl:apply-templates select="."/>
         </xsl:for-each>
     </xsl:template>
-    
+
     <xsl:template match="Parag">
         <p>
             <xsl:for-each select="./child::node()">
@@ -349,7 +343,7 @@
             </xsl:for-each>
         </p>
     </xsl:template>
-    
+
     <xsl:template match="List">
         <xsl:if test="count(./ListHeader)!=0">
             <span class="ListHeader">
@@ -364,7 +358,7 @@
             </xsl:for-each>
         </ul>
     </xsl:template>
-    
+
     <xsl:template match="SubList">
         <xsl:if test="count(./SubListHeader)!=0">
             <span class="ListHeader">
@@ -379,11 +373,11 @@
             </xsl:for-each>
         </ul>
     </xsl:template>
-    
+
     <xsl:template match="Fragment">
         <xsl:value-of select="."/>
     </xsl:template>
-    
+
     <xsl:template match="Link">
         <xsl:element name="a">
             <xsl:attribute name="href">
@@ -392,7 +386,7 @@
             <xsl:value-of select="./LinkText"/>
         </xsl:element>
     </xsl:template>
-    
+
     <xsl:template match="ExternalDoc">
         <xsl:element name="a">
             <xsl:attribute name="href">
@@ -401,8 +395,8 @@
             <xsl:value-of select="Title"/>
         </xsl:element>
     </xsl:template>
-    
-    
+
+
     <xsl:template match="Link">
         <xsl:element name="a">
             <xsl:attribute name="href">
@@ -414,17 +408,24 @@
             <xsl:value-of select="LinkText"/>
         </xsl:element>
     </xsl:template>
-    
+
 
     <xsl:template match="CourseId" mode="teacher">
-        <xsl:variable name="cid"><xsl:value-of select="."/></xsl:variable>
-        <xsl:apply-templates select="//Root/Teacher/Person[Engagments/Engagment/CoursRef=$cid]" mode="teacher"/>
+        <xsl:variable name="cid">
+            <xsl:value-of select="."/>
+        </xsl:variable>
+        <xsl:apply-templates select="//Root/Teacher/Person[Engagments/Engagment/CoursRef=$cid]"
+            mode="teacher"/>
+        <xsl:if test="count(//Root/Teacher/Person[Engagments/Engagment/CoursRef=$cid])=0">
+            no teacher now
+        </xsl:if>
     </xsl:template>
 
     <xsl:template match="Person" mode="teacher">
         <xsl:value-of select="Lastname"/>
         <xsl:text> </xsl:text>
-        <xsl:value-of select="Firstname"/><br/>
+        <xsl:value-of select="Firstname"/>
+        <br/>
     </xsl:template>
 
 </xsl:stylesheet>
