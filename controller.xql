@@ -55,14 +55,10 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
     </item>
   
     <!-- /explorer page -->
-    <collection name="explorer" epilogue="standard">
+    <item name="explorer" epilogue="standard">
         <model src="models/explorer.xql"/>
         <view src="views/explorer.xsl"/>
-            <item>
-                <model src="models/course.xql"/>
-                <view src="views/course.xsl"/>
-            </item>
-    </collection>
+    </item>
   
     <!-- /FAQ page -->
     <item name="faq" epilogue="standard">
