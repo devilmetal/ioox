@@ -162,9 +162,11 @@
                      </xsl:when>
                      <xsl:otherwise>
                         <div class="span12">
-                          
-                           <h3 class="heading">Calendar</h3>
-                           <div id="calendar"></div>
+                           <ul>
+                          <xsl:for-each select="//item">
+                             <li><xsl:value-of select="title"></xsl:value-of></li>
+                          </xsl:for-each>
+                           </ul>
                         </div>
                      </xsl:otherwise>
                   </xsl:choose>
