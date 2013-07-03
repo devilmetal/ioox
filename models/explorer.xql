@@ -8,54 +8,32 @@ declare option exist:serialize "method=xml media-type=text/xml";
 
 let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
-let $id :=  if ($method = 'POST') then (
-                            request:get-parameter('coursid', '')
+let $curr-date := fn:current-date()
+let $id := if (session:get-attribute('id')) then (
+                            session:get-attribute('id')
                             )
                         else(
-                            1
+                            '-1'
                             )
-                            
-let $sort_name :=  if ($method = 'POST') then (
-                            request:get-parameter('sort_name', '')
-                            )
-                        else(
-                            ''
-                            )
-let $sort_id :=  if ($method = 'POST') then (
-                            request:get-parameter('sort_id', '')
-                            )
-                        else(
-                            ''
-                            )
-let $sort_teacher :=  if ($method = 'POST') then (
-                            request:get-parameter('sort_teacher', '')
-                            )
-                        else(
-                            ''
-                            )
-let $order :=  if ($method = 'POST') then (
-                            request:get-parameter('order', '')
-                            )
-                        else(
-                            'ascending'
-                            )
-let $data2 := doc(concat($collection, "db.xml"))/Moodle/Courses
-let $data3 := doc(concat($collection, "db.xml"))/Moodle/Persons
-let $session-attributes := session:get-attribute-names()
+
+let $data0 := doc(concat($collection, "AcademicYears.xml"))//Period[($curr-date >= ./End)] 
+let $data1 := doc(concat($collection, "AcademicYears.xml"))//Period[($curr-date >= ./Start) and ($curr-date <= ./End)]
+let $data2 := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments
+
+order by $data0/Period/End
     return
     <Root>
-     {$data2}
-     <CoursID>{$id}</CoursID>
-     {$data3}
-     <Sort>
-        <SortID>{$sort_id}</SortID>
-        <SortName>{$sort_name}</SortName>
-        <SortTeacher>{$sort_teacher}</SortTeacher>
-        <Order>{$order}</Order>
+        
+        <CoursID>{$id}</CoursID>
+        <PastPeriod>{$data0}</PastPeriod>
+        <CurrentPeriod>{$data1}</CurrentPeriod>
+        <Person>{$data2}</Person>
+        
+        
         <Session>
-   <Connected>{session:get-attribute('id')}</Connected>
-   <ID>{session:get-id()}</ID>
-   </Session>
-     </Sort>
-     </Root>
+            <Connected>{session:get-attribute('id')}</Connected>
+            <ID>{session:get-id()}</ID>
+        </Session>
+    </Root>
    
+
