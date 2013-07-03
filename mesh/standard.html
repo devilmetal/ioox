@@ -21,47 +21,10 @@
 
       <site:menu force="true">lipsum</site:menu>
       <div id="contentwrapper">
-        <site:navbar>
-          <div class="navbar">
-            <div class="navbar-inner">
-              <div class="container-fluid">
-                <ul class="nav" id="mobile-nav-2">
-                  <li>
-                    <a href="me/"><img
-                      src="{$xslt-ressource-url}/img/gCons-mini-white/home.png"
-                      alt=""/> MyHome </a>
-                  </li>
-                  <li class="divider-vertical hidden-phone hidden-tablet"/>
-                  <li>
-                    <a href="me/courses/"><img
-                      src="{$xslt-ressource-url}/img/gCons-mini-white/bookmark.png"
-                      alt=""/> Courses </a>
-                  </li>
-                  <li class="divider-vertical hidden-phone hidden-tablet"/>
-                  <li>
-                    <a href="me/mynotes/"><img
-                      src="{$xslt-ressource-url}/img/gCons-mini-white/addressbook.png"
-                      alt=""/> MyNote </a>
-                  </li>
-                  <li class="divider-vertical hidden-phone hidden-tablet"/>
-                  <li>
-                    <a href="me/grades"><img
-                      src="{$xslt-ressource-url}/img/gCons-mini-white/pie-chart.png"
-                      alt=""/> Grades </a>
-                  </li>
-                  <li class="divider-vertical hidden-phone hidden-tablet"/>
-                  <li>
-                    <a href="me/todo"><img
-                      src="{$xslt-ressource-url}/img/gCons-mini-white/calendar.png"
-                      alt=""/> Todos </a>
-                  </li>
-                  <li> </li>
-                </ul>
-              </div>
-            </div>
-        </site:navbar>
+        
         <div class="main_content">
           <div class="row-fluid">
+            <site:navbar/>
             <div class="alert alert-info" condition="has-message">
               <a class="close" data-dismiss="alert">×</a>
               <site:message force="true"></site:message>

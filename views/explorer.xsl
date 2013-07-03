@@ -70,75 +70,13 @@
                 </div>
             </site:change>
             <!-- </site:header>-->
+            
+            <site:navbar/>
+            
             <site:content>
                 <!-- main content -->
                 <div id="contentwrapper">
-<site:nav>
-                    <div class="navbar">
-                        <div class="navbar-inner">
-                            <div class="container-fluid">
-                                <ul class="nav" id="mobile-nav-2">
-                                    <li>
-                                        <a href="me/"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/home.png"
-                                                alt=""/> MyHome </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="me/courses/"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/bookmark.png"
-                                                alt=""/> Courses </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="me/mynotes/"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/addressbook.png"
-                                                alt=""/> MyNote </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="me/grades"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/pie-chart.png"
-                                                alt=""/> Grades </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="me/todo"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/calendar.png"
-                                                alt=""/> Todos </a>
-                                    </li>
-                                    <li> </li>
-                                </ul>
-                            </div>
-                        </div>
-                        <!-- Teacher menu bloqued -->
-                        <div class="navbar-inner" style="display:none;">
-                            <div class="container-fluid">
-                                <a class="brand2" href="#"> Teacher</a>
-                                <ul class="nav">
-                                    <li>
-                                        <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/configuration.png"
-                                                alt=""/> My Teaching </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/multi-agents.png"
-                                                alt=""/> My Class </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/bar-chart.png"
-                                                alt=""/> Manage Grades </a>
-                                    </li>
-                                    <li> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-</site:nav>
+
                     <h3 class="heading"> Explorer </h3>
                     <div class="row-fluid">
 

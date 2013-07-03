@@ -32,6 +32,7 @@ declare function site:branch( $cmd as element(), $source as element(), $view as 
  case element(site:login) return site:login($cmd)
  case element(site:home) return site:home($cmd, $view)
  case element(site:menu) return site:menu($cmd, $view)
+ case element(site:navbar) return site:navbar($cmd, $view)
  case element(site:error) return site:error($cmd, $view)
  case element(site:message) return site:message($view)
  case element(site:image) return site:image($source)
@@ -224,21 +225,21 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
 								<ul class="gmul">
 								
 								    <li class="gitem">
-								    <a href="home" >
+								    <a href="{$cmd/@base-url}home" >
 										<img src="{$cmd/@base-url}static/ioox/img/gCons/home.png" alt="" /> Home
 								    </a>
 								    </li>
 								
 								
 								    <li class="gitem">
-								    <a href="explorer" >
+								    <a href="{$cmd/@base-url}explorer" >
 										<img src="{$cmd/@base-url}static/ioox/img/gCons/search.png" alt="" /> Explorer
 								    </a>
 								    </li>
 								
 								
 								    <li class="gitem">
-								    <a href="faq" >
+								    <a href="{$cmd/@base-url}faq" >
 										<img src="{$cmd/@base-url}static/ioox/img/gCons/push-pin.png" alt="" /> FAQ
 									</a>
 									</li>
@@ -251,6 +252,50 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
 				</div>
 			</div>
          </span>
+};
+
+declare function site:navbar( $cmd as element(), $view as element() ) as element()*
+{
+    let $rights := tokenize(request:get-attribute('oppidum.rights'), ' ')
+    let $user := xdb:get-current-user()
+    return 
+    if ($user != 'guest')  then
+   <span>
+   
+    <!-- navbar -->
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <ul class="nav" id="mobile-nav-2">
+                        <li>
+                            <a href="{$cmd/@base-url}me/"><img src="{$cmd/@base-url}static/ioox/img/gCons-mini-white/home.png"  alt=""/> MyHome </a>
+                        </li>
+                        <li class="divider-vertical hidden-phone hidden-tablet"/>
+                        <li>
+                            <a href="{$cmd/@base-url}me/courses/"><img src="{$cmd/@base-url}static/ioox/img/gCons-mini-white/bookmark.png"alt=""/> Courses </a>
+                        </li>
+                        <li class="divider-vertical hidden-phone hidden-tablet"/>
+                        <li>
+                            <a href="{$cmd/@base-url}me/mynotes/"><img src="{$cmd/@base-url}static/ioox/img/gCons-mini-white/addressbook.png" alt=""/> MyNote </a>
+                        </li>
+                        <li class="divider-vertical hidden-phone hidden-tablet"/>
+                        <li>
+                            <a href="{$cmd/@base-url}me/grades"><img src="{$cmd/@base-url}static/ioox/img/gCons-mini-white/pie-chart.png" alt=""/> Grades </a>
+                        </li>
+                        <li class="divider-vertical hidden-phone hidden-tablet"/>
+                        <li>
+                            <a href="{$cmd/@base-url}me/todo"><img src="{$cmd/@base-url}static/ioox/img/gCons-mini-white/calendar.png" alt=""/> Todos </a>
+                        </li>
+                     </ul>
+                </div>
+            </div>
+       </div>
+            
+    </span>
+    else
+       <span>
+            
+    </span>
 };
 
 declare function site:change( $cmd as element(), $view as element() ) as element()*
