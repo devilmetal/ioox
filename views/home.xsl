@@ -210,7 +210,7 @@
             <!-- calendar functions -->
             
             <script src="{$xslt-ressource-url}/js/gebo_btns.js"></script>
-            <script src="{$xslt-ressource-url}/js/initcalendar.js"/>
+            <script src="{$xslt.base-url}caljs"/>
          </site:javascript>
       </site:view>
 
