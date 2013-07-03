@@ -924,10 +924,10 @@ a.Student:after
 { 
 content:" (subcribed)";
 }
-a.Unsubscrib{
+a.Unsubscribed{
 	background-color:#006d8d !important;
 }
-a.Unsubscrib:after
+a.Unsubscribed:after
 { 
 content:" (unsubscrib)";
 }

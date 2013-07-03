@@ -19,6 +19,7 @@ let $id := if (session:get-attribute('id')) then (
 let $data0 := doc(concat($collection, "AcademicYears.xml"))//Period[$curr-date >= ./End] 
 let $data1 := doc(concat($collection, "AcademicYears.xml"))//Period[($curr-date >= ./Start) and ($curr-date <= ./End)]
 let $data2 := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments
+let $data3 := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagment[Role='Tutor' or Role='Teacher']/ancestor::Person
 
     return
     <Root>
@@ -33,6 +34,7 @@ let $data2 := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Enga
         </PastPeriod>
         <CurrentPeriod>{$data1}</CurrentPeriod>
         <Person>{$data2}</Person>
+        <Teacher>{$data3}</Teacher>
         
         
         

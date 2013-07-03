@@ -90,10 +90,11 @@ let $course := if ($person//Engagment[Role != 'Unsubscribed']/CoursRef = $ref2) 
                                                                                         {$courseBase/Acronym}
                                                                                         {$courseBase/Description}
                                                                                     </Course>)                        
-
+let $period := $courseBase/ancestor::Period
 
     return
     <Root>
+        {$period}
         <Teachers>
             {$teachers}
         </Teachers>

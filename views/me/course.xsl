@@ -299,6 +299,8 @@
                             <div id="chart_div"/>
                         </div>
                         <div class="tab-pane {$noInscCourse}" id="tab_br3">
+
+    
                             <dl class="dl-horizontal">
                                 <dt>Cours name</dt>
                                 <dd>
@@ -312,6 +314,8 @@
                                 <dd>
                                     <xsl:value-of select="CourseNo"/>
                                 </dd>
+                                <dt>Period</dt>
+                                <dd><xsl:value-of select="/Root/Period/Name"/></dd>
                                 <dt>Professor</dt>
                                 <dd>
                                     <ul class="list_a">
@@ -324,6 +328,9 @@
                                     <xsl:apply-templates select="Description"/>
                                 </dd>
                             </dl>
+
+
+                            
                         </div>
                         <div class="tab-pane" id="tab_br4">
                             <dl class="dl-horizontal">
@@ -423,10 +430,14 @@
                 </xsl:when>
             </xsl:choose>
         </xsl:variable>
+        
+        
         <div class="tab-pane {$current}" id="tab_l{$nr}">
             <h3 class="heading">
                 <xsl:apply-templates select="Topic"/>
             </h3>
+            <div class="row-fluid">
+                <div class="span8">
             <dl class="dl-horizontal">
                 <dt>Date-Time</dt>
                 <dd>the <xsl:value-of select="format-date(./Date, '[D1].[M1].[Y01]')"/>, start
@@ -439,12 +450,20 @@
                 </dd>
                 <xsl:apply-templates select="./Resources"/>
             </dl>
+            </div>
+            <div class="span4">
+                    <xsl:variable name="Notelocation"><xsl:value-of select="$xslt.base-url"/>me/mynotes/<xsl:value-of select="./ancestor::Course/CourseId"/>/<xsl:value-of select="SessionNumber"/></xsl:variable>
+                    <button onclick="javascript:window.location = '{$Notelocation}'">Note</button>
+            </div>
+            
+            </div>
             <h4 class="heading">Description</h4>
             <xsl:apply-templates select="Description"/>
 
             <h4 class="heading">Exercise</h4>
             <xsl:apply-templates select="Exercise"/>
 
+        
         </div>
     </xsl:template>
 
@@ -459,39 +478,6 @@
                 </dd>
             </xsl:for-each>
         </xsl:if>
-    </xsl:template>
-
-
-
-    <xsl:template match="Session">
-        <li>
-            <div class="session">
-                <h5>
-                    <xsl:apply-templates select="Topic"/>
-                </h5>
-                <h5>Description</h5>
-                <xsl:apply-templates select="Description"/>
-                <div> This session is going to take place from <xsl:value-of select="StartTime"/> to
-                        <xsl:value-of select="EndTime"/><xsl:text> the </xsl:text>
-                    <xsl:value-of select="Date"/>. </div>
-
-                <xsl:if test="Resources//Ressource/child::node()">
-
-
-                    <xsl:for-each select="Resources/Ressource/child::node()">
-                        <dd>
-                            <xsl:apply-templates select="."/>
-                        </dd>
-                    </xsl:for-each>
-
-                </xsl:if>
-                <xsl:if test="Exercise">
-                    <h5>Link to the exercices (Data and upload of solutions)</h5>
-                    <xsl:apply-templates select="Exercise"/>
-                </xsl:if>
-            </div>
-        </li>
-        <hr/>
     </xsl:template>
 
     <xsl:template match="Teachers" mode="teacher">

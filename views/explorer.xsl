@@ -294,8 +294,6 @@
                         <div class="accordion-inner">
                             <div class="row-fluid">
                             <div class="span5">
-                                <p>debug: CN=<xsl:value-of select="$CN"/><br/>
-                                class=<xsl:value-of select="$class"/></p>
                                 <dl class="dl-horizontal dl-modif">
                                     <dt>Cours name</dt>
                                     <dd>
@@ -309,7 +307,12 @@
                                     <dd>
                                         <xsl:value-of select="CourseNo"/>
                                     </dd>
-                                    <dd><button class="btn btn-inverse">Go to cours</button></dd>
+                                    <dt>Teacher</dt>
+                                    <dd>
+                                        <xsl:apply-templates select="CourseId" mode="teacher"></xsl:apply-templates>
+                                    </dd>
+                                    <xsl:variable name="linkcourse"><xsl:value-of select="$xslt.base-url"/>me/courses/<xsl:value-of select="CourseId"/></xsl:variable>
+                                    <dd><button class="btn btn-inverse"  onclick="javascript:window.location = '{$linkcourse}';">Go to cours</button></dd>
                                 </dl>
                             </div>
                             <div class="span7">
@@ -413,8 +416,15 @@
     </xsl:template>
     
 
+    <xsl:template match="CourseId" mode="teacher">
+        <xsl:variable name="cid"><xsl:value-of select="."/></xsl:variable>
+        <xsl:apply-templates select="//Root/Teacher/Person[Engagments/Engagment/CoursRef=$cid]" mode="teacher"/>
+    </xsl:template>
 
-
-
+    <xsl:template match="Person" mode="teacher">
+        <xsl:value-of select="Lastname"/>
+        <xsl:text> </xsl:text>
+        <xsl:value-of select="Firstname"/><br/>
+    </xsl:template>
 
 </xsl:stylesheet>
