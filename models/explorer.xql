@@ -24,7 +24,7 @@ let $data3 := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagme
     return
     <Root>
         
-        <CoursID>{$id}</CoursID>
+        
         
         <PastPeriod>
         {   for $p in doc(concat($collection, "AcademicYears.xml"))//Period[$curr-date >= ./End] 
@@ -40,7 +40,7 @@ let $data3 := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagme
         
         <Session>
             <Connected>{session:get-attribute('id')}</Connected>
-            <ID>{session:get-id()}</ID>
+            <ID>{$id}</ID>
         </Session>
     </Root>
    

@@ -6,7 +6,7 @@
     <xsl:output method="xml" media-type="text/html" omit-xml-declaration="yes" indent="no"/>
     <xsl:variable name="xslt-ressource-url"><xsl:value-of select="$xslt.base-url"
         />static/ioox</xsl:variable>
-    <xsl:param name="xslt.rights"/>
+    
     <xsl:param name="xslt.base-url">/</xsl:param>
     <xsl:template match="/">
         <site:view>
@@ -268,7 +268,7 @@
                         <xsl:value-of select="./CourseId"/>
                     </xsl:variable>
                     <xsl:variable name="class">
-                        <xsl:value-of select="//Engagment[CoursRef=$CN]/Role"/>
+                        <xsl:value-of select="//Root/Person/Engagments/Engagment[CoursRef=$CN]/Role"/>
                     </xsl:variable>
 
                     <div class="accordion-heading">
