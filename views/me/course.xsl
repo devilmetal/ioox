@@ -10,12 +10,12 @@
     xmlns="http://www.w3.org/1999/xhtml" xmlns:site="http://oppidoc.com/oppidum/site"
     extension-element-prefixes="date" version="2.0">
     <xsl:output method="xml" media-type="text/xhtml" omit-xml-declaration="yes" indent="no"/>
-
+    <xsl:variable name="xslt-ressource-url"><xsl:value-of select="$xslt.base-url"
+    />static/ioox</xsl:variable>
     <xsl:param name="xslt.rights"/>
     <xsl:param name="xslt.base-url">/</xsl:param>
     <xsl:template match="/">
-        <xsl:variable name="xslt-ressource-url"><xsl:value-of select="$xslt.base-url"
-            />static/ioox</xsl:variable>
+        
         <site:view>
             <site:change>
                 <div class="style_switcher">
@@ -226,7 +226,6 @@
                     
                     });
                 </script>
-                <script type="text/javascript" src="https://www.google.com/jsapi"></script>
                 <xsl:apply-templates select="/Root/Grades" mode="javascript"></xsl:apply-templates>
             </site:javascript>
         </site:view>
@@ -644,7 +643,7 @@
     <xsl:template match="Grades" mode="javascript">
         <!-- Si Grades est vide, donc on est pas connecté, donc on affichge pas ça. -->
         <xsl:if test="/Root/Grades != ''">
-        <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+            <script src="{$xslt-ressource-url}/js/jsapi.js"/>
         <script type="text/javascript">
             google.load("visualization", "1", {packages:["corechart"]});
             google.setOnLoadCallback(drawChart);
