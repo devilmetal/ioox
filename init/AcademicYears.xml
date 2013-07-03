@@ -1631,8 +1631,8 @@
     </Period>
     <Period>
         <Name>SA2012</Name>
-        <Start>2013-04-17</Start>
-        <End>2013-12-21</End>
+        <Start>2012-04-17</Start>
+        <End>2012-12-21</End>
         <Courses>
             <Course>
                 <CourseId>51</CourseId>
@@ -3167,12 +3167,26 @@
     </Period>
     <Period>
         <Name>SA2013</Name>
-        <Start>2013-09-16</Start>
+        <Start>2013-07-01</Start>
         <End>2013-12-20</End>
+        <Courses/>
     </Period>
     <Period>
         <Name>SP2014</Name>
         <Start>2014-02-17</Start>
         <End>2014-05-28</End>
+        <Courses/>
+    </Period>
+    <Period>
+        <Name>SP2009</Name>
+        <Start>2009-02-17</Start>
+        <End>2009-05-28</End>
+        <Courses/>
+    </Period>
+    <Period>
+        <Name>SP2008</Name>
+        <Start>2008-02-17</Start>
+        <End>2008-05-28</End>
+        <Courses/>
     </Period>
 </AcademicYear>

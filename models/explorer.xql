@@ -16,18 +16,24 @@ let $id := if (session:get-attribute('id')) then (
                             '-1'
                             )
 
-let $data0 := doc(concat($collection, "AcademicYears.xml"))//Period[($curr-date >= ./End)] 
+let $data0 := doc(concat($collection, "AcademicYears.xml"))//Period[$curr-date >= ./End] 
 let $data1 := doc(concat($collection, "AcademicYears.xml"))//Period[($curr-date >= ./Start) and ($curr-date <= ./End)]
 let $data2 := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments
 
-order by $data0/Period/End
     return
     <Root>
         
         <CoursID>{$id}</CoursID>
-        <PastPeriod>{$data0}</PastPeriod>
+        
+        <PastPeriod>
+        {   for $p in doc(concat($collection, "AcademicYears.xml"))//Period[$curr-date >= ./End] 
+            order by $p/End descending
+            return $p
+         }
+        </PastPeriod>
         <CurrentPeriod>{$data1}</CurrentPeriod>
         <Person>{$data2}</Person>
+        
         
         
         <Session>

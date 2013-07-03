@@ -908,5 +908,19 @@
 		    float:left;
 		}
 
-/* Page cours 
+/* Page Explorer 
  ---------------------------------------------------------------------*/
+ 
+.dl-modif dt{
+width: 100px;
+}
+.dl-modif dd{
+margin-left: 110px;
+}
+a.Student{
+	background-color:#faa732 !important;
+}
+a.Student:after
+{ 
+content:" (subcribed)";
+}
