@@ -934,3 +934,19 @@ content:" (unsubscrib)";
 .m0010{
 	margin: 0 0 0.61em 0;
 }
+span.square_sub{
+	display:inline-block;
+	background-color:#faa732 !important;
+	margin-right:0.61em;
+	color:#faa732;
+	width:1.61em;
+	height:1.61em;
+}
+span.square_unsub{
+	display:inline-block;
+	background-color:#006d8d !important;
+	margin-right:0.61em;
+	color:#006d8d;
+	width:1.61em;
+	height:1.61em;
+}

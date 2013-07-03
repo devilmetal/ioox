@@ -161,7 +161,13 @@
                                         <xsl:with-param name="class">active</xsl:with-param>
                                     </xsl:apply-templates>
                                     <xsl:apply-templates select="//PastPeriod/Period" mode="full"/>
-                                    <div class="tab-pane" id="legend"> Testo leggenda </div>
+                                    <div class="tab-pane" id="legend">
+                                        <dl class="dl-horizontal">
+                                            <dt>Color indicator</dt>
+                                            <dd><span class="square_sub">.</span>you are subscribed on the cours</dd>
+                                            <dd><span class="square_unsub">.</span>you was subscibed on the cours</dd>
+                                        </dl>
+                                    </div>
                                 </div>
                             </div>
                         </div>
