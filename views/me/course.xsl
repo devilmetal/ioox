@@ -243,21 +243,40 @@
                 </h3>
                 <div class="tabbable">
                     <ul class="nav nav-tabs">
-                        <li class="active">
-                            <a href="#tab_br1" data-toggle="tab">Courses</a>
-                        </li>
-                        <li class="">
-                            <a href="#tab_br2" data-toggle="tab">Evaluation</a>
-                        </li>
-                        <li class="">
-                            <a href="#tab_br3" data-toggle="tab">Dettailes</a>
-                        </li>
-                        <li class="">
-                            <a href="#tab_br4" data-toggle="tab">Manage</a>
-                        </li>
+                        
+                        <!-- Traitement d'affichage -->
+                        <xsl:choose>
+                            <xsl:when test="Sessions and Evaluation">
+                                <li class="active">
+                                    <a href="#tab_br1" data-toggle="tab">Courses</a>
+                                </li>
+                                <li class="">
+                                    <a href="#tab_br2" data-toggle="tab">Evaluation</a>
+                                </li>
+                                <li class="">
+                                    <a href="#tab_br3" data-toggle="tab">Dettailes</a>
+                                </li>
+                                <li class="">
+                                    <a href="#tab_br4" data-toggle="tab">Manage</a>
+                                </li>
+                            </xsl:when>
+                            <xsl:otherwise>
+                                <li class="active">
+                                    <a href="#tab_br3" data-toggle="tab">Dettailes</a>
+                                </li>
+                                <li class="">
+                                    <a href="#tab_br4" data-toggle="tab">Manage</a>
+                                </li>
+                            </xsl:otherwise>
+                            
+                        </xsl:choose>
+                        
                     </ul>
                     <div class="tab-content">
-                        <div class="tab-pane active" id="tab_br1">
+                        <!-- Traitement d'affichage -->
+                        <xsl:variable name="compltcourse"><xsl:if test="Sessions and Evaluation">active</xsl:if></xsl:variable>
+                        <xsl:variable name="noInscCourse"><xsl:if test="not(Sessions and Evaluation)">active</xsl:if></xsl:variable>
+                        <div class="tab-pane {$compltcourse}" id="tab_br1">
                             <!-- testo session -->
                             <div class="tabbable tabs-left">
                                 <ul class="nav nav-tabs">
@@ -279,7 +298,7 @@
                             <h3 class="heading">Grades</h3>
                             <div id="chart_div"/>
                         </div>
-                        <div class="tab-pane" id="tab_br3">
+                        <div class="tab-pane {$noInscCourse}" id="tab_br3">
                             <dl class="dl-horizontal">
                                 <dt>Cours name</dt>
                                 <dd>
@@ -309,9 +328,31 @@
                         <div class="tab-pane" id="tab_br4">
                             <dl class="dl-horizontal">
                                 <dt>Status</dt>
-                                <dd>Inscripted</dd>
-                                <dt>Operation</dt>
-                                <dd>unsubscribe</dd>
+                                <dd>
+                                    <!-- On va tester si la personne est inscrite ou pas et faire l'affichage selon -->
+                                    <xsl:choose>
+                                        <xsl:when test="Sessions and Evaluation">
+                                            <dd>Subscribed</dd>
+                                            <dt>Operation</dt>
+                                            <dd>
+                                                <form action="#" method="POST">
+                                                    <input type="hidden" name ="type" value="unsubscrib"/>
+                                                    <input type="submit" onclick="confirm('Are you sure you want to unsubscrib this course ?')" value="Unsubscrib"/>
+                                                 </form>
+                                            </dd>
+                                        </xsl:when>
+                                        <xsl:otherwise>
+                                            <dd>Not subscribed</dd>
+                                            <dt>Operation</dt>
+                                            <dd>
+                                                <form action="#" method="POST">
+                                                    <input type="hidden" name ="type" value="subscrib"/>
+                                                    <input type="submit" onclick="confirm('Are you sure you want to subscrib this course ?')" value="Subscrib"/>
+                                                </form>
+                                            </dd>
+                                        </xsl:otherwise>
+                                    </xsl:choose>
+                                </dd>
                                 <dd>download all documentation</dd>
                             </dl>
                         </div>

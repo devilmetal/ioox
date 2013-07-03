@@ -13,7 +13,7 @@ let $collection := '/sites/ioox/data/'
         {if (session:get-attribute('id')) then (
                             let $id := string(session:get-attribute('id'))
                             let $person := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
-                            let $courses := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$person/Engagments//Engagment/CoursRef]
+                            let $courses := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$person/Engagments//Engagment[Role!='Unsubscribed']/CoursRef]
                             return <Courses>{$courses}</Courses>
                             )
                         else(

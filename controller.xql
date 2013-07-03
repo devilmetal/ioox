@@ -130,9 +130,13 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
             <model src="models/me/courses.xql"/>
             <view src="views/me/courses.xsl"/>
             <!-- détail de chaque cours -->
-            <item epilogue="standard">
+            <item epilogue="standard" method="POST">
                 <model src="models/me/course.xql"/>
                 <view src="views/me/course.xsl"/>
+                <action epilogue="standard" name="POST">
+                    <model src="models/me/course.xql"/>
+                    <view src="views/me/course.xsl"/>
+                </action>
                 <!-- Détail de chaque exercice (rendu et donnée) -->
                 <item epilogue="standard" method="POST">
                     <model src="models/me/exercice.xql"/>

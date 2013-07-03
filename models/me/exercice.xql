@@ -24,7 +24,7 @@ let $id := if (session:get-attribute('id')) then (
    (:: On va controler si la personne est bien liée au cours. Ceci va donc aussi faire preuve de controle de login
         Dans le cas d'un non-login ou que la personne n'est pas liée, l'element Root sera simplement vide::)
 let $engament :=  doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]//Engagments
-let $session := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid][CourseId=$engament//Engagment/CoursRef]/Sessions/Session[SessionNumber=$sessionNumber]
+let $session := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid][CourseId=$engament//Engagment[Role!='Unsubscribed']/CoursRef]/Sessions/Session[SessionNumber=$sessionNumber]
 
 let $method := request:get-method()
 let $done := if ($method='POST') then (

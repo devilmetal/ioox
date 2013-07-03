@@ -55,8 +55,8 @@
     </Holidays>
     <Period>
         <Name>SA2012</Name>
-        <Start>2012-09-17</Start>
-        <End>2012-12-21</End>
+        <Start>2013-04-17</Start>
+        <End>2013-12-21</End>
         <Courses>
             <Course>
                 <CourseId>51</CourseId>
