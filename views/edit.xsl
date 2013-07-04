@@ -70,6 +70,7 @@
           </div>
         </div>
       </site:change>
+      <site:navbar/>
       <xsl:if test="$xslt.skin != ''">
         <xsl:attribute name="skin"><xsl:value-of select="$xslt.skin"/></xsl:attribute>
       </xsl:if>
