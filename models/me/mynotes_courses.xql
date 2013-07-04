@@ -20,6 +20,7 @@ let $person := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
 let $notes  := $person/Notes
 let $ref := string(request:get-attribute('oppidum.command')/resource/@name)
 let $usables-session := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$ref]/Sessions/Session[SessionNumber=$notes//Note/SessionRef]
+let $name := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$ref]/Title
         
 
     return
@@ -27,6 +28,7 @@ let $usables-session := doc(concat($collection, "AcademicYears.xml"))//Course[Co
      {$usables-session}
      <Infos>
         <CourseRef>{$ref}</CourseRef>
+        {$name}
      </Infos>
      </Root>
    

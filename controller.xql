@@ -93,9 +93,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                     <view src="views/me/mynotes_session.xsl"/>
                     <action epilogue="standard" name="modifier">
                         <model src="oppidum:actions/edit.xql"/>
-                        <view src="views/edit.xsl">
-                            <param name="skin" value="editor"/>
-                        </view>
+                        <view src="views/edit.xsl"/>
                     </action>
                     <action name="POST">
                         <model src="models/save_note.xql"/>

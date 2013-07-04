@@ -13,8 +13,10 @@
     
     <xsl:param name="xslt.rights"/>
     <xsl:param name="xslt.base-url">/</xsl:param>
+    <xsl:variable name="xslt-ressource-url"><xsl:value-of select="$xslt.base-url"/>static/ioox</xsl:variable>
+    <xsl:variable name="CourseRef"><xsl:value-of select="//Root/Note/CourseRef"/></xsl:variable>
     <xsl:template match="/">
-        <xsl:variable name="xslt-ressource-url"><xsl:value-of select="$xslt.base-url"/>static/ioox</xsl:variable>
+        
         <site:view>
             <site:change>
                 <div class="style_switcher">
@@ -82,78 +84,8 @@
             <!-- MENU DEFINITION -->
             <site:menu> </site:menu>
             <!-- SITE CONTENT -->
-            <site:navbar>
-                
-                <div class="main_content">
-                    <div class="navbar">
-                        <xsl:if test="//Session/Role != '-1'">
-                            <div class="navbar-inner">
-                                <div class="container-fluid">
-                                    <!--<a class="brand2" href="#"> Me</a>-->
-                                    <ul class="nav" id="mobile-nav-2">
-                                        <li>
-                                            <a href="#"><img src="{$xslt-ressource-url}/img/gCons-mini-white/home.png" alt=""/>
-                                                MyHome </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/bookmark.png"
-                                                alt=""/> Courses </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/addressbook.png"
-                                                alt=""/> MyNote </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/pie-chart.png"
-                                                alt=""/> Grades </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/calendar.png"
-                                                alt=""/> Todos </a>
-                                        </li>
-                                        <li> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </xsl:if>
-                        <xsl:if test="//Session/Role != 'Student' and //Session/Role != '-1' ">
-                            <div class="navbar-inner">
-                                <div class="container-fluid">
-                                    <a class="brand2" href="#"> Teacher</a>
-                                    <ul class="nav">
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/configuration.png"
-                                                alt=""/> My Teaching </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/multi-agents.png"
-                                                alt=""/> My Class </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/bar-chart.png"
-                                                alt=""/> Manage Grades </a>
-                                        </li>
-                                        <li> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </xsl:if>
-                    </div>
-                </div>
-            </site:navbar>
+            <site:navbar/>
+            
             <site:content>
                 <xsl:choose>
                     <xsl:when test="//Session/Id = '-1'">
@@ -161,12 +93,15 @@
                         <div> You have to login to access this page. </div>
                     </xsl:when>
                     <xsl:otherwise>
-                        <div class="span12">
-                            <!-- ENTER CONTENT HERE ! -->
-                            <ul>
-                                <xsl:apply-templates select="/Root/Note"/>
-                            </ul>
-                        </div>
+                        
+                            
+                            <!-- Print the Note Path in the line -->
+                            <xsl:apply-templates select="/Root/Note" mode="path"/>
+                            
+                            <!-- Print the current note  -->
+                            <xsl:apply-templates select="/Root/Note"/>
+                            
+                        
                     </xsl:otherwise>
                 </xsl:choose>
             </site:content>
@@ -221,18 +156,51 @@
     </xsl:template>
     
     <xsl:template match="Note">
-        <h3>Note for the course : <xsl:value-of select="/Root/NoteInfos/CourseName"/>, session : <xsl:value-of select="/Root/NoteInfos/SessionTopic"/></h3>
-        <hr/>
+        <h3 class="heading"><xsl:value-of select="//NoteInfos/SessionTopic"/></h3>
+        
         <xsl:apply-templates select="Content"/>
-        <button title="Modifier la page" onclick="javascript:window.location.href+='/modifier'"
-            >Modifier</button>
+        
     </xsl:template>
     
     <!-- Affichage d'un content type -->
     <xsl:template match="Content">
-        <xsl:for-each select="./child::node()">
-            <xsl:apply-templates select="."/>
-        </xsl:for-each>
+        <div id="msg_view" class="tab-pane active">
+            <div class="doc_view">
+                <div class="doc_view_header">
+                    <dl class="dl-horizontal">
+                        <dt>Topic</dt>
+                        <dd><xsl:value-of select="//NoteInfos/SessionTopic"/></dd>
+                        <dt>Date</dt>
+                        <dd><xsl:value-of select="//NoteInfos/LastEdit"/></dd>
+                    </dl>
+                </div>
+                <div class="doc_view_content">
+                    <xsl:for-each select="./child::node()">
+                        <xsl:apply-templates select="."/>
+                    </xsl:for-each>
+                </div>
+                <div class="doc_view_footer clearfix">
+                    <button title="Modifier la page" onclick="javascript:window.location.href+='/modifier'"
+                        >Modifier</button>
+                </div>
+            </div>
+            <ul class="pager">
+                <xsl:variable name="prevt"><xsl:value-of select="//NoteInfos/PrevT"></xsl:value-of></xsl:variable>
+                <xsl:variable name="nextt"><xsl:value-of select="//NoteInfos/NextT"></xsl:value-of></xsl:variable>
+                <xsl:if test="not(*[$prevt=''])">
+                <li class="previous">
+                    <a href="{$xslt.base-url}me/mynotes/{$CourseRef}/{$prevt}"><i class="icon-chevron-left"></i> Previous</a>
+                </li>
+                </xsl:if>
+                <xsl:if test="not(*[$nextt=''])">
+                <li class="next">
+                    <a href="{$xslt.base-url}me/mynotes/{$CourseRef}/{$nextt}">Next <i class="icon-chevron-right"></i></a>
+                </li>
+                </xsl:if>
+            </ul>
+        </div>
+        
+        
     </xsl:template>
     
     <xsl:template match="Parag">
@@ -287,5 +255,22 @@
             <xsl:attribute name="href"><xsl:value-of select="Access/Location"/></xsl:attribute>
             <xsl:value-of select="Title"/>
         </xsl:element>
+    </xsl:template>
+    
+    <xsl:template match="Note" mode="path">
+        <div id="jCrumbs" class="breadCrumb module">
+            <ul>
+                <li>
+                    <a href="{$xslt.base-url}me/mynotes"><img src="{$xslt-ressource-url}/img/gCons-mini/addressbook.png" alt=""/></a>
+                </li>
+                <li>
+                    <a href="{$xslt.base-url}me/mynotes/{$CourseRef}"><xsl:value-of select="//NoteInfos/CourseName"/></a>
+                </li>
+                <li>
+                    <xsl:value-of select="//NoteInfos/SessionTopic"/>
+                </li>
+               
+            </ul>
+        </div>
     </xsl:template>
 </xsl:stylesheet>

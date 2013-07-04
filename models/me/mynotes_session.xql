@@ -40,12 +40,22 @@ let $query := if (not($noteExist) and $courseTest) then
 let $note := $person//Note[CourseRef=$courseid][SessionRef=$sessionNumber]
 let $courseName := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]/Title/text()
 let $sessionTopic := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]//Session[SessionNumber=$sessionNumber]/Topic/text()
+let $sessions := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]//Sessions
+let $next-topic1 := $person//Notes/Note[CourseRef=$courseid][SessionRef>$sessionNumber]
+let $next-topic := $next-topic1//Note[SessionRef=min(SessionRef)]/SessionRef/text()
+let $prev-topic1 := $person//Notes/Note[CourseRef=$courseid][SessionRef<$sessionNumber]
+let $prev-topic := $prev-topic1//Note[SessionRef=max(SessionRef)]/SessionRef/text()
+
     return
     <Root>
      {$note}
+     
      <NoteInfos>
         <CourseName>{$courseName}</CourseName>
         <SessionTopic>{$sessionTopic}</SessionTopic>
+        <LastEdit>{xdb:last-modified('/sites/ioox/data/','Persons.xml')}</LastEdit>
+        <PrevT>{$prev-topic}</PrevT>
+        <NextT>{$next-topic}</NextT>
      </NoteInfos>
      </Root>
    
