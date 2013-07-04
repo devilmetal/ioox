@@ -26,43 +26,53 @@ let $start :=  if ($method = 'GET') then (
 
 let $readblestart := string(me:convert-UTS($start))
 
+let $dateDstart := substring-before($readblestart,'T')
 let $datestart := concat(substring-before($readblestart,'T'),'+00:00')
-
+let $dateaddMonth := functx:add-months($dateDstart,1)
 let $year := year-from-date(xs:date($datestart))
 let $month := month-from-date(xs:date($datestart))
 
 
-let $data1 := doc(concat($collection, "Calendar.xml"))/Calendar/Year[No=$year]
-let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course
-let $data3 := doc(concat($collection, "Persons.xml"))//Person[Engagments/Engagment/Role='Student']
 let $id := if (session:get-attribute('id')) then (
                             session:get-attribute('id')
                             )
                         else(
                             '-1'
                             )
+let $data1 := doc(concat($collection, "Calendar.xml"))/Calendar/Year[No=$year]
+let $person :=  doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
+(: on reprend que les cours de la period concernée par la date start envoyée par le JS du calendrier et uniquement ceux dont la personne y est inscrit et pas desinscrit :)
+let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$person//Engagment[Role!='Unsubscribed']/CoursRef][./ancestor::Period/Start<=$dateDstart][./ancestor::Period/End>=$dateDstart]
+
 let $todolist := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]//ToDoList
 
+(: On prend les vacances qui partent de la date donnée jusqu'à celles qui se terminent le même jour le 2ème mois après celui donné, comme ça on assure de toutes les avoir :) 
+let $holidays1 := doc(concat($collection, "AcademicYears.xml"))//Holiday[Start>=$dateDstart][Start<=$dateaddMonth]
+(: il existe aussi le cas d'un chevauchement dans les date quand l'holiday possède une fin et que la start donnée par le JS du calendar est au milieu de Start et End :)
+let $holidays2 := doc(concat($collection, "AcademicYears.xml"))//Holiday[Start<=$dateDstart][End>=$dateDstart]
     return
     <Root>
+        <Date>
+            <Year>{$year}</Year>
+            <Month>{$month}</Month>
+        </Date>
         <Calendar>
             {$data1}
         </Calendar>
         <Courses>
             {$data2}
         </Courses>
-        <Persons>
-            {$data3}
-        </Persons>
-        <Date>
-            <Year>{$year}</Year>
-            <Month>{$month}</Month>
-        </Date>
         <Session>
             <Id>{$id}</Id>
         </Session>
         <ToDoListPerson>
             {$todolist}
         </ToDoListPerson>
+        <Holidays>
+            {$holidays1}
+            {$holidays2}
+        </Holidays>
+        {$dateDstart}
      </Root>
+     
    

@@ -25,7 +25,8 @@
                 {Sorry, no rights},
             </xsl:otherwise>
         </xsl:choose>
-        {}]
+        
+         {}]
     </xsl:template>   
     
     
@@ -52,21 +53,28 @@
             <xsl:value-of select="$DayNo"/>
         </xsl:variable>
         <!-- Case : it exist a session for this day -->
-        <xsl:if test="not(empty(//Session[Date=$FullDay]))">
+        
+        <!-- Ajout d'un session dans le calendrier -->
                         <xsl:apply-templates
                             select="//Session[Date=$FullDay]">
                             <xsl:sort select="StartTime"/>
                             <xsl:with-param name="FullDate"><xsl:value-of select="$FullDate"/></xsl:with-param>
                         </xsl:apply-templates>
-        </xsl:if>
+        
+        
+        <!-- Ajout d'un element de la todolist -->
         <xsl:apply-templates select="//ToDoListPerson/ToDoList//Task[Deadline/Date=$FullDay]"/>
+        
+        <!-- Ajout des vacances -->
+        <xsl:apply-templates select="/Root/Holidays//Holiday[Start=$FullDay]"/>
+        
     </xsl:template>
     
     <!-- MISE EN PAGE DES EVENTS D'UN JOUR AFFICHAGE DANS LE CALENDRIER-->
     <xsl:template match="Session">
         <xsl:param name="FullDate"></xsl:param>
         <xsl:variable name="CourseId"><xsl:value-of select="ancestor::Course/CourseId"/></xsl:variable>
-        <xsl:if test="not(empty(//Person[PersonId=$UserId]/Engagments//Engagment[Role!='Unsubscribed'][CoursRef=$CourseId]))">
+        
             {
             <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
             <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
@@ -76,7 +84,6 @@
             "allDay": false,
             "url"   : "<xsl:value-of select="$xslt.base-url"/>me/courses/<xsl:value-of select="$CourseId"/>#<xsl:value-of select="SessionId"/>"
             },  
-        </xsl:if>
         </xsl:template>
     
     
@@ -90,7 +97,21 @@
         "start" : "<xsl:value-of select="Deadline/Date"/><xsl:text> 01:00:00</xsl:text>",
         "end" : "<xsl:value-of select="Deadline/Date"/><xsl:text> 02:00:00</xsl:text>",
         "allDay": false,
-        "url"   : "<xsl:value-of select="$xslt.base-url"/>me/todo"
+        "url"   : "<xsl:value-of select="$xslt.base-url"/>me/todo",
+        "color" : "#cea97e",
+        "textColor" : "#5e4223"
+        }, 
+    </xsl:template>
+    
+    <xsl:template match="Holiday">
+        {
+        "title" : "<xsl:value-of select="Explanation"/>",
+        "start" : "<xsl:value-of select="Start"/>",
+        <!-- Si il y a une fin ie les vacances sont plus longues que 1 jour on la note -->
+        <xsl:if test="End">"end" : "<xsl:value-of select="End"/>",</xsl:if>
+        "allDay" : true,
+        "color" : "#aedb97",
+        "textColor" : "#3d641b"
         }, 
     </xsl:template>
 </xsl:stylesheet>

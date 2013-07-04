@@ -9,12 +9,10 @@
         </Holiday>
         <Holiday>
             <Start>2012-11-14</Start>
-            <End>2012-11-14</End>
             <Explanation>Dies Academicus</Explanation>
         </Holiday>
         <Holiday>
             <Start>2012-12-08</Start>
-            <End>2012-12-08</End>
             <Explanation>Immaculée Conception</Explanation>
         </Holiday>
         <Holiday>
@@ -29,13 +27,11 @@
         </Holiday>
         <Holiday>
             <Start>2013-05-20</Start>
-            <End>2013-05-20</End>
-            <Explanation>Pentecôte</Explanation>
+            <Explanation>Pentecote</Explanation>
         </Holiday>
         <Holiday>
             <Start>2013-05-30</Start>
-            <End>2013-05-30</End>
-            <Explanation>Fête Dieu</Explanation>
+            <Explanation>Fete Dieu</Explanation>
         </Holiday>
         <Holiday>
             <Start>2013-10-31</Start>
@@ -44,7 +40,6 @@
         </Holiday>
         <Holiday>
             <Start>2013-11-15</Start>
-            <End>2012-11-15</End>
             <Explanation>Dies Academicus</Explanation>
         </Holiday>
         <Holiday>
