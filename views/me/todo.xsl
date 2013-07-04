@@ -82,7 +82,10 @@
             <!-- MENU DEFINITION -->
             <site:menu> </site:menu>
             <!-- SITE CONTENT -->
-            <site:navbar/>
+            <site:navbar />
+                
+            
+            
                 
                 
             <site:content>
@@ -157,25 +160,43 @@
     </xsl:template>
     
     <xsl:template match="Activity">
-        <h2><xsl:value-of select="Title"/></h2>
-        <h3>Tasks</h3>
+        <h3 class="heading"><xsl:value-of select="Title"/></h3>
         <xsl:apply-templates select="Tasks//Task"/>
     </xsl:template>
     
     <xsl:template match="Task">
-        <h4><xsl:value-of select="Title"></xsl:value-of></h4>
-        <h4>Priority :</h4>
-        <p><xsl:value-of select="Priority"/></p>
-        <xsl:if test="Deadline">
-            <h2>Deadline</h2>
-            <p><xsl:value-of select="Deadline/Date"/></p>
-        </xsl:if>
-        <h4>Description</h4>
-        <xsl:apply-templates select="Description"/>
+        <xsl:variable name="prio"><xsl:value-of select="child::Priority"/></xsl:variable>
+        <blockquote class="prio{$prio}">
+            <h3 class="priohead{$prio}">
+                <xsl:value-of select="Title"/>
+                <span class="oursmall priohead{$prio}">
+                (Prio: <xsl:value-of select="$prio"/>
+                    <xsl:if test="not(Deadline/Date='YYYY-MM-DD')">
+                        - deadline <xsl:value-of select="Deadline/Date"/>
+                    </xsl:if>
+                    )
+                </span>
+            </h3>
+            <xsl:apply-templates select="Description"/>
+        </blockquote>
+        
+        
     </xsl:template>
 
 	
     <!-- Affichage d'un content type -->
+
+    <xsl:template match="ExternalDoc">
+	<xsl:apply-templates select=".//Access"/><br/>
+    </xsl:template>
+	 
+    <xsl:template match="Access">
+    	 <xsl:element name="a">
+            <xsl:attribute name="href"><xsl:value-of select="Location"/></xsl:attribute>
+            <xsl:value-of select="ancestor::ExternalDoc/Title"/>
+        </xsl:element>
+    </xsl:template>
+
     <xsl:template match="Description">
         <xsl:for-each select="./child::node()">
             <xsl:apply-templates select="."/>
@@ -191,24 +212,37 @@
     </xsl:template>
     
     <xsl:template match="List">
-        <ul>
+        <xsl:if test="count(./ListHeader)!=0">
+            <span class="ListHeader">
+                <xsl:value-of select="./ListHeader"/>
+            </span>
+        </xsl:if>
+        <ul class="list_b">
             <xsl:for-each select="./child::node()">
-                <li><xsl:apply-templates select="."/></li>
+                <li>
+                    <xsl:apply-templates select="."/>
+                </li>
             </xsl:for-each>
         </ul>
     </xsl:template>
     
-    <xsl:template match="ListHeader">
-        <span class="ListHeader">
-            <xsl:value-of select="."/>
-        </span>
+    <xsl:template match="SubList">
+        <xsl:if test="count(./SubListHeader)!=0">
+            <span class="ListHeader">
+                <xsl:value-of select="./SubListHeader"/>
+            </span>
+        </xsl:if>
+        <ul class="list_c">
+            <xsl:for-each select="./child::node()">
+                <li>
+                    <xsl:apply-templates select="."/>
+                </li>
+            </xsl:for-each>
+        </ul>
     </xsl:template>
-    
     
     <xsl:template match="Fragment">
         <xsl:value-of select="."/>
-        <!--<br/>
-         THIS IS TRUE??? -->
     </xsl:template>
     
     <xsl:template match="Link">
@@ -220,37 +254,37 @@
         </xsl:element>
     </xsl:template>
     
-    
-    
-    <xsl:template match="ListItem">
-        <ol>
-            <xsl:for-each select="./child::node()">
-                <li><xsl:apply-templates select="."/></li>
-            </xsl:for-each>
-        </ol>
-    </xsl:template>
-    
-    <xsl:template match="SubList">
-        <xsl:if test="count(./SubListHeader)!=0">
-            <span class="SubListHeader">
-                <xsl:value-of select="./SubListHeader"/>
-            </span>
-        </xsl:if>
-        <ol>
-            <xsl:for-each select="./SubListItem">
-                <li><xsl:apply-templates select="./child::node()"/></li>
-            </xsl:for-each>
-        </ol>
-    </xsl:template>
-    
     <xsl:template match="ExternalDoc">
-	<xsl:apply-templates select=".//Access"/><br/>
+        <xsl:element name="a">
+            <xsl:attribute name="href">
+                <xsl:value-of select="Access/Location"/>
+            </xsl:attribute>
+            <xsl:value-of select="Title"/>
+        </xsl:element>
     </xsl:template>
-	 
-    <xsl:template match="Access">
-    	 <xsl:element name="a">
-            <xsl:attribute name="href"><xsl:value-of select="Location"/></xsl:attribute>
-            <xsl:value-of select="ancestor::ExternalDoc/Title"/>
+    
+    <xsl:template match="Exercise" mode="link">
+        <xsl:variable name="id1">
+            <xsl:value-of select="ancestor::Course/CourseId"/>
+        </xsl:variable>
+        <xsl:variable name="id2">
+            <xsl:value-of select="ancestor::Session/SessionNumber"/>
+        </xsl:variable>
+        
+        <a href="{$xslt.base-url}me/courses/{$id1}/{$id2}" class="btn btn-inverse">Exercise</a>
+        
+    </xsl:template>
+    
+    
+    <xsl:template match="Link">
+        <xsl:element name="a">
+            <xsl:attribute name="href">
+                <xsl:value-of select="LinkRef"/>
+            </xsl:attribute>
+            <xsl:attribute name="alt">
+                <xsl:value-of select="Comment"/>
+            </xsl:attribute>
+            <xsl:value-of select="LinkText"/>
         </xsl:element>
     </xsl:template>
     

@@ -39,8 +39,9 @@
         </ul>
       </xt:component>
       <xt:component name="Deadline">
-        <xt:use label="Date" types="text">YYYY-MM-DD</xt:use>
-        <xt:use label="Time" types="text" option="unset">YYYY-MM-DDTHH:00:00</xt:use>
+        
+        <xt:use label="Date" types="text" param="filter=date;date_region=fr;date_format=ISO_8601">YYYY-MM-DD</xt:use>
+        <xt:use label="Time" types="text">YYYY-MM-DDTHH:00:00</xt:use>
       </xt:component>
       <xt:component name="Parag">
         <p>
