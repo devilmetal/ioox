@@ -123,7 +123,7 @@ declare function site:login( $cmd as element() ) as element()*
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$user} <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                    <li><a href="#">My Profile</a></li>
+                                    <li><a href="{$cmd/@base-url}profil">My Profile</a></li>
                                     <li class="divider"></li>
                                     <li><a class="login" href="{$cmd/@base-url}logout?url={$cmd/@base-url}">Log Out</a></li>
                                     </ul>
