@@ -236,8 +236,29 @@
         <!--<xsl:value-of select="sum($globalMean/child::node()/child::node())"></xsl:value-of>-->
         Putain de note global : ok ! : <xsl:value-of select="sum($globalMean/child::node()) div $totalEngagment"></xsl:value-of>
         
-        <xsl:apply-templates select="./Grades/Engagment" mode="engagment"/>
+        
+        <h2>Tri par périodes</h2>
+        <xsl:apply-templates select="/Root/Infos/Periods//Period"/>
     </xsl:template>
+    
+    <xsl:template match="Period">
+        <h3><xsl:value-of select="Name"/></h3>
+        <h3>Tri par cours </h3>
+        <xsl:apply-templates select=".//Course"/>
+    </xsl:template>
+    
+    <xsl:template match="Course">
+        <h4>Cours <xsl:value-of select="CourseNo"/></h4>
+        <xsl:variable name="courseid"><xsl:value-of select="CourseId"/></xsl:variable>
+        <xsl:apply-templates select="//Grades//Engagment[CoursRef=$courseid]" mode="engagment"/>
+    </xsl:template>
+    
+    
+    
+    
+    
+    
+    
     
     <xsl:template match="Engagment" mode="global">
         <!-- Somme de toutes les "sous-grades" -->
@@ -276,9 +297,9 @@
         <!-- L'ID du cours associé -->
         <xsl:variable name="courseid"><xsl:value-of select="ancestor::Engagment/CoursRef"></xsl:value-of></xsl:variable>
         <!-- Somme total des poids -->
-        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
+        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos//Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
         <!-- Pondération  -->
-        <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/Exercices/Weight) div $sumtotal"/></xsl:variable>
+        <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos//Course[CourseId=$courseid]/Evaluation/Exercices/Weight) div $sumtotal"/></xsl:variable>
         
         <Mean><xsl:value-of select="$ponderation * $mean "></xsl:value-of></Mean>
         
@@ -287,8 +308,8 @@
     <xsl:template match="ExamGrade">
         <xsl:variable name="mean"><xsl:value-of select="."/></xsl:variable>
         <xsl:variable name="courseid"><xsl:value-of select="ancestor::Engagment/CoursRef"></xsl:value-of></xsl:variable>
-        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
-        <xsl:variable name="ponderation"><xsl:value-of select="/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/Exam/Weight div $sumtotal"/></xsl:variable>
+        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos//Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
+        <xsl:variable name="ponderation"><xsl:value-of select="/Root/Infos//Course[CourseId=$courseid]/Evaluation/Exam/Weight div $sumtotal"/></xsl:variable>
         
         <Mean><xsl:value-of select="$ponderation * $mean "></xsl:value-of></Mean>
         
@@ -297,8 +318,8 @@
     <xsl:template match="ProjectGrades">
         <xsl:variable name="mean"><xsl:value-of select="sum(.//Step/StepGrade) div count(.//Step/StepGrade)"/></xsl:variable>
         <xsl:variable name="courseid"><xsl:value-of select="ancestor::Engagment/CoursRef"></xsl:value-of></xsl:variable>
-        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
-        <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/Project/Weight) div $sumtotal"/></xsl:variable>
+        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos//Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
+        <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos//Course[CourseId=$courseid]/Evaluation/Project/Weight) div $sumtotal"/></xsl:variable>
         
         <Mean><xsl:value-of select="$ponderation * $mean "></xsl:value-of></Mean>
         
@@ -310,9 +331,9 @@
         <!-- L'ID du cours associé -->
         <xsl:variable name="courseid"><xsl:value-of select="ancestor::Engagment/CoursRef"></xsl:value-of></xsl:variable>
         <!-- Somme total des poids -->
-        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
+        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos//Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
         <!-- Pondération  -->
-        <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/Exercices/Weight) div $sumtotal"/></xsl:variable>
+        <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos//Course[CourseId=$courseid]/Evaluation/Exercices/Weight) div $sumtotal"/></xsl:variable>
         
         <p>Putain de moyenne pour les exercice : <xsl:value-of select="$mean "></xsl:value-of></p>
         
@@ -321,8 +342,8 @@
     <xsl:template match="ExamGrade" mode="unite">
         <xsl:variable name="mean"><xsl:value-of select="."/></xsl:variable>
         <xsl:variable name="courseid"><xsl:value-of select="ancestor::Engagment/CoursRef"></xsl:value-of></xsl:variable>
-        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
-        <xsl:variable name="ponderation"><xsl:value-of select="/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/Exam/Weight div $sumtotal"/></xsl:variable>
+        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos//Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
+        <xsl:variable name="ponderation"><xsl:value-of select="/Root/Infos//Course[CourseId=$courseid]/Evaluation/Exam/Weight div $sumtotal"/></xsl:variable>
         
         <p>Putain de moyenne pour l'examen : <xsl:value-of select="$mean "></xsl:value-of></p>
         
@@ -331,8 +352,8 @@
     <xsl:template match="ProjectGrades" mode="unite">
         <xsl:variable name="mean"><xsl:value-of select="sum(.//Step/StepGrade) div count(.//Step/StepGrade)"/></xsl:variable>
         <xsl:variable name="courseid"><xsl:value-of select="ancestor::Engagment/CoursRef"></xsl:value-of></xsl:variable>
-        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
-        <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos/Courses/Course[CourseId=$courseid]/Evaluation/Project/Weight) div $sumtotal"/></xsl:variable>
+        <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos//Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
+        <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos//Course[CourseId=$courseid]/Evaluation/Project/Weight) div $sumtotal"/></xsl:variable>
         
         <p>Putain de moyenne pour le projet : <xsl:value-of select="$mean "></xsl:value-of></p>
         

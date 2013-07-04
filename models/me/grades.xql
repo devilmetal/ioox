@@ -13,9 +13,22 @@ let $collection := '/sites/ioox/data/'
                             let $id := string(session:get-attribute('id'))
                             let $person := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
                             let $grades := $person//Engagment[Grade]
-                            let $courses := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$person/Engagments//Engagment/CoursRef]
+                            
+                            (: NOTE : on retourne les cours classés par periode et uniquement les cours dont la personne possède un engagment (inscrit, desinscrit) :)
+                            let $periods := doc(concat($collection, "AcademicYears.xml"))//Period[.//Course[CourseId=$person/Engagments//Engagment/CoursRef]]
                             return <Infos>
-                                        <Courses>{$courses}</Courses>
+                                        <Periods>{
+                                            for $period in $periods//Period
+                                            return
+                                            (
+                                            <Period>
+                                            <Name>{$period/Name/text()}</Name>
+                                            <Courses>
+                                                {$period//Course[CourseId=$person/Engagments//Engagment/CoursRef]}
+                                            </Courses>
+                                            </Period>
+                                            )}
+                                         </Periods>
                                         <Grades>{$grades}</Grades>
                                    </Infos>
                             )
