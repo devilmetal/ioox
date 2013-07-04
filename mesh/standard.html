@@ -11,7 +11,55 @@
       <site:error force="true"></site:error>
     </div>
     <div id="loading_layer" style="display:none"><img src="/exist/projets/ioox/static/ioox/img/ajax_loader.gif" alt="" /></div>
-    <site:change></site:change>
+    <site:change>
+      
+        <div class="style_switcher">
+          <div class="sepH_c">
+            <p>Backgrounds:</p>
+            <div class="clearfix">
+              <span class="style_item jQptrn style_active ptrn_def" title=""></span>
+              <span class="ssw_ptrn_a style_item jQptrn" title="ptrn_a"></span>
+              <span class="ssw_ptrn_b style_item jQptrn" title="ptrn_b"></span>
+              <span class="ssw_ptrn_c style_item jQptrn" title="ptrn_c"></span>
+              <span class="ssw_ptrn_d style_item jQptrn" title="ptrn_d"></span>
+              <span class="ssw_ptrn_e style_item jQptrn" title="ptrn_e"></span>
+            </div>
+          </div>
+          <div class="sepH_c">
+            <p>Layout:</p>
+            <div class="clearfix">
+              <label class="radio inline"><input type="radio" name="ssw_layout" id="ssw_layout_fluid" value=""  /> Fluid</label>
+              <label class="radio inline"><input type="radio" name="ssw_layout" id="ssw_layout_fixed" value="gebo-fixed" /> Fixed</label>
+            </div>
+          </div>
+          <div class="sepH_c">
+            <p>Sidebar position:</p>
+            <div class="clearfix">
+              <label class="radio inline"><input type="radio" name="ssw_sidebar" id="ssw_sidebar_left" value=""  /> Left</label>
+              <label class="radio inline"><input type="radio" name="ssw_sidebar" id="ssw_sidebar_right" value="sidebar_right" /> Right</label>
+            </div>
+          </div>
+          <div class="sepH_c">
+            <p>Show top menu on:</p>
+            <div class="clearfix">
+              <label class="radio inline"><input type="radio" name="ssw_menu" id="ssw_menu_click" value=""  /> Click</label>
+              <label class="radio inline"><input type="radio" name="ssw_menu" id="ssw_menu_hover" value="menu_hover" /> Hover</label>
+            </div>
+          </div>
+          
+          <div class="gh_button-group">
+            <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
+            <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
+          </div>
+          <div class="hide">
+            <ul id="ssw_styles">
+              <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
+              <li class="small ssw_lColor sepH_a" style="display:none">a { color: #<span></span> }</li>
+            </ul>
+          </div>
+        </div>
+      
+    </site:change>
     <div id="maincontainer" class="clearfix">
       <div id="login">
         <p>
@@ -35,10 +83,12 @@
           </div>
         </div>
       </div>
-      <site:javascript></site:javascript>
+      <site:javascript>
+ 
+      </site:javascript>
     </div>
     <footer>
-      <p>&#169; 2013 iOoX</p>
+      <p>&#169; 2013 Klaxon</p>
     </footer>
   </body>
 </html>

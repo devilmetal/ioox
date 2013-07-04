@@ -84,7 +84,7 @@ declare function site:login( $cmd as element() ) as element()*
                         <div class="container-fluid">
                             <a class="brand" href="#">
                             <img src="{$cmd/@base-url}static/ioox/img/gCons/connections-white.png" alt=""/>
-                            Klakxon</a>
+                            Klaxon</a>
                             <ul class="nav user_menu pull-right">
                                 <li class="divider-vertical hidden-phone hidden-tablet"></li>
                                 <li class="dropdown">
@@ -173,14 +173,14 @@ declare function site:message( $view as element() ) as node()*
  let $type := substring-before($e, ':'), $object := substring-after($e, ':')
  return
    if ($type = 'ACTION-LOGIN-SUCCESS') then
-     <p>Vous avez été identifié en tant que "<span>{$object}</span>"</p>
+     <p>You are logged as "<span>{$object}</span>"</p>
    else if ($type = 'ACTION-LOGOUT-SUCCESS') then
      (
      session:invalidate(),
-     <p>Vous avez été déconnecté avec succès</p>
+     <p>You are successfull unlogged</p>
      )
    else if ($type = 'ACTION-UPDATE-SUCCESS') then
-     <p>La ressource a été enregistrée avec succès</p>
+     <p>Your edit have been saved.</p>
    else
      ()
 };
@@ -264,7 +264,7 @@ declare function site:navbar( $cmd as element(), $view as element() ) as element
    
     <!-- navbar -->
         <div class="navbar">
-            <div class="navbar-inner">
+            <div class="navbar-inner navb2">
                 <div class="container-fluid">
                     <ul class="nav" id="mobile-nav-2">
                         <li>
@@ -289,6 +289,11 @@ declare function site:navbar( $cmd as element(), $view as element() ) as element
                      </ul>
                 </div>
             </div>
+       </div>
+       <div class="row-fluid">
+       <div class="span12">
+       <a href="javascript:window.history.back()" class="btn btn-inverse backb"><i class="splashy-arrow_large_left"></i> Back</a>
+       </div>
        </div>
             
     </span>

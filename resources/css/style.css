@@ -990,3 +990,12 @@ ul.gmul li a {
 	-o-transition: background-color 0.2s ease-in-out;
 	transition: background-color 0.2s ease-in-out;
 }
+.navb2{
+padding:0;
+margin:0;
+}
+.backb{
+display:block;
+float:right;
+margin:-1em 0 0.61em 0;
+}
