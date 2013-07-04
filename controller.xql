@@ -14,7 +14,6 @@ declare variable $access := <access>
   <rule action="install" role="u:admin" message="administrateur"/>
   <rule action="ajouter modifier" role="u:admin g:site-member" message="membre"/>
   <rule action="POST" role="all" message="tous"/>
-  <rule action="home" role="u:admin" message="administrateur"/>
 </access>;
 
 (: ======================================================================
@@ -23,7 +22,9 @@ declare variable $access := <access>
 declare variable $actions := <actions error="models/error.xql">
   <action name="login" depth="0" epilogue="standard"> <!-- may be GET or POST -->
     <model src="oppidum:actions/login.xql"/>
-    <view src="oppidum:views/login.xsl"/>
+    <view src="views/login.xsl">
+        <param name="skin" value="login"/>
+    </view>
   </action>
   <action name="logout" depth="0">
     <model src="oppidum:actions/logout.xql"/>
