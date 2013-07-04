@@ -109,7 +109,7 @@
         "start" : "<xsl:value-of select="Start"/>",
         <!-- Si il y a une fin ie les vacances sont plus longues que 1 jour on la note -->
         <xsl:if test="End">"end" : "<xsl:value-of select="End"/>",</xsl:if>
-        "allDay" : true,
+        "allDay": true,
         "color" : "#aedb97",
         "textColor" : "#3d641b"
         }, 

@@ -115,7 +115,7 @@ declare function site:login( $cmd as element() ) as element()*
                 <div class="navbar navbar-fixed-top">
                     <div class="navbar-inner">
                         <div class="container-fluid">
-                            <a class="brand" href="#">
+                            <a class="brand" href="{$cmd/@base-url}">
                             <img src="{$cmd/@base-url}static/ioox/img/gCons/connections-white.png" alt=""/>
                             Klaxon</a>
                             <ul class="nav user_menu pull-right">
@@ -123,7 +123,7 @@ declare function site:login( $cmd as element() ) as element()*
                                 <li class="dropdown">
                                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">{$user} <b class="caret"></b></a>
                                     <ul class="dropdown-menu">
-                                    <li><a href="{$cmd/@base-url}profil">My Profile</a></li>
+                                    <li><a href="{$cmd/@base-url}me/profil">My Profile</a></li>
                                     <li class="divider"></li>
                                     <li><a class="login" href="{$cmd/@base-url}logout?url={$cmd/@base-url}">Log Out</a></li>
                                     </ul>

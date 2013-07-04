@@ -130,6 +130,12 @@
                                 </xs:complexType>
                             </xs:element>
                             <xs:element name="Token" type="xs:string"/>
+                            <xs:element name="GravatarEmail" type="xs:string">
+                                <xs:annotation>
+                                    <xs:documentation>email personel du compte gravatar
+</xs:documentation>
+                                </xs:annotation>
+                            </xs:element>
                         </xs:sequence>
                     </xs:complexType>
                 </xs:element>

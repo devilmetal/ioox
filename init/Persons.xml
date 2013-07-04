@@ -6,7 +6,8 @@
         <Lastname>Luyet</Lastname>
         <Firstname>Gil</Firstname>
         <Username>FooBarZ</Username>
-        <Password>123</Password>
+        <UniqueID>Mouhaha</UniqueID>
+        
         <Engagments>
             <Engagment>
                 <EngagementId>1</EngagementId>
@@ -88,13 +89,14 @@
                 </Content>
             </Note>
         </Notes>
+        <Token/>
+        <GravatarEmail>gil.luyet@unifr.ch</GravatarEmail>
     </Person>
     <Person>
         <PersonId>51</PersonId>
         <Lastname>Carnevale</Lastname>
         <Firstname>Luca</Firstname>
         <Username>carnevlu</Username>
-        <Password>123</Password>
         <Engagments>
             <Engagment>
                 <EngagementId>3</EngagementId>
@@ -311,13 +313,15 @@
                 </Tasks>
             </Activity>
         </ToDoList>
+        <Token/>
+        <GravatarEmail/>
     </Person>
     <Person>
         <PersonId>52</PersonId>
         <Lastname>Foo</Lastname>
         <Firstname>Bar</Firstname>
         <Username>foobar</Username>
-        <Password>123</Password>
+        <UniqueID/>
         <Engagments>
             <Engagment>
                 <EngagementId>4</EngagementId>
@@ -334,6 +338,9 @@
             </Engagment>
         </Engagments>
         <ToDoList/>
+        <Notes/>
+        <Token/>
+        <GravatarEmail/>
     </Person>
     <Person>
         <PersonId>542</PersonId>

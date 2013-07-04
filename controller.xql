@@ -117,9 +117,13 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
         </item>
         
         <!-- /me/profile page -->
-        <item name="profil" epilogue="standard">
+        <item name="profil" epilogue="standard" method="POST">
             <model src="models/me/profil.xql"/>
             <view src="views/me/profil.xsl"/>
+            <action name="POST" epilogue="standard">
+                <model src="models/me/profil.xql"/>
+                <view src="views/me/profil.xsl"/>
+            </action>
         </item>
         
         <!-- /me/grades page -->
