@@ -1422,24 +1422,29 @@ footer{
 
 /*	scaffolding home made*/
 @media (max-width: 717px){
-	body{width:700px !important;}
-	div#contentwrapper{width:700px !important;}
+	body{max-width:700px !important;}
+	div#contentwrapper{max-width:700px !important;}
+	div.row-fluid {max-width:700px !important;}
 }
 @media (max-width: 617px){
-	body{width:600px !important;}
-	div#contentwrapper{width:600px !important;}
+	body{max-width:600px !important;}
+	div#contentwrapper{max-width:600px !important;}
+	div.row-fluid {max-width:600px !important;}
 }
 @media (max-width: 517px){
-	body{width:500px !important;}
-	div#contentwrapper{width:500px !important;}
+	body{max-width:500px !important;}
+	div#contentwrapper{max-width:500px !important;}
+	div.row-fluid {max-width:500px !important;}
 }
 @media (max-width: 417px){
-	body{width:400px !important;}
-	div#contentwrapper{width:400px !important;}
+	body{max-width:400px !important;}
+	div#contentwrapper{max-width:400px !important;}
+	div.row-fluid {max-width:400px !important;}
 }
 @media (max-width: 317px){
-		body{width:300px !important;}
-	div#contentwrapper{width:300px !important;}
+	body{max-width:300px !important;}
+	div#contentwrapper{max-width:300px !important;}
+	div.row-fluid {max-width:300px !important;}
 }
 
 
