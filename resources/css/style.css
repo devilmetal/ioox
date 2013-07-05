@@ -1405,3 +1405,8 @@ div.obc4{
 div.ourbox span{
 	line-height:3em;
 }
+footer{
+	position:fixed;
+	bottom:0;
+	right:1em;
+}
