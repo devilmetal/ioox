@@ -1422,7 +1422,7 @@ footer{
 
 /*	scaffolding home made*/
 @media (max-width: 717px){
-	body{max-width:700px !important;}
+	body{max-width:700px !important; zoom:135%;}
 	div#contentwrapper{max-width:700px !important;}
 	div.row-fluid {max-width:700px !important;}
 }
