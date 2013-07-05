@@ -78,7 +78,7 @@ declare function site:login( $cmd as element() ) as element()*
    if ($user = 'guest')  then
      if (not(ends-with($uri, '/login'))) then
      
-       <header><div class="hidden-phone">
+       <header><div class="hidden-phone hidden-tablet">
                 <div class="navbar navbar-fixed-top">
                     <div class="navbar-inner">
                         <div class="container-fluid">
@@ -86,7 +86,7 @@ declare function site:login( $cmd as element() ) as element()*
                             <img src="{$cmd/@base-url}static/ioox/img/gCons/connections-white.png" alt=""/>
                             Klaxon</a>
                             <ul class="nav user_menu pull-right">
-                                <li class="divider-vertical hidden-phone hidden-tablet"></li>
+                                <li class="divider-vertical hidden-phone hidden-tablet hidden-tablet"></li>
                                 <li class="dropdown">
                                     <a class="login" href="{$cmd/@base-url}login?url={$uri}">Login</a>
                                 </li>
@@ -112,7 +112,7 @@ declare function site:login( $cmd as element() ) as element()*
        ()
    else
     (
-    <header><div class="hidden-phone">
+    <header><div class="hidden-phone hidden-tablet">
                 <div class="navbar navbar-fixed-top">
                     <div class="navbar-inner">
                     
@@ -250,7 +250,7 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
 										<img src="{$cmd/@base-url}static/ioox/img/gCons/push-pin.png" alt="" /> FAQ
 									</a>
 									</li>
-                                    <li class="gitem visible-phone">
+                                    <li class="gitem visible-phone visible-tablet">
                                         <a class="login" href="{$cmd/@base-url}login?url={$uri}">
                                         <img src="{$cmd/@base-url}static/ioox/img/gCons/shut-down.png" alt=""/> Log In
                                         </a>
@@ -302,33 +302,33 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
 									</a>
 									</li>
 									
-									<li class="gitem visible-phone">
+									<li class="gitem visible-phone visible-tablet">
 									   <a href="{$cmd/@base-url}me/">
 									   <img src="{$cmd/@base-url}static/ioox/img/gCons/lamp.png"  alt=""/> MyHome 
 									   </a>
 									</li>
 									
-                                    <li class="gitem visible-phone">
+                                    <li class="gitem visible-phone visible-tablet">
                                         <a href="{$cmd/@base-url}me/courses/"><img src="{$cmd/@base-url}static/ioox/img/gCons/bookmark.png"alt=""/> Courses </a>
                                     </li>
                         
-                                    <li class="gitem visible-phone">
+                                    <li class="gitem visible-phone visible-tablet">
                                         <a href="{$cmd/@base-url}me/mynotes/"><img src="{$cmd/@base-url}static/ioox/img/gCons/addressbook.png" alt=""/> MyNote </a>
                                     </li>
                         
-                                    <li class="gitem visible-phone">
+                                    <li class="gitem visible-phone visible-tablet">
                                         <a href="{$cmd/@base-url}me/grades"><img src="{$cmd/@base-url}static/ioox/img/gCons/pie-chart.png" alt=""/> Grades </a>
                                     </li>
                         
-                                    <li class="gitem visible-phone">
+                                    <li class="gitem visible-phone visible-tablet">
                                         <a href="{$cmd/@base-url}me/todo"><img src="{$cmd/@base-url}static/ioox/img/gCons/calendar.png" alt=""/> Todos </a>
                                     </li>
                                     
-                                    <li class="gitem visible-phone">
+                                    <li class="gitem visible-phone visible-tablet">
                                         <a href="{$cmd/@base-url}me/profil">
                                         <img src="{$cmd/@base-url}static/ioox/img/gCons/ID.png" alt=""/> My Profile</a>
                                     </li>
-                                    <li class="gitem visible-phone">
+                                    <li class="gitem visible-phone visible-tablet">
                                         <a class="login" href="{$cmd/@base-url}logout?url={$cmd/@base-url}">
                                         <img src="{$cmd/@base-url}static/ioox/img/gCons/shut-down.png" alt=""/> Log Out</a>
                                     </li>
@@ -353,26 +353,26 @@ declare function site:navbar( $cmd as element(), $view as element() ) as element
    <span>
    
     <!-- navbar -->
-        <div class="navbar hidden-phone">
+        <div class="navbar hidden-phone hidden-tablet">
             <div class="navbar-inner navb2">
                 <div class="container-fluid">
                     <ul class="nav" id="mobile-nav-2">
                         <li>
                             <a href="{$cmd/@base-url}me/"><img src="{$cmd/@base-url}static/ioox/img/gCons-mini-white/lamp.png"  alt=""/> MyHome </a>
                         </li>
-                        <li class="divider-vertical hidden-phone hidden-tablet"/>
+                        <li class="divider-vertical hidden-phone hidden-tablet hidden-tablet"/>
                         <li>
                             <a href="{$cmd/@base-url}me/courses/"><img src="{$cmd/@base-url}static/ioox/img/gCons-mini-white/bookmark.png"alt=""/> Courses </a>
                         </li>
-                        <li class="divider-vertical hidden-phone hidden-tablet"/>
+                        <li class="divider-vertical hidden-phone hidden-tablet hidden-tablet"/>
                         <li>
                             <a href="{$cmd/@base-url}me/mynotes/"><img src="{$cmd/@base-url}static/ioox/img/gCons-mini-white/addressbook.png" alt=""/> MyNote </a>
                         </li>
-                        <li class="divider-vertical hidden-phone hidden-tablet"/>
+                        <li class="divider-vertical hidden-phone hidden-tablet hidden-tablet"/>
                         <li>
                             <a href="{$cmd/@base-url}me/grades"><img src="{$cmd/@base-url}static/ioox/img/gCons-mini-white/pie-chart.png" alt=""/> Grades </a>
                         </li>
-                        <li class="divider-vertical hidden-phone hidden-tablet"/>
+                        <li class="divider-vertical hidden-phone hidden-tablet hidden-tablet"/>
                         <li>
                             <a href="{$cmd/@base-url}me/todo"><img src="{$cmd/@base-url}static/ioox/img/gCons-mini-white/calendar.png" alt=""/> Todos </a>
                         </li>

@@ -6,10 +6,10 @@ import module namespace session="http://exist-db.org/xquery/session";
 
 declare option exist:serialize "method=xml media-type=text/xml";
 
-let $doc := doc('http://www.unifr.ch/webnews/rss2/fr/unifr/')                            
+$doc := doc('http://www.unifr.ch/webnews/rss2/fr/unifr/')  
 
     return 
    <Unifr>
-    {$doc}
+   {$doc}
    </Unifr>
    
