@@ -1445,3 +1445,15 @@ footer{
 @media (max-width: 417px){
 	div#contentwrapper{max-width:417px;}
 }
+@media (max-width: 367px){
+	div#contentwrapper{max-width:367px;}
+}
+@media (max-width: 317px){
+	div#contentwrapper{max-width:317px;}
+}
+@media (max-width: 267px){
+	div#contentwrapper{max-width:267px;}
+}
+@media (max-width: 217px){
+	div#contentwrapper{max-width:217px;}
+}
