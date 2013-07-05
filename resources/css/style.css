@@ -1420,6 +1420,28 @@ footer{
 	font-weight:bold;
 }
 
+/*	scaffolding home made*/
 @media (max-width: 767px){
-	div#contentwrapper{max-width:760px;}
+	div#contentwrapper{max-width:767px;}
+}
+@media (max-width: 717px){
+	div#contentwrapper{max-width:717px;}
+}
+@media (max-width: 667px){
+	div#contentwrapper{max-width:667px;}
+}
+@media (max-width: 617px){
+	div#contentwrapper{max-width:617px;}
+}
+@media (max-width: 567px){
+	div#contentwrapper{max-width:567px;}
+}
+@media (max-width: 517px){
+	div#contentwrapper{max-width:517px;}
+}
+@media (max-width: 467px){
+	div#contentwrapper{max-width:467px;}
+}
+@media (max-width: 417px){
+	div#contentwrapper{max-width:417px;}
 }
