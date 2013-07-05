@@ -1421,46 +1421,20 @@ footer{
 }
 
 /*	scaffolding home made*/
-@media (max-width: 767px){
-	.off_switch{font-size:2em important!;}
-	div#contentwrapper{width:767px !important;}
-}
 @media (max-width: 717px){
-	div#contentwrapper{width:717px !important;}
-}
-@media (max-width: 667px){
-	div#contentwrapper{width:667px !important;}
+	div#contentwrapper{width:700px !important;}
 }
 @media (max-width: 617px){
-	div#contentwrapper{width:617px !important;}
-}
-@media (max-width: 567px){
-	div#contentwrapper{width:567px !important;}
+	div#contentwrapper{width:600px !important;}
 }
 @media (max-width: 517px){
-	div#contentwrapper{width:517px !important;}
-}
-@media (max-width: 467px){
-	div#contentwrapper{width:467px !important;}
+	div#contentwrapper{width:500px !important;}
 }
 @media (max-width: 417px){
-	div#contentwrapper{width:417px !important;}
-}
-@media (max-width: 367px){
-	div#contentwrapper{width:367px !important;}
+	div#contentwrapper{width:400px !important;}
 }
 @media (max-width: 317px){
-	div#contentwrapper{width:317px !important;}
+	div#contentwrapper{width:300px !important;}
 }
-@media (max-width: 267px){
-	div#contentwrapper{width:267px !important;}
-}
-@media (max-width: 217px){
-	div#contentwrapper{width:217px !important;}
-}
-@media (max-width: 167px){
-	div#contentwrapper{width:267px !important;}
-}
-@media (max-width: 117px){
-	div#contentwrapper{width:217px !important;}
-}
+
+
