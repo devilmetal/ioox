@@ -342,9 +342,9 @@
                                             <dd>Subscribed</dd>
                                             <dt>Operation</dt>
                                             <dd>
-                                                <form action="#" method="POST">
+                                                <form action="#" method="POST" onsubmit="return confirm('Are you sure you want to unsubscrib this course ?')">
                                                     <input type="hidden" name ="type" value="unsubscrib"/>
-                                                    <input type="submit" onclick="confirm('Are you sure you want to unsubscrib this course ?')" value="Unsubscrib"/>
+                                                    <input class="btn btn-inverse" type="submit"  value="Unsubscrib"/>
                                                  </form>
                                             </dd>
                                         </xsl:when>
@@ -352,9 +352,9 @@
                                             <dd>Not subscribed</dd>
                                             <dt>Operation</dt>
                                             <dd>
-                                                <form action="#" method="POST">
+                                                <form action="#" method="POST" onsubmit="return confirm('Are you sure you want to subscrib this course ?')">
                                                     <input type="hidden" name ="type" value="subscrib"/>
-                                                    <input type="submit" onclick="confirm('Are you sure you want to subscrib this course ?')" value="Subscrib"/>
+                                                    <input class="btn btn-inverse" type="submit"  value="Subscrib"/>
                                                 </form>
                                             </dd>
                                         </xsl:otherwise>

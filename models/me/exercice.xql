@@ -56,7 +56,11 @@ let $done := if ($method='POST') then (
                 )
             else
             <False/>
-            
+let $docCollection := concat(concat(concat('/db/courses/',$courseid),'/'),$sessionNumber)
+let $docName := $session//Deliverables/Deliverable[PersonRef=$id]/File/LinkText/text()
+let $docLink := $session//Deliverables/Deliverable[PersonRef=$id]/File/LinkRef/text()
+
+let $previousDocumentTime := if(exists(doc(concat($docCollection,$docName)))) then (xdb:last-modified($docCollection,$docName)) else ('na')        
  
     return
 
@@ -76,5 +80,10 @@ let $done := if ($method='POST') then (
 		{$sessionNumber}
 		</SessionId>
 	</Infos>
+	<PreviousInfos>
+	   <Name>{$docName}</Name>
+	   <Link>{$docLink}</Link>
+	   <Date>{$previousDocumentTime}</Date>
+	</PreviousInfos>
 		
      </Root>

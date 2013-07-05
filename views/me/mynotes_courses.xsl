@@ -194,6 +194,12 @@
                         <span>Date <xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></span>
                         <span>Time <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/>-<xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></span><br/>
                         <a href="{$xslt.base-url}me/mynotes/{$courseid}/{$sessionnumber}" class="btn btn-inverse btn-mini"><i class="splashy-view_list"></i> Show Note</a>
+                        <p/>
+                        <form action="#" method="POST" onsubmit="return confirm('Are you sure you want to delete this note ?')">
+                            <input type="hidden" name="delete" value="{$courseid}-_-{$sessionnumber}"/>
+                            <button class="btn btn-inverse btn-mini" type="submit">
+                                <i class="splashy-document_letter_remove"/> Delete Note</button>
+                        </form>
                         </div>
                     </xsl:when>
                     <xsl:otherwise>

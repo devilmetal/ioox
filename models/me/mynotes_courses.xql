@@ -16,7 +16,18 @@ let $id := if (session:get-attribute('id')) then (
                         else(
                             '-1'
                             )
+                            
 let $person := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
+
+(: Si la method est un post, donc on fait la suppresion d'une note :)               
+let $query := if($method='POST') then
+        (
+            let $delete := request:get-parameter('delete', '')
+            let $sessionNumber := substring-after($delete,'-_-')
+            let $courseId := substring-before($delete,'-_-')
+            return update delete $person//Note[SessionRef=$sessionNumber][CourseRef=$courseId]
+        ) 
+        else ((: nothing to do:))
 let $notes  := $person/Notes
 let $ref := string(request:get-attribute('oppidum.command')/resource/@name)
 let $usables-session := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$ref]/Sessions/Session[SessionNumber=$notes//Note/SessionRef]

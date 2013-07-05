@@ -41,6 +41,8 @@ let $note := $person//Note[CourseRef=$courseid][SessionRef=$sessionNumber]
 let $courseName := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]/Title/text()
 let $sessionTopic := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]//Session[SessionNumber=$sessionNumber]/Topic/text()
 let $sessions := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]//Sessions
+
+(: pour les boutons de navigations :)
 let $next-topic1 := $person//Notes/Note[CourseRef=$courseid][SessionRef>$sessionNumber]
 let $next-topic := $next-topic1//Note[SessionRef=min(SessionRef)]/SessionRef/text()
 let $prev-topic1 := $person//Notes/Note[CourseRef=$courseid][SessionRef<$sessionNumber]

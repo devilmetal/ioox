@@ -84,9 +84,13 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
             <model src="models/me/mynotes.xql"/>
             <view src="views/me/mynotes.xsl"/>
             <!-- détail de chaque cours -->
-            <item epilogue="standard">
+            <item epilogue="standard" method="POST">
                 <model src="models/me/mynotes_courses.xql"/>
                 <view src="views/me/mynotes_courses.xsl"/>
+                <action epilogue="standard" name="POST">
+                    <model src="models/me/mynotes_courses.xql"/>
+                    <view src="views/me/mynotes_courses.xsl"/>
+                </action>
                 <!-- Détail de chaque note (par session) -->
                 <item epilogue="standard" supported="modifier" method="POST" template="templates/note">
                     <model src="models/me/mynotes_session.xql"/>

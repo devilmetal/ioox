@@ -224,31 +224,46 @@
     
     
     <xsl:template match="Session">
-        <!-- Affichage de l'exercice -->
-	<h2>Exercise</h2>
-	<h2>Topic : <xsl:value-of select="Topic"/></h2>
-	<h3>Description</h3>
-		<xsl:apply-templates select="Exercise/Description"/>
-	<h3>Data</h3>
-		<xsl:apply-templates select="Exercise/Data"/>
-	<form enctype="multipart/form-data" method="POST" action="#">
-                                <fieldset>
-                                    <legend>Upload Document:</legend>
-                                    <input type="file" name="file"/>
-                                    <input type="submit" value="Upload"/>
-                                </fieldset>
-        </form>
-	<h3>Previous Uploaded document :</h3>
-		<xsl:apply-templates select="Exercise/Deliverables/Deliverable[PersonRef=/Root/Infos/CurrentUserId]"/>
+        <div id="msg_view" class="tab-pane">
+            <div class="doc_view">
+                <div class="doc_view_header">
+                    <dl class="dl-horizontal">
+                        <dt>Session Topic</dt>
+                        <dd><xsl:value-of select="Topic"></xsl:value-of></dd>
+                        <dt>Exercise description</dt>
+                    </dl>
+                </div>
+                <div class="doc_view_content">
+                    <dt>Description</dt>
+                    <xsl:apply-templates select="Exercise/Description"/>
+                    <dt>Data</dt>
+                    <xsl:apply-templates select="Exercise/Data"/>
+                    
+                </div>
+                <div class="doc_view_footer clearfix">
+                    <form enctype="multipart/form-data" method="POST" action="#">
+                        <fieldset>
+                            <legend>Upload Document:</legend>
+                            <input type="file" name="file"/>
+                            <input type="submit" value="Upload"/>
+                        </fieldset>
+                    </form>
+                    
+                    <xsl:apply-templates select="/Root/PreviousInfos[Date!='na']"/>
+                </div>
+            </div>
+        </div>
     </xsl:template>
     
     <!-- Affichage du lien vers l'ancien rendu d'exercice --> 
-    <xsl:template match="Deliverable">
+    <xsl:template match="PreviousInfos">
+    <h4>Previous Uploaded document (<xsl:value-of select="format-dateTime(Date,'[Y0001]-[M01]-[D01] at [H01]:[m01]:[s01]')"/>):</h4>
+        <xsl:value-of select="fo"></xsl:value-of>
 	<xsl:element name="a">
             <xsl:attribute name="href">
-                <xsl:value-of select="File/LinkRef"/>
+                <xsl:value-of select="Link"/>
             </xsl:attribute>
-            <xsl:value-of select="File/LinkText"/>
+            <xsl:value-of select="Name"/>
         </xsl:element>
     </xsl:template>
 
@@ -327,6 +342,7 @@
     </xsl:template>
     
     <xsl:template match="ExternalDoc">
+        External document : <br/>
 	<xsl:apply-templates select=".//Access"/><br/>
     </xsl:template>
 	 
@@ -334,7 +350,7 @@
     	 <xsl:element name="a">
             <xsl:attribute name="href"><xsl:value-of select="Location"/></xsl:attribute>
             <xsl:value-of select="ancestor::ExternalDoc/Title"/>
-        </xsl:element>
+        </xsl:element><br/>
     </xsl:template>
     
 </xsl:stylesheet>
