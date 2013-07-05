@@ -12,7 +12,8 @@ declare option exist:serialize "method=xhtml media-type=text/html indent=yes";
 declare function me:convert-UTS($v) as xs:dateTime
 {
   functx:dateTime('1970','01','01','00','00','00')
-  + functx:dayTimeDuration(xs:decimal(0),xs:decimal(0),xs:decimal(0),xs:decimal(number($v)+864000))
+  (:les + 10'000 représente un léger scaling:)
+  + functx:dayTimeDuration(xs:decimal(0),xs:decimal(0),xs:decimal(0),xs:decimal(number($v)+10000))
   (:Here we add 10 days to be sur we are in the middle of the month to retrive the month no.:)
 };
 
@@ -39,40 +40,48 @@ let $id := if (session:get-attribute('id')) then (
                         else(
                             '-1'
                             )
-let $data1 := doc(concat($collection, "Calendar.xml"))/Calendar/Year[No=$year]
+                            
 let $person :=  doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
-(: on reprend que les cours de la period concernée par la date start envoyée par le JS du calendrier et uniquement ceux dont la personne y est inscrit et pas desinscrit :)
-let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$person//Engagment[Role!='Unsubscribed']/CoursRef][./ancestor::Period/Start<=$dateDstart][./ancestor::Period/End>=$dateDstart]
 
+
+(:on prend les sessions concernées 1) dans le bon intervalle de temps + lequels sont dans les cours suivits :)
+let $sessions := doc(concat($collection, "AcademicYears.xml"))//Session[Date>=$dateDstart][Date<=$dateaddMonth][ancestor::Course/CourseId=$person//Engagment[Role!='Unsubscribed']/CoursRef]
+
+(: Reprise de la todolist :)
 let $todolist := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]//ToDoList
+
+(: on reprend que les tâches voulues, ie celles dans le bon interval de temps :)
+let $tasks := $todolist//Task[Deadline/Date>=$dateDstart][Deadline/Date<=$dateaddMonth]
+
 
 (: On prend les vacances qui partent de la date donnée jusqu'à celles qui se terminent le même jour le 2ème mois après celui donné, comme ça on assure de toutes les avoir :) 
 let $holidays1 := doc(concat($collection, "AcademicYears.xml"))//Holiday[Start>=$dateDstart][Start<=$dateaddMonth]
 (: il existe aussi le cas d'un chevauchement dans les date quand l'holiday possède une fin et que la start donnée par le JS du calendar est au milieu de Start et End :)
 let $holidays2 := doc(concat($collection, "AcademicYears.xml"))//Holiday[Start<=$dateDstart][End>=$dateDstart]
-    return
+
+
+return
     <Root>
-        <Date>
-            <Year>{$year}</Year>
-            <Month>{$month}</Month>
-        </Date>
-        <Calendar>
-            {$data1}
-        </Calendar>
-        <Courses>
-            {$data2}
-        </Courses>
-        <Session>
-            <Id>{$id}</Id>
-        </Session>
-        <ToDoListPerson>
-            {$todolist}
-        </ToDoListPerson>
+        <Sessions>
+            {
+            for $session in $sessions
+            return 
+            <SessionEnc>
+                <CourseId>{$session/ancestor::Course/CourseId/text()}</CourseId>
+                {$session}
+            </SessionEnc>
+            }
+        </Sessions>
+        <Tasks>
+            {$tasks}
+        </Tasks>
         <Holidays>
             {$holidays1}
             {$holidays2}
         </Holidays>
-        {$dateDstart}
+        <SessionId>
+            <Id>{$id}</Id>
+        </SessionId>
      </Root>
      
    
