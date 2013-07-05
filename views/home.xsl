@@ -87,11 +87,11 @@
          </site:navbar>
          <site:content>
             
-            <div class="span12">
+            
                <div class="blog_content">
                   <xsl:apply-templates select="//item[position() &lt; 11]"/>
                </div>
-            </div>
+            
          </site:content>
          <site:javascript>
             <script src="{$xslt-ressource-url}/js/jquery.min.js"></script>

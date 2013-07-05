@@ -95,11 +95,11 @@
                         <div> You have to login to access this page. </div>
                     </xsl:when>
                     <xsl:otherwise>
-                        <div class="span12">
+                        
                            <xsl:apply-templates select="//ToDoList"/>
                             <button title="Modifier la page" onclick="javascript:window.location.href+='/modifier'"
                                 >Modifier</button>
-                        </div>
+                        
                     </xsl:otherwise>
                 </xsl:choose>
             </site:content>
@@ -171,7 +171,7 @@
                 <xsl:value-of select="Title"/>
                 <span class="oursmall priohead{$prio}">
                 (Prio: <xsl:value-of select="$prio"/>
-                    <xsl:if test="not(Deadline/Date='YYYY-MM-DD')">
+                    <xsl:if test="not(Deadline/Date!='')">
                         - deadline <xsl:value-of select="Deadline/Date"/>
                     </xsl:if>
                     )
@@ -212,7 +212,7 @@
     </xsl:template>
     
     <xsl:template match="List">
-        <xsl:if test="count(./ListHeader)!=0">
+        <xsl:if test="count(ListHeader) &gt; 0">
             <span class="ListHeader">
                 <xsl:value-of select="./ListHeader"/>
             </span>
@@ -227,7 +227,7 @@
     </xsl:template>
     
     <xsl:template match="SubList">
-        <xsl:if test="count(./SubListHeader)!=0">
+        <xsl:if test="count(SubListHeader) &gt; 0">
             <span class="ListHeader">
                 <xsl:value-of select="./SubListHeader"/>
             </span>
