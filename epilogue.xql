@@ -223,9 +223,9 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
     <!-- sidebar -->
             <a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
             <div class="sidebar">
-				<div class="antiScroll">
+				<!--<div class="antiScroll">
 					<div class="antiscroll-inner">
-						<div class="antiscroll-content">
+						<div class="antiscroll-content">-->
 							<div class="sidebar_inner">
 								
 								<div class="globalmenu">
@@ -256,9 +256,9 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
                                         </a>
                                     </li>
 								</ul>
-								</div>
+								<!--</div>
 							</div>
-						</div>
+						</div>-->
 					</div>
 				</div>
 			</div>
@@ -274,9 +274,9 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
     <!-- sidebar -->
             <a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
             <div class="sidebar">
-				<div class="antiScroll">
+				<!--<div class="antiScroll">
 					<div class="antiscroll-inner">
-						<div class="antiscroll-content">
+						<div class="antiscroll-content">-->
 							<div class="sidebar_inner">
 								
 								<div class="globalmenu">
@@ -334,9 +334,9 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
                                     </li>
 								
 								</ul>
-								</div>
+								<!--</div>
 							</div>
-						</div>
+						</div>-->
 					</div>
 				</div>
 			</div>
