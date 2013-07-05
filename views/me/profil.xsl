@@ -171,17 +171,22 @@
                                         <p><strong><a href="https://gravatar.com">Change your avatar at Gravatar.com</a></strong>.</p>
                                     </div>
                                 </div>
-                                </div>	
+                                </div>
+                            <label for="gravemail" class="control-label">Gravatar Email</label>
+                            <div class="controls">
+                                <xsl:variable name="firstname" select="GravatarEmail"/>
+                                <input type="text" name="gravemail" id="gravemail" class="input-xlarge" value="{$firstname}" />
+                            </div>
                             </div>
                         <div class="control-group formSep">
-                            <label for="u_fname" class="control-label">First Name</label>
+                            <label for="f_fname" class="control-label">First Name</label>
                             <div class="controls">
                                 <xsl:variable name="firstname" select="Firstname"/>
                                 <input type="text" name="f_name" id="f_fname" class="input-xlarge" value="{$firstname}" />
                             </div>
                         </div>
                         <div class="control-group formSep">
-                            <label for="u_fname" class="control-label">Last Name</label>
+                            <label for="l_fname" class="control-label">Last Name</label>
                             <div class="controls">
                                 <xsl:variable name="lastname" select="Lastname"/>
                                 <input type="text" name ="l_name" id="l_fname" class="input-xlarge" value="{$lastname}" />

@@ -24,7 +24,11 @@ let $id :=  if ($method = 'POST') then (
                             )
 let $person := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
 let $notes  := $person/Notes
-let $usables-courses := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$notes//Note/CourseRef]
+let $engagments := $person//Engagments
+
+(:let $usables-courses := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$notes//Note/CourseRef]:)
+let $usables-courses := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$engagments//Engagment[Role != 'Unsubscribed']/CoursRef]
+
 let $period := doc(concat($collection, "AcademicYears.xml"))//Period[Courses/Course/CourseId=$notes//Note/CourseRef]
                             
 

@@ -26,7 +26,6 @@ let $username := $person/Username
 let $query := if($method = 'POST') then (
     (: on récupère les paramêtres :)
     let $fname := request:get-parameter('f_name', '')
-    let $lname := request:get-parameter('l_name', '')
     let $pass1 := request:get-parameter('pass1', '')
     let $pass2 := request:get-parameter('pass2', '')
     return
@@ -57,6 +56,12 @@ let $queryLname := if($method = 'POST') then (
     let $lname := request:get-parameter('l_name', '')
     return
     update replace $person/Lastname with <Lastname>{$lname}</Lastname>
+    ) else ((:nothing to do:))
+let $queryGravatar := if($method = 'POST') then (
+    (: on récupère les paramêtres :)
+    let $gravemail := request:get-parameter('gravemail', '')
+    return
+    update replace $person/GravatarEmail with <GravatarEmail>{$gravemail}</GravatarEmail>
     ) else ((:nothing to do:))
 let $gravemail := $person/GravatarEmail
 let $trim := replace(replace($gravemail,'\s+$',''),'^\s+','')

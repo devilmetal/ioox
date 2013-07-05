@@ -28,7 +28,7 @@ let $readblestart := string(me:convert-UTS($start))
 
 let $dateDstart := substring-before($readblestart,'T')
 let $datestart := concat(substring-before($readblestart,'T'),'+00:00')
-let $dateaddMonth := functx:add-months($dateDstart,1)
+let $dateaddMonth := functx:add-months($dateDstart,2)
 let $year := year-from-date(xs:date($datestart))
 let $month := month-from-date(xs:date($datestart))
 

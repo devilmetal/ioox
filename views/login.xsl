@@ -122,7 +122,7 @@
       <!--  splashy icons -->
       <link rel="stylesheet" href="{$xslt-ressource-url}/img/splashy/splashy.css"/>
       <!--  colorbox -->
-      <link rrel="stylesheet" href="{$xslt-ressource-url}/lib/colorbox/colorbox.css"/>
+      <link rel="stylesheet" href="{$xslt-ressource-url}/lib/colorbox/colorbox.css"/>
       <!--  main styles -->
       <link rel="stylesheet" href="{$xslt-ressource-url}/css/style.css"/>
       <link href="http://fonts.googleapis.com/css?family=PT+Sans"/>

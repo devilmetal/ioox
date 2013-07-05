@@ -222,7 +222,7 @@
     </xsl:template>
     
     <xsl:template match="Null">
-        <p>You have either tho register in courses other to login in order to access your courses.</p>
+        <p>You have either to register in any course other to login in order to access your courses.</p>
     </xsl:template>
     
     <xsl:template match="Infos">

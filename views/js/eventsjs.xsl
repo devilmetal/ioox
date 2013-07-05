@@ -79,8 +79,8 @@
             <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
             <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
             "title" : "<xsl:value-of select="translate(./Topic,$t,$newt)"/>",
-            "start" : "<xsl:value-of select="$FullDate"/><xsl:text> </xsl:text><xsl:value-of select="StartTime"/>",
-            "end"   : "<xsl:value-of select="$FullDate"/><xsl:text> </xsl:text><xsl:value-of select="EndTime"/>",
+            "start" : "<xsl:value-of select="$FullDate"/><xsl:text> </xsl:text><xsl:value-of select="format-time(StartTime,'[H01]:[m01]:[s01]')"/>",
+        "end"   : "<xsl:value-of select="$FullDate"/><xsl:text> </xsl:text><xsl:value-of select="format-time(EndTime,'[H01]:[m01]:[s01]')"/>",
             "allDay": false,
             "url"   : "<xsl:value-of select="$xslt.base-url"/>me/courses/<xsl:value-of select="$CourseId"/>#<xsl:value-of select="SessionId"/>"
             },  
@@ -94,9 +94,17 @@
     <xsl:template match="Task">
         {
         "title" : "<xsl:value-of select="Title"/>",
-        "start" : "<xsl:value-of select="Deadline/Date"/><xsl:text> 01:00:00</xsl:text>",
-        "end" : "<xsl:value-of select="Deadline/Date"/><xsl:text> 02:00:00</xsl:text>",
-        "allDay": false,
+        <xsl:choose>
+            <xsl:when test="Deadline/Time">
+                "start" : "<xsl:value-of select="Deadline/Date"/><xsl:text> </xsl:text><xsl:value-of select="Deadline/Time"/>",
+                "end" : "<xsl:value-of select="Deadline/Date"/><xsl:text> </xsl:text><xsl:value-of select="Deadline/Time"/>",
+                "allDay": false,
+            </xsl:when>
+            <xsl:otherwise>
+                "start" : "<xsl:value-of select="Deadline/Date"/>",
+                "allDay": true,
+            </xsl:otherwise>
+        </xsl:choose>
         "url"   : "<xsl:value-of select="$xslt.base-url"/>me/todo",
         "color" : "#cea97e",
         "textColor" : "#5e4223"
@@ -109,9 +117,9 @@
         "start" : "<xsl:value-of select="Start"/>",
         <!-- Si il y a une fin ie les vacances sont plus longues que 1 jour on la note -->
         <xsl:if test="End">"end" : "<xsl:value-of select="End"/>",</xsl:if>
-        "allDay": true,
+        "allDay" : true,
         "color" : "#aedb97",
         "textColor" : "#3d641b"
-        }, 
+        },
     </xsl:template>
 </xsl:stylesheet>
