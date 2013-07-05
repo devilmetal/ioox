@@ -91,11 +91,15 @@
                         <div> You have to login to access this page. </div>
                     </xsl:when>
                     <xsl:otherwise>
-                        <div class="span12">
+                        
                             <!-- On va appliquer le template suivant le retour du XQuery soit : Null => pas loggé/pas incrit
-                                                                                         soit : Courses => on affiche -->
-                            <xsl:apply-templates select="/Root/child::node()"></xsl:apply-templates>
-                        </div>
+                                                                                         soit : Courses => on affiche 
+                            <xsl:apply-templates select="/Root/child::node()"></xsl:apply-templates>-->
+                            
+                            <xsl:apply-templates select="//Period"/>
+                                
+                            
+                        
                     </xsl:otherwise>
                 </xsl:choose>
             </site:content>
@@ -176,6 +180,40 @@
             <xsl:variable name="id"><xsl:value-of select="CourseId"/></xsl:variable>
             <td><a href="{$xslt.base-url}me/courses/{$id}">Link to the course</a></td>
         </tr>
+    </xsl:template>
+    
+    <xsl:template match="Period">
+        <h3 class="heading"><xsl:value-of select="Name"/></h3>
+        <div class="row-fluid">
+        <xsl:apply-templates select="Course" mode="new"/>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="Course" mode="new">
+        <div class="span4">
+            <xsl:variable name="id"><xsl:value-of select="CourseId"/></xsl:variable>
+            <xsl:choose>
+                <xsl:when test="count(.[Role!='Student'])=0">
+                    <div class="ourbox obc1">
+                        
+                            <h4><xsl:value-of select="Title"/></h4>
+                            <br/>
+                        <a href="{$xslt.base-url}me/courses/{$id}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to</a>
+                        
+                    </div>
+                </xsl:when>
+                <xsl:otherwise>
+                    <div class="ourbox obc4">
+                        
+                            <h4><xsl:value-of select="Title"/></h4>
+                            <br/>
+                        <a href="{$xslt.base-url}me/courses/{$id}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to</a>
+                        
+                    </div>
+                </xsl:otherwise>
+            </xsl:choose>
+        </div>
+            
     </xsl:template>
     
     

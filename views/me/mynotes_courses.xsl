@@ -92,14 +92,17 @@
                         <div> You have to login to access this page. </div>
                     </xsl:when>
                     <xsl:otherwise>
-                        <div class="span12">
+                        
                             <!-- ENTER CONTENT HERE ! -->
                             <!-- Print path nav -->
                             <xsl:apply-templates select="//Root/Infos"/>
-                            <ul>
-                                <xsl:apply-templates select=".//Session"/>
-                            </ul>
-                        </div>
+                            <!--<ul>
+                                <xsl:apply-templates select="//Root/Session"/>
+                            </ul>-->
+                            <h3 class="heading">Sessions's note of cours: <xsl:value-of select="//Infos/Title"/></h3>
+                            <xsl:apply-templates select="//AllSession"/>
+                            
+                        
                     </xsl:otherwise>
                 </xsl:choose>
             </site:content>
@@ -171,6 +174,38 @@
                 </li>
                 
             </ul>
+        </div>
+    </xsl:template>
+    <xsl:template match="AllSession">
+        <div class="row-fluid">
+            <xsl:apply-templates select="Session" mode="app"/>
+        </div>
+    </xsl:template>
+    <xsl:template match="Session" mode="app">
+        <xsl:variable name="courseid"><xsl:value-of select="/Root/Infos/CourseRef"/></xsl:variable>
+        <xsl:variable name="sessionnumber"><xsl:value-of select="SessionNumber"/></xsl:variable>
+        <div class="span6">
+            
+                
+                <xsl:choose>
+                    <xsl:when test="//Root/Session[SessionNumber=$sessionnumber]/SessionNumber &gt; 0">
+                        <div class="ourbox obc0">
+                        <h4><xsl:value-of select="Topic"/></h4>
+                        <span>Date <xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></span>
+                        <span>Time <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/>-<xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></span><br/>
+                        <a href="{$xslt.base-url}me/mynotes/{$courseid}/{$sessionnumber}" class="btn btn-inverse btn-mini"><i class="splashy-view_list"></i> Show Note</a>
+                        </div>
+                    </xsl:when>
+                    <xsl:otherwise>
+                        <div class="ourbox obc2">
+                        <h4><xsl:value-of select="Topic"/></h4>
+                            <span>Date <xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></span>
+                            <span>Time <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/>-<xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></span><br/>
+                        <a href="{$xslt.base-url}me/mynotes/{$courseid}/{$sessionnumber}/modifier" class="btn btn-inverse btn-mini"><i class="splashy-add"></i> Create Note</a>
+                        </div>
+                    </xsl:otherwise>
+                </xsl:choose>
+            
         </div>
     </xsl:template>
 </xsl:stylesheet>

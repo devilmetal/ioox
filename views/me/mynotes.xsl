@@ -99,9 +99,14 @@
                             </ul>
                         </div>
                             <!-- ENTER CONTENT HERE ! -->
-                            <ul>
-                                <xsl:apply-templates select=".//Course"/>
-                            </ul>
+                        <div class="row-fluid">
+                        <xsl:apply-templates select="//Period"/> 
+                        </div>
+                        <!--<br/>
+                        <h3 class="heading">Current period courses</h3>
+                        <div class="row-fluid">
+                            <xsl:apply-templates select=".//Course" mode="current"/>
+                        </div>-->
                         
                     </xsl:otherwise>
                 </xsl:choose>
@@ -156,8 +161,27 @@
         
     </xsl:template>
     
+    <xsl:template match="Period">
+        <xsl:if test="count(Course/CourseId = //Root/Course/CourseId) &gt; 0">
+            <h3 class="heading"><xsl:value-of select="Name"/></h3>
+            <div class="rowf-luid">
+                <xsl:apply-templates select="Course[CourseId = //Root/Course/CourseId]"></xsl:apply-templates>
+            </div>
+        </xsl:if>
+
+    </xsl:template>
+    
     <xsl:template match="Course">
         <xsl:variable name="courseid"><xsl:value-of select="CourseId"/></xsl:variable>
-        <li><a href="{$xslt.base-url}me/mynotes/{$courseid}">Link to the "notes" for : <xsl:value-of select="Title"></xsl:value-of></a></li>
+        <div class="span4">
+        <div class="ourbox obc1">
+            <h4><xsl:value-of select="Acronym"/></h4>
+            <br/>
+            <a href="{$xslt.base-url}me/mynotes/{$courseid}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> Show notes</a>
+        </div>
+        </div>
+    </xsl:template>
+    <xsl:template match="Course" mode="past">
+        bho
     </xsl:template>
 </xsl:stylesheet>

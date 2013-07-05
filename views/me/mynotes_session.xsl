@@ -156,7 +156,7 @@
     </xsl:template>
     
     <xsl:template match="Note">
-        <h3 class="heading"><xsl:value-of select="//NoteInfos/SessionTopic"/></h3>
+        <h3 class="heading">Note: <xsl:value-of select="//NoteInfos/SessionTopic"/></h3>
         
         <xsl:apply-templates select="Content"/>
         
@@ -181,7 +181,7 @@
                 </div>
                 <div class="doc_view_footer clearfix">
                     <button title="Modifier la page" onclick="javascript:window.location.href+='/modifier'"
-                        >Modifier</button>
+                        class="btn btn-inverse faq_right "><i class="splashy-pencil"></i> Edit</button>
                 </div>
             </div>
             <ul class="pager">

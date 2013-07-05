@@ -25,10 +25,29 @@ let $id :=  if ($method = 'POST') then (
 let $person := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
 let $notes  := $person/Notes
 let $usables-courses := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$notes//Note/CourseRef]
+let $period := doc(concat($collection, "AcademicYears.xml"))//Period[Courses/Course/CourseId=$notes//Note/CourseRef]
                             
 
     return
     <Root>
      {$usables-courses}
+     <Periods>
+     {
+     for $p in $period
+     order by $p/Date
+     return
+     <Period>
+        {$p/Name}
+        {$p/Start}
+        {$p/End}
+        {
+        for $c in $period/Courses/Course
+        return
+        <Course>{$c/CourseId}{$c/CourseNo}{$c/Title}{$c/Acronym}</Course>
+        }
+        
+     </Period>
+     }
+     </Periods>
      </Root>
    

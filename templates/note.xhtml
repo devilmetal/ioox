@@ -88,8 +88,23 @@
     </xt:head>
   </head>
   <body>
-    <h2>Note creator</h2>
-    <xt:use label="Note" types="Note"/>
+    <h3 class="heading">Blocnotes</h3>
+    <div class="doc_view">
+      <div class="doc_view_header">
+        <dl class="dl-horizontal">
+          <dt>Topic</dt>
+          <dd>//NoteInfos/SessionTopic</dd>
+          <dt>Date</dt>
+          <dd>//NoteInfos/LastEdit</dd>
+        </dl>
+      </div>
+      <div class="doc_view_content">
+        <xt:use label="Note" types="Note"/>
+      </div>
+      <div class="doc_view_footer clearfix">
+        
+      </div>
+    </div>
     
   </body>
 </html>
