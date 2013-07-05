@@ -1419,3 +1419,7 @@ footer{
 .ListHeader{
 	font-weight:bold;
 }
+
+@media (max-width: 767px){
+	body{width:100%;}
+}
