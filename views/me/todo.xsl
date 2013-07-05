@@ -171,16 +171,20 @@
                 <xsl:value-of select="Title"/>
                 <span class="oursmall priohead{$prio}">
                 (Prio: <xsl:value-of select="$prio"/>
-                    <xsl:if test="not(Deadline/Date!='')">
+                    <xsl:if test="count(Deadline) &gt; 0">
                         - deadline <xsl:value-of select="Deadline/Date"/>
-                    </xsl:if>
-                    )
+                        <xsl:apply-templates select="Deadline/Time"/>
+                    </xsl:if>)
                 </span>
             </h3>
             <xsl:apply-templates select="Description"/>
         </blockquote>
         
         
+    </xsl:template>
+    
+    <xsl:template match="Time">
+        <xsl:text> </xsl:text><xsl:value-of select="format-time(.,'[H1]:[m1]')"/>
     </xsl:template>
 
 	
