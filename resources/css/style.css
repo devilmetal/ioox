@@ -1380,6 +1380,7 @@ font-size:0.81em;
 }
 div.ourbox{
 	margin-right:0.61em;
+	margin-bottom:0.61em;
 	padding: .61em .61em .61em .61em;
 	text-align:center;
 -webkit-border-radius: 4px;
