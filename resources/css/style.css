@@ -1421,5 +1421,5 @@ footer{
 }
 
 @media (max-width: 767px){
-	body{width:100%;}
+	div#contentwrapper{max-width:760px;}
 }
