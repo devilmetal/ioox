@@ -9,7 +9,7 @@ declare option exist:serialize "method=xml media-type=text/xml";
 
 let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
-
+let $role := xdb:get-user-groups(xdb:get-current-user())
 let $id := if (session:get-attribute('id')) then (
                             session:get-attribute('id')
                             )
@@ -40,7 +40,7 @@ let $core := if($method='POST') then
                      let $lnametest := $lname != ''
                      let $fnametest := $fname != ''
                      let $uniqueIDtest := $uniqueID != ''
-                     
+                     let $iamadmin := $role='dba'
                      
                      
                      (: ----------------- AFFICHAGE SELON LES TESTS --------------- :)
@@ -94,7 +94,7 @@ let $core := if($method='POST') then
                         )
                       
                       (: ------------ EXECUTION DE LA QUERY POUR LE SAVE DE L'UTILISATEUR SI LES TESTS SONT OK ----------------:)
-                      let $query := if(not($usertest) and $lnametest and $fnametest and $uniqueIDtest) then 
+                      let $query := if(not($usertest) and $lnametest and $fnametest and $uniqueIDtest and $iamadmin) then 
                         (
                         (:on crée l'utilisateur:)
                         let $create := xdb:create-user($username,$password,'site-member','')
@@ -173,7 +173,7 @@ let $core := if($method='POST') then
 
     return
     <Root>
-        <Role>{xdb:get-user-groups(xdb:get-current-user())}</Role>
+        <Role>{$role}</Role>
         <Core>
             {$core}
         </Core>
