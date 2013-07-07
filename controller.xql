@@ -66,6 +66,16 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
         <model src="models/faq.xql"/>
         <view src="views/faq.xsl"/>
     </item>
+    
+    <!--admin page -->
+    <item name="admin" epilogue="standard" method="POST">
+        <model src="models/admin.xql"/>
+        <view src="views/admin.xsl"/>
+        <action name="POST" epilogue="standard">
+            <model src="models/admin.xql"/>
+            <view src="views/admin.xsl"/>
+        </action>
+    </item>
   
     <!-- /contact page -->
     <item name="contact" epilogue="standard">

@@ -94,8 +94,6 @@
                     <xsl:otherwise>
                             <!-- On va appliquer le template suivant le retour du XQuery soit : Null => pas loggé/pas incrit
                                                                                          soit : Courses => on affiche -->
-                            <xsl:apply-templates select="/Root/child::node()"></xsl:apply-templates>
-                            
                             
                         <div id="contentwrapper">
                             
@@ -103,7 +101,7 @@
                             <div class="row-fluid">
                                 
                                 <div class="span12">
-                                    <xsl:apply-templates select="//Infos"/>
+                                    <xsl:apply-templates select="/Root/Infos"/>
                                     <div class="tabbable">
                                         <ul class="nav nav-tabs">
                                             <!-- Generate the tab menu ofr the current and other tabs -->
@@ -311,8 +309,9 @@
             <xsl:apply-templates select="./Grades/Engagment" mode="global"/>
         </xsl:variable>
         <!--<xsl:value-of select="sum($globalMean/child::node()/child::node())"></xsl:value-of>-->
-        Putain de note global : ok ! : <xsl:value-of select="sum($globalMean/child::node()) div $totalEngagment"></xsl:value-of>
-        
+        <dt>Note global</dt>
+        <xsl:variable name="sumPonderation"><xsl:value-of select="sum($globalMean/child::node()) div $totalEngagment"/></xsl:variable>
+        <dd><xsl:value-of select="round(100*$sumPonderation) div 100"/></dd>
     </xsl:template>
     
     <xsl:template match="Period">
@@ -320,14 +319,6 @@
         <h3>Tri par cours </h3>
         <xsl:apply-templates select=".//Course"/>
     </xsl:template>
-    
-    
-    
-    
-    
-    
-    
-    
     
     <xsl:template match="Engagment" mode="global">
         <!-- Somme de toutes les "sous-grades" -->
@@ -339,7 +330,7 @@
         <!-- Moyenne de l'engagment -->
         <xsl:variable name="sumPonderation"><xsl:value-of select="sum($elementSumPonderation/child::node()/child::node())"></xsl:value-of></xsl:variable>
         
-        <Mean><xsl:value-of select="number($sumPonderation)"></xsl:value-of></Mean>
+        <Mean><xsl:value-of select="round(100*$sumPonderation) div 100"></xsl:value-of></Mean>
         
        
     </xsl:template>
@@ -354,7 +345,8 @@
         <!-- Moyenne de l'engagment -->
         <xsl:variable name="sumPonderation"><xsl:value-of select="sum($elementSumPonderation/child::node()/child::node())"></xsl:value-of></xsl:variable>
         
-        <p>Putain de moyen pour le cours : <xsl:value-of select="number($sumPonderation)"></xsl:value-of></p>
+        <dt>Moyenne pour le cours</dt>
+        <dd> <xsl:value-of select="round(100*$sumPonderation) div 100"/></dd>
         <xsl:apply-templates select="Grade/child::node()" mode="unite"/>
         
         
@@ -370,7 +362,7 @@
         <!-- Pondération  -->
         <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos//Course[CourseId=$courseid]/Evaluation/Exercices/Weight) div $sumtotal"/></xsl:variable>
         
-        <Mean><xsl:value-of select="$ponderation * $mean "></xsl:value-of></Mean>
+        <Mean><xsl:value-of select="round(100*$ponderation*$mean) div 100"></xsl:value-of></Mean>
         
     </xsl:template>
     
@@ -380,7 +372,7 @@
         <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos//Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
         <xsl:variable name="ponderation"><xsl:value-of select="/Root/Infos//Course[CourseId=$courseid]/Evaluation/Exam/Weight div $sumtotal"/></xsl:variable>
         
-        <Mean><xsl:value-of select="$ponderation * $mean "></xsl:value-of></Mean>
+        <Mean><xsl:value-of select="round(100*$ponderation*$mean) div 100"></xsl:value-of></Mean>
         
     </xsl:template>
     
@@ -390,7 +382,7 @@
         <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos//Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
         <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos//Course[CourseId=$courseid]/Evaluation/Project/Weight) div $sumtotal"/></xsl:variable>
         
-        <Mean><xsl:value-of select="$ponderation * $mean "></xsl:value-of></Mean>
+        <Mean><xsl:value-of select="round(100*$ponderation*$mean) div 100"></xsl:value-of></Mean>
         
     </xsl:template>
     
@@ -404,7 +396,8 @@
         <!-- Pondération  -->
         <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos//Course[CourseId=$courseid]/Evaluation/Exercices/Weight) div $sumtotal"/></xsl:variable>
         
-        <p>Putain de moyenne pour les exercice : <xsl:value-of select="$mean "></xsl:value-of></p>
+        <dt>Moyenne pour les exercice</dt>
+        <dd><xsl:value-of select="$mean"/></dd>
         
     </xsl:template>
     
@@ -414,8 +407,8 @@
         <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos//Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
         <xsl:variable name="ponderation"><xsl:value-of select="/Root/Infos//Course[CourseId=$courseid]/Evaluation/Exam/Weight div $sumtotal"/></xsl:variable>
         
-        <p>Putain de moyenne pour l'examen : <xsl:value-of select="$mean "></xsl:value-of></p>
-        
+        <dt>Note de l'examen</dt>
+        <dd><xsl:value-of select="$mean"/></dd>
     </xsl:template>
     
     <xsl:template match="ProjectGrades" mode="unite">
@@ -424,7 +417,7 @@
         <xsl:variable name="sumtotal"><xsl:value-of select="sum(/Root/Infos//Course[CourseId=$courseid]/Evaluation/child::node()/Weight)"/></xsl:variable>
         <xsl:variable name="ponderation"><xsl:value-of select="number(/Root/Infos//Course[CourseId=$courseid]/Evaluation/Project/Weight) div $sumtotal"/></xsl:variable>
         
-        <p>Putain de moyenne pour le projet : <xsl:value-of select="$mean "></xsl:value-of></p>
-        
+        <dt>Moyenne pour le projet</dt>
+        <dd><xsl:value-of select="$mean"/></dd>
     </xsl:template>
 </xsl:stylesheet>
