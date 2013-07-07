@@ -385,7 +385,7 @@
 
         <!--  &lt; instead of < and &gt; instead of >, b -->
         <xsl:variable name="current">
-            <xsl:choose>
+            <!--<xsl:choose>
                 <xsl:when test="count(preceding-sibling::Session) = 0">
                     <xsl:if test="current-date() &lt; ./Session/Date">active</xsl:if>
                 </xsl:when>
@@ -397,7 +397,7 @@
                 <xsl:when test="count(following-sibling::Session)=0">
                     <xsl:if test="current-date() &gt; $date">active</xsl:if>
                 </xsl:when>
-            </xsl:choose>
+            </xsl:choose>-->
         </xsl:variable>
         <li class="{$current}">
             <a href="#tab_l{$nr}" data-toggle="tab">Session <xsl:value-of

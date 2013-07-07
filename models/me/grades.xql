@@ -19,6 +19,7 @@ let $collection := '/sites/ioox/data/'
                             return <Infos>
                                         <Periods>{
                                             for $period in $periods//Period
+                                            order by $period/Start
                                             return
                                             (
                                             <Period>

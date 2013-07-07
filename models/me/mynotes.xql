@@ -16,12 +16,6 @@ let $id := if (session:get-attribute('id')) then (
                         else(
                             '-1'
                             )
-let $id :=  if ($method = 'POST') then (
-                            request:get-parameter('coursid', '')
-                            )
-                        else(
-                            1
-                            )
 let $person := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
 let $notes  := $person/Notes
 let $engagments := $person//Engagments
@@ -53,5 +47,10 @@ let $period := doc(concat($collection, "AcademicYears.xml"))//Period[Courses/Cou
      </Period>
      }
      </Periods>
+     <Session>
+        <Id>
+            {$id}
+        </Id>
+     </Session>
      </Root>
    

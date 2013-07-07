@@ -82,78 +82,9 @@
             <!-- MENU DEFINITION -->
             <site:menu> </site:menu>
             <!-- SITE CONTENT -->
-            <site:navbar>
+            <site:navbar/>
                 
-                <div class="main_content">
-                    <div class="navbar">
-                        <xsl:if test="//Session/Role != '-1'">
-                            <div class="navbar-inner">
-                                <div class="container-fluid">
-                                    <!--<a class="brand2" href="#"> Me</a>-->
-                                    <ul class="nav" id="mobile-nav-2">
-                                        <li>
-                                            <a href="#"><img src="{$xslt-ressource-url}/img/gCons-mini-white/home.png" alt=""/>
-                                                MyHome </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/bookmark.png"
-                                                alt=""/> Courses </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/addressbook.png"
-                                                alt=""/> MyNote </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/pie-chart.png"
-                                                alt=""/> Grades </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/calendar.png"
-                                                alt=""/> Todos </a>
-                                        </li>
-                                        <li> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </xsl:if>
-                        <xsl:if test="//Session/Role != 'Student' and //Session/Role != '-1' ">
-                            <div class="navbar-inner">
-                                <div class="container-fluid">
-                                    <a class="brand2" href="#"> Teacher</a>
-                                    <ul class="nav">
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/configuration.png"
-                                                alt=""/> My Teaching </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/multi-agents.png"
-                                                alt=""/> My Class </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/bar-chart.png"
-                                                alt=""/> Manage Grades </a>
-                                        </li>
-                                        <li> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </xsl:if>
-                    </div>
-                </div>
-            </site:navbar>
+            
             <site:content>
                 <xsl:choose>
                     <xsl:when test="//Session/Id = '-1'">
@@ -161,11 +92,58 @@
                         <div> You have to login to access this page. </div>
                     </xsl:when>
                     <xsl:otherwise>
-                        <div class="span12">
                             <!-- On va appliquer le template suivant le retour du XQuery soit : Null => pas loggé/pas incrit
                                                                                          soit : Courses => on affiche -->
                             <xsl:apply-templates select="/Root/child::node()"></xsl:apply-templates>
+                            
+                            
+                        <div id="contentwrapper">
+                            
+                            <h3 class="heading"> Grades </h3>
+                            <div class="row-fluid">
+                                
+                                <div class="span12">
+                                    <xsl:apply-templates select="//Infos"/>
+                                    <div class="tabbable">
+                                        <ul class="nav nav-tabs">
+                                            <!-- Generate the tab menu ofr the current and other tabs -->
+                                            
+                                            <xsl:apply-templates select="//Period" mode="tab"/>
+                                            
+                                        </ul>
+                                        <div class="tab-content">
+                                            <xsl:apply-templates select="//Period" mode="full"/>
+                                            
+                                            <div class="tab-pane" id="legend">
+                                                <dl class="dl-horizontal">
+                                                    <dt>Color indicator</dt>
+                                                    <dd><span class="square_sub">.</span>you are subscribed on the cours</dd>
+                                                    <dd><span class="square_unsub">.</span>you was subscibed on the cours</dd>
+                                                </dl>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                            </div>
+                            
                         </div>
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                            
                     </xsl:otherwise>
                 </xsl:choose>
             </site:content>
@@ -216,10 +194,109 @@
                 </script>
             </site:javascript>
         </site:view>
-        
-        
-        
     </xsl:template>
+    
+    
+    <xsl:template match="Periods" mode="explorer">
+        <xsl:apply-templates select="Period[1]" mode="tab"/>
+        <xsl:apply-templates select="Period[2]" mode="tab"/>
+        <xsl:apply-templates select="Period[3]" mode="tab"/>
+        <xsl:apply-templates select="Period[4]" mode="dropdown"/>
+    </xsl:template>
+    
+    <xsl:template match="Period" mode="tab">
+        <xsl:variable name="class"><xsl:if test=".=//Period[position()=1]">active</xsl:if></xsl:variable>
+        <li class="{$class}">
+            <xsl:element name="a">
+                <xsl:attribute name="href">#<xsl:value-of select="./End"/></xsl:attribute>
+                <xsl:attribute name="data-toggle">tab</xsl:attribute>
+                <xsl:value-of select="./Name"/>
+            </xsl:element>
+        </li>
+    </xsl:template>
+    
+    
+    <xsl:template match="Period" mode="full">
+        <xsl:variable name="class"><xsl:if test=".=//Period[position()=1]">active</xsl:if></xsl:variable>
+        <xsl:variable name="id_tab">
+            <xsl:value-of select="./End"/>
+        </xsl:variable>
+        <div class="tab-pane {$class}" id="{$id_tab}">
+            <xsl:apply-templates select="Courses"/>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="Period" mode="dropdown">
+        <li class="dropdown">
+            <a href="#" data-toggle="dropdown" class="dropdown-toggle">Archive <b class="caret"
+            /></a>
+            <ul class="dropdown-menu">
+                <li>
+                    <xsl:element name="a">
+                        <xsl:attribute name="href">#<xsl:value-of select="./End"/></xsl:attribute>
+                        <xsl:attribute name="data-toggle">tab</xsl:attribute>
+                        <xsl:value-of select="./Name"/>
+                    </xsl:element>
+                </li>
+                <xsl:for-each select="following-sibling::Period">
+                    <li>
+                        <xsl:element name="a">
+                            <xsl:attribute name="href">#<xsl:value-of select="./End"
+                            /></xsl:attribute>
+                            <xsl:attribute name="data-toggle">tab</xsl:attribute>
+                            <xsl:value-of select="./Name"/>
+                        </xsl:element>
+                    </li>
+                </xsl:for-each>
+            </ul>
+        </li>
+    </xsl:template>
+    
+    <xsl:template match="Courses">
+        <div id="accordion1" class="accordion">
+            <xsl:for-each select="Course">
+                <xsl:variable name="acc_uni"><xsl:value-of select="ancestor::Period/End"
+                />-<xsl:value-of select="CourseId"/></xsl:variable>
+                <div class="accordion-group">
+                    <xsl:variable name="CN">
+                        <xsl:value-of select="./CourseId"/>
+                    </xsl:variable>
+                    <xsl:variable name="class">
+                        <xsl:value-of select="//Root/Person/Engagments/Engagment[CoursRef=$CN]/Role"/>
+                    </xsl:variable>
+                    
+                    <div class="accordion-heading">
+                        <!-- data-parent="#accordion1" deleted -->
+                        <a href="#{$acc_uni}" data-toggle="collapse"
+                            class="accordion-toggle  {$class}">
+                            <xsl:value-of select="CourseNo"/> - <xsl:value-of select="Title"/>
+                        </a>
+                    </div>
+                    <div class="accordion-body collapse" id="{$acc_uni}">
+                        <div class="accordion-inner">
+                            <div class="row-fluid">
+                                <h4>Cours <xsl:value-of select="CourseNo"/></h4>
+                                <xsl:variable name="courseid"><xsl:value-of select="CourseId"/></xsl:variable>
+                                <xsl:apply-templates select="//Grades//Engagment[CoursRef=$courseid]" mode="engagment"/>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </div>
+            </xsl:for-each>
+        </div>
+    </xsl:template>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
     <xsl:template match="Null">
         <p>You have either to register in any course other to login in order to access your courses.</p>
@@ -236,9 +313,6 @@
         <!--<xsl:value-of select="sum($globalMean/child::node()/child::node())"></xsl:value-of>-->
         Putain de note global : ok ! : <xsl:value-of select="sum($globalMean/child::node()) div $totalEngagment"></xsl:value-of>
         
-        
-        <h2>Tri par périodes</h2>
-        <xsl:apply-templates select="/Root/Infos/Periods//Period"/>
     </xsl:template>
     
     <xsl:template match="Period">
@@ -247,11 +321,6 @@
         <xsl:apply-templates select=".//Course"/>
     </xsl:template>
     
-    <xsl:template match="Course">
-        <h4>Cours <xsl:value-of select="CourseNo"/></h4>
-        <xsl:variable name="courseid"><xsl:value-of select="CourseId"/></xsl:variable>
-        <xsl:apply-templates select="//Grades//Engagment[CoursRef=$courseid]" mode="engagment"/>
-    </xsl:template>
     
     
     

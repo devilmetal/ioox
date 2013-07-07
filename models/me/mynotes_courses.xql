@@ -49,5 +49,10 @@ let $name := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$ref
         <CourseRef>{$ref}</CourseRef>
         {$name}
      </Infos>
+     <Session>
+        <Id>
+            {$id}
+        </Id>
+     </Session>
      </Root>
    

@@ -44,7 +44,7 @@
             "start" : "<xsl:value-of select="Session/Date"/><xsl:text> </xsl:text><xsl:value-of select="format-time(Session/StartTime,'[H01]:[m01]:[s01]')"/>",
             "end"   : "<xsl:value-of select="Session/Date"/><xsl:text> </xsl:text><xsl:value-of select="format-time(Session/EndTime,'[H01]:[m01]:[s01]')"/>",
             "allDay": false,
-            "url"   : "<xsl:value-of select="$xslt.base-url"/>me/courses/<xsl:value-of select="$CourseId"/>#<xsl:value-of select="Session/SessionNumber"/>"
+            "url"   : "<xsl:value-of select="$xslt.base-url"/>me/courses/<xsl:value-of select="$CourseId"/>#tab_l<xsl:value-of select="Session/SessionNumber"/>"
             },  
         </xsl:template>
     

@@ -6,7 +6,8 @@ import module namespace session="http://exist-db.org/xquery/session";
 
 declare option exist:serialize "method=xml media-type=text/xml";
 
-let $doc := doc('http://www.unifr.ch/webnews/rss2/fr/unifr/')                            
+
+let $doc := if(doc-available('http://www.unifr.ch/webnews/rss2/fr/unifr/')) then (doc('http://www.unifr.ch/webnews/rss2/fr/unifr/')) else (<Empty/>)            
 
     return 
    <Unifr>

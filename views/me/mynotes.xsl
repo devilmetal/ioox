@@ -86,7 +86,7 @@
             
             <site:content>
                 <xsl:choose>
-                    <xsl:when test="//Session/Id = '-1'">
+                    <xsl:when test="/Root/Session/Id = '-1'">
                         <!-- NOT LOGGED IN  -->
                         <div> You have to login to access this page. </div>
                     </xsl:when>
