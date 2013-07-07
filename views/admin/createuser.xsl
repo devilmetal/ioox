@@ -95,7 +95,12 @@
                         <div> You are not admin. </div>
                     </xsl:when>
                     <xsl:otherwise>
-                        <a href="./usercreation">Create an user</a>
+                        
+                        <!-- Affichage
+                            cas 1) child = Form => affichage du formulaire (et selon les erreurs associées)
+                            cas 2) child = Done => affichage de l'après création, donc mot de pass + username
+                        -->
+                        <xsl:apply-templates select="/Root/Core/child::node()"/>
                         
                     </xsl:otherwise>
                 </xsl:choose>
@@ -147,10 +152,91 @@
                 </script>
             </site:javascript>
         </site:view>
-        
-        
-        
     </xsl:template>
+    
+    <xsl:template match="Form">
+        <div class="span12">
+            <h3 class="heading">Create an user</h3>
+            <div class="row-fluid">
+                <div class="span8">
+                    <form class="form-horizontal" method="post" action="#">
+                        <fieldset>
+                            <xsl:apply-templates select="Error"/>
+                            <div class="control-group formSep">
+                                <label for="username" class="control-label">Username</label>
+                                <div class="controls">
+                                    <!-- old or new value for username -->
+                                    <xsl:variable name="username"><xsl:value-of select="Username/Text"/></xsl:variable>
+                                    <input type="text" id="username" name="username" class="input-xlarge" value="{$username}" />
+                                    
+                                    <!-- si une erreur existe on l'affiche -->
+                                    <xsl:apply-templates select="Username/Error"/>
+                                </div>
+                            </div>
+                           
+                            <div class="control-group formSep">
+                                <label for="fname" class="control-label">First Name</label>
+                                <div class="controls">
+                                    <!-- old or new value for fname -->
+                                    <xsl:variable name="fname"><xsl:value-of select="Firstname/Text"/></xsl:variable>
+                                    <input type="text" id="fname" name="fname" class="input-xlarge" value="{$fname}" />
+                                    
+                                    <!-- si une erreur existe on l'affiche -->
+                                    <xsl:apply-templates select="Firstname/Error"/>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group formSep">
+                                <label for="lname" class="control-label">First Name</label>
+                                <div class="controls">
+                                    <!-- old or new value for lname -->
+                                    <xsl:variable name="lname"><xsl:value-of select="Lastname/Text"/></xsl:variable>
+                                    <input type="text" id="lname" name="lname" class="input-xlarge" value="{$lname}" />
+                                    
+                                    <!-- si une erreur existe on l'affiche -->
+                                    <xsl:apply-templates select="Lastname/Error"/>
+                                </div>
+                            </div>
+                            
+                            <div class="control-group formSep">
+                                <label for="uniqueID" class="control-label">Unique ID</label>
+                                <div class="controls">
+                                    <!-- old or new value for lname -->
+                                    <xsl:variable name="uniqueID"><xsl:value-of select="UniqueID/Text"/></xsl:variable>
+                                    <input type="text" id="uniqueID" name="uniqueID" class="input-xlarge" value="{$uniqueID}" />
+                                    
+                                    <!-- si une erreur existe on l'affiche -->
+                                    <xsl:apply-templates select="UniqueID/Error"/>
+                                </div>
+                            </div>
+                            
+                           
+                            <div class="control-group">
+                                <div class="controls">
+                                    <button class="btn btn-gebo" type="submit">Save changes</button>
+                                    <button class="btn">Cancel</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="Done">
+        <p>Query ok ! </p>
+        <p>Username : <xsl:value-of select="Username"/></p>
+        <p>Password : <xsl:value-of select="Password"/></p>
+    </xsl:template>
+    
+    <xsl:template match="Error">
+        <div class="alert alert-error">
+            <a class="close" data-dismiss="alert">×</a>
+            <strong>Error : </strong> <xsl:value-of select="."/>
+        </div>
+    </xsl:template>
+    
     
     
 </xsl:stylesheet>

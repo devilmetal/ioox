@@ -95,7 +95,8 @@
                         <div> You are not admin. </div>
                     </xsl:when>
                     <xsl:otherwise>
-                        <a href="./usercreation">Create an user</a>
+                        
+                        <a href="./admin/usercreation" class="btn btn-inverse m0010">Create an User</a>
                         
                     </xsl:otherwise>
                 </xsl:choose>
