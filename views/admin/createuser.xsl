@@ -187,7 +187,7 @@
                             </div>
                             
                             <div class="control-group formSep">
-                                <label for="lname" class="control-label">First Name</label>
+                                <label for="lname" class="control-label">Last Name</label>
                                 <div class="controls">
                                     <!-- old or new value for lname -->
                                     <xsl:variable name="lname"><xsl:value-of select="Lastname/Text"/></xsl:variable>
@@ -201,7 +201,7 @@
                             <div class="control-group formSep">
                                 <label for="uniqueID" class="control-label">Unique ID</label>
                                 <div class="controls">
-                                    <!-- old or new value for lname -->
+                                    <!-- old or new value for uniqueID -->
                                     <xsl:variable name="uniqueID"><xsl:value-of select="UniqueID/Text"/></xsl:variable>
                                     <input type="text" id="uniqueID" name="uniqueID" class="input-xlarge" value="{$uniqueID}" />
                                     

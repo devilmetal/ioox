@@ -156,16 +156,107 @@
     
    
     
-    <xsl:template match="Done">
-        <p>Query ok ! </p>
-        <p>Username : <xsl:value-of select="Username"/></p>
-        <p>Password : <xsl:value-of select="Password"/></p>
+    <xsl:template match="Search">
+        <div class="span12">
+            <h3 class="heading">Search for an user</h3>
+            <div class="row-fluid">
+                <div class="span8">
+                    <form class="form-horizontal" method="post" action="#">
+                        <fieldset>
+                            <xsl:apply-templates select="Error"/>
+                            <xsl:apply-templates select="Message"/>
+                            <div class="control-group formSep">
+                                <label for="username" class="control-label">Username</label>
+                                <div class="controls">
+                                    <input type="text" id="username" name="username" class="input-xlarge" value="" />
+                                </div>
+                            </div>
+                            <div class="control-group formSep">
+                                <label for="fname" class="control-label">First Name</label>
+                                <div class="controls">
+                                    <input type="text" id="fname" name="fname" class="input-xlarge" value="" />
+                                    
+                                </div>
+                            </div>
+                            <div class="control-group formSep">
+                                <label for="lname" class="control-label">Last Name</label>
+                                <div class="controls">
+                                    <input type="text" id="lname" name="lname" class="input-xlarge" value="" />
+                                </div>
+                            </div>
+                            <div class="control-group formSep">
+                                <label for="uniqueID" class="control-label">Unique ID</label>
+                                <div class="controls">
+                                    <input type="text" id="uniqueID" name="uniqueID" class="input-xlarge" value="" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input name="search" value="search" type="hidden"/>
+                                    <button class="btn btn-gebo" type="submit">Search for an user</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
     </xsl:template>
     
+    <xsl:template match="Back">
+        <div class="span12">
+            <h3 class="heading">Search for an user</h3>
+            <div class="row-fluid">
+                <xsl:apply-templates select=".//Person"/>
+            </div>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="Person">
+        <div class="span8">
+            <form class="form-horizontal" method="post" action="#">
+                <fieldset>
+                    <div class="control-group formSep">
+                        <label class="control-label">Username</label>
+                        <div class="controls text_line">
+                            <strong><xsl:value-of select="Username"/></strong>
+                        </div><br/>
+                        <label class="control-label">First Name</label>
+                        <div class="controls text_line">
+                            <strong><xsl:value-of select="Firstname"/></strong>
+                        </div><br/>
+                        <label class="control-label">Last Name</label>
+                        <div class="controls text_line">
+                            <strong><xsl:value-of select="Lastname"/></strong>
+                        </div><br/>
+                        <label class="control-label">UniqueID</label>
+                        <div class="controls text_line">
+                            <strong><xsl:value-of select="UniqueID"/></strong>
+                        </div><br/>
+                        <div class="controls">
+                            <xsl:variable name="username"><xsl:value-of select="Username"/></xsl:variable>
+                            <input name="username" value="{$username}" type="hidden"/>
+                            <button class="btn btn-gebo" type="submit">Delete</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </xsl:template>
+    
+    <!-- Affichage d'une erreure -->
     <xsl:template match="Error">
         <div class="alert alert-error">
             <a class="close" data-dismiss="alert">×</a>
             <strong>Error : </strong> <xsl:value-of select="."/>
+        </div>
+    </xsl:template>
+    
+    <!-- Affichage d'un message -->
+    <xsl:template match="Message">
+        <div class="alert alert-info" condition="has-message">
+            <a class="close" data-dismiss="alert">×</a>
+            <strong>Message : </strong> <xsl:value-of select="."/>
         </div>
     </xsl:template>
     
