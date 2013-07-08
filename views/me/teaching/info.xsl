@@ -133,6 +133,7 @@
                               <div class="alert alert-block alert-warning fade in">
                                  <h4 class="alert-heading">Instruction</h4>
                                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae tristique erat.</p>
+                                 <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/info/modifier" class="btn btn-inverse"><i class="splashy-document_a4_edit"></i> Edit</a>
                               </div>
                            </div>
                            <div class="span7">

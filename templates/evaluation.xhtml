@@ -2,25 +2,84 @@
   <head>
     <meta name="description" content="This XTiger XML template defines the structure of an article for publication in the Proceedings of an ACM conference. The resulting XHTML document can be formatted by the ACM-Proc-Article.css style sheet, both for display and print. It can also be transformed into a LaTeX file (style sig-alternate.cls) with ACM-Proc-Article2latex.xsl"/>
     <meta name="keywords" content="template, XTiger"/>
-    <title>My Note</title>
+    <title>Cours Evaluation</title>
     <xt:head version="1.1" templateVersion="1.0" label="Root">
       
-      <xt:component name="Note">
-        <span style="display:none">
-          <xt:use label="NoteId" types="text" class="xtt-off"/>
-          <xt:use label="CourseRef" types="text" class="xtt-off"/>
-          <xt:use label="SessionRef" types="text" class="xtt-off"/>
-        </span>
-        <ul>
-          <xt:repeat minOccurs="0" maxOccurs="*" label="Content">
-            <li>
-              <xt:use label="Parag List" types="Parag List"/>
-              <xt:menu-marker/>
-            </li>
-          </xt:repeat>
-        </ul>
-      </xt:component>
+    <xt:component name="Evaluation" label="Evaluation">
       
+      <xt:repeat minOccurs="0" maxOccurs="*" label="Exam" >
+        
+          <xt:component name="Weight" label="Weight">
+            <xt:use type="text">50</xt:use>
+          </xt:component>
+          <xt:component name="Date" label="Date">
+            <xt:use types="text" param="filter=date;date_region=fr;date_format=ISO_8601">YYYY-MM-DD</xt:use>
+          </xt:component>
+          <xt:use label="StartTime" types="text" option="unset">HH:MM:SS</xt:use>
+          <xt:use label="EndTime" types="text" option="unset">HH:MM:SS</xt:use>
+        
+      </xt:repeat>
+      
+      
+      <xt:repeat minOccurs="0" maxOccurs="*" label="Project">
+        
+        <xt:component name="Project" label="Project">
+         
+            <xt:component name="Weight" label="Weight">
+              <xt:use type="text">50</xt:use>
+            </xt:component>
+            <xt:component name="Title" label="Title">
+              <xt:use type="text">Title</xt:use>
+            </xt:component>
+            <xt:component name="Description" label="Description">
+              <xt:use type="Parag"/>
+            </xt:component>
+            <xt:use type="Steps" label="Steps"/>
+            <xt:use type="Report" label="Report"/>
+        <xt:component
+      </xt:repeat>
+      
+      
+      <xt:repeat minOccurs="0" maxOccurs="*" label="Exercices">
+        <xt:component name="Exercices"/>
+      </xt:repeat>
+    
+    </xt:component>
+    
+
+      <xt:component name="Exercices">
+        <xt:use type="text" label="Weight">50</xt:use>
+        <xt:component name="Description" label="Description">
+          <xt:use type="Parag List" label="Parag List"/>
+        </xt:component>
+      </xt:component>
+
+<xt:component name="Report">
+  <xt:component name="Weight" label="Weight">
+    <xt:use type="text">50</xt:use>
+  </xt:component>
+  <xt:component name="Description" label="Description">
+    <xt:use type="Parag List" label="Parag List"/>
+  </xt:component>
+  
+  
+</xt:component>
+
+<xt:component name="Steps">
+  <xt:repeat minOccurs="1" maxOccurs="*">
+    <xt:use type="Step" label="Step"/>
+    <xt:use label="Date" types="text" param="filter=date;date_region=fr;date_format=ISO_8601">YYYY-MM-DD</xt:use>
+  </xt:repeat>
+</xt:component>
+      
+      <xt:component name="Step">
+        <xt:use type="text" label="Title">Title</xt:use>
+        <xt:component name="DeadLine">
+          <xt:use types="text" label="Date" param="filter=date;date_region=fr;date_format=ISO_8601">YYYY-MM-DD</xt:use>
+        </xt:component>
+      </xt:component>
+
+
      
       <xt:component name="Parag">
         <p>
@@ -88,23 +147,11 @@
     </xt:head>
   </head>
   <body>
-    <h3 class="heading">Blocnotes</h3>
-    <div class="doc_view">
-      <div class="doc_view_header">
-        <dl class="dl-horizontal">
-          <dt>Topic</dt>
-          <dd>//NoteInfos/SessionTopic</dd>
-          <dt>Date</dt>
-          <dd>//NoteInfos/LastEdit</dd>
-        </dl>
-      </div>
+    <h3 class="heading">Evaluations informations</h3>
+
       <div class="doc_view_content">
-        <xt:use label="Note" types="Note"/>
+        <xt:use label="Note" types="Evaluation"/>
       </div>
-      <div class="doc_view_footer clearfix">
-        
-      </div>
-    </div>
     
   </body>
 </html>
