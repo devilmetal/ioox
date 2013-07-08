@@ -15,7 +15,8 @@ let $id := if (session:get-attribute('id')) then (
                         else(
                             '-1'
                             )
-
+                            
+let $search := 
 let $data0 := doc(concat($collection, "AcademicYears.xml"))//Period[$curr-date >= ./End] 
 let $data1 := doc(concat($collection, "AcademicYears.xml"))//Period[($curr-date >= ./Start) and ($curr-date <= ./End)]
 let $data2 := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments
