@@ -237,6 +237,9 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
     <item name="todo" resource="todo.xhtml">
       <model src="oppidum:models/template.xql"/>
     </item>
+    <item name="course" resource="course.xhtml">
+      <model src="oppidum:models/template.xql"/>
+    </item>
   </collection>
   
 </site>;

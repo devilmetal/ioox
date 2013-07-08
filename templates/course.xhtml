@@ -1,0 +1,100 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xt="http://ns.inria.org/xtiger" lang="en" xml:lang="en">
+  <head>
+    <meta name="description" content=""/>
+    <meta name="keywords" content="template, XTiger"/>
+    <title>Todos modification</title>
+    <xt:head version="1.1" templateVersion="1.0" label="Root">
+      
+      <xt:component name="Activity">
+        <h3 class="heading">
+          <xt:use label="Title" types="text">Activity name</xt:use><xt:menu-marker/>
+        </h3>
+          <xt:repeat minOccurs="0" maxOccurs="*" label="Tasks">
+              <xt:use label="Task" types="Task"/><xt:menu-marker/>
+          </xt:repeat>
+      </xt:component>
+      
+      <xt:component name="Task">
+        <blockquote class="prio">
+          <h3 class="priohead">
+            <xt:use label="Title" types="text">title</xt:use><xt:menu-marker/>
+          </h3>
+          <span class="oursmall periohead">
+            <xt:repeat minOccurs="0" maxOccurs="1" label="Deadline">
+              <xt:use label="Date" types="text" param="filter=date;date_region=fr;date_format=ISO_8601">YYYY-MM-DD</xt:use>
+              <xt:use label="Time" types="text" option="unset">HH:MM:SS</xt:use>
+              <xt:menu-marker/>
+            </xt:repeat>
+            (prio:<xt:use label="Priority" types="select" values="1 2 3">2</xt:use>)   
+          </span>
+          <xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+            <xt:use label="Parag List" types="Parag List"/><xt:menu-marker/><br/>
+          </xt:repeat>
+        </blockquote>
+      </xt:component>
+      
+      <xt:component name="Parag">
+        <p>
+          <!--<xt:repeat minOccurs="1" maxOccurs="*" label="Parag">-->
+          <!--                        <xt:use types="Fragment Link" label="Fragment Link"/>-->
+          <xt:use types="text" param="type=textarea;filter=wiki;shape=parent">Description of the task</xt:use>
+          <!--                        <xt:menu-marker/>
+                        <br/>
+                    </xt:repeat>-->
+        </p>
+      </xt:component>
+      
+      <xt:component name="Link">
+        <xt:use label="LinkText" types="text">LinkText</xt:use>
+        <xt:use label="LinkRef" types="text">(LinkRef)</xt:use>
+      </xt:component>
+      
+      <xt:component name="List">
+        <span class="ListHeader"><xt:use label="ListHeader" types="text">ListHeader</xt:use></span>
+        <ul class="list_b">
+          <xt:repeat minOccurs="1" maxOccurs="*" pseudoLabel="ListItem">
+            <li>
+              <xt:use label="ListItem" types="ListItem"/><xt:menu-marker/>
+            </li>
+          </xt:repeat>
+        </ul>
+      </xt:component>
+      
+      <xt:component name="ListItem">
+        <xt:use label="Fragment SubList" types="Fragment SubList"/>
+      </xt:component>
+      
+      <xt:component name="SubList">
+        <span class="ListHeader"><xt:use label="SubListHeader" types="text">ListHeader</xt:use></span>
+        <ul class="list_c" style="margin-bottom:1em;">
+          <xt:repeat minOccurs="1" maxOccurs="*" pseudoLabel="ListItem">
+            <li>
+              <xt:use label="SubListItem" types="SubListItem"/><xt:menu-marker/>
+            </li>
+          </xt:repeat>
+        </ul>
+      </xt:component>
+      
+      <xt:component name="SubListItem">
+        <xt:use label="Fragment" types="Fragment"/>
+      </xt:component>
+      
+      <xt:component name="Fragment">
+        <xt:use types="text">Fragment</xt:use>
+      </xt:component>
+      
+      <xt:component name="text">
+        <xt:use types="text">text</xt:use>
+      </xt:component>
+    </xt:head>
+  </head>
+  <body>
+    <!-- Code fix bug fluid -->
+    <h3 class="headins">Editor todo</h3>
+    <ul>
+      <xt:repeat minOccurs="0" maxOccurs="*" label="ToDoList">
+          <xt:use types="Activity" label="Activity"/>
+      </xt:repeat>
+    </ul>
+  </body>
+</html>

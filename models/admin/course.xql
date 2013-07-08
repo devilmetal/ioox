@@ -146,6 +146,10 @@ let $core := if ($courseid='new') then
             order by $period/Start descending
             return $period/Name}
         </Periods>
+        <Modifier>
+            <Param>{$param}</Param>
+            <CourseId>{$courseid}</CourseId>
+        </Modifier>
     </Root>
    
 

@@ -49,6 +49,7 @@ declare variable $code := <code xmlns="http://oppidoc.com/oppidum/install">
     <collection name="/db/www/ioox">
       <files pattern="templates/todo.xhtml" type="text/xml" preserve="true"/>
       <files pattern="templates/note.xhtml" type="text/xml" preserve="true"/>
+      <files pattern="templates/course.xhtml" type="text/xml" preserve="true"/>
       <files pattern="oppidum:templates/filter.xsl" type="text/xml" preserve="true"/>
     </collection>
   </group>

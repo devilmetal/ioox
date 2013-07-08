@@ -154,98 +154,16 @@
         </site:view>
     </xsl:template>
     
-   
-    
-    <xsl:template match="Search">
-        <div class="span12">
-            <h3 class="heading">Search for a course</h3>
-            <div class="row-fluid">
-                <div class="span8">
-                    <form class="form-horizontal" method="post" action="#">
-                        <fieldset>
-                            <xsl:apply-templates select="Error"/>
-                            <xsl:apply-templates select="Message"/>
-                            <div class="control-group formSep">
-                                <label for="username" class="control-label">Period</label>
-                                <div class="controls">
-                                    <select name="period">
-                                        <option value="">All periods</option>
-                                        <xsl:apply-templates select="/Root/Periods//Name" mode="select"/>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="control-group formSep">
-                                <label for="courseno" class="control-label">CourseNo</label>
-                                <div class="controls">
-                                    <input type="text" id="courseno" name="courseno" class="input-xlarge" value="" />
-                                </div>
-                            </div>
-                            <div class="control-group formSep">
-                                <label for="title" class="control-label">Title</label>
-                                <div class="controls">
-                                    <input type="text" id="title" name="title" class="input-xlarge" value="" />
-                                    
-                                </div>
-                            </div>
-                            <div class="control-group formSep">
-                                <label for="acronym" class="control-label">Acronym</label>
-                                <div class="controls">
-                                    <input type="text" id="acronym" name="acronym" class="input-xlarge" value="" />
-                                </div>
-                            </div>
-                            <div class="control-group">
-                                <div class="controls">
-                                    <input name="search" value="search" type="hidden"/>
-                                    <button class="btn btn-gebo" type="submit">Search for a course</button>
-                                </div>
-                            </div>
-                        </fieldset>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </xsl:template>
-    
-    <xsl:template match="Back">
-        <div class="span12">
-            <h3 class="heading">Courses</h3>
-            <div class="row-fluid">
-                <xsl:apply-templates select=".//Course"/>
-            </div>
-        </div>
-    </xsl:template>
-    
     <xsl:template match="Course">
         <div class="span8">
-            <form class="form-horizontal" method="post" action="#">
-                <fieldset>
-                    <div class="control-group formSep">
-                        <label class="control-label">CourseNo</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="CourseNo"/></strong>
-                        </div><br/>
-                        <label class="control-label">Title</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="Title"/></strong>
-                        </div><br/>
-                        <label class="control-label">Acronym</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="Acronym"/></strong>
-                        </div><br/>
-                        <label class="control-label">Period</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="Period"/></strong>
-                        </div><br/>
-                        <div class="controls">
-                            <xsl:variable name="courseid"><xsl:value-of select="CourseId"/></xsl:variable>
-                            <input name="courseid" value="{$courseid}" type="hidden"/>
-                            <button class="btn btn-gebo" type="submit">Delete</button>
-                            <a class="btn btn-gebo" href="{$xslt.base-url}admin/courses/{$courseid}">Modifiy</a>
-                            <a class="btn btn-gebo" href="{$xslt.base-url}admin/courses/new?id={$courseid}">Clone</a>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
+            <xsl:value-of select="Title"/>
+            <!-- Génération du lien pour la modification -->
+            <xsl:variable name="courseid"><xsl:value-of select="/Root/Modifier/CourseId"/></xsl:variable>
+            <xsl:variable name="param"><xsl:value-of select="/Root/Modifier/Param"/></xsl:variable>
+            <xsl:variable name="parmaLink">
+                <xsl:if test="$param!=''">?id=<xsl:value-of select="$param"/></xsl:if>
+            </xsl:variable>
+            <a class="btn btn-gebo" href="{$xslt.base-url}admin/courses/{$courseid}/modifier{$parmaLink}">Modify</a>
         </div>
     </xsl:template>
     
