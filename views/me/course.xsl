@@ -378,7 +378,6 @@
                     <xsl:if test="not(*[./Room=''])">no room</xsl:if>
                     <xsl:value-of select="./Room"/>
                 </dd>
-                <xsl:apply-templates select="./Resources"/>
             </dl>
             </div>
             <div class="span3">
@@ -388,22 +387,35 @@
             </div>
             
             </div>
+            <xsl:apply-templates select="Topics"/>
+            
             <h4 class="heading">Description</h4>
             <xsl:apply-templates select="Description"/>
         
         </div>
     </xsl:template>
 
+    <xsl:template match="Topics">
+        <h4 class="heading">Topics</h4>
+        <dl class="dl-horizontal dl-modif">
+            <xsl:apply-templates select="Topic"/>
+        </dl>
+    </xsl:template>
 
-
+    <xsl:template match="Topic">
+        <dt><xsl:value-of select="."/></dt>
+        <dd>
+        <xsl:apply-templates select="./Resources"/>
+        </dd>
+    </xsl:template>
+    
     <xsl:template match="Resources">
         <xsl:if test="count(Ressource/child::node()) &gt; 0">
-            <dt>Resources</dt>
+            <ul class="list_a">
             <xsl:for-each select="child::Ressource">
-                <dd>
                     <xsl:apply-templates select="."/>
-                </dd>
             </xsl:for-each>
+            </ul>
         </xsl:if>
     </xsl:template>
 
