@@ -95,13 +95,13 @@
                         <div> You are not admin. </div>
                     </xsl:when>
                     <xsl:otherwise>
-                        <div class="span12">
-                            <h3 class="heading">Admin Panel</h3>
                         
-                            <a href="{$xslt.base-url}admin/usercreation" class="btn btn-inverse m0010">Create an User</a><br/>
-                            <a href="{$xslt.base-url}admin/userdelete" class="btn btn-inverse m0010">Delete an User</a><br/>
-                            <a href="{$xslt.base-url}admin/courses" class="btn btn-inverse m0010">Courses panel</a><br/>
-                        </div>
+                        <!-- Affichage
+                            cas 1) child = Form => affichage du formulaire (et selon les erreurs associées)
+                            cas 2) child = Done => affichage de l'après création, donc mot de pass + username
+                        -->
+                        <xsl:apply-templates select="/Root/Core/child::node()"/>
+                        
                     </xsl:otherwise>
                 </xsl:choose>
             </site:content>
@@ -152,9 +152,122 @@
                 </script>
             </site:javascript>
         </site:view>
-        
-        
-        
+    </xsl:template>
+    
+   
+    
+    <xsl:template match="Search">
+        <div class="span12">
+            <h3 class="heading">Search for a course</h3>
+            <div class="row-fluid">
+                <div class="span8">
+                    <form class="form-horizontal" method="post" action="#">
+                        <fieldset>
+                            <xsl:apply-templates select="Error"/>
+                            <xsl:apply-templates select="Message"/>
+                            <div class="control-group formSep">
+                                <label for="username" class="control-label">Period</label>
+                                <div class="controls">
+                                    <select name="period">
+                                        <option value="">All periods</option>
+                                        <xsl:apply-templates select="/Root/Periods//Name" mode="select"/>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="control-group formSep">
+                                <label for="courseno" class="control-label">CourseNo</label>
+                                <div class="controls">
+                                    <input type="text" id="courseno" name="courseno" class="input-xlarge" value="" />
+                                </div>
+                            </div>
+                            <div class="control-group formSep">
+                                <label for="title" class="control-label">Title</label>
+                                <div class="controls">
+                                    <input type="text" id="title" name="title" class="input-xlarge" value="" />
+                                    
+                                </div>
+                            </div>
+                            <div class="control-group formSep">
+                                <label for="acronym" class="control-label">Acronym</label>
+                                <div class="controls">
+                                    <input type="text" id="acronym" name="acronym" class="input-xlarge" value="" />
+                                </div>
+                            </div>
+                            <div class="control-group">
+                                <div class="controls">
+                                    <input name="search" value="search" type="hidden"/>
+                                    <button class="btn btn-gebo" type="submit">Search for a course</button>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="Back">
+        <div class="span12">
+            <h3 class="heading">Courses</h3>
+            <div class="row-fluid">
+                <xsl:apply-templates select=".//Course"/>
+            </div>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="Course">
+        <div class="span8">
+            <form class="form-horizontal" method="post" action="#">
+                <fieldset>
+                    <div class="control-group formSep">
+                        <label class="control-label">CourseNo</label>
+                        <div class="controls text_line">
+                            <strong><xsl:value-of select="CourseNo"/></strong>
+                        </div><br/>
+                        <label class="control-label">Title</label>
+                        <div class="controls text_line">
+                            <strong><xsl:value-of select="Title"/></strong>
+                        </div><br/>
+                        <label class="control-label">Acronym</label>
+                        <div class="controls text_line">
+                            <strong><xsl:value-of select="Acronym"/></strong>
+                        </div><br/>
+                        <label class="control-label">Period</label>
+                        <div class="controls text_line">
+                            <strong><xsl:value-of select="Period"/></strong>
+                        </div><br/>
+                        <div class="controls">
+                            <xsl:variable name="courseid"><xsl:value-of select="CourseId"/></xsl:variable>
+                            <input name="courseid" value="{$courseid}" type="hidden"/>
+                            <button class="btn btn-gebo" type="submit">Delete</button>
+                            <a class="btn btn-gebo" href="{$xslt.base-url}admin/courses/{$courseid}">Modifiy</a>
+                            <a class="btn btn-gebo" href="{$xslt.base-url}admin/courses/new?id={$courseid}">Clone</a>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </xsl:template>
+    
+    <!-- Affichage d'une erreure -->
+    <xsl:template match="Error">
+        <div class="alert alert-error">
+            <a class="close" data-dismiss="alert">×</a>
+            <strong>Error : </strong> <xsl:value-of select="."/>
+        </div>
+    </xsl:template>
+    
+    <!-- Affichage d'un message -->
+    <xsl:template match="Message">
+        <div class="alert alert-info" condition="has-message">
+            <a class="close" data-dismiss="alert">×</a>
+            <strong>Message : </strong> <xsl:value-of select="."/>
+        </div>
+    </xsl:template>
+    
+    <xsl:template match="Name" mode="select">
+        <xsl:variable name="name"><xsl:value-of select="."/></xsl:variable>
+        <option value="{$name}"><xsl:value-of select="$name"/></option>
     </xsl:template>
     
     

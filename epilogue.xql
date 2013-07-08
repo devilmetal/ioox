@@ -352,7 +352,27 @@ declare function site:navbar( $cmd as element(), $view as element() ) as element
     if ($user != 'guest')  then
    <span>
    
-    <!-- navbar -->
+    
+       {
+       (:Affichage navbar admin:)
+       if(xdb:get-user-groups(xdb:get-current-user())='dba') then 
+            (
+            <div class="navbar hidden-phone hidden-tablet">
+            <div class="navbar-inner navb2">
+                <div class="container-fluid">
+                    <ul class="nav" id="mobile-nav-2">
+                        <li>
+                            <a href="{$cmd/@base-url}admin/"><img src="{$cmd/@base-url}static/ioox/img/gCons-mini-white/processing.png"  alt=""/> Admin Panel </a>
+                        </li>
+                        
+                     </ul>
+                </div>
+            </div>
+       </div>
+            
+            ) 
+            else
+            (
         <div class="navbar hidden-phone hidden-tablet">
             <div class="navbar-inner navb2">
                 <div class="container-fluid">
@@ -380,6 +400,9 @@ declare function site:navbar( $cmd as element(), $view as element() ) as element
                 </div>
             </div>
        </div>
+            )
+            }
+       
        <div class="row-fluid">
        <div class="span12">
        <a href="javascript:window.history.back()" class="btn btn-inverse backb"><i class="splashy-arrow_large_left"></i> Back</a>

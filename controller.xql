@@ -95,6 +95,28 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                 <view src="views/admin/userdelete.xsl"/>
             </action>
         </item>
+        <collection name="courses" epilogue="standard" method="POST">
+            <!-- vue global des cours, demande pour en créer un formulaire de recherche POST : formulaire de recherche et suppression du cours.-->
+            <model src="models/admin/courses.xql"/>
+            <view src="views/admin/courses.xsl"/>
+            <action name="POST" epilogue="standard">
+                    <model src="models/admin/courses.xql"/>
+                    <view src="views/admin/courses.xsl"/>
+            </action>
+            <!-- vu détaillée par cours, modification via Axel et création si item demandé n'exist pas, POST=sauvgarde de modification 
+            Dans le cas d'une demande de clone, on arrive avec un paramêtre GET sur la page avec l'id du cours à clôner-->
+            <item epilogue="standard" supported="modifier" method="POST" template="templates/course">
+                <model src="models/admin/course.xql"/>
+                <view src="views/admin/course.xsl"/>
+                <action epilogue="standard" name="modifier">
+                        <model src="models/admin/edit.xql"/>
+                        <view src="views/edit.xsl"/>
+                </action>
+                <action name="POST" epilogue="standard" >
+                    <model src="models/admin/save-course.xql"/>
+                </action>
+            </item>
+        </collection>
     </item>
   
     <!-- /contact page -->
