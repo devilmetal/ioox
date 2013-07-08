@@ -113,7 +113,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                         <view src="views/edit.xsl"/>
                 </action>
                 <action name="POST" epilogue="standard" >
-                    <model src="models/admin/save-course.xql"/>
+                    <model src="models/admin/save_course.xql"/>
                 </action>
             </item>
         </collection>

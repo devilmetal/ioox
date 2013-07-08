@@ -5,39 +5,36 @@
     <title>Todos modification</title>
     <xt:head version="1.1" templateVersion="1.0" label="Root">
       
-      <xt:component name="Activity">
+      <xt:component name="Core">
+        <span style="display:none">
+          <xt:use label="OldId" types="text"/>
+        </span>
+        <xt:use label="Course" types="Course"/>
+      </xt:component>
+      
+      <xt:component name="Course">
         <h3 class="heading">
-          <xt:use label="Title" types="text">Activity name</xt:use><xt:menu-marker/>
+          <xt:use label="Title" types="text">Title</xt:use>
         </h3>
-          <xt:repeat minOccurs="0" maxOccurs="*" label="Tasks">
-              <xt:use label="Task" types="Task"/><xt:menu-marker/>
-          </xt:repeat>
+        <span style="display:none">
+          CourseId :<xt:use label="CourseId" types="text"></xt:use>
+        </span>
+        CourseNo : <xt:use label="CourseNo" types="text">CourseNo</xt:use><br/>
+        Acronym : <xt:use label="Acronym" types="text" option="unset">Acronym</xt:use><br/>
+        Description : <br/>
+        
+        <xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+          <xt:use label="Parag List" types="Parag List"/><xt:menu-marker/><br/>
+        </xt:repeat>
+        
       </xt:component>
       
-      <xt:component name="Task">
-        <blockquote class="prio">
-          <h3 class="priohead">
-            <xt:use label="Title" types="text">title</xt:use><xt:menu-marker/>
-          </h3>
-          <span class="oursmall periohead">
-            <xt:repeat minOccurs="0" maxOccurs="1" label="Deadline">
-              <xt:use label="Date" types="text" param="filter=date;date_region=fr;date_format=ISO_8601">YYYY-MM-DD</xt:use>
-              <xt:use label="Time" types="text" option="unset">HH:MM:SS</xt:use>
-              <xt:menu-marker/>
-            </xt:repeat>
-            (prio:<xt:use label="Priority" types="select" values="1 2 3">2</xt:use>)   
-          </span>
-          <xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-            <xt:use label="Parag List" types="Parag List"/><xt:menu-marker/><br/>
-          </xt:repeat>
-        </blockquote>
-      </xt:component>
-      
+     
       <xt:component name="Parag">
         <p>
           <!--<xt:repeat minOccurs="1" maxOccurs="*" label="Parag">-->
           <!--                        <xt:use types="Fragment Link" label="Fragment Link"/>-->
-          <xt:use types="text" param="type=textarea;filter=wiki;shape=parent">Description of the task</xt:use>
+          <xt:use types="text" param="type=textarea;filter=wiki;shape=parent"></xt:use>
           <!--                        <xt:menu-marker/>
                         <br/>
                     </xt:repeat>-->
@@ -90,11 +87,9 @@
   </head>
   <body>
     <!-- Code fix bug fluid -->
-    <h3 class="headins">Editor todo</h3>
+    <h3 class="headins">Editor course</h3>
     <ul>
-      <xt:repeat minOccurs="0" maxOccurs="*" label="ToDoList">
-          <xt:use types="Activity" label="Activity"/>
-      </xt:repeat>
+      <xt:use label="Core" types="Core"/>
     </ul>
   </body>
 </html>

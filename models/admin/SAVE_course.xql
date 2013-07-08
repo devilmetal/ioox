@@ -27,14 +27,14 @@ declare function local:createID() as xs:string
     $id
 };  
 
-(:CECI EST UNE VARIABLE DE CREATION POUR LE NOMBRE DE SESSION A CREER DE BASE :)
-let $MAXNUMBERSESSIONS := 14
+
 
 let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
 let $role := xdb:get-user-groups(xdb:get-current-user())
 let $courseid := string(request:get-attribute('oppidum.command')/resource/@name)
 let $param := string(request:get-parameter('id', ''))
+let $periods := doc(concat($collection, "AcademicYears.xml"))//Period
 
 let $core := if ($courseid='new') then
         (
@@ -49,9 +49,31 @@ let $core := if ($courseid='new') then
                         <CourseNo/>
                         <Title/>
                         <Acronym/>
-                        <Description>
-                            <Parag/>
-                        </Description>
+                        <Description/>
+                        <Evaluation/>
+                        <Sessions>
+                            {
+                            for $i in (1 to $MAXNUMBERSESSIONS)
+                            return
+                            <Session>
+                                <SessionNumber>{$i}</SessionNumber>
+                                <Topics/>
+                                <Description/>
+                                <Date/>
+                                <StartTime/>
+                                <EndTime/>
+                                <Room/>
+                                <Resources/>
+                                <Exercise>
+                                    <ExerciseId>{$i}</ExerciseId>
+                                    <Description/>
+                                    <Data/>
+                                    <Deliverables/>
+                                </Exercise>
+                            </Session>
+                            }
+                            
+                        </Sessions>
                     </Course>
                 )
                 else
@@ -68,10 +90,32 @@ let $core := if ($courseid='new') then
                             return 
                             <Course>
                                 <CourseId>{$newID}</CourseId>
-                                {$course/CourseNo}
-                                {$course/Title}
-                                {$course/Acronym}
-                                {$course/Description}
+                                <CourseNo>{$course/CourseNo}</CourseNo>
+                                <Title>{$course/Title}</Title>
+                                <Acronym>{$course/Acronym}</Acronym>
+                                <Description>{$course/Description}</Description>
+                                <Evaluation>{$course/Evaluation}</Evaluation>
+                                <Sessions>
+                                    {
+                                    for $session in $sessions
+                                    return
+                                        <Session>
+                                            {$session/SessionNumber}
+                                            {$session/Topics}
+                                            {$session/Description}
+                                            <Date/>
+                                            {$session/StartTime}
+                                            {$session/EndTime}
+                                            {$session/Room}
+                                            <Exercise>
+                                                {$session/Exercise/ExerciseId}
+                                                {$session/Exercise/Description}
+                                                {$session/Exercise/Data}
+                                                <Deliverables/>
+                                            </Exercise>
+                                        </Session>
+                                    }
+                                </Sessions>
                             </Course>
                         )
                         else
@@ -90,15 +134,17 @@ let $core := if ($courseid='new') then
         )
 
 (:on prend tous les noms de periodes:)
-(: Note : on passe le OLD ID pour sauvgarder au mieux après.:)
-(: Note : les periodes sont pour la modification :)
     return
     <Root>
         <Role>{$role}</Role>
         <Core>
-            <OldId>{$param}</OldId>
             {$core}
         </Core>
+        <Periods>
+            {for $period in $periods
+            order by $period/Start descending
+            return $period/Name}
+        </Periods>
         <Modifier>
             <Param>{$param}</Param>
             <CourseId>{$courseid}</CourseId>

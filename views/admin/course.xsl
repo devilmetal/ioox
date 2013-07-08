@@ -157,6 +157,8 @@
     <xsl:template match="Course">
         <div class="span8">
             <xsl:value-of select="Title"/>
+            <xsl:value-of select="//OldPeriod"/>
+            <xsl:value-of select="//OldId"/>
             <!-- Génération du lien pour la modification -->
             <xsl:variable name="courseid"><xsl:value-of select="/Root/Modifier/CourseId"/></xsl:variable>
             <xsl:variable name="param"><xsl:value-of select="/Root/Modifier/Param"/></xsl:variable>

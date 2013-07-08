@@ -197,6 +197,7 @@
                                 <div class="controls">
                                     <input name="search" value="search" type="hidden"/>
                                     <button class="btn btn-gebo" type="submit">Search for a course</button>
+                                    <a class="btn btn-gebo" href="{$xslt.base-url}admin/courses/new">Create a course</a>
                                 </div>
                             </div>
                         </fieldset>
