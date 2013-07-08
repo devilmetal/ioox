@@ -75,8 +75,33 @@
             
             <site:content>
                 <!-- main content -->
+                <xsl:variable name="query"><xsl:value-of select="//Search/Query"/></xsl:variable>
                 <div id="contentwrapper">
 
+                    
+                    <div class="row-fluid">
+
+                        <div class="input-append">
+                            <form action="explorer">
+                                <input type="text" class="span3 offset8" name="search" placeholder="search terms" value="{$query}"/>
+                                <button type="submit" class="btn">Search</button>
+                            </form>
+                        </div>
+                        <xsl:if test="not(//Search/Query='')">
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    
+                                    <h3 class="heading">Result search for: <xsl:value-of select="$query"/></h3>
+                                    <xsl:if test="count(/Search/Period/Courses//Course)=0">
+                                        <p>Not found</p>
+                                    </xsl:if>
+                                    <xsl:apply-templates select="//Search/Period" mode="full"/>
+                                    
+                                </div>
+                            </div>
+                        </xsl:if>
+                    </div>
+                    
                     <h3 class="heading"> Explorer </h3>
                     <div class="row-fluid">
 

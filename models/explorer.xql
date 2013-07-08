@@ -16,7 +16,22 @@ let $id := if (session:get-attribute('id')) then (
                             '-1'
                             )
                             
-let $search := 
+
+let $search := if($method = 'GET') then (
+
+    (: retirive GET parameter and filtre him :)
+    let $tmp := request:get-parameter('search','')
+    
+    let $data := doc(concat($collection, "AcademicYears.xml"))//Course[contains(upper-case(Title),upper-case($tmp)) or contains(upper-case(Acronym),upper-case($tmp)) or contains(upper-case(CourseNo),upper-case($tmp))]
+    return
+        <Search>
+        <Query>{$tmp}</Query>
+        <Period><Courses>{$data}</Courses></Period></Search>
+)else(
+        <Search/>
+)
+    
+    
 let $data0 := doc(concat($collection, "AcademicYears.xml"))//Period[$curr-date >= ./End] 
 let $data1 := doc(concat($collection, "AcademicYears.xml"))//Period[($curr-date >= ./Start) and ($curr-date <= ./End)]
 let $data2 := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments
@@ -43,6 +58,7 @@ let $data3 := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagme
             <Connected>{session:get-attribute('id')}</Connected>
             <ID>{$id}</ID>
         </Session>
+        {$search}
     </Root>
    
 
