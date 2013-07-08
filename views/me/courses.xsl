@@ -209,6 +209,7 @@
                             <h4><xsl:value-of select="Title"/></h4>
                             <br/>
                         <a href="{$xslt.base-url}me/courses/{$id}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to</a>
+                        <a href="{$xslt.base-url}me/courses/{$id}/teaching" class="btn btn-warning btn-mini"><i class="splashy-arrow_medium_upper_right"></i> manage</a>
                         
                     </div>
                 </xsl:otherwise>

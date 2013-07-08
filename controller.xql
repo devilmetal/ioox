@@ -214,6 +214,31 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                         <view src="views/me/exercice.xsl"/>
                     </action>
                 </item>
+ <!-- teacher edit mode of the course -->
+                <collection epilogue="standard" name="teaching">
+                    <model src="models/me/teaching/sessions.xql"/>
+                    <view src="views/me/teaching/sessions.xsl"/>
+                    
+                    
+                    <!-- teacher evaluation manager -->
+                    <item epilogue="standard" name="info" supported="modifier" method="POST" template="templates/evaluation">
+                        <model src="models/me/teaching/info.xql"/>
+                        <view src="views/me/teaching/info.xsl"/>
+                        <action name="modifier" epilogue="standard">
+                            <model src="oppidum:actions/edit.xql"/>
+                            <view src="views/edit.xsl"/>
+                        </action>
+                        <action name="POST">
+                            <model src="models/me/techer/save_info.xql"/>
+                        </action>
+                    </item>
+                    
+                    <!-- teacher grades manager -->
+                    <collection epilogue="standard" name="grades">
+                        <model src="models/me/teaching/grades.xql"/>
+                        <view src="views/me/teaching/grades.xsl"/>
+                    </collection>
+                </collection>
             </item>
           </collection>
     </item>
