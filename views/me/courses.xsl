@@ -96,6 +96,7 @@
                                                                                          soit : Courses => on affiche 
                             <xsl:apply-templates select="/Root/child::node()"></xsl:apply-templates>-->
                             
+                            <h3 class="heading">Courses</h3>
                             <xsl:apply-templates select="//Period"/>
                                 
                             

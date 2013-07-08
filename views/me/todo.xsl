@@ -95,7 +95,7 @@
                         <div> You have to login to access this page. </div>
                     </xsl:when>
                     <xsl:otherwise>
-                        
+                        <h3 class="heading">Todos</h3>
                            <xsl:apply-templates select="//ToDoList"/>
                             <button title="Modifier la page" onclick="javascript:window.location.href+='/modifier'"
                                 >Modifier</button>

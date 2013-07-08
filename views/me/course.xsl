@@ -96,79 +96,8 @@
             <!-- MENU DEFINITION -->
             <site:menu> </site:menu>
             <!-- SITE CONTENT -->
-            <site:navbar>
-
-
-                <div class="navbar">
-                    <xsl:if test="//Session/Role != '-1'">
-                        <div class="navbar-inner">
-                            <div class="container-fluid">
-                                <!--<a class="brand2" href="#"> Me</a>-->
-                                <ul class="nav" id="mobile-nav-2">
-                                    <li>
-                                        <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/home.png"
-                                                alt=""/> MyHome </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/bookmark.png"
-                                                alt=""/> Courses </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/addressbook.png"
-                                                alt=""/> MyNote </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/pie-chart.png"
-                                                alt=""/> Grades </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/calendar.png"
-                                                alt=""/> Todos </a>
-                                    </li>
-                                    <li> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </xsl:if>
-                    <xsl:if test="//Session/Role != 'Student' and //Session/Role != '-1' ">
-                        <div class="navbar-inner">
-                            <div class="container-fluid">
-                                <a class="brand2" href="#"> Teacher</a>
-                                <ul class="nav">
-                                    <li>
-                                        <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/configuration.png"
-                                                alt=""/> My Teaching </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/multi-agents.png"
-                                                alt=""/> My Class </a>
-                                    </li>
-                                    <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                    <li>
-                                        <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/bar-chart.png"
-                                                alt=""/> Manage Grades </a>
-                                    </li>
-                                    <li> </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </xsl:if>
-                </div>
-
-            </site:navbar>
+            <site:navbar/>
+            
             <site:content>
 
 
@@ -178,6 +107,7 @@
                         <div> You have to login to access this page. </div>
                     </xsl:when>
                     <xsl:otherwise>
+                        <h3 class="heading">Course detail</h3>
                         <xsl:apply-templates select="/Root/Course" mode="restyle"/>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -234,12 +164,12 @@
 
     </xsl:template>
     <xsl:template match="Course" mode="restyle">
-        <div class="span12">
+        
 
             <!-- test -->
-            <div class="span12">
+            
                 <h3 class="heading">
-                    Course <xsl:value-of select="//Root/Period/Courses/Course[CourseId=//Root/Course/CourseId]/Title"/>
+                    <xsl:value-of select="//Root/Period/Courses/Course[CourseId=//Root/Course/CourseId]/Title"/>
                 </h3>
                 <div class="tabbable">
                     <ul class="nav nav-tabs">
@@ -365,9 +295,9 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            
             <!-- end -->
-        </div>
+        
 
     </xsl:template>
 

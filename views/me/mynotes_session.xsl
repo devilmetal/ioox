@@ -261,7 +261,7 @@
         <div id="jCrumbs" class="breadCrumb module">
             <ul>
                 <li>
-                    <a href="{$xslt.base-url}me/mynotes"><img src="{$xslt-ressource-url}/img/gCons-mini/addressbook.png" alt=""/></a>
+                    <a href="{$xslt.base-url}me/mynotes"><img src="{$xslt-ressource-url}/img/gCons-mini/addressbook.png" alt=""/>MyNotes</a>
                 </li>
                 <li>
                     <a href="{$xslt.base-url}me/mynotes/{$CourseRef}"><xsl:value-of select="//NoteInfos/CourseName"/></a>
