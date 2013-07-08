@@ -83,6 +83,14 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                 <view src="views/admin/createuser.xsl"/>
             </action>
         </item>
+        <item name="userdelete" epilogue="standard" method="POST">
+            <model src="models/admin/userdelete.xql"/>
+            <view src="views/admin/userdelete.xsl"/>
+            <action name="POST" epilogue="standard">
+                <model src="models/admin/userdelete.xql"/>
+                <view src="views/admin/userdelete.xsl"/>
+            </action>
+        </item>
     </item>
   
     <!-- /contact page -->

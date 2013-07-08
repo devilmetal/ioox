@@ -96,8 +96,12 @@
                     </xsl:when>
                     <xsl:otherwise>
                         
-                        <a href="{$xslt.base-url}admin/usercreation" class="btn btn-inverse m0010">Create an User</a>
-                        <a href="{$xslt.base-url}admin/userdelete" class="btn btn-inverse m0010">Delete an User</a>
+                        <!-- Affichage
+                            cas 1) child = Form => affichage du formulaire (et selon les erreurs associées)
+                            cas 2) child = Done => affichage de l'après création, donc mot de pass + username
+                        -->
+                        <xsl:apply-templates select="/Root/Core/child::node()"/>
+                        
                     </xsl:otherwise>
                 </xsl:choose>
             </site:content>
@@ -148,10 +152,23 @@
                 </script>
             </site:javascript>
         </site:view>
-        
-        
-        
     </xsl:template>
+    
+   
+    
+    <xsl:template match="Done">
+        <p>Query ok ! </p>
+        <p>Username : <xsl:value-of select="Username"/></p>
+        <p>Password : <xsl:value-of select="Password"/></p>
+    </xsl:template>
+    
+    <xsl:template match="Error">
+        <div class="alert alert-error">
+            <a class="close" data-dismiss="alert">×</a>
+            <strong>Error : </strong> <xsl:value-of select="."/>
+        </div>
+    </xsl:template>
+    
     
     
 </xsl:stylesheet>
