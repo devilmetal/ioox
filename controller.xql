@@ -117,6 +117,25 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                 </action>
             </item>
         </collection>
+        <!-- Cette page permet de lier un cours à un professeur -->
+        <collection name="bind" epilogue="standard" method="POST">
+            <!-- recherche d'un cours -->
+            <model src="models/admin/bind.xql"/>
+            <view src="views/admin/bind.xsl"/>
+            <action name="POST" epilogue="standard">
+                    <model src="models/admin/bind.xql"/>
+                    <view src="views/admin/bind.xsl"/>
+            </action>
+            <!-- l'item renvoye sur un cours qui donne un fomulaire pour chercher un utilisateur ensuite on affiche les user demander avec un bouton bind -->
+            <item epilogue="standard" method="POST">
+                <model src="models/admin/bindcourse.xql"/>
+                <view src="views/admin/bindcourse.xsl"/>
+                <action name="POST" epilogue="standard">
+                    <model src="models/admin/bindcourse.xql"/>
+                    <view src="views/admin/bindcourse.xsl"/>
+                </action>
+            </item>
+        </collection>
     </item>
   
     <!-- /contact page -->

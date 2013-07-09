@@ -382,17 +382,17 @@
         <xsl:variable name="cid">
             <xsl:value-of select="."/>
         </xsl:variable>
-        <xsl:apply-templates select="//Root/Teacher/Person[Engagments/Engagment/CoursRef=$cid]"
+        <xsl:apply-templates select="//Root/Teacher/Person/Engagments/Engagment[CoursRef=$cid][Role!='Student']"
             mode="teacher"/>
-        <xsl:if test="count(//Root/Teacher/Person[Engagments/Engagment/CoursRef=$cid])=0">
+        <xsl:if test="count(//Root/Teacher/Person/Engagments/Engagment[CoursRef=$cid][Role!='Student'])=0">
             no teacher now
         </xsl:if>
     </xsl:template>
 
-    <xsl:template match="Person" mode="teacher">
-        <xsl:value-of select="Lastname"/>
+    <xsl:template match="Engagment" mode="teacher">
+        <xsl:value-of select="./ancestor::Person/Lastname"/>
         <xsl:text> </xsl:text>
-        <xsl:value-of select="Firstname"/>
+        <xsl:value-of select="./ancestor::Person/Firstname"/>
         <br/>
     </xsl:template>
 
