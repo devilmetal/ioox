@@ -12,36 +12,56 @@ let $method := request:get-method()
 let $curr-date := fn:current-date()
 let $ref := request:get-attribute('oppidum.command')/@trail
 let $courseid := tokenize($ref,'/')[3]
-
+let $studentId := tokenize($ref,'/')[last()]
 let $id := if (session:get-attribute('id')) then (
                             session:get-attribute('id')
                             )
                         else(
                             '-1'
                             )
+(:Test pour vérifier la validité de la demande de page:)
+(:savoir si l'étudiant existe et est enregristé à ce cours:)
+let $student := doc(concat($collection, "Persons.xml"))//Person[PersonId=$studentId]
+let $testStudent := exists($student)
+(:savoir si on est connecté en tant que prof pour ce cours:)
+let $teacherCount := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Teacher' or Role='Tutor'][CoursRef=$courseid])
+let $isTeacher := $teacherCount>0
+(:savoir si le cours exists bien:)
+let $course := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]
+let $isAcourse := exists($course)
 
+(:traitement des messages d'erreur au cas ou :)
+let $backStudent := if($testStudent) then () else (<Error>This student is not registred on your course.</Error>)
+let $backIsACourse := if ($isAcourse) then () else (<Error>This is not a valid course.</Error>)
+let $backIsTeacher := if ($isTeacher) then () else (<Error>You are not a teacher for this course.</Error>)
 
-let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]/Evaluation
+(:Coeur de la query, on va, si tout est ok, parcourri le Course/Evaluation pour créer la bonne instance d'évaluation, on la remplit en fonction de ce que l'étudiant possède déjà:)
+let $core := if ($testStudent and $isTeacher and $isAcourse ) then 
+            (
+                (:Tout va bien, on fait le traitement:)
+                let $currGrade := $student//Engagment[CoursRef=$courseid][Role='Student']/Grade
+                return
+                <Grade>
+                    <ExamGrade>{$currGrade/ExamGrade}</ExamGrade>
+                    <ExercicesGrades>
+                        {
+                        (:On fait l'insance pour tous les exercises, et on la remplit si ils ont déjà été évalués:)
+                        (:TODO:)
+                        }
+                    </ExercicesGrades>
+                </Grade>
+            )
+            else
+            (
+                (:il y a des erreurs, on ne fait rien, elle sont retournée via le traitement plus haut:)
+            )
 
-let $teacher := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Teacher'][CoursRef=$courseid])
-let $tutor := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Tutor'][CoursRef=$courseid])
-let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Student'][CoursRef=$courseid])
-                            
 
     return
     <Root>
-    {$data2}
-    <sysinfo>
-        <CourseId>{$courseid}</CourseId>
-        <Session>
-            <Id>{$id}</Id>
-            <Username>{$user}</Username>
-            <CurrentRole>
-                <Teacher>{$teacher}</Teacher>
-                <Tutor>{$tutor}</Tutor>
-                <Student>{$user}</Student>
-            </CurrentRole>
-            </Session>
-    </sysinfo>
+    {$backIsACourse}
+    {$backIsTeacher}
+    {$backStudent}
+    {$core}
     </Root>
    

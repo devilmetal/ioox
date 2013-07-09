@@ -78,62 +78,51 @@
             <!-- calendar -->
             <link rel="stylesheet" href="{$xslt-ressource-url}/lib/fullcalendar/fullcalendar_gebo.css" />	
          </site:header>
-
+         
          <!-- MENU DEFINITION -->
          <site:menu> </site:menu>
          <!-- SITE CONTENT -->
          <site:navbar/>
-            
-            
+         
+         
          
          <site:content>
-            <xsl:variable name="rolle"><xsl:value-of select="//CurrentRole/Teacher + //CurrentRole/Tutor"/></xsl:variable>
-            <xsl:variable name="courseid"><xsl:value-of select="//sysinfo/CourseId"/></xsl:variable>
-            <xsl:choose>
-               <xsl:when test="(//Session/Id = '-1') or ($rolle ='0')">
-                  <!-- NOT LOGGED IN  -->
-                  <div> You have to login to access this page or have to be allowed! </div>
-               </xsl:when>
-               <xsl:otherwise>
-                  
-                  
-                  <div class="navbar">
+            <xsl:variable name="courseid"><xsl:value-of select="/Root/CourseId"/></xsl:variable>
+            <div class="navbar">
+               
+               <div class="navbar-inner">
+                  <div class="container-fluid">
                      
-                     <div class="navbar-inner">
-                        <div class="container-fluid">
-                           
-                           <ul class="nav">
-                              <li>
-                                 <a href="{$xslt.base-url}me/courses/{$courseid}/teaching"><img
-                                    src="{$xslt-ressource-url}/img/gCons-mini-white/configuration.png"
-                                    alt=""/> My Teaching </a>
-                              </li>
-                              <li class="divider-vertical hidden-phone hidden-tablet"/>
-                              <li>
-                                 <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/info"><img
-                                    src="{$xslt-ressource-url}/img/gCons-mini-white/multi-agents.png"
-                                    alt=""/> Cours evaluation </a>
-                              </li>
-                              <li class="divider-vertical hidden-phone hidden-tablet"/>
-                              <li>
-                                 <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/grades"><img
-                                    src="{$xslt-ressource-url}/img/gCons-mini-white/bar-chart.png"
-                                    alt=""/> Manage Grades </a>
-                              </li>
-                              <li> </li>
-                           </ul>
-                        </div>
-                     </div>
-                     
+                     <ul class="nav">
+                        <li>
+                           <a href="{$xslt.base-url}me/courses/{$courseid}/teaching"><img
+                              src="{$xslt-ressource-url}/img/gCons-mini-white/configuration.png"
+                              alt=""/> My Teaching </a>
+                        </li>
+                        <li class="divider-vertical hidden-phone hidden-tablet"/>
+                        <li>
+                           <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/info"><img
+                              src="{$xslt-ressource-url}/img/gCons-mini-white/multi-agents.png"
+                              alt=""/> Cours evaluation </a>
+                        </li>
+                        <li class="divider-vertical hidden-phone hidden-tablet"/>
+                        <li>
+                           <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/grades"><img
+                              src="{$xslt-ressource-url}/img/gCons-mini-white/bar-chart.png"
+                              alt=""/> Manage Grades </a>
+                        </li>
+                        <li> </li>
+                     </ul>
                   </div>
-                           
-                           <h3 class="heading">Students Grade</h3>
-                        <p>This is list of all dlivrable element with the grade</p>
-                        
-
-                        
-                     </xsl:otherwise>
-                  </xsl:choose>
+               </div>
+               
+            </div>
+            
+            <h3 class="heading">Grade management</h3>
+            <xsl:apply-templates select="/Root/child::node()"/>
+            
+            
+            
          </site:content>
          <site:javascript>
             <script src="{$xslt-ressource-url}/js/jquery.min.js"></script>
@@ -179,8 +168,24 @@
             <script src="{$xslt.base-url}caljs"/>
          </site:javascript>
       </site:view>
-
    </xsl:template>
-
-  
+   
+   
+   <!-- Affichage d'une erreure -->
+   <xsl:template match="Error">
+      <div class="alert alert-error">
+         <a class="close" data-dismiss="alert">×</a>
+         <strong>Error : </strong> <xsl:value-of select="."/>
+      </div>
+   </xsl:template>
+   
+   <!-- Affichage d'un message -->
+   <xsl:template match="Message">
+      <div class="alert alert-info" condition="has-message">
+         <a class="close" data-dismiss="alert">×</a>
+         <strong>Message : </strong> <xsl:value-of select="."/>
+      </div>
+   </xsl:template>
+   
+   
 </xsl:stylesheet>
