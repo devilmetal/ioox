@@ -40,15 +40,75 @@ let $core := if ($testStudent and $isTeacher and $isAcourse ) then
             (
                 (:Tout va bien, on fait le traitement:)
                 let $currGrade := $student//Engagment[CoursRef=$courseid][Role='Student']/Grade
+                let $courseEval := $course/Evaluation
                 return
                 <Grade>
-                    <ExamGrade>{$currGrade/ExamGrade}</ExamGrade>
-                    <ExercicesGrades>
-                        {
-                        (:On fait l'insance pour tous les exercises, et on la remplit si ils ont déjà été évalués:)
-                        (:TODO:)
-                        }
-                    </ExercicesGrades>
+                    <Infos>
+                        <Name>
+                            {$student/Lastname}
+                            {$student/Firstname}
+                        </Name>
+                        {$student/UniqueID}
+                    </Infos>
+                     {
+                     (:Si l'Exam existe on produit l'ExamGrade:)
+                     if(exists($courseEval/Exam)) then 
+                        (
+                            <ExamGrade>{$currGrade/ExamGrade/text()}</ExamGrade>
+                        )
+                        else
+                        (
+                        (:Rien a ajouter, pas d'examen pour ce cours:)
+                        )
+                     }
+                     {
+                     if(exists($courseEval/Exercices)) then
+                        (
+                            <ExercicesGrades>
+                            {
+                            (:On fait l'insance pour tous les exercises, et on la remplit si ils ont déjà été évalués:)
+                            let $sessions := $course//Session
+                            for $session in $sessions
+                            return 
+                                if (exists($session/Exercise)) then
+                                    (
+                                        let $exerciceId := $session/Exercise/ExerciceId/text()
+                                        return
+                                        <Exercice>
+                                            {$session/Topics}
+                                            <ExerciceId>{$exerciceId}</ExerciceId>
+                                            <ExerciceGrade>{$currGrade/ExercicesGrades/Exercice[ExerciceId=$exerciceId]/ExerciceGrade/text()}</ExerciceGrade>
+                                        </Exercice>
+                                    )
+                                    else
+                                    (
+                                        (:il n'y a pas d'exercice pour cette session:)
+                                    )
+                            }
+                            </ExercicesGrades>
+                        )
+                        else
+                        (
+                        (:Rien a ajouter, pas d'evaluation pour les exercices sur ce cours:)
+                        )
+                     }
+                     {
+                     (:MAYBE
+                     ON DOIT CHIOISIR SI LES REPORTGRADE, PROJECTGRADE et PERSENTATIONGRADE sont optionnels !!!:)
+                     if(exists($courseEval/Project)) then
+                        (
+                            <ProjectGrades>
+                                <PojectGrade/>
+                                <PresentationGrade/>
+                                <PojectGrade/>
+                            </ProjectGrades>
+                        )
+                        else
+                        (
+                        (:Rien a ajouter, pas d'evaluation pour le projet sur ce cours:)
+                        )
+                     }
+                    
                 </Grade>
             )
             else

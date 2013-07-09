@@ -159,7 +159,7 @@
     <xsl:template match="Session">
         <xsl:variable name="courseid"><xsl:value-of select="/Root/Infos/CourseRef"/></xsl:variable>
         <xsl:variable name="sessionnumber"><xsl:value-of select="SessionNumber"/></xsl:variable>
-        <li><a href="{$xslt.base-url}me/mynotes/{$courseid}/{$sessionnumber}">Link to the "notes" for : <xsl:value-of select="Topic"></xsl:value-of></a></li>
+        <li><a href="{$xslt.base-url}me/mynotes/{$courseid}/{$sessionnumber}">Link to the "notes" for : <xsl:apply-templates select="Topics"/></a></li>
     </xsl:template>
     
     <xsl:template match="Infos">
@@ -190,7 +190,7 @@
                 <xsl:choose>
                     <xsl:when test="//Root/Session[SessionNumber=$sessionnumber]/SessionNumber &gt; 0">
                         <div class="ourbox obc0">
-                        <h4><xsl:value-of select="Topic"/></h4>
+                        <h4><xsl:apply-templates select="Topics"/></h4>
                         <span>Date <xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></span>
                         <span>Time <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/>-<xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></span><br/>
                         <a href="{$xslt.base-url}me/mynotes/{$courseid}/{$sessionnumber}" class="btn btn-inverse btn-mini"><i class="splashy-view_list"></i> Show Note</a>
@@ -213,5 +213,13 @@
                 </xsl:choose>
             
         </div>
+    </xsl:template>
+    
+    <xsl:template match="Topics">
+        <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
+        <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
+        <xsl:for-each select="Topic">
+            <xsl:value-of select="translate(Topic,$t,$newt)"/><xsl:text> </xsl:text>
+        </xsl:for-each>
     </xsl:template>
 </xsl:stylesheet>

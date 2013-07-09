@@ -42,7 +42,7 @@ let $name := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$ref
      {
      for $session in $all-session/Session
      order by dateTime($session/Date,$session/StartTime)
-     return <Session>{$session/SessionNumber} {$session/Topic} {$session/Date} {$session/StartTime} {$session/EndTime}</Session>
+     return <Session>{$session/SessionNumber} {$session/Topics} {$session/Date} {$session/StartTime} {$session/EndTime}</Session>
      }
      </AllSession>
      <Infos>

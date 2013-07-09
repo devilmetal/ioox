@@ -39,7 +39,7 @@ let $query := if (not($noteExist) and $courseTest) then
                 ()
 let $note := $person//Note[CourseRef=$courseid][SessionRef=$sessionNumber]
 let $courseName := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]/Title/text()
-let $sessionTopic := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]//Session[SessionNumber=$sessionNumber]/Topic/text()
+let $sessionTopic := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]//Session[SessionNumber=$sessionNumber]/Topics
 let $sessions := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]//Sessions
 
 (: pour les boutons de navigations :)

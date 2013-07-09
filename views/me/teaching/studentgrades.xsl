@@ -118,7 +118,7 @@
                
             </div>
             
-            <h3 class="heading">Grade management</h3>
+            <h2 class="heading">Grade management</h2>
             <xsl:apply-templates select="/Root/child::node()"/>
             
             
@@ -170,7 +170,27 @@
       </site:view>
    </xsl:template>
    
+   <xsl:template match="Grade">
+      <h3 class="heading"><xsl:value-of select="Infos/UniqueID"/><xsl:text> - </xsl:text><xsl:value-of select="Infos/Name/Lastname"/><xsl:text> </xsl:text><xsl:value-of select="Infos/Name/Firstname"/></h3>
+      <xsl:apply-templates select="ExamGrade"/>
+      <xsl:apply-templates select="ExercicesGrades"/>
+      <xsl:apply-templates select="ProjectGrades"/>
+      <button title="Modifier la page" onclick="javascript:window.location.href+='/modifier'"
+         class="btn btn-inverse faq_right "><i class="splashy-pencil"></i> Modify</button>
+   </xsl:template>
    
+   <xsl:template match="ExamGrade">
+         <h4>Exam Grade</h4>
+         <dd><xsl:value-of select="."/></dd>
+   </xsl:template>
+   
+   <xsl:template match="ExercicesGrades">
+      <h4>Exercices Grades</h4>
+      <xsl:for-each select="Exercice">
+         <dt><xsl:apply-templates select="Topics"/></dt>
+         <dd><xsl:value-of select="ExerciceGrade"/></dd>
+      </xsl:for-each>
+   </xsl:template>
    <!-- Affichage d'une erreure -->
    <xsl:template match="Error">
       <div class="alert alert-error">
@@ -185,6 +205,15 @@
          <a class="close" data-dismiss="alert">×</a>
          <strong>Message : </strong> <xsl:value-of select="."/>
       </div>
+   </xsl:template>
+   
+   <xsl:template match="Topics">
+      <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
+      <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
+      <xsl:for-each select="Topic">
+         <xsl:value-of select="translate(.,$t,$newt)"/><<xsl:if test="./node()=./ancestor::Topics/Topic[position()!=last()]/node()"></xsl:if>
+      </xsl:for-each>
+      
    </xsl:template>
    
    

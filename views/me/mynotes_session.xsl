@@ -156,7 +156,7 @@
     </xsl:template>
     
     <xsl:template match="Note">
-        <h3 class="heading">Note: <xsl:value-of select="//NoteInfos/SessionTopic"/></h3>
+        <h3 class="heading">Note: <xsl:apply-templates select="//NoteInfos/SessionTopic/Topics"/></h3>
         
         <xsl:apply-templates select="Content"/>
         
@@ -272,5 +272,13 @@
                
             </ul>
         </div>
+    </xsl:template>
+    
+    <xsl:template match="Topics">
+        <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
+        <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
+        <xsl:for-each select="Topic">
+            <xsl:value-of select="translate(Topic,$t,$newt)"/><xsl:text> </xsl:text>
+        </xsl:for-each>
     </xsl:template>
 </xsl:stylesheet>

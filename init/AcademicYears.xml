@@ -2186,7 +2186,12 @@
                 <Sessions>
                     <Session>
                         <SessionNumber>12231</SessionNumber>
-                        <Topic>Topic2</Topic>
+                        <Topics>
+                            <Topic>Topic2</Topic>
+                            <Topic>SecondTopic2</Topic>
+                            <Resources></Resources>
+                        </Topics>
+                        <Resources/>
                         <Description>
                             <List>
                                 <SubList>
@@ -2265,8 +2270,7 @@
                             </Ressource>
                         </Resources>
                         <Exercise>
-                            <ExerciceId>
-                            </ExerciceId>
+                            <ExerciceId>1</ExerciceId>
                             <Description>
                             </Description>
                             <Data>
@@ -2294,7 +2298,11 @@
                     </Session>
                     <Session>
                         <SessionNumber>2144112</SessionNumber>
-                        <Topic>Topic3</Topic>
+                        <Topics>
+                            <Topic>Topic3</Topic>
+                            <Topic>SecondTopic3</Topic>
+                            <Resources/>
+                        </Topics>
                         <Description>
                             <List>
                                 <ListItem>
@@ -2340,8 +2348,7 @@
                             </Ressource>
                         </Resources>
                         <Exercise>
-                            <ExerciceId>
-                            </ExerciceId>
+                            <ExerciceId>2</ExerciceId>
                             <Description>
                             </Description>
                             <Data>

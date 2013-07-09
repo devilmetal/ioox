@@ -38,9 +38,7 @@
         <xsl:variable name="CourseId"><xsl:value-of select="CourseId"/></xsl:variable>
         
             {
-            <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
-            <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
-            "title" : "<xsl:value-of select="translate(Session/Topic,$t,$newt)"/>",
+            "title" : "<xsl:apply-templates select="Topics"/>",
             "start" : "<xsl:value-of select="Session/Date"/><xsl:text> </xsl:text><xsl:value-of select="format-time(Session/StartTime,'[H01]:[m01]:[s01]')"/>",
             "end"   : "<xsl:value-of select="Session/Date"/><xsl:text> </xsl:text><xsl:value-of select="format-time(Session/EndTime,'[H01]:[m01]:[s01]')"/>",
             "allDay": false,
@@ -83,5 +81,13 @@
         "color" : "#aedb97",
         "textColor" : "#3d641b"
         },
+    </xsl:template>
+    
+    <xsl:template match="Topics">
+        <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
+        <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
+       <xsl:for-each select="Topic">
+           <xsl:value-of select="translate(Topic,$t,$newt)"/><xsl:text> </xsl:text>
+       </xsl:for-each>
     </xsl:template>
 </xsl:stylesheet>
