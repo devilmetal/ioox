@@ -28,7 +28,7 @@ declare variable $site := <site xmlns="http://oppidoc.com/oppidum/install">
     </collection>
     <!-- NOT REQUIRED I THINK
     <collection name="/db/sites/ioox/chapters" policy="write-delete-add"/>
-    <collection name="/db/sites/ioox/images" policy="write-delete-add"/>
+    
     -->
   </group>
 </site>;

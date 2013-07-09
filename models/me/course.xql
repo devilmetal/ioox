@@ -29,9 +29,10 @@ let $courseBase := doc(concat($collection, "AcademicYears.xml"))//Course[CourseI
 (:On test si la personne n'est pas un prof ( dans ce cas, il ne peux pas se desinscrire comme ça... :)
 let $isteacher := exists($person//Engagment[CoursRef=$ref2][Role='Teacher'])
 (:On test si le cours est dans la période actuelle, ie, la current-date est contenu dans l'intérval donné de la période :)
+let $isAcourse := exists(doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$ref2])
 let $periodstartday := $courseBase/ancestor::Period/Start
 let $periodendday := $courseBase/ancestor::Period/End
-let $isgoodperiod := ($curr-date <= $periodendday) and ($curr-date >= $periodstartday)
+let $isgoodperiod := $isAcourse and ($curr-date <= $periodendday) and ($curr-date >= $periodstartday)
 
 (: Si la method est un POST, dans ce cas on s'inscrit/desinscrit au cours 
     (ie on remplace le role par desinscrit, comme ça on conserve la note)  
@@ -80,8 +81,12 @@ let $query := if ($method ='POST' and $id!='-1' and not($isteacher) and $isgoodp
                             
       
 
+<<<<<<< HEAD
 let $teachers := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagment[(Role='Tutor' or Role='Teacher') and (CoursRef=$ref2) ]/ancestor::Person
 
+=======
+let $teachers := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagment[(Role='Tutor' or Role='Teacher')][CoursRef=$courseBase/CourseId]/ancestor::Person
+>>>>>>> a19f74240ff5170f87a88eee54fe5d943a7c6898
 let $grades :=  $person//Engagment[Grade][CoursRef=$ref2]
 let $everygrades :=  doc(concat($collection, "Persons.xml"))//Engagment[Grade][CoursRef=$ref2]
 (: si la personne est inscrite, on prend le cours en entier, sinon, juste les infos, dans ce cas, ça va modifier l'affichage par la suite ::)
@@ -92,19 +97,29 @@ let $course := if ($person//Engagment[Role != 'Unsubscribed']/CoursRef = $ref2) 
                                                                                         {$courseBase/Description}
                                                                                     </Course>)                        
 let $period := $courseBase/ancestor::Period
-
+let $error := if ($isgoodperiod) then () else ( <Error>You can not subscrib a course which is in not in the current period</Error>)
     return
-    <Root>
+        if ($isAcourse) then 
+        (
+        <Root>
         {$period}
         <Teachers>
             {$teachers}
         </Teachers>
-     {$course}
-     <Grades>
-        {$grades}
-     </Grades>
-     <EverybodyGrades>
-        {$everygrades}
-     </EverybodyGrades>
-     </Root>
+        {$course}
+        <Grades>
+            {$grades}
+        </Grades>
+        <EverybodyGrades>
+            {$everygrades}
+        </EverybodyGrades>
+        {$error}
+        </Root>
+        )
+        else
+        (
+        <Root>
+        <Error>This is not a valid course.</Error>
+        </Root>
+        )
     

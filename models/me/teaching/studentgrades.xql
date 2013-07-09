@@ -11,7 +11,7 @@ let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
 let $curr-date := fn:current-date()
 let $ref := request:get-attribute('oppidum.command')/@trail
-let $courseid := substring-before(substring-after(substring-after($ref,'/'),'/'),'/')
+let $courseid := tokenize($ref,'/')[3]
 
 let $id := if (session:get-attribute('id')) then (
                             session:get-attribute('id')
@@ -35,6 +35,7 @@ let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
         <CourseId>{$courseid}</CourseId>
         <Session>
             <Id>{$id}</Id>
+            <Username>{$user}</Username>
             <CurrentRole>
                 <Teacher>{$teacher}</Teacher>
                 <Tutor>{$tutor}</Tutor>
@@ -43,3 +44,4 @@ let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
             </Session>
     </sysinfo>
     </Root>
+   
