@@ -1420,6 +1420,10 @@ footer{
 	font-weight:bold;
 }
 
+.minititle{
+	color:#3a87ad;
+}
+
 @media (max-width: 979px) {
 	a.off_switch, a.on_switch{
 	height:20px;

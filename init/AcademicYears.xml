@@ -209,6 +209,34 @@
                                 </Parag>
                             </Description>
                         </Presentation>
+                        <Project>
+                            <Weight>50</Weight>
+                            <Description>
+                                <List>
+                                    <ListItem>
+                                        <Fragment>Fragment16</Fragment>
+                                        <Fragment>Fragment17</Fragment>
+                                    </ListItem>
+                                    <ListItem>
+                                        <Link>
+                                            <LinkText>LinkText10</LinkText>
+                                            <LinkRef>http://www.oxygenxml.com/</LinkRef>
+                                        </Link>
+                                        <Fragment>Fragment18</Fragment>
+                                    </ListItem>
+                                </List>
+                                <Parag>
+                                    <Link>
+                                        <LinkText>LinkText11</LinkText>
+                                        <LinkRef>http://www.oxygenxml.com/</LinkRef>
+                                    </Link>
+                                    <Link>
+                                        <LinkText>LinkText12</LinkText>
+                                        <LinkRef>http://www.oxygenxml.com/</LinkRef>
+                                    </Link>
+                                </Parag>
+                            </Description>
+                        </Project>
                     </Project>
                     <Exercices>
                         <Weight>50</Weight>
@@ -2129,6 +2157,34 @@
                                 </List>
                             </Description>
                         </Presentation>
+                        <Project>
+                            <Weight>50</Weight>
+                            <Description>
+                                <List>
+                                    <ListItem>
+                                        <Fragment>Fragment16</Fragment>
+                                        <Fragment>Fragment17</Fragment>
+                                    </ListItem>
+                                    <ListItem>
+                                        <Link>
+                                            <LinkText>LinkText10</LinkText>
+                                            <LinkRef>http://www.oxygenxml.com/</LinkRef>
+                                        </Link>
+                                        <Fragment>Fragment18</Fragment>
+                                    </ListItem>
+                                </List>
+                                <Parag>
+                                    <Link>
+                                        <LinkText>LinkText11</LinkText>
+                                        <LinkRef>http://www.oxygenxml.com/</LinkRef>
+                                    </Link>
+                                    <Link>
+                                        <LinkText>LinkText12</LinkText>
+                                        <LinkRef>http://www.oxygenxml.com/</LinkRef>
+                                    </Link>
+                                </Parag>
+                            </Description>
+                        </Project>
                     </Project>
                     <Exercices>
                         <Weight>50</Weight>

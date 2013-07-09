@@ -35,7 +35,6 @@ let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
         <CourseId>{$courseid}</CourseId>
         <Session>
             <Id>{$id}</Id>
-            <Username>{$user}</Username>
             <CurrentRole>
                 <Teacher>{$teacher}</Teacher>
                 <Tutor>{$tutor}</Tutor>
