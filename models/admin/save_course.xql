@@ -31,7 +31,7 @@ let $courses := doc(concat($collection, "AcademicYears.xml"))//Period[replace(st
 
 let $test := exists(doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$newId])
 (:si oldid est vide et il n'existe aucun cours avec newID donc c'est un nouveau cours, sinon si le nouvel id est identique on fait un replace du cours.:)
-let $query := if ($oldId='' and not($test)) then
+let $query := if ($oldId='nan' and not($test)) then
         (
             (:Dans ce cas, on fait une insertion d'un nouveau cours:)
             (:on profite de créer la nouvelle collection pour le cours :)
@@ -141,7 +141,7 @@ let $query := if ($oldId='' and not($test)) then
                                 {$oldcourse/Evaluation}
                                 <Sessions>
                                     {
-                                    for $session in $oldcourse/Sessions
+                                    for $session in $oldcourse/Sessions/Session
                                     (:on profite de créer les collection avec les droit aussi:)
                                     let $query1 := xdb:create-collection($courseCollection,string($session/SessionNumber))
                                     (:On change les droits:)

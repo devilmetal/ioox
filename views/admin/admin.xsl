@@ -101,6 +101,7 @@
                             <a href="{$xslt.base-url}admin/usercreation" class="btn btn-inverse m0010">Create an User</a><br/>
                             <a href="{$xslt.base-url}admin/userdelete" class="btn btn-inverse m0010">Delete an User</a><br/>
                             <a href="{$xslt.base-url}admin/courses" class="btn btn-inverse m0010">Courses panel</a><br/>
+                            <a href="{$xslt.base-url}admin/bind" class="btn btn-inverse m0010">Manage Teachers</a><br/>
                         </div>
                     </xsl:otherwise>
                 </xsl:choose>

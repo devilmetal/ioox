@@ -34,14 +34,14 @@ let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
 let $role := xdb:get-user-groups(xdb:get-current-user())
 let $courseid := string(request:get-attribute('oppidum.command')/resource/@name)
-let $param := string(request:get-parameter('id', ''))
+let $param := string(request:get-parameter('id', 'nan'))
 
 let $core := if ($courseid='new') then
         (
             (:c'est la création d'un cours ou le clône:)
             let $newID := local:createID()
             return
-            if ($param='') then
+            if ($param='nan') then
                 (
                     (:C'est la création d'un nouveau cours:)
                     <Course>

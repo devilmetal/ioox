@@ -70,7 +70,10 @@ let $core := if ($method='POST' and $role='dba') then
         (:si l'utilisateur est dans la BD, normalement c'est le cas... alors on supprime:)
         let $BDdelete := if($test1) then 
                     (
-                    let $query := update delete doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]
+                    (:On supprime le cours:)
+                    let $query1 := update delete doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]
+                    (:On supprime toute trace d'engagement ainsi que les notes qui vont avec:)
+                    let $query2 := update delete doc(concat($collection, "Persons.xml"))//Person//Engagment[CoursRef=$courseid]
                     return <Message>The course has been deleted from the Database</Message>
                     ) 
                     else 
