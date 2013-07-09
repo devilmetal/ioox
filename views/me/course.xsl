@@ -108,6 +108,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <h3 class="heading">Course detail</h3>
+                        <xsl:apply-templates select="/Root/Error"></xsl:apply-templates>
                         <xsl:apply-templates select="/Root/Course" mode="restyle"/>
                     </xsl:otherwise>
                 </xsl:choose>
@@ -653,5 +654,22 @@
         <!-- Moyenne des notes des steps -->
         <xsl:variable name="mean"><xsl:value-of select="sum(.//Step/StepGrade) div count(.//Step/StepGrade)"/></xsl:variable>
         ,['Project' ,<xsl:value-of select="$mean"/>,<xsl:value-of select="$meanO"/>]
+    </xsl:template>
+    
+    
+    <!-- Affichage d'une erreure -->
+    <xsl:template match="Error">
+        <div class="alert alert-error">
+            <a class="close" data-dismiss="alert">×</a>
+            <strong>Error : </strong> <xsl:value-of select="."/>
+        </div>
+    </xsl:template>
+    
+    <!-- Affichage d'un message -->
+    <xsl:template match="Message">
+        <div class="alert alert-info" condition="has-message">
+            <a class="close" data-dismiss="alert">×</a>
+            <strong>Message : </strong> <xsl:value-of select="."/>
+        </div>
     </xsl:template>
 </xsl:stylesheet>
