@@ -132,14 +132,6 @@
                                 </Deadline>
                             </Step>
                         </Steps>
-                        <Steps>
-                            <Step>
-                                <Title>Title3</Title>
-                                <Deadline>
-                                    <Date>2006-05-04</Date>
-                                </Deadline>
-                            </Step>
-                        </Steps>
                         <Report>
                             <Weight>50</Weight>
                             <Description>
@@ -493,14 +485,6 @@
                         <Steps>
                             <Step>
                                 <Title>Title10</Title>
-                                <Deadline>
-                                    <Date>2006-05-04</Date>
-                                </Deadline>
-                            </Step>
-                        </Steps>
-                        <Steps>
-                            <Step>
-                                <Title>Title11</Title>
                                 <Deadline>
                                     <Date>2006-05-04</Date>
                                 </Deadline>
@@ -920,14 +904,6 @@
                                 </Deadline>
                             </Step>
                         </Steps>
-                        <Steps>
-                            <Step>
-                                <Title>Title3</Title>
-                                <Deadline>
-                                    <Date>2006-05-04</Date>
-                                </Deadline>
-                            </Step>
-                        </Steps>
                         <Report>
                             <Weight>50</Weight>
                             <Description>
@@ -1281,14 +1257,6 @@
                         <Steps>
                             <Step>
                                 <Title>Title10</Title>
-                                <Deadline>
-                                    <Date>2006-05-04</Date>
-                                </Deadline>
-                            </Step>
-                        </Steps>
-                        <Steps>
-                            <Step>
-                                <Title>Title11</Title>
                                 <Deadline>
                                     <Date>2006-05-04</Date>
                                 </Deadline>
@@ -1708,14 +1676,6 @@
                                 </Deadline>
                             </Step>
                         </Steps>
-                        <Steps>
-                            <Step>
-                                <Title>Title3</Title>
-                                <Deadline>
-                                    <Date>2006-05-04</Date>
-                                </Deadline>
-                            </Step>
-                        </Steps>
                         <Report>
                             <Weight>50</Weight>
                             <Description>
@@ -2069,14 +2029,6 @@
                         <Steps>
                             <Step>
                                 <Title>Title10</Title>
-                                <Deadline>
-                                    <Date>2006-05-04</Date>
-                                </Deadline>
-                            </Step>
-                        </Steps>
-                        <Steps>
-                            <Step>
-                                <Title>Title11</Title>
                                 <Deadline>
                                     <Date>2006-05-04</Date>
                                 </Deadline>
@@ -2481,14 +2433,6 @@
                                 </Deadline>
                             </Step>
                         </Steps>
-                        <Steps>
-                            <Step>
-                                <Title>Title16</Title>
-                                <Deadline>
-                                    <Date>2006-05-04</Date>
-                                </Deadline>
-                            </Step>
-                        </Steps>
                         <Report>
                             <Weight>50</Weight>
                             <Description>
@@ -2846,14 +2790,6 @@
                         <Steps>
                             <Step>
                                 <Title>Title20</Title>
-                                <Deadline>
-                                    <Date>2006-05-04</Date>
-                                </Deadline>
-                            </Step>
-                        </Steps>
-                        <Steps>
-                            <Step>
-                                <Title>Title21</Title>
                                 <Deadline>
                                     <Date>2006-05-04</Date>
                                 </Deadline>
