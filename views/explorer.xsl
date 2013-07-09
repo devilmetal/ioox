@@ -92,7 +92,7 @@
                                 <div class="span12">
                                     
                                     <h3 class="heading">Result search for: <xsl:value-of select="$query"/></h3>
-                                    <xsl:if test="count(/Search/Period/Courses//Course)=0">
+                                    <xsl:if test="count(//Search/Period/Courses/Course) = 0">
                                         <p>Not found</p>
                                     </xsl:if>
                                     <xsl:apply-templates select="//Search/Period" mode="full"/>

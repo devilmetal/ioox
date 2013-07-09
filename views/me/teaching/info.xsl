@@ -210,6 +210,7 @@
             <xsl:value-of select="$Total"/>
          </xsl:with-param>
       </xsl:apply-templates>
+      
    </xsl:template>
    
    <xsl:template match="Exam">
@@ -243,13 +244,47 @@
                </div>
                <div class="accordion-body collapse" id="collapseOne1" style="height: 0px; ">
                   <div class="accordion-inner">
+                     <dl class="dl-horizontal dl-modif">
+                     <xsl:apply-templates select="Report"/>
+                     <xsl:apply-templates select="Presentation"/>
+                     <xsl:apply-templates select="Project" mode="small"/>
                      <xsl:apply-templates select="Description"/>
+                     </dl>
                   </div>
                </div>
             </div>
          </div>
       </dd>
    </xsl:template>
+   
+   <xsl:template match="Report">
+      <dt class="minititle">Report</dt>
+         <xsl:apply-templates select="child::node()" mode="small"/>
+   </xsl:template>
+   
+   <xsl:template match="Presentation">
+      <dt class="minititle">Presentation</dt>
+      <xsl:apply-templates select="child::node()" mode="small"/>
+   </xsl:template>
+   
+   <xsl:template match="Project" mode="small">
+      <dt class="minititle">Projet</dt>
+      <xsl:apply-templates select="child::node()" mode="small"/>
+   </xsl:template>
+   
+   <xsl:template match="Weight" mode="small">
+      <xsl:variable name="tsum"><xsl:value-of select="sum(ancestor-or-self::Project/node()/Weight)"/></xsl:variable>
+      <dd><xsl:value-of select="round( . * 100 div $tsum)"/> % weight in the Project Evaluation.</dd>
+   </xsl:template>
+   
+   <xsl:template match="Description" mode="small">
+      <dt>Desc</dt>
+      <dd><xsl:for-each select="./child::node()">
+         <xsl:apply-templates select="."/>
+      </xsl:for-each>
+      </dd>
+   </xsl:template>
+
    
    <xsl:template match="Exercices">
       <xsl:param name="Total"/>
