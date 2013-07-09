@@ -13,10 +13,30 @@ declare function local:scale($string) as xs:string
   return 
     $lowcase
 };  
-
+declare function local:createID() as xs:string
+{
+    let $date := current-dateTime()
+    let $year := year-from-dateTime($date)
+    let $month := month-from-dateTime($date)
+    let $day := day-from-dateTime($date)
+    let $hours := hours-from-dateTime($date)
+    let $minutes := minutes-from-dateTime($date)
+    let $secondes := string(seconds-from-dateTime($date))
+    let $id := concat(concat(concat(concat(concat($year,$month),$day),$hours),$minutes),substring-before($secondes,'.'))
+  return 
+    $id
+};  
 let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
 let $role := xdb:get-user-groups(xdb:get-current-user())
+let $courseid := string(request:get-attribute('oppidum.command')/resource/@name)
+(:On reprend le titre du cours pour l'afficher ainsi que la periode du cours:)
+let $course := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]
+let $courseTitle := $course/Title
+let $coursePeriod := $course/ancestor::Period/Name
+let $pageTitle := concat(concat($coursePeriod,' - '),$courseTitle)
+
+
 (:on controle aussi si la personne est bien un admin avant de chercher les données:)
 let $core := if ($method='POST' and $role='dba') then 
     (
@@ -49,36 +69,34 @@ let $core := if ($method='POST' and $role='dba') then
         )
         else
         (
-        (:SUPPRESSION:)
-        (:On supprime un utilisateur:)
-        let $username := request:get-parameter('username', '')
+        (:BINDING:)
+        (:On bind un user à un cours en tent que Teacher ou Tutor:)
+        let $personid := request:get-parameter('personid', '')
+        let $role := request:get-parameter('role', '')
         
-        (:Supression de la base de donnée:)
-        let $test1 := exists(doc(concat($collection, "Persons.xml"))//Person[Username=$username])
-        (:si l'utilisateur est dans la BD, normalement c'est le cas... alors on supprime:)
-        let $BDdelete := if($test1) then 
-                    (
-                    let $query := update delete doc(concat($collection, "Persons.xml"))//Person[Username=$username]
-                    return <Message>The user has been deleted from the Database</Message>
-                    ) 
-                    else 
-                    (
-                    <Message>The user was not in the Database. But it is ok.</Message>
-                    )
-        (:Supression de l'utilisateur base de donnée eXist:)
-        let $test2 := xdb:exists-user($username)
-        let $eXistDelete := if ($test2) then 
-                    (
-                        let $query := xdb:delete-user($username)
-                        return <Message>The eXist user has been deleted</Message>
-                    )
-                    else
-                    (
-                        <Message>The user was not an eXist user. But it is ok.</Message>
-                    )
+        (:on test si l'user n'as pas déjà un tel role:)
+        let $test := exists(doc(concat($collection, "Persons.xml"))//Person[PersonId=$personid]//Engagment[CoursRef=$courseid][Role=$role])
+        
+        let $query := if ($test) then
+                            (
+                            (:on a rien à faire, on retourne un message:)
+                            <Message>This user is already registred to this course as {local:scale($role)}</Message>
+                            )
+                            else
+                            (
+                            let $person := doc(concat($collection, "Persons.xml"))//Person[PersonId=$personid]
+                            let $query := update insert <Engagment>
+                                                            <EngagementId>{local:createID()}</EngagementId>
+                                                            <CoursRef>{$courseid}</CoursRef>
+                                                            <Role>{$role}</Role>
+                                                        </Engagment> 
+                                                        into $person/Engagments
+                            return
+                                <Message>{$person/Lastname} {$person/Firstname} is now {$role} for this course</Message>
+                            
+                            )
         return  <Search>
-                    {$BDdelete}
-                    {$eXistDelete}
+                    {$query}
                 </Search>
         )
     )
@@ -93,6 +111,9 @@ let $core := if ($method='POST' and $role='dba') then
         <Core>
             {$core}
         </Core>
+        <PageTitle>
+            {$pageTitle}
+        </PageTitle>
     </Root>
    
 

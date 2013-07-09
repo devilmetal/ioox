@@ -100,6 +100,8 @@
                             cas 1) child = Form => affichage du formulaire (et selon les erreurs associées)
                             cas 2) child = Done => affichage de l'après création, donc mot de pass + username
                         -->
+                        
+                        <h2 class="heading"><xsl:value-of select="//PageTitle"/></h2>
                         <xsl:apply-templates select="/Root/Core/child::node()"/>
                         
                     </xsl:otherwise>
@@ -214,7 +216,6 @@
     
     <xsl:template match="Person">
         <div class="span8">
-            <form class="form-horizontal" method="post" action="#">
                 <fieldset>
                     <div class="control-group formSep">
                         <label class="control-label">Username</label>
@@ -234,13 +235,20 @@
                             <strong><xsl:value-of select="UniqueID"/></strong>
                         </div><br/>
                         <div class="controls">
-                            <xsl:variable name="username"><xsl:value-of select="Username"/></xsl:variable>
-                            <input name="username" value="{$username}" type="hidden"/>
-                            <button class="btn btn-gebo" type="submit">Delete</button>
+                            <xsl:variable name="personid"><xsl:value-of select="PersonId"/></xsl:variable>
+                            <form class="form-horizontal" method="post" action="#">
+                                <input type="hidden" name="role" value="Teacher"/>
+                                <input name="personid" value="{$personid}" type="hidden"/>
+                                <button class="btn btn-gebo" type="submit">Bind to this cours as teacher</button>
+                            </form>
+                            <form class="form-horizontal" method="post" action="#">
+                                <input type="hidden" name="role" value="Tutor"/>
+                                <input name="personid" value="{$personid}" type="hidden"/>
+                                <button class="btn btn-gebo" type="submit">Bind to this cours as tutor</button>
+                            </form>
                         </div>
                     </div>
                 </fieldset>
-            </form>
         </div>
     </xsl:template>
     

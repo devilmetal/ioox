@@ -18,12 +18,7 @@ declare function local:scale($string) as xs:string
 let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
 let $role := xdb:get-user-groups(xdb:get-current-user())
-(:let $courseid := string(request:get-attribute('oppidum.command')/resource/@name)
-On reprend le titre du cours pour l'afficher ainsi que la periode du cours
-let $course := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]
-let $courseTitle := $course/Title
-let $coursePeriod := $course/ancestor::Period/Name
-let $pageTitle := concat(concat($coursePeriod,' - '),$courseTitle):)
+
 
 
 (:on prend tous les noms de periodes:)
@@ -65,7 +60,7 @@ let $core := if ($method='POST' and $role='dba') then
                                         <Teachers>
                                             {
                                             for $person in $persons/Person
-                                            where ($person//Engagment/Role='Teacher' and $person//Engagment/CoursRef=$id) or ( $person//Engagment/Role='Tutor' and $person//Engagment/CoursRef=$id)
+                                            where $person//Engagment[(Role='Teacher' and CoursRef=$id) or (Role='Tutor' and CoursRef=$id)]
                                             return
                                                 <Teacher>
                                                     <Name>{$person/Lastname} {$person/Firstname}</Name>

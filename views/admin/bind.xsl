@@ -161,7 +161,7 @@
             <h3 class="heading">Search for a course</h3>
             <div class="row-fluid">
                 <div class="span8">
-                    <form class="form-horizontal" method="post" action="bind.xml">
+                    <form class="form-horizontal" method="post" action="#">
                         <fieldset>
                             <xsl:apply-templates select="Error"/>
                             <xsl:apply-templates select="Message"/>
