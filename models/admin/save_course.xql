@@ -64,12 +64,6 @@ let $query := if ($oldId='nan' and not($test)) then
                                         <EndTime/>
                                         <Room/>
                                         <Resources/>
-                                        <Exercise>
-                                            <ExerciseId>{$i}</ExerciseId>
-                                            <Description/>
-                                            <Data/>
-                                            <Deliverables/>
-                                        </Exercise>
                                     </Session>
                                     }
                                 </Sessions>
@@ -108,12 +102,20 @@ let $query := if ($oldId='nan' and not($test)) then
                                         {$session/EndTime}
                                         {$session/Room}
                                         {$session/Ressources}
-                                        <Exercise>
-                                            {$session/Exercise/ExerciseId}
-                                            {$session/Exercise/Description}
-                                            {$session/Exercise/Data}
-                                            <Deliverables/>
-                                        </Exercise>
+                                        {
+                                        (:si il y a un exercice pour la session on le reprend, sinon pas:)
+                                        if(exists($session/Exercise)) then
+                                            (
+                                                <Exercise>
+                                                    {$session/Exercise/ExerciseId}
+                                                    {$session/Exercise/Description}
+                                                    {$session/Exercise/Data}
+                                                    <Deliverables/>
+                                                </Exercise>
+                                            )
+                                            else
+                                            ((:Rien:))
+                                        }
                                     </Session>
                                     }
                                 </Sessions>
@@ -157,12 +159,20 @@ let $query := if ($oldId='nan' and not($test)) then
                                         {$session/EndTime}
                                         {$session/Room}
                                         {$session/Ressources}
-                                        <Exercise>
-                                            {$session/Exercise/ExerciseId}
-                                            {$session/Exercise/Description}
-                                            {$session/Exercise/Data}
-                                            <Deliverables/>
-                                        </Exercise>
+                                        {
+                                        (:si il y a un exercice pour la session on le reprend, sinon pas:)
+                                        if(exists($session/Exercise)) then
+                                            (
+                                                <Exercise>
+                                                    {$session/Exercise/ExerciseId}
+                                                    {$session/Exercise/Description}
+                                                    {$session/Exercise/Data}
+                                                    <Deliverables/>
+                                                </Exercise>
+                                            )
+                                            else
+                                            ((:Rien:))
+                                        }
                                     </Session>
                                     }
                                 </Sessions>

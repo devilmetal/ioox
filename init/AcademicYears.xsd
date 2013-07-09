@@ -154,7 +154,7 @@
                                                   <xs:element minOccurs="1" name="EndTime"
                                                   type="xs:time"/>
                                                   <xs:element name="Room"/>
-                                                  <xs:element name="Exercise">
+                                                  <xs:element name="Exercise" minOccurs="0">
                                                   <xs:complexType>
                                                   <xs:sequence>
                                                   <xs:element name="ExerciceId"/>
