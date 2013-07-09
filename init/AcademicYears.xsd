@@ -90,6 +90,15 @@
                                                   </xs:sequence>
                                                   </xs:complexType>
                                                   </xs:element>
+                                                  <xs:element name="Project">
+                                                  <xs:complexType>
+                                                  <xs:sequence>
+                                                  <xs:element name="Weight" type="WeightType"/>
+                                                  <xs:element name="Description" type="ContentType"
+                                                  />
+                                                  </xs:sequence>
+                                                  </xs:complexType>
+                                                  </xs:element>
                                                   </xs:sequence>
                                                   </xs:complexType>
                                                   </xs:element>

@@ -92,7 +92,7 @@ let $course := if ($person//Engagment[Role != 'Unsubscribed']/CoursRef = $ref2) 
                                                                                         {$courseBase/Description}
                                                                                     </Course>)                        
 let $period := $courseBase/ancestor::Period
-
+let $error := if ($isgoodperiod) then () else ( <Error>You can not subscrib a course which is in not in the current period</Error>)
     return
         if ($isAcourse) then 
         (
@@ -108,6 +108,7 @@ let $period := $courseBase/ancestor::Period
         <EverybodyGrades>
             {$everygrades}
         </EverybodyGrades>
+        {$error}
         </Root>
         )
         else

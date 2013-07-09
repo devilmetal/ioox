@@ -247,7 +247,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                         <model src="models/me/teaching/info.xql"/>
                         <view src="views/me/teaching/info.xsl"/>
                         <action epilogue="standard" name="modifier">
-                        <   model src="oppidum:actions/edit.xql"/>
+                            <model src="oppidum:actions/edit.xql"/>
                             <view src="views/edit.xsl"/>
                         </action>
                         <action name="POST">
@@ -256,10 +256,23 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                     </item>
                     
                     <!-- teacher grades manager -->
-                    <collection epilogue="standard" name="grades">
+                    <item epilogue="standard" name="grades">
+                        <!-- vue de base avec l'affichage de tous les étudiants du cours -->
                         <model src="models/me/teaching/grades.xql"/>
                         <view src="views/me/teaching/grades.xsl"/>
-                    </collection>
+                        <!-- Chagrement des notes par rapport à l'evaluation de base du cours -->
+                        <item epilogue="standard" method="POST">
+                        <model src="models/me/teaching/studentgrades.xql"/>
+                        <view src="views/me/teaching/studentgrades.xsl"/>
+                        <action epilogue="standard" name="modifier">
+                            <model src="oppidum:actions/edit.xql"/>
+                            <view src="views/edit.xsl"/>
+                        </action>
+                        <action name="POST">
+                            <model src="models/me/techer/save_grades.xql"/>
+                        </action>
+                        </item>
+                    </item>
                 </collection>
             </item>
           </collection>
