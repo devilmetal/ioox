@@ -191,6 +191,17 @@
          <dd><xsl:value-of select="ExerciceGrade"/></dd>
       </xsl:for-each>
    </xsl:template>
+   
+   <xsl:template match="ProjectGrades">
+      <h4>Project Grades</h4>
+         <dt>Project Grade</dt>
+         <dd><xsl:value-of select="PojectGrade"/></dd>
+         <dt>Presentation Grade</dt>
+         <dd><xsl:value-of select="PresentationGrade"/></dd>
+         <dt>Report Grade</dt>
+         <dd><xsl:value-of select="ReportGrade"/></dd>
+      
+   </xsl:template>
    <!-- Affichage d'une erreure -->
    <xsl:template match="Error">
       <div class="alert alert-error">
@@ -224,6 +235,7 @@
       <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
       <xsl:value-of select="translate(.,$t,$newt)"/>
    </xsl:template>
+   
    
    
 </xsl:stylesheet>

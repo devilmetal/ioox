@@ -100,7 +100,7 @@ let $core := if ($testStudent and $isTeacher and $isAcourse ) then
                             <ProjectGrades>
                                 <PojectGrade/>
                                 <PresentationGrade/>
-                                <PojectGrade/>
+                                <ReportGrade/>
                             </ProjectGrades>
                         )
                         else
