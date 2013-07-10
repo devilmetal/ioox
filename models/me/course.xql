@@ -81,12 +81,8 @@ let $query := if ($method ='POST' and $id!='-1' and not($isteacher) and $isgoodp
                             
       
 
-<<<<<<< HEAD
 let $teachers := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagment[(Role='Tutor' or Role='Teacher') and (CoursRef=$ref2) ]/ancestor::Person
 
-=======
-let $teachers := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagment[(Role='Tutor' or Role='Teacher')][CoursRef=$courseBase/CourseId]/ancestor::Person
->>>>>>> a19f74240ff5170f87a88eee54fe5d943a7c6898
 let $grades :=  $person//Engagment[Grade][CoursRef=$ref2]
 let $everygrades :=  doc(concat($collection, "Persons.xml"))//Engagment[Grade][CoursRef=$ref2]
 (: si la personne est inscrite, on prend le cours en entier, sinon, juste les infos, dans ce cas, ça va modifier l'affichage par la suite ::)
