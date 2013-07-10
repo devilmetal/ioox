@@ -7,12 +7,62 @@
       
       <xt:component name="Grade">
         <h3 class="heading">Exam Grade</h3>
-        <div data-regexp="6|[1-5]|([1-5].[0-9])" data-variable="grade" data-binding="regexp">
+        <div data-regexp="[1-6]|([1-5].[0-9])" data-variable="grade" data-binding="regexp">
           <xt:use param="filter=event;type=text;id=ExamGrade" label="ExamGrade" types="input"/>
-          <p class="af-error" data-regexp-error="grade" style="font-color:red;font-size:10">Invalid hour, must be between 1 to 6 and at most 1 decimal</p>
+          <p class="af-error" data-regexp-error="grade" style="font-color:red;font-size:10">Invalid grade, must be between 1 to 6 and at most 1 decimal</p>
         </div>
+        <h3 class="heading">Exercises Grade</h3>
+        <xt:repeat minOccurs="0" maxOccurs="*" label="ExercicesGrades">
+          <xt:use label="Exercice" types="Exercice"/>
+          <span style="display:none">
+            <xt:menu-marker/>
+          </span>
+        </xt:repeat>
+        <h3 class="heading">Project Grade</h3>
+        <xt:use label="ProjectGrades" types="ProjectGrades"/>
+        
         
       </xt:component>
+      
+      <xt:component name="ProjectGrades">
+        <h4 class="heading">Poject Grade</h4>
+        <div data-regexp="[1-6]|([1-5].[0-9])" data-variable="grade" data-binding="regexp">
+          <xt:use param="filter=event;type=text;id=ProjectGrade" label="ProjectGrade" types="input"/>
+          <p class="af-error" data-regexp-error="grade" style="font-color:red;font-size:10">Invalid grade, must be between 1 to 6 and at most 1 decimal</p>
+        </div>
+        <h4 class="heading">Presentation Grade</h4>
+        
+        <div data-regexp="[1-6]|([1-5].[0-9])" data-variable="grade" data-binding="regexp">
+          <xt:use param="filter=event;type=text;id=PresentationGrade" label="PresentationGrade" types="input"/>
+          <p class="af-error" data-regexp-error="grade" style="font-color:red;font-size:10">Invalid grade, must be between 1 to 6 and at most 1 decimal</p>
+        </div>
+        <h4 class="heading">Report Grade</h4>
+        
+        <div data-regexp="[1-6]|([1-5].[0-9])" data-variable="grade" data-binding="regexp">
+          <xt:use param="filter=event;type=text;id=ReportGrade" label="ReportGrade" types="input"/>
+          <p class="af-error" data-regexp-error="grade" style="font-color:red;font-size:10">Invalid grade, must be between 1 to 6 and at most 1 decimal</p>
+        </div>
+      </xt:component>
+      
+      <xt:component name="Exercice">
+        <h4 class="heading">
+          Exercise :
+          <xt:repeat label="Topics">
+            <xt:use label="Topic" types="text" param="class=string"/>
+            <span style="display:none">
+              <xt:menu-marker/>
+            </span>
+          </xt:repeat>
+        </h4>
+        <div data-regexp="[1-6]|([1-5].[0-9])" data-variable="grade" data-binding="regexp">
+          <xt:use param="filter=event;type=text;id=ExerciceGrade" label="ExerciceGrade" types="input"/>
+          <p class="af-error" data-regexp-error="grade" style="font-color:red;font-size:10">Invalid grade, must be between 1 to 6 and at most 1 decimal</p>
+        </div>
+        <span style="display:none">
+          <xt:use label="ExerciceId" types="text"/>
+        </span>
+      </xt:component>
+        
       
      
       <xt:component name="Parag">
@@ -81,15 +131,9 @@
     </xt:head>
   </head>
   <body>
-    <h3 class="heading">Blocnotes</h3>
+    <h3 class="heading">Grade modification</h3>
     <div class="doc_view">
       <div class="doc_view_header">
-        <dl class="dl-horizontal">
-          <dt>Topic</dt>
-          <dd>//NoteInfos/SessionTopic</dd>
-          <dt>Date</dt>
-          <dd>//NoteInfos/LastEdit</dd>
-        </dl>
       </div>
       <div class="doc_view_content">
         <xt:use label="Grade" types="Grade"/>

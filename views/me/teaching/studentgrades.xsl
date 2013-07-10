@@ -172,33 +172,43 @@
    
    <xsl:template match="Grade">
       <h3 class="heading"><xsl:value-of select="Infos/UniqueID"/><xsl:text> - </xsl:text><xsl:value-of select="Infos/Name/Lastname"/><xsl:text> </xsl:text><xsl:value-of select="Infos/Name/Firstname"/></h3>
-      <xsl:apply-templates select="ExamGrade"/>
-      <xsl:apply-templates select="ExercicesGrades"/>
-      <xsl:apply-templates select="ProjectGrades"/>
+      <div class="doc_view">
+         <div class="doc_view_header">
+         </div>
+         <div class="doc_view_content">
+            <xsl:apply-templates select="ExamGrade"/>
+            <xsl:apply-templates select="ExercicesGrades"/>
+            <xsl:apply-templates select="ProjectGrades"/>
+         </div>
+         <div class="doc_view_footer clearfix">
+            
+         </div>
+      </div>
+      
       <button title="Modifier la page" onclick="javascript:window.location.href+='/modifier'"
          class="btn btn-inverse faq_right "><i class="splashy-pencil"></i> Modify</button>
    </xsl:template>
    
    <xsl:template match="ExamGrade">
-         <h4>Exam Grade</h4>
+      <h3 class="heading">Exam Grade</h3>
          <dd><xsl:value-of select="."/></dd>
    </xsl:template>
    
    <xsl:template match="ExercicesGrades">
-      <h4>Exercices Grades</h4>
+      <h3 class="heading">Exercices Grades</h3>
       <xsl:for-each select="Exercice">
-         <dt><xsl:apply-templates select="Topics"/></dt>
+         <h4 class="heading">Exercice : <xsl:apply-templates select="Topics"/></h4>
          <dd><xsl:value-of select="ExerciceGrade"/></dd>
       </xsl:for-each>
    </xsl:template>
    
    <xsl:template match="ProjectGrades">
-      <h4>Project Grades</h4>
-         <dt>Project Grade</dt>
-         <dd><xsl:value-of select="PojectGrade"/></dd>
-         <dt>Presentation Grade</dt>
+      <h3 class="heading">Project Grades</h3>
+         <h4 class="heading">Project Grade</h4>
+      <dd><xsl:value-of select="ProjectGrade"/></dd>
+      <h4 class="heading">Presentation Grade</h4>
          <dd><xsl:value-of select="PresentationGrade"/></dd>
-         <dt>Report Grade</dt>
+      <h4 class="heading">Report Grade</h4>
          <dd><xsl:value-of select="ReportGrade"/></dd>
       
    </xsl:template>

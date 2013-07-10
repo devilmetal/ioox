@@ -12,7 +12,7 @@ let $method := request:get-method()
 let $curr-date := fn:current-date()
 let $ref := request:get-attribute('oppidum.command')/@trail
 let $courseid := tokenize($ref,'/')[3]
-let $studentId := tokenize($ref,'/')[last()]
+let $studentId := tokenize($ref,'/')[6]
 let $id := if (session:get-attribute('id')) then (
                             session:get-attribute('id')
                             )
@@ -75,7 +75,12 @@ let $core := if ($testStudent and $isTeacher and $isAcourse ) then
                                         let $exerciceId := $session/Exercise/ExerciceId/text()
                                         return
                                         <Exercice>
-                                            {$session/Topics}
+                                            <Topics>
+                                            {
+                                            for $topic in $session/Topics/Topic
+                                            return
+                                                $topic}
+                                            </Topics>
                                             <ExerciceId>{$exerciceId}</ExerciceId>
                                             <ExerciceGrade>{$currGrade/ExercicesGrades/Exercice[ExerciceId=$exerciceId]/ExerciceGrade/text()}</ExerciceGrade>
                                         </Exercice>
@@ -98,9 +103,9 @@ let $core := if ($testStudent and $isTeacher and $isAcourse ) then
                      if(exists($courseEval/Project)) then
                         (
                             <ProjectGrades>
-                                <PojectGrade/>
-                                <PresentationGrade/>
-                                <ReportGrade/>
+                                <ProjectGrade>{$currGrade/ProjectGrades/ProjectGrade/text()}</ProjectGrade>
+                                <PresentationGrade>{$currGrade/ProjectGrades/PresentationGrade/text()}</PresentationGrade>
+                                <ReportGrade>{$currGrade/ProjectGrades/ReportGrade/text()}</ReportGrade>
                             </ProjectGrades>
                         )
                         else
