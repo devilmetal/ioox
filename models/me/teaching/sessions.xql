@@ -13,6 +13,7 @@ let $curr-date := fn:current-date()
 let $ref := request:get-attribute('oppidum.command')/@trail
 let $courseid := tokenize($ref,'/')[3]
 
+
 let $id := if (session:get-attribute('id')) then (
                             session:get-attribute('id')
                             )
@@ -21,7 +22,7 @@ let $id := if (session:get-attribute('id')) then (
                             )
 
 
-let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]/Evaluation
+let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]/Sessions
 
 let $teacher := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Teacher'][CoursRef=$courseid])
 let $tutor := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Tutor'][CoursRef=$courseid])
@@ -35,7 +36,6 @@ let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
         <CourseId>{$courseid}</CourseId>
         <Session>
             <Id>{$id}</Id>
-            <Username>{$user}</Username>
             <CurrentRole>
                 <Teacher>{$teacher}</Teacher>
                 <Tutor>{$tutor}</Tutor>
@@ -44,4 +44,3 @@ let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
             </Session>
     </sysinfo>
     </Root>
-   
