@@ -21,51 +21,98 @@
           </blockquote>
         </xt:repeat>
         
+
+        
+        
         <!-- ENENENENENE -->
-        <!-- Pj information-->
+        <!-- Project information -->
         <xt:repeat minOccurs="0" maxOccurs="1" label="Project">
-          <h4>Project <xt:menu-marker/></h4>
+          <h4>Project of the cours <xt:menu-marker/></h4>
           <blockquote>
             <dl class="dl-horizontal dl-modif">
-              <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
-              <dt>title</dt><dd><xt:use label="Title" types="text">Title</xt:use></dd>
-              <dt>Description</dt>
+              <dt>weight</dt><dd>
+                <xt:use types="text" label="Weight">50</xt:use></dd>
+              <dt>Title</dt><dd>
+                <xt:use types="text" label="Title">Title of the pj</xt:use></dd>
+              <!-- Desc du pj en general -->
+              <dt>description</dt>
               <dd>
                 <xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-                  <p><xt:use label="Parag List" types="Parag List"></xt:use><xt:menu-marker/></p>
-                </xt:repeat>
+                <xt:use types="Parag List" label="Parag List">Desc</xt:use>
+              </xt:repeat>
               </dd>
-              <dt>Steps</dt>
-              <dd>
-                <ul>
-                  <xt:repeat minOccurs="0" maxOccurs="*" label="Steps">
-                    <li><xt:use label="Step" types="Step">Step</xt:use><xt:menu-marker/></li>
-                  </xt:repeat>
-                </ul>
-              </dd>
-              
             </dl>
+
+            <!-- Steps list -->
             
-            <xt:menu-marker/>
+            <xt:repeat minOccurs="0" maxOccurs="1" label="Steps">
+              <h4>Steps of the pj <xt:menu-marker/></h4>
+              <ul>
+                <xt:use types="Step" label="Step"/>
+              </ul>
+            </xt:repeat>
+            
+            <!-- Pj/Report -->
+            <xt:repeat minOccurs="0" maxOccurs="1" label="Report">
+              <h4>Report <xt:menu-marker/></h4>
+              <blockquote>
+                <dl class="dl-horizontal dl-modif">
+                  <dt>weight</dt><dd>
+                    <xt:use types="text" label="Weight">50</xt:use></dd>
+                  <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+                    <xt:use types="Parag List" label="Parag List"></xt:use>
+                  </xt:repeat></dd>
+                </dl>
+              </blockquote>
+            </xt:repeat>
+            
+            <!-- Pj/Report -->
+            <xt:repeat minOccurs="0" maxOccurs="1" label="Presentation">
+              <h4>Presentation <xt:menu-marker/></h4>
+              <blockquote>
+                <dl class="dl-horizontal dl-modif">
+                  <dt>weight</dt><dd>
+                    <xt:use types="text" label="Weight">50</xt:use></dd>
+                  <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+                    <xt:use types="Parag List" label="Parag List"></xt:use>
+                  </xt:repeat></dd>
+                </dl>
+              </blockquote>
+            </xt:repeat>
+            
+            <!-- Pj/Project -->
+            <xt:repeat minOccurs="0" maxOccurs="1" label="Project">
+              <h4>Project <xt:menu-marker/></h4>
+              <blockquote>
+                <dl class="dl-horizontal dl-modif">
+                  <dt>weight</dt><dd>
+                    <xt:use types="text" label="Weight">50</xt:use></dd>
+                  <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+                    <xt:use types="Parag List" label="Parag List"></xt:use>
+                  </xt:repeat></dd>
+                </dl>
+              </blockquote>
+            </xt:repeat>
+            
           </blockquote>
         </xt:repeat>
         
         <!-- EENENENE -->
         
+        
         <!-- Exercices information -->
         <xt:repeat minOccurs="0" maxOccurs="1" label="Exercices">
-          <h4>Exercices of the pj <xt:menu-marker/></h4>
+          <h4>Exercices of the Cours <xt:menu-marker/></h4>
           <blockquote>
             <dl class="dl-horizontal dl-modif">
               <dt>weight</dt><dd>
                 <xt:use types="text" label="Weight">50</xt:use></dd>
-              <dt>description</dt><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+              <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
                 <xt:use types="Parag List" label="Parag List"></xt:use>
-              </xt:repeat>
+              </xt:repeat></dd>
             </dl>
           </blockquote>
         </xt:repeat>
-        
          
         
       </xt:component>
@@ -73,13 +120,8 @@
       
       <xt:component name="Parag">
         <p>
-          <!--<xt:repeat minOccurs="1" maxOccurs="*" label="Parag">-->
-          <!--                        <xt:use types="Fragment Link" label="Fragment Link"/>-->
           <xt:use types="text" param="types=textarea;filter=wiki;shape=parent">Cliquez pour
             éditer</xt:use>
-          <!--                        <xt:menu-marker/>
-                        <br/>
-                    </xt:repeat>-->
         </p>
       </xt:component>
       
@@ -137,13 +179,15 @@
       </xt:component>
       
       <xt:component name="Step">
-        <xt:use label="Title" types="text">Title</xt:use>
-        <xt:component name="Deadline">
-          <xt:use types="text" label="Date" param="filter=date;date_region=fr;date_format=ISO_8601"
-            >YYYY-MM-DD</xt:use>
-        </xt:component>
-        
+        step title <xt:use label="Title" types="text">Title</xt:use>
+        <xt:use types="Deadline"/>
       </xt:component>
+      
+      <xt:component name="Deadline">
+        (deadline <xt:use types="text" label="Date" param="filter=date;date_region=fr;date_format=ISO_8601"
+          >YYYY-MM-DD</xt:use>)
+      </xt:component>
+      
     </xt:head>
   </head>
   <body>
