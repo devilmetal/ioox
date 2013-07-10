@@ -210,9 +210,9 @@
    <xsl:template match="Topics">
       <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
       <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
-      <xsl:for-each select="Topic">
+         <xsl:apply-templates select="Topic"></xsl:apply-templates>
          <xsl:value-of select="translate(.,$t,$newt)"/><<xsl:if test="./node()=./ancestor::Topics/Topic[position()!=last()]/node()"></xsl:if>
-      </xsl:for-each>
+      
       
    </xsl:template>
    
