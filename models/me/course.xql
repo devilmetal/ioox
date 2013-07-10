@@ -26,6 +26,7 @@ let $ref2 := string($ref)
 (: Récupération du cours :)
 let $courseBase := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$ref2]
 
+
 (:On test si la personne n'est pas un prof ( dans ce cas, il ne peux pas se desinscrire comme ça... :)
 let $isteacher := exists($person//Engagment[CoursRef=$ref2][Role='Teacher'])
 (:On test si le cours est dans la période actuelle, ie, la current-date est contenu dans l'intérval donné de la période :)
@@ -81,7 +82,8 @@ let $query := if ($method ='POST' and $id!='-1' and not($isteacher) and $isgoodp
                             
       
 
-let $teachers := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagment[(Role='Tutor' or Role='Teacher')][CoursRef=$courseBase/CourseId]/ancestor::Person
+
+let $teachers := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagment[(Role='Tutor' or Role='Teacher') and (CoursRef=$ref2) ]/ancestor::Person
 let $grades :=  $person//Engagment[Grade][CoursRef=$ref2]
 let $everygrades :=  doc(concat($collection, "Persons.xml"))//Engagment[Grade][CoursRef=$ref2]
 (: si la personne est inscrite, on prend le cours en entier, sinon, juste les infos, dans ce cas, ça va modifier l'affichage par la suite ::)
