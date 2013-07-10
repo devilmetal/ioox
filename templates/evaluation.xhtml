@@ -15,10 +15,10 @@
             <dl class="dl-horizontal dl-modif">
               <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
               <dt>Date</dt><dd><xt:use types="text" label="Date" param="filter=date;date_region=fr;date_format=ISO_8601"
-             >YYYY-MM-DD</xt:use></dd>
+                >YYYY-MM-DD</xt:use></dd>
               <dt>StartTime</dt><dd><xt:use label="StartTime" types="text" option="unset">HH:MM:SS</xt:use></dd>
               <dt>EndTime</dt><dd><xt:use label="EndTime" types="text" option="unset">HH:MM:SS</xt:use></dd>
-          </dl>
+            </dl>
           </blockquote>
         </xt:repeat>
         
@@ -26,61 +26,61 @@
         <xt:repeat minOccurs="0" maxOccurs="1" label="Project">
           <h4>Project <xt:menu-marker></xt:menu-marker></h4>
           <blockquote>
-          <dl class="dl-horizontal dl-modif">
-            <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
-            <dt>title</dt><dd><xt:use label="Title" types="text">Title</xt:use></dd>
-          
-            <dt>Description</dt>
-            <dd>
-              <xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-              <p><xt:use label="Parag List" types="Parag List"></xt:use><xt:menu-marker/></p>
-            </xt:repeat>
-            </dd>
-            <dt>Steps</dt>
-            <dd>
-              <ul>
-              <xt:repeat minOccurs="0" maxOccurs="*" label="Steps">
-                <li><xt:use label="Step" types="Step">Step</xt:use><xt:menu-marker/></li>
-              </xt:repeat>
-              </ul>
-            </dd>
-          </dl>
-        
-          
-          <!-- Pj/Report information-->
+            <dl class="dl-horizontal dl-modif">
+              <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
+              <dt>title</dt><dd><xt:use label="Title" types="text">Title</xt:use></dd>
+              
+              <dt>Description</dt>
+              <dd>
+                <xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+                  <p><xt:use label="Parag List" types="Parag List"></xt:use><xt:menu-marker/></p>
+                </xt:repeat>
+              </dd>
+              <dt>Steps</dt>
+              <dd>
+                <ul>
+                  <xt:repeat minOccurs="0" maxOccurs="*" label="Steps">
+                    <li><xt:use label="Step" types="Step">Step</xt:use><xt:menu-marker/></li>
+                  </xt:repeat>
+                </ul>
+              </dd>
+            </dl>
             
-          <xt:repeat minOccurs="0" maxOccurs="1" label="Report">
-            <h4>Report of the pj <xt:menu-marker/></h4>
-            <blockquote>
-              <dl class="dl-horizontal dl-modif">
-                <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
-                <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-                  <xt:use label="Parag List" types="Parag List"></xt:use>
-                  <xt:menu-marker></xt:menu-marker>
-                 </xt:repeat>
-                </dd>
-              </dl>
-            </blockquote>
-            </xt:repeat>
-          
             
-          <!-- Pj/Presentation information-->
-          <xt:repeat minOccurs="0" maxOccurs="1" label="Presentation">
-            <h4>Presentation of the pj <xt:menu-marker/></h4>
-            <blockquote>
-              <dl class="dl-horizontal dl-modif">
-                <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
-                <dt>descritpion</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-              <xt:use label="Parag List" types="Parag List"></xt:use>
-              <xt:menu-marker/>
-            </xt:repeat>
-                </dd>
-              </dl>
+            <!-- Pj/Report information-->
             
-            </blockquote>
-          
-          </xt:repeat>
-          
+            <xt:repeat minOccurs="0" maxOccurs="1" label="Report">
+              <h4>Report of the pj <xt:menu-marker/></h4>
+              <blockquote>
+                <dl class="dl-horizontal dl-modif">
+                  <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
+                  <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+                    <xt:use label="Parag List" types="Parag List"></xt:use>
+                    <xt:menu-marker></xt:menu-marker>
+                  </xt:repeat>
+                  </dd>
+                </dl>
+              </blockquote>
+            </xt:repeat>
+            
+            
+            <!-- Pj/Presentation information-->
+            <xt:repeat minOccurs="0" maxOccurs="1" label="Presentation">
+              <h4>Presentation of the pj <xt:menu-marker/></h4>
+              <blockquote>
+                <dl class="dl-horizontal dl-modif">
+                  <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
+                  <dt>descritpion</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+                    <xt:use label="Parag List" types="Parag List"></xt:use>
+                    <xt:menu-marker/>
+                  </xt:repeat>
+                  </dd>
+                </dl>
+                
+              </blockquote>
+              
+            </xt:repeat>
+            
             <!-- Pj/Projet information-->
             <xt:repeat minOccurs="0" maxOccurs="1" label="Projet">
               <h4>Note of the projet <xt:menu-marker/></h4>
@@ -95,31 +95,28 @@
                 </dl>
               </blockquote>
             </xt:repeat>
-          
-          <xt:menu-marker/>
+            
+            <xt:menu-marker/>
           </blockquote>
         </xt:repeat>
         
         
-        
+        <!-- Pj Exercices-->
         <xt:repeat minOccurs="0" maxOccurs="1" label="Exercices">
           <h4>Exercices of the pj <xt:menu-marker/></h4>
           <blockquote>
             <dl class="dl-horizontal dl-modif">
               <dt>weight</dt><dd>
-          <xt:use types="text" label="Weight">50</xt:use></dd>
-          <dt>description</dt><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-            <xt:use types="Parag List" label="Parag List"></xt:use>
-          </xt:repeat>
+                <xt:use types="text" label="Weight">50</xt:use></dd>
+              <dt>description</dt><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+                <xt:use types="Parag List" label="Parag List"></xt:use>
+              </xt:repeat>
             </dl>
           </blockquote>
         </xt:repeat>
- 
-        <xt:use label="Exam" types="Exam"/>
- 
+
+      
       </xt:component>
-      
-      
       
       
       
@@ -202,7 +199,7 @@
     <h3 class="heading">Edit evaluations informations</h3>
     
     
-      <xt:use label="Evaluation" types="Evaluation"></xt:use>
+    <xt:use label="Evaluation" types="Evaluation"></xt:use>
     
     
   </body>
