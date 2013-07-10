@@ -117,12 +117,14 @@ let $collection := '/sites/ioox/data/'
                                                         {
                                                         if($exercice) then
                                                             (
+                                                                <ExercicesGrades>
+                                                                {$course/Evaluation/Exercices/Weight}
+                                                                {
                                                                 let $exerciceGrade := exists($engagment[Role='Student'][CoursRef=$courseId]/Grade/ExercicesGrades)
                                                                 return
                                                                     if ($exerciceGrade) then 
                                                                         (
-                                                                            <ExercicesGrades>
-                                                                                {$course/Evaluation/Exercices/Weight}
+                                                                            <Grades>
                                                                                 <ExerciceMean>
                                                                                   {
                                                                                     let $meanTest :=    exists($engagment[Role='Student'][CoursRef=$courseId]/Grade/ExercicesGrades/Exercice[ExerciceGrade!=''])
@@ -159,11 +161,12 @@ let $collection := '/sites/ioox/data/'
                                                                                             )
                                                                                     }
                                                                                 </Exercices>
-                                                                            </ExercicesGrades>
+                                                                             </Grades>
                                                                         )
                                                                         else
                                                                         ((:Pas encore de note pour les exercices pour ce cours:))
-                                                                
+                                                                }
+                                                                </ExercicesGrades>
                                                             )
                                                             else
                                                             (

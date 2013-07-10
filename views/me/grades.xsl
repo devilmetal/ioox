@@ -189,7 +189,10 @@
     </xsl:template>
     
     <xsl:template match="ExercicesGrades" mode="javascript">
-        ,['Exercices' ,<xsl:value-of select="ExerciceMean"/>]
+        <xsl:apply-templates select="Grades/ExerciceMean"/>
+    </xsl:template>
+    <xsl:template match="ExerciceMean">
+        ,['Exercices' ,<xsl:value-of select="."/>]
     </xsl:template>
 
     <xsl:template match="Periods" mode="explorer">
@@ -270,13 +273,58 @@
                     <div class="accordion-body collapse" id="{$acc_uni}">
                         <div class="accordion-inner">
                             <div class="row-fluid">
-                                <h4>Cours <xsl:value-of select="CourseTitle"/></h4>
+                                <h3 class="heading">Cours <xsl:value-of select="CourseTitle"/></h3>
 
                                 <xsl:variable name="courseid">
                                     <xsl:value-of select="CourseId"/>
                                 </xsl:variable>
 
-                                <!-- Détails -->
+                                <!-- Calcul de la moyenne -->
+                                
+                                <!-- On prend le total des poids (chaque poids est rendu par le Xquery s'il existe) -->
+                                <xsl:variable name="ExamW"><xsl:choose>
+                                    <xsl:when test="ExamGrade/Weight"><xsl:value-of select="ExamGrade/Weight"/></xsl:when>
+                                    <xsl:otherwise>0</xsl:otherwise>
+                                </xsl:choose></xsl:variable>
+                                <xsl:variable name="ProjW"><xsl:choose>
+                                    <xsl:when test="ProjectGrades/Weight"><xsl:value-of select="ProjectGrades/Weight"/></xsl:when>
+                                    <xsl:otherwise>0</xsl:otherwise>
+                                </xsl:choose></xsl:variable>
+                                <xsl:variable name="ExerW"><xsl:choose>
+                                    <xsl:when test="ExercicesGrades/Weight"><xsl:value-of select="ExercicesGrades/Weight"/></xsl:when>
+                                    <xsl:otherwise>0</xsl:otherwise>
+                                </xsl:choose></xsl:variable>
+                                
+                                <!-- Calcul du total -->
+                                <xsl:variable name="TotalW"><xsl:value-of select="$ExamW+$ProjW+$ExerW"/></xsl:variable>
+                                
+                                <!-- Calcul pour l'examen pondéré -->
+                                <xsl:variable name="ExamG">
+                                    <xsl:choose>
+                                        <xsl:when test="ExamGrade/Grade"><xsl:value-of select="ExamGrade/Grade * $ExamW div $TotalW"/></xsl:when>
+                                        <xsl:otherwise>0</xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:variable>
+                                <!-- Calcul pour le project pondéré -->
+                                <xsl:variable name="ProjG">
+                                    <xsl:choose>
+                                        <xsl:when test="ProjectGrades/Grades/ProjectMean"><xsl:value-of select="ProjectGrades/Grades/ProjectMean * $ProjW div $TotalW"/></xsl:when>
+                                        <xsl:otherwise>0</xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:variable>
+                                <!-- Calcul pour les exercices pondéré -->
+                                <xsl:variable name="ExerG">
+                                    <xsl:choose>
+                                        <xsl:when test="ExercicesGrades/Grades/ExerciceMean"><xsl:value-of select="ExercicesGrades/Grades/ExerciceMean * $ExerW div $TotalW"/></xsl:when>
+                                        <xsl:otherwise>0</xsl:otherwise>
+                                    </xsl:choose>
+                                </xsl:variable>
+                                
+                                <xsl:variable name="FinalGrade"><xsl:value-of select="$ExamG+$ProjG+$ExerG"/></xsl:variable>
+                                <h4 class="heading">Course global mean :</h4>
+                                <dd><xsl:value-of select="$FinalGrade *100 div 100"/></dd>
+                                
+                                <!-- Détails graphique-->
                                 <div id="chart_div{$courseid}"/>
 
                                 <!-- NO MORE USED

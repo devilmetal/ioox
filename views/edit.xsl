@@ -138,6 +138,8 @@
       </xsl:if>
       <p>Loading...</p>
     </div>
+    <button data-command="validate" data-target="template-container" data-validation-output="errors"
+      data-validation-label="span.label">Validate</button>
   </xsl:template>
   
   <xsl:template match="Edit[error]">
