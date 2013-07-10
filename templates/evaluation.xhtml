@@ -1,13 +1,12 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xt="http://ns.inria.org/xtiger" lang="en"
-  xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xt="http://ns.inria.org/xtiger" lang="en" xml:lang="en">
   <head>
-    <meta name="description"
-      content="This XTiger XML template defines the structure of an article for publication in the Proceedings of an ACM conference. The resulting XHTML document can be formatted by the ACM-Proc-Article.css style sheet, both for display and print. It can also be transformed into a LaTeX file (style sig-alternate.cls) with ACM-Proc-Article2latex.xsl" />
-    <meta name="keywords" content="template, XTiger" />
-    <title>Cours Evaluation</title>
+    <meta name="description" content="This XTiger XML template defines the structure of an article for publication in the Proceedings of an ACM conference. The resulting XHTML document can be formatted by the ACM-Proc-Article.css style sheet, both for display and print. It can also be transformed into a LaTeX file (style sig-alternate.cls) with ACM-Proc-Article2latex.xsl"/>
+    <meta name="keywords" content="template, XTiger"/>
+    <title>My Note</title>
     <xt:head version="1.1" templateVersion="1.0" label="Root">
       
       <xt:component name="Evaluation">
+        
         <!-- Exame information-->
         <xt:repeat minOccurs="0" maxOccurs="1" label="Exam">
           <h4>Exam <xt:menu-marker></xt:menu-marker></h4>
@@ -22,14 +21,14 @@
           </blockquote>
         </xt:repeat>
         
+        <!-- ENENENENENE -->
         <!-- Pj information-->
         <xt:repeat minOccurs="0" maxOccurs="1" label="Project">
-          <h4>Project <xt:menu-marker></xt:menu-marker></h4>
+          <h4>Project <xt:menu-marker/></h4>
           <blockquote>
             <dl class="dl-horizontal dl-modif">
               <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
               <dt>title</dt><dd><xt:use label="Title" types="text">Title</xt:use></dd>
-              
               <dt>Description</dt>
               <dd>
                 <xt:repeat minOccurs="0" maxOccurs="*" label="Description">
@@ -44,64 +43,16 @@
                   </xt:repeat>
                 </ul>
               </dd>
-            </dl>
-            
-            
-            <!-- Pj/Report information-->
-            
-            <xt:repeat minOccurs="0" maxOccurs="1" label="Report">
-              <h4>Report of the pj <xt:menu-marker/></h4>
-              <blockquote>
-                <dl class="dl-horizontal dl-modif">
-                  <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
-                  <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-                    <xt:use label="Parag List" types="Parag List"></xt:use>
-                    <xt:menu-marker></xt:menu-marker>
-                  </xt:repeat>
-                  </dd>
-                </dl>
-              </blockquote>
-            </xt:repeat>
-            
-            
-            <!-- Pj/Presentation information-->
-            <xt:repeat minOccurs="0" maxOccurs="1" label="Presentation">
-              <h4>Presentation of the pj <xt:menu-marker/></h4>
-              <blockquote>
-                <dl class="dl-horizontal dl-modif">
-                  <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
-                  <dt>descritpion</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-                    <xt:use label="Parag List" types="Parag List"></xt:use>
-                    <xt:menu-marker/>
-                  </xt:repeat>
-                  </dd>
-                </dl>
-                
-              </blockquote>
               
-            </xt:repeat>
-            
-            <!-- Pj/Projet information-->
-            <xt:repeat minOccurs="0" maxOccurs="1" label="Projet">
-              <h4>Note of the projet <xt:menu-marker/></h4>
-              <blockquote>
-                <dl class="dl-horizontal dl-modif">
-                  <dt>weight</dt><dd><xt:use types="text" label="Weight">50</xt:use></dd>
-                  <dt>descritpion</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-                    <xt:use label="Parag List" types="Parag List"></xt:use>
-                    <xt:menu-marker/>
-                  </xt:repeat>
-                  </dd>
-                </dl>
-              </blockquote>
-            </xt:repeat>
+            </dl>
             
             <xt:menu-marker/>
           </blockquote>
         </xt:repeat>
         
+        <!-- EENENENE -->
         
-        <!-- Pj Exercices-->
+        <!-- Exercices information -->
         <xt:repeat minOccurs="0" maxOccurs="1" label="Exercices">
           <h4>Exercices of the pj <xt:menu-marker/></h4>
           <blockquote>
@@ -114,10 +65,10 @@
             </dl>
           </blockquote>
         </xt:repeat>
-
-      
+        
+         
+        
       </xt:component>
-      
       
       
       <xt:component name="Parag">
@@ -196,11 +147,9 @@
     </xt:head>
   </head>
   <body>
-    <h3 class="heading">Edit evaluations informations</h3>
+    <h3 class="heading">Evaluation</h3>
     
-    
-    <xt:use label="Evaluation" types="Evaluation"></xt:use>
-    
-    
+    <xt:use label="Evaluation" types="Evaluation"/>
+     
   </body>
 </html>
