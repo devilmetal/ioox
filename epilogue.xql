@@ -266,8 +266,66 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
                                         <i class="splashy-arrow_large_left"></i> Back</a>
          </span>
 
-   else
+   else if ($user = 'admin')  then
     (
+        
+       <span>
+    
+            
+    <!-- sidebar -->
+            <a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
+            <div class="sidebar">
+				<!--<div class="antiScroll">
+					<div class="antiscroll-inner">
+						<div class="antiscroll-content">-->
+							<div class="sidebar_inner">
+								
+								<div class="globalmenu">
+								<ul class="gmul">
+								
+								    <li class="gitem">
+								    <a href="{$cmd/@base-url}home" >
+										<img src="{$cmd/@base-url}static/ioox/img/gCons/home.png" alt="" /> Home
+								    </a>
+								    </li>
+								
+								
+								    <li class="gitem">
+								    <a href="{$cmd/@base-url}explorer" >
+										<img src="{$cmd/@base-url}static/ioox/img/gCons/search.png" alt="" /> Explorer
+								    </a>
+								    </li>
+								
+								
+								    <li class="gitem">
+								    <a href="{$cmd/@base-url}faq" >
+										<img src="{$cmd/@base-url}static/ioox/img/gCons/push-pin.png" alt="" /> FAQ
+									</a>
+									</li>
+									
+									<li class="gitem visible-phone visible-tablet">
+								    <a href="{$cmd/@base-url}admin" >
+										<img src="{$cmd/@base-url}static/ioox/img/gCons-white/processing.png" alt="" /> Admin
+									</a>
+									</li>
+									
+                                    <li class="gitem visible-phone visible-tablet">
+                                        <a class="login" href="{$cmd/@base-url}logout?url={$cmd/@base-url}">
+                                        <img src="{$cmd/@base-url}static/ioox/img/gCons/shut-down.png" alt=""/> Log Out</a>
+                                    </li>
+								</ul>
+								<!--</div>
+							</div>
+						</div>-->
+					</div>
+				</div>
+			</div>
+         </span>     
+        
+        
+        
+        
+    )else(
     <span>
     
             
