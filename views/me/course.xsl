@@ -157,7 +157,7 @@
                     
                     });
                 </script>
-                <xsl:apply-templates select="/Root/Grades" mode="javascript"></xsl:apply-templates>
+                <xsl:apply-templates select="/Root/Means" mode="javascript"></xsl:apply-templates>
             </site:javascript>
         </site:view>
 
@@ -641,9 +641,9 @@
 
 
     <!-- code pour la génération du graphique simplifié des notes le tout est géré par Google Charts-->
-    <xsl:template match="Grades" mode="javascript">
+    <xsl:template match="Means" mode="javascript">
         <!-- Si Grades est vide, donc on est pas connecté, donc on affichge pas ça. -->
-        <xsl:if test="/Root/Grades != ''">
+       
             <script src="{$xslt-ressource-url}/js/jsapi.js"/>
         <script type="text/javascript">
             google.load("visualization", "1", {packages:["corechart"]});
@@ -651,7 +651,7 @@
             function drawChart() {
             var data = google.visualization.arrayToDataTable([
             ['Type', 'Grade', 'Global Mean']
-            <xsl:apply-templates select="Engagment/Grade/child::node()" mode="javascript"/>
+            <xsl:apply-templates select="./child::node()" mode="javascript"/>
             ]);
             
             var options = {
@@ -664,32 +664,27 @@
             chart.draw(data, options);
             }
         </script>
-        </xsl:if>
     </xsl:template>
     
-    <xsl:template match="ExamGrade" mode="javascript">
-        <!-- Calculer la moyenne des notes des examens des autres -->
-        <xsl:variable name="meanO"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ExamGrade) div count(//EverybodyGrades//Engagment/Grade/ExamGrade)"></xsl:value-of></xsl:variable>
-        ,['Exam' ,<xsl:value-of select="."/>,<xsl:value-of select="$meanO"/>]
+    <xsl:template match="ExamMean" mode="javascript">
+        ,['Exam' ,<xsl:value-of select="Me"/>,<xsl:value-of select="Others"/>]
     </xsl:template>
-    <xsl:template match="ExercicesGrades" mode="javascript">
-        <!-- Moyenne des notes des exercices de tous les autres -->
-        <xsl:variable name="meanO"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ExercicesGrades/Exercice/ExerciceGrade) div count(//EverybodyGrades//Engagment/Grade/ExercicesGrades/Exercice/ExerciceGrade)"></xsl:value-of></xsl:variable>
-        
-        <!-- Moyenne des notes des exercices-->
-        <xsl:variable name="mean"><xsl:value-of select="sum(.//Exercice/ExerciceGrade) div count(.//Exercice/ExerciceGrade)"/></xsl:variable>
-        ,['Exercises' ,<xsl:value-of select="$mean"/>,<xsl:value-of select="$meanO"/>]
+    <xsl:template match="ExercicesMean" mode="javascript">
+        ,['Exercises' ,<xsl:value-of select="Me"/>,<xsl:value-of select="Others"/>]
     </xsl:template>
-    <xsl:template match="ProjectGrades" mode="javascript">
-        <!-- Moyenne des notes des project steps de tous les autres -->
-        <xsl:variable name="meanO"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ProjectGrades/child::node()) div count(//EverybodyGrades//Engagment/Grade/ProjectGrades/child::node())"></xsl:value-of></xsl:variable>
-        
-        
-        <!-- Moyenne des notes des steps -->
-        <xsl:variable name="mean"><xsl:value-of select="(number(replace(ReportGrade,'',0))+number(PresentationGrade)+number(ProjectGrade)) div 3"/></xsl:variable>
-        ,['Project' ,<xsl:value-of select="$mean"/>,<xsl:value-of select="$meanO"/>]
+    <xsl:template match="ProjectMean" mode="javascript">
+        <xsl:apply-templates select="./child::node()" mode="javascript"/>
     </xsl:template>
     
+    <xsl:template match="Project" mode="javascript">
+        ,['Project' ,<xsl:value-of select="Me"/>,<xsl:value-of select="Others"/>]
+    </xsl:template>
+    <xsl:template match="Report" mode="javascript">
+        ,['Report' ,<xsl:value-of select="Me"/>,<xsl:value-of select="Others"/>]
+    </xsl:template>
+    <xsl:template match="Presentation" mode="javascript">
+        ,['Presentation' ,<xsl:value-of select="Me"/>,<xsl:value-of select="Others"/>]
+    </xsl:template>
     
     <!-- Affichage d'une erreure -->
     <xsl:template match="Error">

@@ -128,5 +128,8 @@ let $core := if ($testStudent and $isTeacher and $isAcourse ) then
     {$backIsTeacher}
     {$backStudent}
     {$core}
+    <CourseId>
+        {$courseid}
+    </CourseId>
     </Root>
    

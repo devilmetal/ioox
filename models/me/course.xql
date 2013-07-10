@@ -56,7 +56,7 @@ let $query := if ($method ='POST' and $id!='-1' and not($isteacher) and $isgoodp
                                             else
                                             (
                                             (: on inscrit la personne au cours, IE on crée un engagement avec le role 'Student' :)
-                                            update insert <Engagment><EngagementId>{$id}{$ref2}</EngagementId><Role>Student</Role><CoursRef>{$ref2}</CoursRef></Engagment> into $person//Engagments           
+                                            update insert <Engagment><EngagementId>{$id}{$ref2}</EngagementId><Role>Student</Role><CoursRef>{$ref2}</CoursRef><Grade/></Engagment> into $person//Engagments           
                                             )
                                         
                                     ) 
@@ -91,13 +91,166 @@ let $course := if ($person//Engagment[Role != 'Unsubscribed']/CoursRef = $ref2) 
                                                                                         {$courseBase/CourseNo}
                                                                                         {$courseBase/Acronym}
                                                                                         {$courseBase/Description}
-                                                                                    </Course>)                        
+                                                                                    </Course>)     
+let $means :=   <Means>
+                    {
+                    (:Savoir si l'examen exist et il y a des notes:)
+                    let $test1 := exists($course/Evaluation/Exam)
+                    let $test2 := exists($everygrades//Grade[ExamGrade!=''])
+                    let $test3 := exists($grades//Grade[ExamGrade!=''])
+                    return
+                        if($test1) then
+                            (
+                                (:il existe un examen:)
+                                if($test2) then
+                                    (
+                                        (:une moyenne est calculable:)
+                                        <ExamMean>
+                                            <Others>{sum($everygrades//Grade[ExamGrade!='']/ExamGrade) div count($everygrades//Grade[ExamGrade!='']/ExamGrade)}</Others>
+                                            <Me>
+                                            {
+                                                if($test3) then
+                                                (
+                                                    $grades//Grade/ExamGrade/text()
+                                                )
+                                                else
+                                                ()
+                                            }
+                                            </Me>
+                                       </ExamMean>
+                                    )
+                                    else
+                                    ()
+                            )
+                            else
+                            ()
+                    }
+                    {
+                    (:Savoir si le project exist et il y a des notes:)
+                    let $test1 := exists($course/Evaluation/Project)
+                    (:si le project exist, on va teste pour les sous-moyennes project/report/presentation:)
+                    return
+                    if($test1) then
+                        (
+                        <ProjectMean>
+                        {
+                        (:sous-test pour le project:)
+                        let $test1 := exists($everygrades//Grade/ProjectGrades[ProjectGrade!=''])
+                        let $test2 := exists($grades//Grade/ProjectGrades[ProjectGrade!=''])
+                        return
+                        if($test1) then 
+                            (
+                                <Project>
+                                    <Others>{sum($everygrades//Grade/ProjectGrades[ProjectGrade!='']/ProjectGrade) div count($everygrades//Grade/ProjectGrades[ProjectGrade!='']/ProjectGrade)}</Others>                                    
+                                    <Me>
+                                        {
+                                            if($test2) then
+                                            (
+                                                $grades//Grade/ProjectGrades/ProjectGrade/text()
+                                            )
+                                            else
+                                            ()
+                                        }
+                                    </Me>
+                                </Project>
+                            )
+                            else
+                            ()
+                        }
+                        {
+                        (:sous-test pour le rapport:)
+                        let $test1 := exists($everygrades//Grade/ProjectGrades[ReportGrade!=''])
+                        let $test2 := exists($grades//Grade/ProjectGrades[ReportGrade!=''])
+                        return
+                        if($test1) then 
+                            (
+                                <Report>
+                                    <Others>{sum($everygrades//Grade/ProjectGrades[ReportGrade!='']/ReportGrade) div count($everygrades//Grade/ProjectGrades[ReportGrade!='']/ReportGrade)}</Others>                                    
+                                    <Me>
+                                        {
+                                            if($test2) then
+                                            (
+                                                $grades//Grade/ProjectGrades/ReportGrade/text()
+                                            )
+                                            else
+                                            ()
+                                        }
+                                    </Me>
+                                </Report>
+                            )
+                            else
+                            ()
+                        }
+                        {
+                        (:sous-test pour la presentation:)
+                        let $test1 := exists($everygrades//Grade/ProjectGrades[PresentationGrade!=''])
+                        let $test2 := exists($grades//Grade/ProjectGrades[PresentationGrade!=''])
+                        return
+                        if($test1) then 
+                            (
+                                <Presentation>
+                                    <Others>{sum($everygrades//Grade/ProjectGrades[PresentationGrade!='']/PresentationGrade) div count($everygrades//Grade/ProjectGrades[PresentationGrade!='']/PresentationGrade)}</Others>                                    
+                                    <Me>
+                                        {
+                                            if($test2) then
+                                            (
+                                                $grades//Grade/ProjectGrades/PresentationGrade/text()
+                                            )
+                                            else
+                                            ()
+                                        }
+                                    </Me>
+                                </Presentation>
+                            )
+                            else
+                            ()
+                        }
+                        </ProjectMean>)
+                        else
+                        ()
+                    
+                    }
+                    {
+                    (:Savoir si les exercices existent et il y a des notes:)
+                    let $test1 := exists($course/Evaluation/Exercices)
+                    let $test2 := exists($everygrades//Grade/ExercicesGrades/Exercice[ExerciceGrade!=''])
+                    let $test3 := exists($grades//Grade/ExercicesGrades/Exercice[ExerciceGrade!=''])
+                    return
+                        if($test1) then
+                            (
+                                (:il existe des exercices:)
+                                if($test2) then
+                                    (
+                                        (:une moyenne est calculable:)
+                                        <ExercicesMean>
+                                            <Others>{sum($everygrades//Grade/ExercicesGrades/Exercice[ExerciceGrade!='']/ExerciceGrade) div count($everygrades//Grade/ExercicesGrades/Exercice[ExerciceGrade!='']/ExerciceGrade)}</Others>
+                                            <Me>
+                                            {
+                                                if($test3) then
+                                                (
+                                                    sum($grades//Grade/ExercicesGrades/Exercice[ExerciceGrade!='']/ExerciceGrade) div count($grades//Grade/ExercicesGrades/Exercice[ExerciceGrade!='']/ExerciceGrade)
+                                                )
+                                                else
+                                                ()
+                                            }
+                                            </Me>
+                                       </ExercicesMean>
+                                    )
+                                    else
+                                    ()
+                            )
+                            else
+                            ()
+                    }
+                </Means>
 let $period := $courseBase/ancestor::Period
 let $error := if ($isgoodperiod) then () else ( <Error>You can not subscrib a course which is in not in the current period</Error>)
     return
         if ($isAcourse) then 
         (
         <Root>
+        
+        {$means}
         {$period}
         <Teachers>
             {$teachers}
