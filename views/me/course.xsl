@@ -682,11 +682,11 @@
     </xsl:template>
     <xsl:template match="ProjectGrades" mode="javascript">
         <!-- Moyenne des notes des project steps de tous les autres -->
-        <xsl:variable name="meanO"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ProjectGrades/Step/StepGrade) div count(//EverybodyGrades//Engagment/Grade/ProjectGrades/Step/StepGrade)"></xsl:value-of></xsl:variable>
+        <xsl:variable name="meanO"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ProjectGrades/child::node()) div count(//EverybodyGrades//Engagment/Grade/ProjectGrades/child::node())"></xsl:value-of></xsl:variable>
         
         
         <!-- Moyenne des notes des steps -->
-        <xsl:variable name="mean"><xsl:value-of select="sum(.//Step/StepGrade) div count(.//Step/StepGrade)"/></xsl:variable>
+        <xsl:variable name="mean"><xsl:value-of select="(number(replace(ReportGrade,'',0))+number(PresentationGrade)+number(ProjectGrade)) div 3"/></xsl:variable>
         ,['Project' ,<xsl:value-of select="$mean"/>,<xsl:value-of select="$meanO"/>]
     </xsl:template>
     
