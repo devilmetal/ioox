@@ -669,11 +669,22 @@
     <xsl:template match="ExamMean" mode="javascript">
         ,['Exam' ,<xsl:value-of select="Me"/>,<xsl:value-of select="Others"/>]
     </xsl:template>
+<<<<<<< HEAD
     <xsl:template match="ExercicesMean" mode="javascript">
         ,['Exercises' ,<xsl:value-of select="Me"/>,<xsl:value-of select="Others"/>]
     </xsl:template>
     <xsl:template match="ProjectMean" mode="javascript">
         <xsl:apply-templates select="./child::node()" mode="javascript"/>
+=======
+    <xsl:template match="ProjectGrades" mode="javascript">
+        <!-- Moyenne des notes des project steps de tous les autres -->
+        <xsl:variable name="meanO"><xsl:value-of select="sum(//EverybodyGrades//Engagment/Grade/ProjectGrades/child::node()) div count(//EverybodyGrades//Engagment/Grade/ProjectGrades/child::node())"></xsl:value-of></xsl:variable>
+        
+        
+        <!-- Moyenne des notes -->
+        <xsl:variable name="mean"><xsl:value-of select="number(replace(ReportGrade,'',0)) + number(PresentationGrade) + number(ProjectGrade)) div 3"/></xsl:variable>
+        ,['Project' ,<xsl:value-of select="$mean"/>,<xsl:value-of select="$meanO"/>]
+>>>>>>> 59c7137b0cda31f98b157fd7a5c46c571b61ed39
     </xsl:template>
     
     <xsl:template match="Project" mode="javascript">

@@ -129,6 +129,10 @@
                            
                            <h3 class="heading">Sessions</h3>
                         <p>This is the overview of all session with the possibility to entry in edit mode</p>
+                  <div class="row-fluid">
+                     <xsl:apply-templates select="//Sessions"/>  
+                  </div>
+                  
                         
 
                         
@@ -180,6 +184,19 @@
          </site:javascript>
       </site:view>
 
+   </xsl:template>
+   
+   <xsl:template match="Sessions">
+      <div class="row-fluid">
+         <xsl:apply-templates select="Session"/>
+      </div>
+   </xsl:template>
+   
+   <xsl:template match="Session">
+      <div class="span6">
+         <h5> <xsl:value-of select="SessionNumber"/> - <xsl:value-of select="Date"/></h5>
+         
+      </div>
    </xsl:template>
 
   
