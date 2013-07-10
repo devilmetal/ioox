@@ -261,7 +261,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                         <model src="models/me/teaching/grades.xql"/>
                         <view src="views/me/teaching/grades.xsl"/>
                         <!-- Chagrement des notes par rapport à l'evaluation de base du cours -->
-                        <item epilogue="standard" method="POST">
+                        <item epilogue="standard" method="POST" supported="modifier" template="templates/grades">
                         <model src="models/me/teaching/studentgrades.xql"/>
                         <view src="views/me/teaching/studentgrades.xsl"/>
                         <action epilogue="standard" name="modifier">
@@ -301,6 +301,9 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
       <model src="oppidum:models/template.xql"/>
     </item>
     <item name="evaluation" resource="evaluation.xhtml">
+      <model src="oppidum:models/template.xql"/>
+    </item>
+    <item name="grades" resource="grades.xhtml">
       <model src="oppidum:models/template.xql"/>
     </item>
   </collection>
