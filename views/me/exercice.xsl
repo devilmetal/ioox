@@ -228,8 +228,8 @@
             <div class="doc_view">
                 <div class="doc_view_header">
                     <dl class="dl-horizontal">
-                        <dt>Session Topic</dt>
-                        <dd><xsl:value-of select="Topic"></xsl:value-of></dd>
+                        <dt>Session Topics</dt>
+                        <dd><xsl:apply-templates select="Topics"/></dd>
                         <dt>Exercise description</dt>
                     </dl>
                 </div>
@@ -351,6 +351,24 @@
             <xsl:attribute name="href"><xsl:value-of select="Location"/></xsl:attribute>
             <xsl:value-of select="ancestor::ExternalDoc/Title"/>
         </xsl:element><br/>
+    </xsl:template>
+    
+    <xsl:template match="Topics">
+        
+        <xsl:apply-templates select="Topic[position()!=last()]" mode="notlast"/>
+        <xsl:apply-templates select="Topic[position()=last()]" mode="last"/>
+        
+    </xsl:template>
+    
+    <xsl:template match="Topic" mode="notlast">
+        <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
+        <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
+        <xsl:value-of select="translate(.,$t,$newt)"/><xsl:text> / </xsl:text>
+    </xsl:template>
+    <xsl:template match="Topic" mode="last">
+        <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
+        <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
+        <xsl:value-of select="translate(.,$t,$newt)"/>
     </xsl:template>
     
 </xsl:stylesheet>
