@@ -27,11 +27,25 @@ let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$co
 let $teacher := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Teacher'][CoursRef=$courseid])
 let $tutor := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Tutor'][CoursRef=$courseid])
 let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Student'][CoursRef=$courseid])
-                            
-
+ 
     return
     <Root>
-    {$data2}
+    <Sessions>
+    {
+    for $s in $data2//Session
+    order by $s/Date
+    return
+        <Session>
+            {$s/SessionNumber}
+            {$s/Topics}
+            {$s/Description}
+            {$s/Date}
+            {$s/StartTime}
+            {$s/EndTime}
+            {$s/Room}
+        </Session>
+    } 
+    </Sessions>
     <sysinfo>
         <CourseId>{$courseid}</CourseId>
         <Session>
