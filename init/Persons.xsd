@@ -44,7 +44,7 @@
                                                   <xs:element name="ReportGrade" type="GradeType"/>
                                                   <xs:element name="PresentationGrade"
                                                   type="GradeType"/>
-                                                  <xs:element name="PojectGrade" type="GradeType"/>
+                                                  <xs:element name="ProjectGrade" type="GradeType"/>
                                                   </xs:sequence>
                                                   </xs:complexType>
                                                   </xs:element>
