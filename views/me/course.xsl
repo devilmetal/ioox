@@ -365,7 +365,7 @@
         
         <div class="tab-pane {$current}" id="tab_l{$nr}">
             <h3 class="heading">
-                <xsl:apply-templates select="Topic"/>
+                <xsl:apply-templates select="Topics"/>
             </h3>
             <div class="row-fluid">
                 <div class="span9">

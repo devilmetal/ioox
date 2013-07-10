@@ -208,12 +208,21 @@
    </xsl:template>
    
    <xsl:template match="Topics">
+      
+         <xsl:apply-templates select="Topic[position()!=last()]" mode="notlast"/>
+         <xsl:apply-templates select="Topic[position()=last()]" mode="last"/>
+         
+   </xsl:template>
+   
+   <xsl:template match="Topic" mode="notlast">
       <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
       <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
-         <xsl:apply-templates select="Topic"></xsl:apply-templates>
-         <xsl:value-of select="translate(.,$t,$newt)"/><<xsl:if test="./node()=./ancestor::Topics/Topic[position()!=last()]/node()"></xsl:if>
-      
-      
+      <xsl:value-of select="translate(.,$t,$newt)"/><xsl:text> / </xsl:text>
+   </xsl:template>
+   <xsl:template match="Topic" mode="last">
+      <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
+      <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
+      <xsl:value-of select="translate(.,$t,$newt)"/>
    </xsl:template>
    
    
