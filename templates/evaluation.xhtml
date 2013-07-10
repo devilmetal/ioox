@@ -45,7 +45,7 @@
 
             <!-- Steps list -->
             
-            <xt:repeat minOccurs="0" maxOccurs="1" label="Steps">
+            <xt:repeat minOccurs="0" maxOccurs="*" label="Steps">
               <h4>Steps of the pj <xt:menu-marker/></h4>
               <ul>
                 <xt:use types="Step" label="Step"/>
@@ -53,46 +53,14 @@
             </xt:repeat>
             
             <!-- Pj/Report -->
-            <xt:repeat minOccurs="0" maxOccurs="1" label="Report">
-              <h4>Report <xt:menu-marker/></h4>
-              <blockquote>
-                <dl class="dl-horizontal dl-modif">
-                  <dt>weight</dt><dd>
-                    <xt:use types="text" label="Weight">50</xt:use></dd>
-                  <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-                    <xt:use types="Parag List" label="Parag List"></xt:use>
-                  </xt:repeat></dd>
-                </dl>
-              </blockquote>
-            </xt:repeat>
+            <xt:use label="Report" types="Report"/>
             
             <!-- Pj/Report -->
-            <xt:repeat minOccurs="0" maxOccurs="1" label="Presentation">
-              <h4>Presentation <xt:menu-marker/></h4>
-              <blockquote>
-                <dl class="dl-horizontal dl-modif">
-                  <dt>weight</dt><dd>
-                    <xt:use types="text" label="Weight">50</xt:use></dd>
-                  <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-                    <xt:use types="Parag List" label="Parag List"></xt:use>
-                  </xt:repeat></dd>
-                </dl>
-              </blockquote>
-            </xt:repeat>
+            <xt:use label="Presentation" types="Presentation"/>
             
             <!-- Pj/Project -->
-            <xt:repeat minOccurs="0" maxOccurs="1" label="Project">
-              <h4>Project <xt:menu-marker/></h4>
-              <blockquote>
-                <dl class="dl-horizontal dl-modif">
-                  <dt>weight</dt><dd>
-                    <xt:use types="text" label="Weight">50</xt:use></dd>
-                  <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-                    <xt:use types="Parag List" label="Parag List"></xt:use>
-                  </xt:repeat></dd>
-                </dl>
-              </blockquote>
-            </xt:repeat>
+            <xt:use label="Project" types="Project"/>
+            
             
           </blockquote>
         </xt:repeat>
@@ -117,6 +85,45 @@
         
       </xt:component>
       
+      
+      <xt:component name="Report">
+          <h4>Report</h4>
+          <blockquote>
+            <dl class="dl-horizontal dl-modif">
+              <dt>weight</dt><dd>
+                <xt:use types="text" label="Weight">50</xt:use></dd>
+              <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+                <xt:use types="Parag List" label="Parag List"></xt:use>
+              </xt:repeat></dd>
+            </dl>
+          </blockquote>
+      </xt:component>
+      
+      <xt:component name="Presentation">
+          <h4>Presentation</h4>
+          <blockquote>
+            <dl class="dl-horizontal dl-modif">
+              <dt>weight</dt><dd>
+                <xt:use types="text" label="Weight">50</xt:use></dd>
+              <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+                <xt:use types="Parag List" label="Parag List"></xt:use>
+              </xt:repeat></dd>
+            </dl>
+          </blockquote>
+      </xt:component>
+      
+      <xt:component name="Project">
+          <h4>Project <xt:menu-marker/></h4>
+          <blockquote>
+            <dl class="dl-horizontal dl-modif">
+              <dt>weight</dt><dd>
+                <xt:use types="text" label="Weight">50</xt:use></dd>
+              <dt>description</dt><dd><xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+                <xt:use types="Parag List" label="Parag List"></xt:use>
+              </xt:repeat></dd>
+            </dl>
+          </blockquote>
+      </xt:component>
       
       <xt:component name="Parag">
         <p>

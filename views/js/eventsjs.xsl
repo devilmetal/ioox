@@ -38,7 +38,7 @@
         <xsl:variable name="CourseId"><xsl:value-of select="CourseId"/></xsl:variable>
         
             {
-            "title" : "<xsl:apply-templates select="Topics"/>",
+            "title" : "<xsl:apply-templates select="Session/Topics"/>",
             "start" : "<xsl:value-of select="Session/Date"/><xsl:text> </xsl:text><xsl:value-of select="format-time(Session/StartTime,'[H01]:[m01]:[s01]')"/>",
             "end"   : "<xsl:value-of select="Session/Date"/><xsl:text> </xsl:text><xsl:value-of select="format-time(Session/EndTime,'[H01]:[m01]:[s01]')"/>",
             "allDay": false,
@@ -84,10 +84,20 @@
     </xsl:template>
     
     <xsl:template match="Topics">
+        
+        <xsl:apply-templates select="Topic[position()!=last()]" mode="notlast"/>
+        <xsl:apply-templates select="Topic[position()=last()]" mode="last"/>
+        
+    </xsl:template>
+    
+    <xsl:template match="Topic" mode="notlast">
         <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
         <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
-       <xsl:for-each select="Topic">
-           <xsl:value-of select="translate(Topic,$t,$newt)"/><xsl:text> </xsl:text>
-       </xsl:for-each>
+        <xsl:value-of select="translate(.,$t,$newt)"/><xsl:text> / </xsl:text>
+    </xsl:template>
+    <xsl:template match="Topic" mode="last">
+        <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
+        <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
+        <xsl:value-of select="translate(.,$t,$newt)"/>
     </xsl:template>
 </xsl:stylesheet>

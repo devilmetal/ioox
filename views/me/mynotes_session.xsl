@@ -291,5 +291,4 @@
         <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
         <xsl:value-of select="translate(.,$t,$newt)"/>
     </xsl:template>
-    </xsl:template>
 </xsl:stylesheet>

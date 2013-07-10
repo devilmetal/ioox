@@ -1,44 +1,32 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Persons xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:noNamespaceSchemaLocation="file:./Persons.xsd">
+<Persons xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="file:./Persons.xsd">
     <Person>
         <PersonId>1</PersonId>
         <Lastname>Luyet</Lastname>
         <Firstname>Gil</Firstname>
         <Username>FooBarZ</Username>
         <UniqueID>Mouhaha</UniqueID>
-        
         <Engagments>
             <Engagment>
                 <EngagementId>1</EngagementId>
                 <Role>Student</Role>
                 <CoursRef>4112</CoursRef>
                 <Grade>
-                    <ProjectGrades>
-                        <Step>
-                            <StepNo>1</StepNo>
-                            <StepGrade>5</StepGrade>
-                        </Step>
-                        <Step>
-                            <StepNo>2</StepNo>
-                            <StepGrade>4</StepGrade>
-                        </Step>
-                        <Step>
-                            <StepNo>3</StepNo>
-                            <StepGrade>6</StepGrade>
-                        </Step>
-                    </ProjectGrades>
-                    <ExamGrade>6</ExamGrade>
+                    <ExamGrade>3.5</ExamGrade>
                     <ExercicesGrades>
                         <Exercice>
                             <ExerciceId>1</ExerciceId>
-                            <ExerciceGrade>5</ExerciceGrade>
+                            <ExerciceGrade>2</ExerciceGrade>
                         </Exercice>
                         <Exercice>
                             <ExerciceId>2</ExerciceId>
-                            <ExerciceGrade>4</ExerciceGrade>
+                            <ExerciceGrade>6</ExerciceGrade>
                         </Exercice>
                     </ExercicesGrades>
+                    <ProjectGrades>
+      <ProjectGrade>3</ProjectGrade>
+      <PresentationGrade/>
+      <ReportGrade>4</ReportGrade>
+    </ProjectGrades>
                 </Grade>
             </Engagment>
             <Engagment>
@@ -56,39 +44,26 @@
             </Engagment>
         </Engagments>
         <ToDoList>
-            <Activity/>
-        </ToDoList>
-        <Notes>
-            <Note>
-                <NoteId>1</NoteId>
-                <CourseRef>51</CourseRef>
-                <SessionRef>50</SessionRef>
-                <Content>
-                    <Parag>
-                        <Fragment>BlaBlaBla</Fragment>
-                        <Link>
-                            <LinkText>bidule</LinkText>
-                            <LinkRef>http://www.bidule.com</LinkRef>
-                        </Link>
-                    </Parag>
-                    <List>
-                        <ListItem>
-                            <Fragment>1</Fragment>
-                        </ListItem>
-                        <ListItem>
-                            <Fragment>2</Fragment>
-                        </ListItem>
-                        <ListItem>
-                            <Fragment>3</Fragment>
-                        </ListItem>
-                    </List>
-                    <Parag>
-                        <Fragment>Hahahahha</Fragment>
-                        <Fragment>Hohohohoho</Fragment>
-                    </Parag>
-                </Content>
-            </Note>
-        </Notes>
+    <Activity>
+      <Title>Activity name</Title>
+      <Tasks>
+        <Task>
+          <Title>ddsada</Title>
+          <Deadline>
+            <Date>2013-07-02</Date>
+            <Time>11:11:00</Time>
+          </Deadline>
+          <Priority>2</Priority>
+          <Description>
+            <Parag>
+              <Fragment>cxxcxycxycy</Fragment>
+            </Parag>
+          </Description>
+        </Task>
+      </Tasks>
+    </Activity>
+  </ToDoList>
+        <Notes/>
         <Token/>
         <GravatarEmail>gil.luyet@unifr.ch</GravatarEmail>
     </Person>
@@ -103,7 +78,6 @@
                 <Role>Student</Role>
                 <CoursRef>4112</CoursRef>
             </Engagment>
-            
             <Engagment>
                 <EngagementId>3</EngagementId>
                 <Role>Teacher</Role>
@@ -355,7 +329,6 @@
                 <CoursRef>51</CoursRef>
                 <Grade>
                     <ExamGrade>3.5</ExamGrade>
-                    
                     <ProjectGrades>
                         <Step>
                             <StepNo>1</StepNo>

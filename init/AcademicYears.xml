@@ -340,7 +340,10 @@
                     </Session>
                     <Session>
                         <SessionNumber>51</SessionNumber>
-                        <Topic>Topic1</Topic>
+                        <Topics>
+                            <Topic>Topic1</Topic>
+                            <Topics>Topic2</Topics>
+                        </Topics>
                         <Description>
                             <List>
                                 <SubList>
