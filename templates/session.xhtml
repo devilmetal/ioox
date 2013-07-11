@@ -87,9 +87,9 @@
           <dl class="dl-horizontal dl-modif">
             <dt>Title</dt><dd><xt:use label="Title" types="text">Title of the topic</xt:use></dd>
           </dl>
-          <xt:repeat minOccurs="0" maxOccurs="1" label="Resources">
+          <xt:repeat minOccurs="1" maxOccurs="1" label="Resources">
             <h4>Resoureces of this topic test <xt:menu-maker/></h4>
-            <xt:repeat minOccurs="1" maxOccurs="*" pseudoLabel="Resource">
+            <xt:repeat minOccurs="0" maxOccurs="*" pseudoLabel="Resource">
               <h5>Resource <xt:menu-maker/></h5>
               <xt:use label="Ressource" types="Ressource"/>
             </xt:repeat>
