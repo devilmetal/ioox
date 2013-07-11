@@ -191,20 +191,7 @@
          <xsl:apply-templates select="Session" mode="app"/>
       </div>
    </xsl:template>
-   
-   <xsl:template match="Session">
-      <div class="span6">
-         <h5> <xsl:value-of select="SessionNumber"/> - <xsl:value-of select="Date"/></h5>
-         
-      </div>
-   </xsl:template>
-   
-   
-   <xsl:template match="AllSession">
-      <div class="row-fluid">
-         <xsl:apply-templates select="Session" mode="app"/>
-      </div>
-   </xsl:template>
+
    
    
    
@@ -212,11 +199,11 @@
    <xsl:template match="Session" mode="app">
       <xsl:variable name="courseid"><xsl:value-of select="//sysinfo/CourseId"/></xsl:variable>
       <xsl:variable name="sessionnumber"><xsl:value-of select="SessionNumber"/></xsl:variable>
-      <div class="span6">
-         
-         
+
+      
          <xsl:choose>
-            <xsl:when test="count(//Topics//Topic)!=0">
+            <xsl:when test="count(./Topics//Topic)!=0">
+               <div class="span6 bb">
                <div class="ourbox obc0">
                   <h4><xsl:apply-templates select="child::Topics"/></h4>
                   <span><i class="splashy-calendar_week"></i> [<xsl:if test="Date!=''"> d:<xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if>
@@ -224,8 +211,10 @@
                   <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/{$sessionnumber}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to sesison</a>
                   <p/>
                </div>
+               </div>
             </xsl:when>
             <xsl:otherwise>
+               <div class="span6 bb">
                <div class="ourbox obc2">
                   <h4><xsl:value-of select="Topics"/></h4>
                   <span><i class="splashy-calendar_week"></i> [<xsl:if test="Date!=''"> d:<xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if>
@@ -233,10 +222,10 @@
                   <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/{$sessionnumber}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to sesison</a>
                   <p/>
                </div>
+               </div>
             </xsl:otherwise>
-         </xsl:choose>
-         
-      </div>
+         </xsl:choose> 
+      
    </xsl:template>
    
    

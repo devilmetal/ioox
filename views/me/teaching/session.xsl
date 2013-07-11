@@ -124,22 +124,13 @@
                      </div>
                      
                   </div>
-                           
-                           <h3 class="heading">Session</h3>
-                        <p>This is the overview of the selected session.</p>
-                  <xsl:variable name="courseid"><xsl:value-of select="//sysinfo/CourseId"/></xsl:variable>
-                  <xsl:variable name="sessionnumber"><xsl:value-of select="//sysinfo/SessionNumber"/></xsl:variable>
-                  <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/{$sessionnumber}/modifier" class="btn btn-inverse"><i class="splashy-document_a4_edit"></i> Edit</a>
+
                   <div class="row-fluid">
-                     <xsl:apply-templates select="//Sessions"/> 
-                     <xsl:value-of select="."/>
-                     
+                     <xsl:apply-templates select="//Root/Session"/> 
+
                      <xsl:apply-templates select="/Root/sysinfo/Persons" mode="exerciseTable"/>
                   </div>
-                  
-                        
 
-                        
                      </xsl:otherwise>
                   </xsl:choose>
          </site:content>
@@ -191,7 +182,7 @@
    </xsl:template>
    
    <xsl:template match="Persons" mode="exerciseTable">
-      <div class="span8">
+      <h3 class="heading">Delivery exercises</h3>
          <table class="table table-striped">
             <thead>
                <tr>
@@ -222,47 +213,96 @@
                </xsl:for-each>
             </tbody>
          </table>	
-      </div>
+      
    </xsl:template>
    
    
-   <xsl:template match="Sessions">
-      <div class="row-fluid">
-         ciao<br/> 
-         <xsl:apply-templates select="child::node()"/>
-      </div>
+   <xsl:template match="Session">
+      <xsl:variable name="courseid"><xsl:value-of select="//sysinfo/CourseId"/></xsl:variable>
+      <xsl:variable name="sessionnumber"><xsl:value-of select="//sysinfo/SessionNumber"/></xsl:variable>
+      <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/{$sessionnumber}/modifier" class="btn btn-inverse backb"><i class="splashy-document_a4_edit"></i> Edit</a>
+      <h3 class="heading">Session nr <xsl:value-of select="SessionNumber"/></h3>
+      <dl class="dl-horizontal dl-modif">
+         <dt>Data</dt><dd><xsl:value-of select="Date"/></dd>
+         <dt>StartTime</dt><dd><xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></dd>
+         <dt>EndTime</dt><dd><xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></dd>
+         <dt>Room</dt><dd><xsl:value-of select="Room"/></dd>
+      </dl>
+      
+      <xsl:apply-templates select="Topics"/>
+      
+      <xsl:apply-templates select="Description"/>
+      
+      <xsl:apply-templates select="Exercise"/>
+      
+      <hr/>
+      <hr/>
+      
+      
    </xsl:template>
    
    <xsl:template match="Description">
+      <xsl:for-each select="node()"><xsl:apply-templates select="node()"/></xsl:for-each>
+   </xsl:template>
+   
+   <xsl:template match="Exercise">
+      <h3 class="heading">Exercise</h3>
+      <h4>Description</h4>
+      <xsl:apply-templates select="Description"/>
       
-      <p><xsl:for-each select="./child::node()">
+      <xsl:apply-templates select="Data/node()"/>
+      
+   </xsl:template>
+   <xsl:template match="Description">
+      <h3 class="heading">Description</h3>
+      <xsl:for-each select="./child::node()">
          <xsl:apply-templates select="."/>
       </xsl:for-each>
-      </p>
+      
    </xsl:template>
    
    <xsl:template match="Topics">
-      <h4 class="heading">Topics</h4>
-      <dl class="dl-horizontal dl-modif">
+      <h3 class="heading">Topics</h3>
+      <ol>
          <xsl:apply-templates select="Topic"/>
-      </dl>
+      </ol>
    </xsl:template>
    
    <xsl:template match="Topic">
-      <dt><xsl:value-of select="Title"/></dt>
-      <dd>
-         <xsl:apply-templates select="./Resources"/>
-      </dd>
+      <li>
+      <h4><xsl:value-of select="Title"/></h4>
+         <xsl:apply-templates select="Ressources"/>
+      </li>
    </xsl:template>
    
-   <xsl:template match="Resources">
-      <xsl:if test="count(Ressource/child::node()) &gt; 0">
+   <xsl:template match="Ressources">
+      <xsl:if test="count(Ressource) !=0">
          <ul class="list_a">
             <xsl:for-each select="child::Ressource">
                <xsl:apply-templates select="."/>
             </xsl:for-each>
          </ul>
       </xsl:if>
+   </xsl:template>
+   
+   <xsl:template match="Link">
+      <li>
+      <xsl:element name="a">
+         <xsl:attribute name="href"><xsl:value-of select="LinkRef"/></xsl:attribute>
+         <xsl:attribute name="target">_blank</xsl:attribute>
+         <xsl:value-of select="LinkText"></xsl:value-of>
+      </xsl:element>
+      <xsl:if test="exists(Comment)">
+         <blockquote>
+            <h6>Comment</h6>
+            <xsl:value-of select="Comment"/>
+         </blockquote>
+      </xsl:if>
+      </li>
+   </xsl:template>
+   
+   <xsl:template match="ExternalDoc">
+      <li><xsl:value-of select="Title"/> linkto</li>
    </xsl:template>
    
    <xsl:template match="Teachers" mode="teacher">
@@ -291,6 +331,48 @@
             <xsl:value-of select="$Total"/>
          </xsl:with-param>
       </xsl:apply-templates>
+   </xsl:template>
+   
+   <xsl:template match="Parag">
+      <p>
+         <xsl:for-each select="./child::node()">
+            <xsl:apply-templates select="."/>
+         </xsl:for-each>
+      </p>
+   </xsl:template>
+   
+   <xsl:template match="List">
+      <xsl:if test="count(./ListHeader)!=0">
+         <span class="ListHeader">
+            <xsl:value-of select="./ListHeader[name()!='ListHeader']"/>
+         </span>
+      </xsl:if>
+      <ul class="list_b">
+         <xsl:for-each select="./child::node()">
+            <li>
+               <xsl:apply-templates select="."/>
+            </li>
+         </xsl:for-each>
+      </ul>
+   </xsl:template>
+   
+   <xsl:template match="SubList">
+      <xsl:if test="count(./SubListHeader)!=0">
+         <span class="ListHeader">
+            <xsl:value-of select="./SubListHeader[name()!='SubListHeader']"/>
+         </span>
+      </xsl:if>
+      <ul class="list_c">
+         <xsl:for-each select="./child::node()">
+            <li>
+               <xsl:apply-templates select="."/>
+            </li>
+         </xsl:for-each>
+      </ul>
+   </xsl:template>
+   
+   <xsl:template match="Fragment">
+      <xsl:value-of select="."/>
    </xsl:template>
    
    
