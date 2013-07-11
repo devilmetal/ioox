@@ -191,8 +191,8 @@
                     <xsl:when test="//Root/Session[SessionNumber=$sessionnumber]/SessionNumber &gt; 0">
                         <div class="ourbox obc0">
                         <h4><xsl:apply-templates select="child::Topics"/></h4>
-                        <span>Date <xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></span>
-                        <span>Time <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/>-<xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></span><br/>
+                            <span>Date <xsl:if test="Date!=''"><xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if></span>
+                            <span>Time <xsl:if test="StartTime!=''"><xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></xsl:if>-<xsl:if test="EndTime!=''"><xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></xsl:if></span><br/>
                         <a href="{$xslt.base-url}me/mynotes/{$courseid}/{$sessionnumber}" class="btn btn-inverse btn-mini"><i class="splashy-view_list"></i> Show Note</a>
                         <p/>
                         <form action="#" method="POST" onsubmit="return confirm('Are you sure you want to delete this note ?')">
@@ -204,9 +204,9 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <div class="ourbox obc2">
-                        <h4><xsl:value-of select="Topic"/></h4>
-                            <span>Date <xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></span>
-                            <span>Time <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/>-<xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></span><br/>
+                        <h4><xsl:value-of select="Topics"/></h4>
+                            <span>Date <xsl:if test="Date!=''"><xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if></span>
+                            <span>Time <xsl:if test="StartTime!=''"><xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></xsl:if>-<xsl:if test="EndTime!=''"><xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></xsl:if></span><br/>
                         <a href="{$xslt.base-url}me/mynotes/{$courseid}/{$sessionnumber}/modifier" class="btn btn-inverse btn-mini"><i class="splashy-add"></i> Create Note</a>
                         </div>
                     </xsl:otherwise>
@@ -216,9 +216,15 @@
     </xsl:template>
     
     <xsl:template match="Topics">
-        test
+        <xsl:if test="count(Topic)!=0">
         <xsl:apply-templates select="Topic[position()!=last()]" mode="notlast"/>
         <xsl:apply-templates select="Topic[position()=last()]" mode="last"/>
+        </xsl:if>
+        <xsl:if test="count(Topic)=0">
+            No topic for now
+        </xsl:if>
+        
+       
         
     </xsl:template>
     
