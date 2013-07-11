@@ -308,7 +308,11 @@
             <xsl:value-of select="./SessionNumber"/>
         </xsl:variable>
         <xsl:variable name="date">
-            <xsl:value-of select="./Date"/>
+            
+            <xsl:choose>
+                <xsl:when test="empty(Date)"><xsl:value-of select="./Date"/></xsl:when>
+                <xsl:otherwise>1970-01-01</xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
         <xsl:variable name="precdate">
             <xsl:value-of select="preceding-sibling::Session/Date"/>
@@ -316,19 +320,24 @@
 
         <!--  &lt; instead of < and &gt; instead of >, b -->
         <xsl:variable name="current">
-            <!--<xsl:choose>
-                <xsl:when test="count(preceding-sibling::Session) = 0">
-                    <xsl:if test="current-date() &lt; ./Session/Date">active</xsl:if>
-                </xsl:when>
-                <xsl:when
-                    test="count(preceding-sibling::Session) &gt; 0 and count(preceding-sibling::Session) &lt; count(Session)">
-                    <xsl:if test=" $precdate &lt; current-date() and current-date() &lt; $date"
-                        >active</xsl:if>
-                </xsl:when>
-                <xsl:when test="count(following-sibling::Session)=0">
-                    <xsl:if test="current-date() &gt; $date">active</xsl:if>
-                </xsl:when>
-            </xsl:choose>-->
+            <xsl:choose>
+                <xsl:when test="Session/Date=''"></xsl:when>
+                <xsl:otherwise>
+                    <xsl:choose>
+                        <xsl:when test="count(preceding-sibling::Session) = 0">
+                            <xsl:if test="current-date() &lt; ./Session/Date">active</xsl:if>
+                        </xsl:when>
+                        <xsl:when
+                            test="count(preceding-sibling::Session) &gt; 0 and count(preceding-sibling::Session) &lt; count(Session)">
+                            <xsl:if test=" $precdate &lt; current-date() and current-date() &lt; $date"
+                                >active</xsl:if>
+                        </xsl:when>
+                        <xsl:when test="count(following-sibling::Session)=0">
+                            <xsl:if test="current-date() &gt; $date">active</xsl:if>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
         <li class="{$current}">
             <a href="#tab_l{$nr}" data-toggle="tab">Session <xsl:value-of
@@ -348,18 +357,27 @@
         </xsl:variable>
         <xsl:variable name="current">
             <xsl:choose>
-                <xsl:when test="count(preceding-sibling::Session) = 0">
-                    <xsl:if test="current-date() &lt; ./Session/Date">active</xsl:if>
-                </xsl:when>
-                <xsl:when
-                    test="count(preceding-sibling::Session) &gt; 0 and count(preceding-sibling::Session) &lt; count(Session)">
-                    <xsl:if test=" $precdate &lt; current-date() and current-date() &lt; $date"
-                        >active</xsl:if>
-                </xsl:when>
-                <xsl:when test="count(following-sibling::Session)=0">
-                    <xsl:if test="current-date() &gt; $date">active</xsl:if>
-                </xsl:when>
+                <xsl:when test="Session/Date=''"></xsl:when>
+                <xsl:otherwise>
+                    <xsl:choose>
+                        <xsl:when test="Session/Date=''">
+                            
+                        </xsl:when>
+                        <xsl:when test="count(preceding-sibling::Session) = 0">
+                            <xsl:if test="current-date() &lt; ./Session/Date">active</xsl:if>
+                        </xsl:when>
+                        <xsl:when
+                            test="count(preceding-sibling::Session) &gt; 0 and count(preceding-sibling::Session) &lt; count(Session)">
+                            <xsl:if test=" $precdate &lt; current-date() and current-date() &lt; $date"
+                                >active</xsl:if>
+                        </xsl:when>
+                        <xsl:when test="count(following-sibling::Session)=0">
+                            <xsl:if test="current-date() &gt; $date">active</xsl:if>
+                        </xsl:when>
+                    </xsl:choose>
+                </xsl:otherwise>
             </xsl:choose>
+            
         </xsl:variable>
         
         
@@ -371,9 +389,13 @@
                 <div class="span9">
                     <dl class="dl-horizontal dl-modif">
                 <dt>Date-Time</dt>
-                <dd>the <xsl:value-of select="format-date(./Date, '[D1].[M1].[Y01]')"/>, start
+                        <dd><xsl:if test="Date!=''">the <xsl:value-of select="format-date(./Date, '[D1].[M1].[Y01]')"/></xsl:if>
+                            <xsl:if test="StartTime!='' and EndTime!=''">
+                        , start
                         <xsl:value-of select="format-time(./StartTime,'[H1]:[m01]')"/> - end
-                        <xsl:value-of select="format-time(./EndTime,'[H1]:[m01]')"/></dd>
+                                <xsl:value-of select="format-time(./EndTime,'[H1]:[m01]')"/></xsl:if>
+                            <xsl:if test="Date='' and StartTime='' and EndTime=''">no date specified yet.</xsl:if>
+                        </dd>
                 <dt>Room</dt>
                 <dd>
                     <xsl:if test="not(*[./Room=''])">no room</xsl:if>
@@ -457,13 +479,13 @@
         <dt>Examen</dt>
         <dd>Total weight : <xsl:value-of select="round(Weight*100 div $Total)"/> &#37; of the
             grade</dd>
-        <dd>Date of the exam : <xsl:variable name="dt"><xsl:value-of select="Date"/></xsl:variable>
+        <xsl:if test="Date!='' and StartTime!='' and EndTime!=''"><dd>Date of the exam : <xsl:variable name="dt"><xsl:value-of select="Date"/></xsl:variable>
             <xsl:variable name="t1"><xsl:value-of select="StartTime"/></xsl:variable>
             <xsl:variable name="t2"><xsl:value-of select="EndTime"/></xsl:variable>
             <xsl:value-of select="format-date($dt, '[D01].[M01].[Y0001]')"/> from <xsl:value-of
                 select="format-time($t1,'[H01]:[m01]')"/> to <xsl:value-of
-                select="format-time($t2,'[H01]:[m01]')"/>
-        </dd>
+                    select="format-time($t2,'[H01]:[m01]')"/>
+        </dd></xsl:if>
 
     </xsl:template>
 
