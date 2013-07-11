@@ -13,6 +13,9 @@ declare option exist:serialize "method=xml media-type=text/xml";
 (:::::::::::::  BODY  ::::::::::::::)
 
 let $collection := '/sites/ioox/data/'
+let $ref := request:get-attribute('oppidum.command')/@trail
+let $courseid := tokenize($ref,'/')[3]
+
 
 let $courseid := '4112'
 let $id := if (session:get-attribute('id')) then (
