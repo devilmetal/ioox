@@ -2246,10 +2246,12 @@
                     <Session>
                         <SessionNumber>12231</SessionNumber>
                         <Topics>
-                            <Topic>Topic2</Topic>
-                            <Resources></Resources>
-                            <Topic>SecondTopic2</Topic>
-                            <Resources></Resources>
+                            <Topic>
+                                <Title/>
+                                <Ressources>
+                                    <Ressource/>
+                                </Ressources>
+                            </Topic>
                         </Topics>
                         <Description>
                             <List>
@@ -2314,34 +2316,17 @@
                         <EndTime>01:01:01.001</EndTime>
                         <Room>
                         </Room>
-                        <Exercise>
-                            <ExerciceId>1</ExerciceId>
-                            <Description>
-                            </Description>
-                            <Data>
-                                <ExternalDoc>
-                                    <Title>Title12</Title>
-                                    <Access>
-                                        <Location>http://www.oxygenxml.com/</Location>
-                                        <Format>Undefined</Format>
-                                    </Access>
-                                    <Access>
-                                        <Location>http://www.oxygenxml.com/</Location>
-                                        <Format>Undefined</Format>
-                                    </Access>
-                                </ExternalDoc>
-                            </Data>
-                            <Deliverables/>
-                            
-                        </Exercise>
+                        
                     </Session>
                     <Session>
                         <SessionNumber>2144112</SessionNumber>
                         <Topics>
-                            <Topic>Topic3</Topic>
-                            <Resources></Resources>
-                            <Topic>SecondTopic3</Topic>
-                            <Resources/>
+                            <Topic>
+                                <Title/>
+                                <Ressources>
+                                    <Ressource/>
+                                </Ressources>
+                            </Topic>
                         </Topics>
                         <Description>
                             <List>
@@ -2372,27 +2357,7 @@
                         <StartTime>01:01:01.001</StartTime>
                         <EndTime>01:01:01.001</EndTime>
                         <Room></Room>
-                        <Exercise>
-                            <ExerciceId>2</ExerciceId>
-                            <Description>
-                            </Description>
-                            <Data>
-                                <Link>
-                                    <LinkText>LinkText57</LinkText>
-                                    <LinkRef>http://www.oxygenxml.com/</LinkRef>
-                                </Link>
-                            </Data>
-                            <Deliverables>
-                                <Deliverable>
-                                    <PersonRef>
-                                    </PersonRef>
-                                    <File>
-                                        <LinkText></LinkText>
-                                        <LinkRef/>
-                                    </File>
-                                </Deliverable>
-                            </Deliverables>
-                        </Exercise>
+                        
                     </Session>
                 </Sessions>
             </Course>

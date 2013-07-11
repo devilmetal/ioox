@@ -11,16 +11,55 @@
         <span>
           <xt:use types="text" label="SessionNumber"/>
         </span>
-        <xt:repeat label="Topics">
-          <xt:use label="Topic" types="text"/><xt:menu-marker/><br/>
+        
+        <xt:repeat minOccurs="0" maxOccurs="*" label="Topics">
+          <xt:use label="Topic" types="Topic"/>
+          <xt:menu-marker/>
         </xt:repeat>
-        <xt:repeat minOccurs="0" maxOccurs="*" label="Description">
-          <xt:use label="Parag List" types="Parag List"/><xt:menu-marker/><br/>
+        
+        <!-- Description -->
+        <xt:repeat minOccurs="0" maxOccurs="*" label="Description"><xt:menu-marker></xt:menu-marker>
+          <xt:use types="Parag List" label="Parag List">Desc</xt:use>
         </xt:repeat>
+        
+        <!-- Date -->
+        <xt:use types="text" label="Date" param="filter=date;date_region=fr;date_format=ISO_8601" >YYYY-MM-DD</xt:use>
+        
+        <!-- StartTime -->
+        StartTime: <xt:use label="StartTime" types="text" option="unset">HH:MM:SS</xt:use>
+        
+        <!-- EndTime -->
+        EndTime: <xt:use label="EndTime" types="text" option="unset">HH:MM:SS</xt:use>
+        
+        <!-- Room -->
+        Room: <xt:use label="Room" types="text">Room</xt:use>
+        
+        <h4>EXERCISE !</h4>
+        <xt:repeat minOccurs="0" maxOccurs="1" label="Exercice">Exercise<xt:menu-marker></xt:menu-marker>
+            <!-- Hidden information -->
+            
+            <!-- Description -->
+            <xt:repeat minOccurs="0" maxOccurs="*" label="Description"><xt:menu-marker></xt:menu-marker>
+              <xt:use types="Parag List" label="Parag List">Desc</xt:use>
+            </xt:repeat>
+            <!-- Data -->
+            <xt:use types="Data" label="Data"/>
+        </xt:repeat>
+       
+        
       </xt:component>
       
+      <xt:component name="Exercice">
+        
+        
+      </xt:component>
       
-      <!-- Library component -->
+      <xt:component name="Topic">
+        <xt:use label="Title" types="text"/>
+        <xt:repeat minOccurs="0" maxOccurs="*" label="Ressources">
+          <xt:use label="Ressource" types="Ressource"/>
+        </xt:repeat>
+      </xt:component>
       
       <xt:component name="Deliverable">
         <xt:use types="text" label="PersonRef"/>
