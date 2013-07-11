@@ -204,7 +204,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <div class="ourbox obc2">
-                        <h4><xsl:value-of select="Topic"/></h4>
+                        <h4><xsl:apply-templates select="Topics"/></h4>
                             <span>Date <xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></span>
                             <span>Time <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/>-<xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></span><br/>
                         <a href="{$xslt.base-url}me/mynotes/{$courseid}/{$sessionnumber}/modifier" class="btn btn-inverse btn-mini"><i class="splashy-add"></i> Create Note</a>
