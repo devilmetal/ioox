@@ -190,7 +190,7 @@
                 <xsl:choose>
                     <xsl:when test="//Root/Session[SessionNumber=$sessionnumber]/SessionNumber &gt; 0">
                         <div class="ourbox obc0">
-                        <h4><xsl:apply-templates select="Topics"/></h4>
+                        <h4><xsl:apply-templates select="child::Topics"/></h4>
                         <span>Date <xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></span>
                         <span>Time <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/>-<xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></span><br/>
                         <a href="{$xslt.base-url}me/mynotes/{$courseid}/{$sessionnumber}" class="btn btn-inverse btn-mini"><i class="splashy-view_list"></i> Show Note</a>
@@ -216,7 +216,7 @@
     </xsl:template>
     
     <xsl:template match="Topics">
-        
+        test
         <xsl:apply-templates select="Topic[position()!=last()]" mode="notlast"/>
         <xsl:apply-templates select="Topic[position()=last()]" mode="last"/>
         
