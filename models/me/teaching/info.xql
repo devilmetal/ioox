@@ -11,7 +11,7 @@ let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
 let $curr-date := fn:current-date()
 let $ref := request:get-attribute('oppidum.command')/@trail
-let $courseid := substring-before(substring-after(substring-after($ref,'/'),'/'),'/')
+let $courseid := tokenize($ref,'/')[3]
 
 let $id := if (session:get-attribute('id')) then (
                             session:get-attribute('id')
