@@ -8,56 +8,15 @@
       <xt:component name="Session">
         
         <!-- Hidden information -->
-        <span style="display:none;">
+        <span>
           <xt:use types="text" label="SessionNumber"/>
         </span>
-        
-        <!-- Topics -->
-        <xt:repeat label="Topics"><xt:menu-marker></xt:menu-marker>
-          <xt:use label="Topic" types="text"/>
-          <xt:repeat label="Ressources">
-            <xt:use types="Ressource" label="Ressource"/>
-          </xt:repeat>
+        <xt:repeat label="Topics">
+          <xt:use label="Topic" types="text"/><xt:menu-marker/><br/>
         </xt:repeat>
-        
-        <!-- Description -->
-        <xt:repeat minOccurs="0" maxOccurs="*" label="Description"><xt:menu-marker></xt:menu-marker>
-          <xt:use types="Parag List" label="Parag List">Desc</xt:use>
+        <xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+          <xt:use label="Parag List" types="Parag List"/><xt:menu-marker/><br/>
         </xt:repeat>
-        
-        <!-- Date -->
-        <xt:use types="text" label="Date" param="filter=date;date_region=fr;date_format=ISO_8601" >YYYY-MM-DD</xt:use>
-        
-        <!-- StartTime -->
-        StartTime: <xt:use label="StartTime" types="text" option="unset">HH:MM:SS</xt:use>
-        
-        <!-- EndTime -->
-        EndTime: <xt:use label="EndTime" types="text" option="unset">HH:MM:SS</xt:use>
-        
-        <!-- Room -->
-        Room: <xt:use label="Room" types="text">Room</xt:use>
-        
-        <!-- Exercise -->
-        <xt:repeat minOccurs="0" maxOccurs="1" label="Exercise">Exercise<xt:menu-marker></xt:menu-marker>
-          <!-- Hidden information -->
-          <span style="display:none;">
-            <xt:use types="text" label="ExerciceId"></xt:use>
-          </span>
-          <!-- Description -->
-          <xt:repeat minOccurs="0" maxOccurs="*" label="Description"><xt:menu-marker></xt:menu-marker>
-            <xt:use types="Parag List" label="Parag List">Desc</xt:use>
-          </xt:repeat>
-          <!-- Data -->
-          <xt:use types="Data" label="Data"/>
-          <!-- Deliverables -->
-          <span style="color:red">
-            <xt:repeat label="Deliverables">
-              <xt:use types="Deliverable" label="Deliverable"/>
-            </xt:repeat>
-          </span> 
-        </xt:repeat>
-        
-        
       </xt:component>
       
       
@@ -84,12 +43,6 @@
         here upload file after
       </xt:component>
       
-      
-      <xt:component name="Description">
-        <xt:repeat minOccurs="0" maxOccurs="*">
-          <xt:use types="Parag List" label="Parag List">Desc</xt:use>
-        </xt:repeat>
-      </xt:component>
       
       
       <xt:component name="Parag">

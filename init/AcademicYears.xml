@@ -2247,10 +2247,10 @@
                         <SessionNumber>12231</SessionNumber>
                         <Topics>
                             <Topic>Topic2</Topic>
+                            <Resources></Resources>
                             <Topic>SecondTopic2</Topic>
                             <Resources></Resources>
                         </Topics>
-                        <Resources/>
                         <Description>
                             <List>
                                 <SubList>
@@ -2314,20 +2314,6 @@
                         <EndTime>01:01:01.001</EndTime>
                         <Room>
                         </Room>
-                        <Resources>
-                            <Ressource>
-                                <Link>
-                                    <LinkText>LinkText50</LinkText>
-                                    <LinkRef>http://www.oxygenxml.com/</LinkRef>
-                                </Link>
-                            </Ressource>
-                            <Ressource>
-                                <Link>
-                                    <LinkText>LinkText51</LinkText>
-                                    <LinkRef>http://www.oxygenxml.com/</LinkRef>
-                                </Link>
-                            </Ressource>
-                        </Resources>
                         <Exercise>
                             <ExerciceId>1</ExerciceId>
                             <Description>
@@ -2345,20 +2331,15 @@
                                     </Access>
                                 </ExternalDoc>
                             </Data>
-                            <Deliverables>
-                                <Deliverable>
-                                    <PersonRef>
-                                    </PersonRef>
-                                    <File>
-                                    </File>
-                                </Deliverable>
-                            </Deliverables>
+                            <Deliverables/>
+                            
                         </Exercise>
                     </Session>
                     <Session>
                         <SessionNumber>2144112</SessionNumber>
                         <Topics>
                             <Topic>Topic3</Topic>
+                            <Resources></Resources>
                             <Topic>SecondTopic3</Topic>
                             <Resources/>
                         </Topics>
@@ -2390,22 +2371,7 @@
                         <Date>2013-05-07</Date>
                         <StartTime>01:01:01.001</StartTime>
                         <EndTime>01:01:01.001</EndTime>
-                        <Room>
-                        </Room>
-                        <Resources>
-                            <Ressource>
-                                <Link>
-                                    <LinkText>LinkText55</LinkText>
-                                    <LinkRef>http://www.oxygenxml.com/</LinkRef>
-                                </Link>
-                            </Ressource>
-                            <Ressource>
-                                <Link>
-                                    <LinkText>LinkText56</LinkText>
-                                    <LinkRef>http://www.oxygenxml.com/</LinkRef>
-                                </Link>
-                            </Ressource>
-                        </Resources>
+                        <Room></Room>
                         <Exercise>
                             <ExerciceId>2</ExerciceId>
                             <Description>
@@ -2421,6 +2387,8 @@
                                     <PersonRef>
                                     </PersonRef>
                                     <File>
+                                        <LinkText></LinkText>
+                                        <LinkRef/>
                                     </File>
                                 </Deliverable>
                             </Deliverables>
