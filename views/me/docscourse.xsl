@@ -20,10 +20,18 @@
         <site:view>
             <site:header>
                 
-                <script type="text/javascript" src="{$xslt-ressource-url}/js/base64.js"></script>
-                <script type="text/javascript" src="{$xslt-ressource-url}/js/swfobject.js"></script>
-                <script type="text/javascript" src="{$xslt-ressource-url}/js/downloadify.min.js"></script>
-                <script src="{$xslt-ressource-url}/js/jspdf.js"></script>
+                <script type="text/javascript" src="{$xslt-ressource-url}/js/jquery/jquery-1.7.1.min.js"></script>
+                <script type="text/javascript" src="{$xslt-ressource-url}/js/jquery/jquery-ui-1.8.17.custom.min.js"></script>
+                <script type="text/javascript" src="{$xslt-ressource-url}/js/jspdf.js"></script>
+                <script type="text/javascript" src="{$xslt-ressource-url}/js/libs/FileSaver.js/FileSaver.js"></script>
+                <script type="text/javascript" src="{$xslt-ressource-url}/js/libs/BlobBuilder.js/BlobBuilder.js"></script>
+                
+                <script type="text/javascript" src="{$xslt-ressource-url}/js/jspdf.plugin.addimage.js"></script>
+                
+                <script type="text/javascript" src="{$xslt-ressource-url}/js/jspdf.plugin.standard_fonts_metrics.js"></script>
+                <script type="text/javascript" src="{$xslt-ressource-url}/js/jspdf.plugin.split_text_to_size.js"></script>
+                <script type="text/javascript" src="{$xslt-ressource-url}/js/jspdf.plugin.from_html.js"></script>
+                <script type="text/javascript" src="{$xslt-ressource-url}/js/basic.js"></script>
             </site:header>
             <site:content>
                 <!--<xsl:apply-templates select="/Root/child::node()"/>
@@ -31,50 +39,29 @@
                     Download PDF
                 </a>-->
                 
-                <iframe frameborder="0" width="500" height="400"></iframe>
+                <div id="content" style="display:none;">
+                    <xsl:apply-templates select="/Root/child::node()"/>
+                </div>
+                <iframe frameborder="0" width="100%" height="100%"></iframe>
                 <script>
                     $(document).ready(function() {
                     
                     
-                    var pdf = new jsPDF('p','in','letter')
-                    , sizes = [12, 16, 20]
-                    , fonts = [['Times','Roman'],['Helvetica',''], ['Times','Italic']]
-                    , font, size, lines
-                    , margin = 0.5 // inches on a 8.5 x 11 inch sheet.
-                    , verticalOffset = margin
-                    , loremipsum = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus id eros turpis. Vivamus tempor urna vitae sapien mollis molestie. Vestibulum in lectus non enim bibendum laoreet at at libero. Etiam malesuada erat sed sem blandit in varius orci porttitor. Sed at sapien urna. Fusce augue ipsum, molestie et adipiscing at, varius quis enim. Morbi sed magna est, vel vestibulum urna. Sed tempor ipsum vel mi pretium at elementum urna tempor. Nulla faucibus consectetur felis, elementum venenatis mi mollis gravida. Aliquam mi ante, accumsan eu tempus vitae, viverra quis justo.\n\nProin feugiat augue in augue rhoncus eu cursus tellus laoreet. Pellentesque eu sapien at diam porttitor venenatis nec vitae velit. Donec ultrices volutpat lectus eget vehicula. Nam eu erat mi, in pulvinar eros. Mauris viverra porta orci, et vehicula lectus sagittis id. Nullam at magna vitae nunc fringilla posuere. Duis volutpat malesuada ornare. Nulla in eros metus. Vivamus a posuere libero.'
+                    var pdf = new jsPDF();
                     
-                    // Margins:
-                    pdf.setDrawColor(0, 255, 0)
-                    .setLineWidth(1/72)
-                    .line(margin, margin, margin, 11 - margin)
-                    .line(8.5 - margin, margin, 8.5-margin, 11-margin)
-                    
-                    // the 3 blocks of text
-                    for (var i in fonts){
-                    if (fonts.hasOwnProperty(i)) {
-                    font = fonts[i]
-                    size = sizes[i]
-                    
-                    lines = pdf.setFont(font[0], font[1])
-                    .setFontSize(size)
-                    .splitTextToSize(loremipsum, 7.5)
-                    // Don't want to preset font, size to calculate the lines?
-                    // .splitTextToSize(text, maxsize, options)
-                    // allows you to pass an object with any of the following:
-                    // {
-                    // 	'fontSize': 12
-                    // 	, 'fontStyle': 'Italic'
-                    // 	, 'fontName': 'Times'
-                    // }
-                    // Without these, .splitTextToSize will use current / default
-                    // font Family, Style, Size.
-                    console.log(lines);
-                    pdf.text(0.5, verticalOffset + size / 72, lines)
-                    
-                    verticalOffset += (lines.length + 0.5) * size / 72
+                    // We'll make our own renderer to skip this editor
+                    var specialElementHandlers = {
+                    '#editor': function(element, renderer){
+                    return true;
                     }
-                    }
+                    };
+                    
+                    // All units are in the set measurement for the document
+                    // This can be changed to "pt" (points), "mm" (Default), "cm", "in"
+                    pdf.fromHTML($('#content').get(0), 15, 15, {
+                    'width': 300, 
+                    'elementHandlers': specialElementHandlers
+                    });
                     
                     var string = pdf.output('datauristring');
                     
