@@ -212,6 +212,19 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
             </item>
           </collection>
           
+        <!-- /me/docs page -->
+        <!-- permet de transformer les mynotes en PDF (merci jsPDF :D)-->
+        <collection name="docs" epilogue="standard">
+            <!-- Vue global des notes / modification si prof-->
+            <model src="models/me/docs.xql"/>
+            <view src="views/me/docs.xsl"/>
+            <!-- détail de chaque note (note précise + compte rendu du prof, On renvoye sur la page du cours ??? )-->
+            <item epilogue="standard2">
+                <model src="models/me/docscourse.xql"/>
+                <view src="views/me/docscourse.xsl"/>
+            </item>
+          </collection>
+          
         <!-- /me/courses page -->
         <collection name="courses" epilogue="standard">
             <model src="models/me/courses.xql"/>

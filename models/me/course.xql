@@ -256,12 +256,6 @@ let $error := if ($isgoodperiod) then () else ( <Error>You can not subscrib a co
             {$teachers}
         </Teachers>
         {$course}
-        <Grades>
-            {$grades}
-        </Grades>
-        <EverybodyGrades>
-            {$everygrades}
-        </EverybodyGrades>
         {$error}
         </Root>
         )
