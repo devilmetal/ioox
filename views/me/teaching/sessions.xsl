@@ -216,7 +216,7 @@
          
          
          <xsl:choose>
-            <xsl:when test="count(Topics/Topic)!=0">
+            <xsl:when test="count(//Topics//Topic)!=0">
                <div class="ourbox obc0">
                   <h4><xsl:apply-templates select="child::Topics"/></h4>
                   <span><i class="splashy-calendar_week"></i> [<xsl:if test="Date!=''"> d:<xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if>

@@ -29,46 +29,53 @@
           
           <!-- Room -->
           <dt>Room</dt>
-          <dd><xt:use label="Room" types="input">Room</xt:use></dd>
+          <dd><xt:use label="Room" types="input"/></dd>
         </dl>
         
-        <h4>Topics</h4>
-        <blockquote>
+        <h3 class="heading">Topics</h3>
+        
         <xt:repeat minOccurs="0" maxOccurs="*" label="Topics">
           
-            <xt:menu-marker/>
+            <h4>Topic<xt:menu-marker/></h4>
             <xt:use label="Topic" types="Topic"/>
           
         </xt:repeat>
-        </blockquote>
+        
         
         <!-- Description -->
+        <h3 class="heading">Description</h3>
         <blockquote>
-          <h5>Description</h5>
         <xt:repeat minOccurs="0" maxOccurs="*" label="Description"><xt:menu-marker></xt:menu-marker>
           <xt:use types="Parag List" label="Parag List">Desc</xt:use>
         </xt:repeat>
         </blockquote>
         
         
-        <blockquote>
+        
         <xt:repeat minOccurs="0" maxOccurs="1" label="Exercice">
-          <h5>Exercise<xt:menu-marker></xt:menu-marker></h5>
-            <!-- Hidden information -->
+          <h3 class="heading">Exercise<xt:menu-marker></xt:menu-marker></h3>
+          <!-- Hidden information -->
+          
           <span style="display:none"><xt:use types="text" label="ExerciceId"/></span>
             
-            <!-- Description -->
-          <h6>Description</h6>
-            <p><xt:repeat minOccurs="0" maxOccurs="*" label="Description"><xt:menu-marker></xt:menu-marker>
-              <xt:use types="Parag List" label="Parag List">Desc</xt:use>
-            </xt:repeat></p>
+          <!-- Description -->
+          <h4>Description</h4>
+          <blockquote>
+            <p>
+              <xt:repeat minOccurs="0" maxOccurs="*" label="Description"><xt:menu-marker></xt:menu-marker>
+                <xt:use types="Parag List" label="Parag List">Desc</xt:use>
+              </xt:repeat>
+            </p>
+          </blockquote>
           
             <!-- Data -->
-          <blockquote>
-            <xt:use types="Data" label="Data"/>
-           </blockquote>
+          <h4>Data of the Exercise</h4>
+           <blockquote> 
+             <xt:use types="Data" label="Data"/>
+          </blockquote>
+          
         </xt:repeat>
-        </blockquote>
+        
         
       </xt:component>
       
@@ -81,13 +88,13 @@
       
       <xt:component name="Topic">
         <blockquote>
-          <h6>Topic</h6>
           <dl class="dl-horizontal dl-modif">
             <dt>Title</dt><dd><xt:use label="Title" types="text">Title of the topic</xt:use></dd>
           </dl>
           <xt:repeat minOccurs="0" maxOccurs="1" label="Resources">
-            <h5>Resoureces of this topic</h5><xt:menu-maker/>
+            <h4>Resoureces of this topic test <xt:menu-maker/></h4>
             <xt:repeat minOccurs="1" maxOccurs="*" pseudoLabel="Resource">
+              <h5>Resource <xt:menu-maker/></h5>
               <xt:use label="Ressource" types="Ressource"/>
             </xt:repeat>
           </xt:repeat>
