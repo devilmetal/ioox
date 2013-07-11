@@ -442,7 +442,7 @@
         <dt><xsl:value-of select="."/></dt>
         <dd>
         <xsl:apply-templates select="./Resources"/>
-        </dd>
+        </dd><br/>
     </xsl:template>
     
     <xsl:template match="Resources">
@@ -467,9 +467,6 @@
         <xsl:value-of select="Lastname"/>
         <xsl:text> </xsl:text>
         <xsl:value-of select="Firstname"/>
-    </xsl:template>
-    <xsl:template match="Topic">
-        <xsl:value-of select="."/>
     </xsl:template>
 
     <xsl:template match="Evaluation">

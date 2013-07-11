@@ -204,7 +204,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <div class="ourbox obc2">
-                        <h4><xsl:value-of select="Topics"/></h4>
+                        <h4><xsl:apply-templates select="Topics"/></h4>
                             <span>Date <xsl:if test="Date!=''"><xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if></span>
                             <span>Time <xsl:if test="StartTime!=''"><xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></xsl:if>-<xsl:if test="EndTime!=''"><xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></xsl:if></span><br/>
                         <a href="{$xslt.base-url}me/mynotes/{$courseid}/{$sessionnumber}/modifier" class="btn btn-inverse btn-mini"><i class="splashy-add"></i> Create Note</a>
@@ -231,11 +231,11 @@
     <xsl:template match="Topic" mode="notlast">
         <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
         <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
-        <xsl:value-of select="translate(.,$t,$newt)"/><xsl:text> / </xsl:text>
+        <xsl:value-of select="translate(Title,$t,$newt)"/><xsl:text> / </xsl:text>
     </xsl:template>
     <xsl:template match="Topic" mode="last">
         <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
         <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
-        <xsl:value-of select="translate(.,$t,$newt)"/>
+        <xsl:value-of select="translate(Title,$t,$newt)"/>
     </xsl:template>
 </xsl:stylesheet>

@@ -284,11 +284,11 @@
     <xsl:template match="Topic" mode="notlast">
         <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
         <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
-        <xsl:value-of select="translate(.,$t,$newt)"/><xsl:text> / </xsl:text>
+        <xsl:value-of select="translate(Title,$t,$newt)"/><xsl:text> / </xsl:text>
     </xsl:template>
     <xsl:template match="Topic" mode="last">
         <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
         <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>
-        <xsl:value-of select="translate(.,$t,$newt)"/>
+        <xsl:value-of select="translate(Title,$t,$newt)"/>
     </xsl:template>
 </xsl:stylesheet>

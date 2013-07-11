@@ -2247,7 +2247,13 @@
                         <SessionNumber>12231</SessionNumber>
                         <Topics>
                             <Topic>
-                                <Title/>
+                                <Title>Test</Title>
+                                <Ressources>
+                                    <Ressource/>
+                                </Ressources>
+                            </Topic>
+                            <Topic>
+                                <Title>Test2</Title>
                                 <Ressources>
                                     <Ressource/>
                                 </Ressources>

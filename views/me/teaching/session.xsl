@@ -133,6 +133,8 @@
                   <div class="row-fluid">
                      <xsl:apply-templates select="//Sessions"/> 
                      <xsl:value-of select="."/>
+                     
+                     <xsl:apply-templates select="/Root/sysinfo/Persons" mode="exerciseTable"/>
                   </div>
                   
                         
@@ -188,6 +190,42 @@
 
    </xsl:template>
    
+   <xsl:template match="Persons" mode="exerciseTable">
+      <div class="span8">
+         <table class="table table-striped">
+            <thead>
+               <tr>
+                  <th>Unique ID</th>
+                  <th>Last Name</th>
+                  <th>First Name</th>
+                  <th>Link to the exercise</th>
+               </tr>
+            </thead>
+            <tbody>
+               <xsl:for-each select="Person">
+                  <tr>
+                     <td><xsl:value-of select="UniqueID"/></td>
+                     <td><xsl:value-of select="Lastname"/></td>
+                     <td><xsl:value-of select="Firstname"/></td>
+                     <td>
+                        <xsl:variable name="id"><xsl:value-of select="PersonId"/></xsl:variable>
+                        <xsl:choose>
+                           <xsl:when test="exists(/Root//Session/Exercise/Deliverables/Deliverable[PersonRef=$id])">
+                              <xsl:variable name="ref"><xsl:value-of select="/Root//Session/Exercise/Deliverables/Deliverable[PersonRef=$id]/File/LinkRef"/></xsl:variable>
+                              <a class="btn btn-gebo" href="{$ref}">Download Exercise</a>
+                           </xsl:when>
+                           <xsl:otherwise><dd>Nothing fo the moment</dd>
+                           <xsl:value-of select="PersonId"></xsl:value-of></xsl:otherwise>
+                        </xsl:choose>
+                     </td>
+                  </tr>
+               </xsl:for-each>
+            </tbody>
+         </table>	
+      </div>
+   </xsl:template>
+   
+   
    <xsl:template match="Sessions">
       <div class="row-fluid">
          ciao<br/> 
@@ -211,7 +249,7 @@
    </xsl:template>
    
    <xsl:template match="Topic">
-      <dt><xsl:value-of select="."/></dt>
+      <dt><xsl:value-of select="Title"/></dt>
       <dd>
          <xsl:apply-templates select="./Resources"/>
       </dd>
@@ -239,9 +277,6 @@
       <xsl:value-of select="Lastname"/>
       <xsl:text> </xsl:text>
       <xsl:value-of select="Firstname"/>
-   </xsl:template>
-   <xsl:template match="Topic">
-      <xsl:value-of select="."/>
    </xsl:template>
    
    <xsl:template match="Evaluation">

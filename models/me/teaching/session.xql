@@ -28,6 +28,8 @@ let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$co
 let $teacher := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Teacher'][CoursRef=$courseid])
 let $tutor := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Tutor'][CoursRef=$courseid])
 let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Student'][CoursRef=$courseid])
+
+let $personsFollowers :=  doc(concat($collection, "Persons.xml"))//Person[.//Engagment[Role='Student'][CoursRef=$courseid]]
  
     return
     <Root>
@@ -43,5 +45,17 @@ let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
                 <Student>{$user}</Student>
             </CurrentRole>
             </Session>
+     <Persons>
+            {
+            for $person in $personsFollowers
+            return
+            <Person>
+                {$person/UniqueID}
+                {$person/Lastname}
+                {$person/Firstname}
+                {$person/PersonId}
+            </Person>
+            }
+     </Persons>
     </sysinfo>
     </Root>

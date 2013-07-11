@@ -57,20 +57,12 @@ let $query := if ($oldId='nan' and not($test)) then
                                     return
                                     <Session>
                                         <SessionNumber>{$i}</SessionNumber>
-                                        <Topics>
-                                            <Topic>
-                                                <Title/>
-                                                <Ressources>
-                                                    <Ressource/>
-                                                </Ressources>
-                                            </Topic>
-                                        </Topics>
+                                        <Topics/>
                                         <Description/>
                                         <Date/>
                                         <StartTime/>
                                         <EndTime/>
                                         <Room/>
-                                        <Resources/>
                                     </Session>
                                     }
                                 </Sessions>
@@ -108,7 +100,6 @@ let $query := if ($oldId='nan' and not($test)) then
                                         {$session/StartTime}
                                         {$session/EndTime}
                                         {$session/Room}
-                                        {$session/Ressources}
                                         {
                                         (:si il y a un exercice pour la session on le reprend, sinon pas:)
                                         if(exists($session/Exercise)) then
@@ -165,7 +156,6 @@ let $query := if ($oldId='nan' and not($test)) then
                                         {$session/StartTime}
                                         {$session/EndTime}
                                         {$session/Room}
-                                        {$session/Ressources}
                                         {
                                         (:si il y a un exercice pour la session on le reprend, sinon pas:)
                                         if(exists($session/Exercise)) then

@@ -56,11 +56,11 @@ let $done := if ($method='POST') then (
                 )
             else
             <False/>
-let $docCollection := concat(concat(concat('/db/courses/',$courseid),'/'),$sessionNumber)
+let $docCollection := concat(concat(concat(concat('/db/courses/',$courseid),'/'),$sessionNumber),'/')
 let $docName := $session//Deliverables/Deliverable[PersonRef=$id]/File/LinkText/text()
 let $docLink := $session//Deliverables/Deliverable[PersonRef=$id]/File/LinkRef/text()
 
-let $previousDocumentTime := if(exists(doc(concat($docCollection,$docName)))) then (xdb:last-modified($docCollection,$docName)) else ('na')        
+let $previousDocumentTime := if(exists(concat($docCollection,$docName))) then (xdb:last-modified($docCollection,$docName)) else ('na')        
  
     return
 
