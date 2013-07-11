@@ -278,6 +278,10 @@
                                                     <input class="btn btn-inverse" type="submit"  value="Unsubscrib"/>
                                                  </form>
                                             </dd>
+                                            <dt>Download Options</dt>
+                                            <xsl:variable name="courseid"><xsl:value-of select="CourseId"/></xsl:variable>
+                                            <dd><a href="{$xslt.base-url}me/docs/{$courseid}" class="btn btn-inverse">Mynotes PDF</a></dd>
+                                            
                                         </xsl:when>
                                         <xsl:otherwise>
                                             <dd>Not subscribed</dd>
@@ -291,8 +295,7 @@
                                         </xsl:otherwise>
                                     </xsl:choose>
                                 </dd>
-                                <dd>download all documentation</dd>
-                            </dl>
+                                </dl>
                         </div>
                     </div>
                 </div>
