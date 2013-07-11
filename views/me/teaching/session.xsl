@@ -224,8 +224,8 @@
       <h3 class="heading">Session nr <xsl:value-of select="SessionNumber"/></h3>
       <dl class="dl-horizontal dl-modif">
          <dt>Data</dt><dd><xsl:value-of select="Date"/></dd>
-         <dt>StartTime</dt><dd><xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></dd>
-         <dt>EndTime</dt><dd><xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></dd>
+         <dt>StartTime</dt><dd><xsl:if test="StartTime!=''"><xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></xsl:if></dd>
+         <dt>EndTime</dt><dd><xsl:if test="EndTime!=''"><xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></xsl:if></dd>
          <dt>Room</dt><dd><xsl:value-of select="Room"/></dd>
       </dl>
       
