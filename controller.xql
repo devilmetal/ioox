@@ -251,8 +251,8 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                     <model src="models/me/teaching/sessions.xql"/>
                     <view src="views/me/teaching/sessions.xsl"/>
                     <item epilogue="standard">
-                        <model src="none"/>
-                        <view src="none"/>
+                        <model src="models/me/teaching/session.xql"/>
+                        <view src="views/me/teaching/session.xsl"/>
                     </item>
                     
                     <!-- teacher evaluation manager -->
