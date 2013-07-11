@@ -318,7 +318,10 @@
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="precdate">
-            <xsl:value-of select="preceding-sibling::Session/Date"/>
+            <xsl:choose>
+                <xsl:when test="empty(preceding-sibling::Session/Date)"><xsl:value-of select="preceding-sibling::Session/Date"/></xsl:when>
+                <xsl:otherwise>1970-01-01</xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
 
         <!--  &lt; instead of < and &gt; instead of >, b -->
@@ -328,7 +331,7 @@
                 <xsl:otherwise>
                     <xsl:choose>
                         <xsl:when test="count(preceding-sibling::Session) = 0">
-                            <xsl:if test="current-date() &lt; ./Session/Date">active</xsl:if>
+                            <xsl:if test="current-date() &lt; $date">active</xsl:if>
                         </xsl:when>
                         <xsl:when
                             test="count(preceding-sibling::Session) &gt; 0 and count(preceding-sibling::Session) &lt; count(Session)">
@@ -353,10 +356,17 @@
             <xsl:value-of select="./SessionNumber"/>
         </xsl:variable>
         <xsl:variable name="date">
-            <xsl:value-of select="./Date"/>
+            
+            <xsl:choose>
+                <xsl:when test="empty(Date)"><xsl:value-of select="./Date"/></xsl:when>
+                <xsl:otherwise>1970-01-01</xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
         <xsl:variable name="precdate">
-            <xsl:value-of select="preceding-sibling::Session/Date"/>
+            <xsl:choose>
+                <xsl:when test="empty(preceding-sibling::Session/Date)"><xsl:value-of select="preceding-sibling::Session/Date"/></xsl:when>
+                <xsl:otherwise>1970-01-01</xsl:otherwise>
+            </xsl:choose>
         </xsl:variable>
         <xsl:variable name="current">
             <xsl:choose>
@@ -367,7 +377,7 @@
                             
                         </xsl:when>
                         <xsl:when test="count(preceding-sibling::Session) = 0">
-                            <xsl:if test="current-date() &lt; ./Session/Date">active</xsl:if>
+                            <xsl:if test="current-date() &lt; $date">active</xsl:if>
                         </xsl:when>
                         <xsl:when
                             test="count(preceding-sibling::Session) &gt; 0 and count(preceding-sibling::Session) &lt; count(Session)">
@@ -590,7 +600,7 @@
     <xsl:template match="List">
         <xsl:if test="count(./ListHeader)!=0">
             <span class="ListHeader">
-                <xsl:value-of select="./ListHeader"/>
+                <xsl:value-of select="./ListHeader[name()!='ListHeader']"/>
             </span>
         </xsl:if>
         <ul class="list_b">
@@ -605,7 +615,7 @@
     <xsl:template match="SubList">
         <xsl:if test="count(./SubListHeader)!=0">
             <span class="ListHeader">
-                <xsl:value-of select="./SubListHeader"/>
+                <xsl:value-of select="./SubListHeader[name()!='SubListHeader']"/>
             </span>
         </xsl:if>
         <ul class="list_c">
@@ -677,6 +687,9 @@
             var data = google.visualization.arrayToDataTable([
             ['Type', 'Grade', 'Global Mean']
             <xsl:apply-templates select="./child::node()" mode="javascript"/>
+            <xsl:if test="empty(./child::node())">
+                ,['No grade yet' ,0,0]
+            </xsl:if>
             ]);
             
             var options = {
