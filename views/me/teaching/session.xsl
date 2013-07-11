@@ -12,7 +12,7 @@
    <xsl:output method="xml" media-type="text/xhtml" omit-xml-declaration="yes" indent="no"/>
    
    <xsl:param name="xslt.rights"/>
-   <xsl:param name="xslt.base-url">/</xsl:param>
+   <xsl:param name="xslt.base-url"/>
    <xsl:template match="/">
       <xsl:variable name="xslt-ressource-url"><xsl:value-of select="$xslt.base-url"/>static/ioox</xsl:variable>
       <site:view>
@@ -75,8 +75,6 @@
                document.documentElement.className += 'js';
             </script>
             <link rel="shortcut icon" href="{$xslt-ressource-url}/img/gCons/connections.png"/>
-            <!-- calendar -->
-            <link rel="stylesheet" href="{$xslt-ressource-url}/lib/fullcalendar/fullcalendar_gebo.css" />	
          </site:header>
 
          <!-- MENU DEFINITION -->
@@ -129,8 +127,12 @@
                            
                            <h3 class="heading">Session</h3>
                         <p>This is the overview of the selected session.</p>
+                  <xsl:variable name="courseid"><xsl:value-of select="//sysinfo/CourseId"/></xsl:variable>
+                  <xsl:variable name="sessionnumber"><xsl:value-of select="//sysinfo/SessionNumber"/></xsl:variable>
+                  <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/{$sessionnumber}/modifier" class="btn btn-inverse"><i class="splashy-document_a4_edit"></i> Edit</a>
                   <div class="row-fluid">
-                     <xsl:apply-templates select="//Sessions"/>  
+                     <xsl:apply-templates select="//Sessions"/> 
+                     <xsl:value-of select="."/>
                   </div>
                   
                         
@@ -188,9 +190,74 @@
    
    <xsl:template match="Sessions">
       <div class="row-fluid">
-         ciao <xsl:value-of select="."/>
+         ciao<br/> 
+         <xsl:apply-templates select="child::node()"/>
       </div>
    </xsl:template>
+   
+   <xsl:template match="Description">
+      
+      <p><xsl:for-each select="./child::node()">
+         <xsl:apply-templates select="."/>
+      </xsl:for-each>
+      </p>
+   </xsl:template>
+   
+   <xsl:template match="Topics">
+      <h4 class="heading">Topics</h4>
+      <dl class="dl-horizontal dl-modif">
+         <xsl:apply-templates select="Topic"/>
+      </dl>
+   </xsl:template>
+   
+   <xsl:template match="Topic">
+      <dt><xsl:value-of select="."/></dt>
+      <dd>
+         <xsl:apply-templates select="./Resources"/>
+      </dd>
+   </xsl:template>
+   
+   <xsl:template match="Resources">
+      <xsl:if test="count(Ressource/child::node()) &gt; 0">
+         <ul class="list_a">
+            <xsl:for-each select="child::Ressource">
+               <xsl:apply-templates select="."/>
+            </xsl:for-each>
+         </ul>
+      </xsl:if>
+   </xsl:template>
+   
+   <xsl:template match="Teachers" mode="teacher">
+      <xsl:for-each select="Person">
+         <li>
+            <xsl:apply-templates select="." mode="teacher"/>
+         </li>
+      </xsl:for-each>
+   </xsl:template>
+   
+   <xsl:template match="Person" mode="teacher">
+      <xsl:value-of select="Lastname"/>
+      <xsl:text> </xsl:text>
+      <xsl:value-of select="Firstname"/>
+   </xsl:template>
+   <xsl:template match="Topic">
+      <xsl:value-of select="."/>
+   </xsl:template>
+   
+   <xsl:template match="Evaluation">
+      <xsl:variable name="NbrOfEvalUnit">
+         <xsl:value-of select="count(child::node()/Weight)"/>
+      </xsl:variable>
+      <xsl:variable name="Total">
+         <xsl:value-of select="sum(child::node()/Weight)"/>
+      </xsl:variable>
+      <xsl:apply-templates select="child::node()">
+         <xsl:with-param name="Total">
+            <xsl:value-of select="$Total"/>
+         </xsl:with-param>
+      </xsl:apply-templates>
+   </xsl:template>
+   
    
    
 

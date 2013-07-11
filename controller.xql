@@ -250,9 +250,16 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                 <collection epilogue="standard" name="teaching">
                     <model src="models/me/teaching/sessions.xql"/>
                     <view src="views/me/teaching/sessions.xsl"/>
-                    <item epilogue="standard">
+                    <item epilogue="standard" supported="modifier" methode="POST" template="templates/session">
                         <model src="models/me/teaching/session.xql"/>
                         <view src="views/me/teaching/session.xsl"/>
+                        <action epilogue="standard" name="modifier">
+                            <model src="oppidum:actions/edit.xql"/>
+                            <view src="views/edit.xsl"/>
+                        </action>
+                        <action name="POST">
+                            <model src="models/me/teaching/save_session.xql"/>
+                        </action>
                     </item>
                     
                     <!-- teacher evaluation manager -->
@@ -317,6 +324,9 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
       <model src="oppidum:models/template.xql"/>
     </item>
     <item name="grades" resource="grades.xhtml">
+      <model src="oppidum:models/template.xql"/>
+    </item>
+    <item name="session" resource="session.xhtml">
       <model src="oppidum:models/template.xql"/>
     </item>
   </collection>
