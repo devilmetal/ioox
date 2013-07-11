@@ -250,7 +250,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                 <collection epilogue="standard" name="teaching">
                     <model src="models/me/teaching/sessions.xql"/>
                     <view src="views/me/teaching/sessions.xsl"/>
-                    <item epilogue="standard" supported="modifier" methode="POST" template="templates/session">
+                    <item epilogue="standard" supported="modifier" method="POST" template="templates/session">
                         <model src="models/me/teaching/session.xql"/>
                         <view src="views/me/teaching/session.xsl"/>
                         <action epilogue="standard" name="modifier">

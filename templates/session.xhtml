@@ -1,154 +1,157 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xt="http://ns.inria.org/xtiger" lang="en" xml:lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:xt="http://ns.inria.org/xtiger" lang="en"
+  xml:lang="en">
   <head>
-    <meta name="description" content="This XTiger XML template defines the structure of an article for publication in the Proceedings of an ACM conference. The resulting XHTML document can be formatted by the ACM-Proc-Article.css style sheet, both for display and print. It can also be transformed into a LaTeX file (style sig-alternate.cls) with ACM-Proc-Article2latex.xsl"/>
-    <meta name="keywords" content="template, XTiger"/>
+    <meta name="description"
+      content="This XTiger XML template defines the structure of an article for publication in the Proceedings of an ACM conference. The resulting XHTML document can be formatted by the ACM-Proc-Article.css style sheet, both for display and print. It can also be transformed into a LaTeX file (style sig-alternate.cls) with ACM-Proc-Article2latex.xsl" />
+    <meta name="keywords" content="template, XTiger" />
     <title>My Note</title>
     <xt:head version="1.1" templateVersion="1.0" label="Root">
-      
+
       <xt:component name="Session">
-        
+
         <!-- Hidden information -->
         <blockquote style="display:none">
           <h5>Hidden information </h5>
-          <xt:use types="text" label="SessionNumber"/>
+          <xt:use types="text" label="SessionNumber"></xt:use>
         </blockquote>
-        
+
         <!-- Date -->
         <dl class="dl-horizontal dl-modif">
           <dt>Data</dt>
           <dd>
-            <xt:use types="text" label="Date" param="filter=date;date_region=fr;date_format=ISO_8601" >YYYY-MM-DD</xt:use>
+            <xt:use types="text" label="Date"
+              param="filter=date;date_region=fr;date_format=ISO_8601">YYYY-MM-DD</xt:use>
           </dd>
           <!-- StartTime -->
           <dt>StartTime</dt>
           <dd><xt:use label="StartTime" types="text" option="unset">HH:MM:SS</xt:use></dd>
-          
+
           <!-- EndTime -->
           <dt>EndTime</dt>
           <dd><xt:use label="EndTime" types="text" option="unset">HH:MM:SS</xt:use></dd>
-          
+
           <!-- Room -->
           <dt>Room</dt>
-          <dd><xt:use label="Room" types="input"/></dd>
+          <dd><xt:use label="Room" types="input"></xt:use></dd>
         </dl>
-        
+
+        <!-- Topics -->
         <h3 class="heading">Topics</h3>
-        
+
         <xt:repeat minOccurs="0" maxOccurs="*" label="Topics">
-          
-            <h4>Topic<xt:menu-marker/></h4>
-            <xt:use label="Topic" types="Topic"/>
-          
+          <xt:use types="Topic" label="Topic"/>
+          <xt:menu-marker/>
         </xt:repeat>
-        
-        
+
         <!-- Description -->
         <h3 class="heading">Description</h3>
         <blockquote>
-        <xt:repeat minOccurs="0" maxOccurs="*" label="Description"><xt:menu-marker></xt:menu-marker>
-          <xt:use types="Parag List" label="Parag List">Desc</xt:use>
-        </xt:repeat>
+          <xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+            <xt:menu-marker></xt:menu-marker>
+            <xt:use types="Parag List" label="Parag List">Desc</xt:use>
+          </xt:repeat>
         </blockquote>
-        
-        
-        
-        <xt:repeat minOccurs="0" maxOccurs="1" label="Exercice">
+
+
+
+        <xt:repeat minOccurs="0" maxOccurs="1" label="Exercise">
           <h3 class="heading">Exercise<xt:menu-marker></xt:menu-marker></h3>
           <!-- Hidden information -->
-          
-          <span style="display:none"><xt:use types="text" label="ExerciceId"/></span>
-            
+
+          <span style="display:none"><xt:use types="text" label="ExerciceId"></xt:use></span>
+
           <!-- Description -->
           <h4>Description</h4>
           <blockquote>
             <p>
-              <xt:repeat minOccurs="0" maxOccurs="*" label="Description"><xt:menu-marker></xt:menu-marker>
+              <xt:repeat minOccurs="1" maxOccurs="*" label="Description"><xt:menu-marker></xt:menu-marker>
                 <xt:use types="Parag List" label="Parag List">Desc</xt:use>
               </xt:repeat>
             </p>
           </blockquote>
-          
-            <!-- Data -->
+
+          <!-- Data -->
           <h4>Data of the Exercise</h4>
-           <blockquote> 
-             <xt:use types="Data" label="Data"/>
+          <blockquote>
+            <xt:use types="Data" label="Data"></xt:use>
           </blockquote>
-          
+
         </xt:repeat>
-        
-        
+
+
       </xt:component>
-      
-      
+
+
       <!-- Library component -->
-      
+
       <xt:component name="Topic">
         <blockquote>
           <dl class="dl-horizontal dl-modif">
-            <dt>Title</dt><dd><xt:use label="Title" types="text">Title of the topic</xt:use></dd>
+            <dt>Title</dt>
+            <dd><xt:use label="Title" types="text">Title of the topic</xt:use></dd>
           </dl>
           <h4>Resoureces of this topic test </h4>
-          <xt:use types="Ressources" label="Ressources"/>
-            
-          
+          <xt:use types="Ressources" label="Ressources"></xt:use>
+
+
         </blockquote>
       </xt:component>
-      
+
       <xt:component name="Ressources">
         <xt:repeat minOccurs="0" maxOccurs="*" pseudoLabel="Resource">
-          <h5>Resource <xt:menu-maker/></h5>
-          <xt:use label="Ressource" types="Ressource"/>
+          <h5>Resource <xt:menu-maker></xt:menu-maker></h5>
+          <xt:use label="Ressource" types="Ressource"></xt:use>
         </xt:repeat>
       </xt:component>
-      
+
       <xt:component name="Ressource">
         <blockquote>
-          <xt:use types="CommentedLink ExternalDoc" label="Link ExternalDoc"/>
+          <xt:use types="Link ExternalDoc" label="Link ExternalDoc"></xt:use>
         </blockquote>
       </xt:component>
-      
-      
-      
-      
-      
+
+
+
+
+
       <xt:component name="Deliverable">
-        <xt:use types="text" label="PersonRef"/>
-        <xt:use types="File" label="File"/>
+        <xt:use types="text" label="PersonRef"></xt:use>
+        <xt:use types="File" label="File"></xt:use>
+      </xt:component>
+
+      <xt:component name="File">
+        <xt:use name="Link"></xt:use>
       </xt:component>
       
-      <xt:component name="File">
-        <xt:use name="Link"/>
-      </xt:component>
       <xt:component name="Data">
-        <xt:use types="CommentedLink ExternalDoc" label="Link ExternalDoc"/>
+        <xt:use types="Link ExternalDoc" label="Link ExternalDoc"></xt:use>
       </xt:component>
 
       <xt:component name="CommentedLink">
-        <p><xt:use types="Link"/></p>
-        <p>Comment:<br/><xt:use types="text" label="Comment" param="types=textarea;">Comment of the link</xt:use></p>
+        <p><xt:use types="Link"></xt:use></p>
+        <p>Comment:<br /><xt:use types="text" label="Comment" param="types=textarea;">Comment of the
+            link</xt:use></p>
       </xt:component>
-      
+
       <xt:component name="Link">
-        <span><xt:use label="LinkText" types="text">LinkText</xt:use> (
-          <xt:use label="LinkRef" types="text">LinkRef</xt:use>)</span>
+        <span><xt:use label="LinkText" types="text">LinkText</xt:use> ( <xt:use label="LinkRef"
+            types="text">LinkRef</xt:use>)</span>
       </xt:component>
 
       <xt:component name="ExternalDoc">
-        <xt:use types="text" label="Title">Title external doc</xt:use>
-        here upload file after
-      </xt:component>
-      
-      
-      
+        <xt:use types="text" label="Title">Title external doc</xt:use> here upload file after </xt:component>
+
+
+
       <xt:component name="Parag">
         <p>
           <xt:use types="text" param="types=textarea;filter=wiki;shape=parent">Cliquez pour
             éditer</xt:use>
         </p>
       </xt:component>
-      
 
-      
+
+
       <xt:component name="List">
         <p>
           <b>
@@ -164,11 +167,11 @@
           </xt:repeat>
         </ul>
       </xt:component>
-      
+
       <xt:component name="ListItem">
         <xt:use label="Fragment SubList" types="Fragment SubList"></xt:use>
       </xt:component>
-      
+
       <xt:component name="SubList">
         <p>
           <b>
@@ -184,35 +187,32 @@
           </xt:repeat>
         </ul>
       </xt:component>
-      
+
       <xt:component name="SubListItem">
         <xt:use label="Fragment" types="Fragment"></xt:use>
       </xt:component>
-      
+
       <xt:component name="Fragment">
         <xt:use types="text">Fragment</xt:use>
       </xt:component>
-      
+
       <xt:component name="text">
         <xt:use types="text">text</xt:use>
       </xt:component>
-      
-      <xt:component name="Step">
-        step title <xt:use label="Title" types="text">Title</xt:use>
-        <xt:use types="Deadline"/>
+
+      <xt:component name="Step"> step title <xt:use label="Title" types="text">Title</xt:use>
+        <xt:use types="Deadline"></xt:use>
       </xt:component>
-      
-      <xt:component name="Deadline">
-        (deadline <xt:use types="text" label="Date" param="filter=date;date_region=fr;date_format=ISO_8601"
-          >YYYY-MM-DD</xt:use>)
-      </xt:component>
-      
+
+      <xt:component name="Deadline"> (deadline <xt:use types="text" label="Date"
+          param="filter=date;date_region=fr;date_format=ISO_8601">YYYY-MM-DD</xt:use>) </xt:component>
+
     </xt:head>
   </head>
   <body>
     <h3 class="heading">Session Edit</h3>
-    
-    <xt:use label="Session" types="Session"/>
-    
+
+    <xt:use label="Session" types="Session"></xt:use>
+
   </body>
 </html>

@@ -24,11 +24,10 @@ let $id := if (session:get-attribute('id')) then (
                             )
 let $cmd := request:get-attribute('oppidum.command')
 let $new := request:get-data()
-let $sid := $new//SessionNumber
-let $old := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]/Sessions/Session[SessionNumber=$sid]
+let $sid := $new//Session//SessionNumber
+let $old := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]//Session[SessionNumber=$sid]
 let $new2 := $new//Session
-let $tosave := 
-                <Session>
+let $tosave := <Session>
                     {$new2/SessionNumber}
                     {$new2/Topics}
                     {$new2/Description}
@@ -37,16 +36,16 @@ let $tosave :=
                     {$new2/EndTime}
                     {$new2/Room}
                     {
-                        let $test := exists($new2/Exercise)
+                        let $test := exists($new2//Exercise)
                         return
                             if ($test) then
                                 (
                                     <Exercise>
-                                        {$new2/Exericse/ExerciseId}
+                                        {$new2/Exericse/ExerciceId}
                                         {$new2/Exercise/Description}
                                         {$new2/Exercise/Data}
                                         {
-                                            let $test := exists($old/Exercise/Deliverables)
+                                            let $test := exists($old/Exercise/Deliverables/Deliverable)
                                             return
                                             if ($test) then
                                                 (
@@ -64,6 +63,7 @@ let $tosave :=
                         
                     }
                 </Session>
+                
         return (
         update replace $old with $tosave,
         oppidum:add-message('ACTION-UPDATE-SUCCESS', '', true()),

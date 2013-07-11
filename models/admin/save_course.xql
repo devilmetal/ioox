@@ -57,8 +57,15 @@ let $query := if ($oldId='nan' and not($test)) then
                                     return
                                     <Session>
                                         <SessionNumber>{$i}</SessionNumber>
-                                        <Topics/>
-                                        <Description/>
+                                        <Topics>
+                                            <Topic>
+                                                <Title/>
+                                                <Ressources/>
+                                            </Topic>
+                                        </Topics>
+                                        <Description>
+                                            <Parag><Fragment/></Parag>
+                                        </Description>
                                         <Date/>
                                         <StartTime/>
                                         <EndTime/>
