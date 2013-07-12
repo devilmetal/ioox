@@ -51,10 +51,10 @@
                         </div>
                     </div>
                     
-                    <div class="gh_button-group">
+                    <!--<div class="gh_button-group">
                         <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
                         <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
-                    </div>
+                    </div>-->
                     <div class="hide">
                         <ul id="ssw_styles">
                             <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
@@ -162,7 +162,7 @@
     </xsl:template>
     
     <xsl:template match="Period">
-        <xsl:if test="count(Course/CourseId = //Root/Course/CourseId) &gt; 0">
+        <xsl:if test="true()">
             <h3 class="heading"><xsl:value-of select="Name"/></h3>
             <div class="rowf-luid">
                 <xsl:apply-templates select="Course[CourseId = //Root/Course/CourseId]"></xsl:apply-templates>
@@ -174,7 +174,7 @@
     <xsl:template match="Course">
         <xsl:variable name="courseid"><xsl:value-of select="CourseId"/></xsl:variable>
         <div class="span4">
-        <div class="ourbox obc1">
+        <div class="ourbox obc1 bb">
             <h4><xsl:value-of select="Acronym"/></h4>
             <br/>
             <a href="{$xslt.base-url}me/mynotes/{$courseid}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> Show notes</a>

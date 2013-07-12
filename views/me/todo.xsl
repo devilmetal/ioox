@@ -51,10 +51,10 @@
                         </div>
                     </div>
                     
-                    <div class="gh_button-group">
+                    <!--<div class="gh_button-group">
                         <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
                         <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
-                    </div>
+                    </div>-->
                     <div class="hide">
                         <ul id="ssw_styles">
                             <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
@@ -222,7 +222,7 @@
             </span>
         </xsl:if>
         <ul class="list_b">
-            <xsl:for-each select="./child::node()">
+            <xsl:for-each select="./child::node()[name()!='ListHeader']">
                 <li>
                     <xsl:apply-templates select="."/>
                 </li>
@@ -237,7 +237,7 @@
             </span>
         </xsl:if>
         <ul class="list_c">
-            <xsl:for-each select="./child::node()">
+            <xsl:for-each select="./child::node()[name()!='SubListHeader']">
                 <li>
                     <xsl:apply-templates select="."/>
                 </li>

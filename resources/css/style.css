@@ -1424,6 +1424,21 @@ footer{
 	color:#3a87ad;
 }
 
+.bb{
+	margin-left: 0 !important;
+	position: relative;
+}
+
+ span.superbackground{
+	font-size:3em;
+	font-weight:bold;
+	color:rgba(21,21,21,.3);
+
+	position: absolute;
+	top:0px;
+	z-index:0;
+}
+
 @media (max-width: 979px) {
 	a.off_switch, a.on_switch{
 	height:20px;

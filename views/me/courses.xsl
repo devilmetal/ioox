@@ -51,10 +51,10 @@
                         </div>
                     </div>
                     
-                    <div class="gh_button-group">
+                    <!--<div class="gh_button-group">
                         <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
                         <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
-                    </div>
+                    </div>-->
                     <div class="hide">
                         <ul id="ssw_styles">
                             <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
@@ -86,7 +86,7 @@
             
             <site:content>
                 <xsl:choose>
-                    <xsl:when test="//Session/Id = '-1'">
+                    <xsl:when test="exists(//Root/Null)">
                         <!-- NOT LOGGED IN  -->
                         <div> You have to login to access this page. </div>
                     </xsl:when>
@@ -195,18 +195,18 @@
             <xsl:variable name="id"><xsl:value-of select="CourseId"/></xsl:variable>
             <xsl:choose>
                 <xsl:when test="count(.[Role!='Student'])=0">
-                    <div class="ourbox obc1">
+                    <div class="ourbox obc1 bb">
                         
-                            <h4><xsl:value-of select="Title"/></h4>
+                        <h4><xsl:value-of select="Acronym"/></h4>
                             <br/>
                         <a href="{$xslt.base-url}me/courses/{$id}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to</a>
                         
                     </div>
                 </xsl:when>
                 <xsl:otherwise>
-                    <div class="ourbox obc4">
+                    <div class="ourbox obc4 bb">
                         
-                            <h4><xsl:value-of select="Title"/></h4>
+                        <h4><xsl:value-of select="Acronym"/></h4>
                             <br/>
                         <a href="{$xslt.base-url}me/courses/{$id}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to</a>
                         <a href="{$xslt.base-url}me/courses/{$id}/teaching" class="btn btn-warning btn-mini"><i class="splashy-arrow_medium_upper_right"></i> manage</a>

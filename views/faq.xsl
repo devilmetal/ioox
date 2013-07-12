@@ -51,10 +51,10 @@
                   </div>
                </div>
                
-               <div class="gh_button-group">
+               <!--<div class="gh_button-group">
                   <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
                   <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
-               </div>
+               </div>-->
                <div class="hide">
                   <ul id="ssw_styles">
                      <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
@@ -84,75 +84,7 @@
          <!-- SITE CONTENT -->
          <site:navbar>
             
-            <div class="main_content">
-               <div class="navbar">
-                  <xsl:if test="//Session/Role != '-1'">
-                  <div class="navbar-inner">
-                     <div class="container-fluid">
-                        <!--<a class="brand2" href="#"> Me</a>-->
-                        <ul class="nav" id="mobile-nav-2">
-                           <li>
-                              <a href="#"><img src="{$xslt-ressource-url}/img/gCons-mini-white/home.png" alt=""/>
-                                 MyHome </a>
-                           </li>
-                           <li class="divider-vertical hidden-phone hidden-tablet"/>
-                           <li>
-                              <a href="#"><img
-                                 src="{$xslt-ressource-url}/img/gCons-mini-white/bookmark.png"
-                                 alt=""/> Courses </a>
-                           </li>
-                           <li class="divider-vertical hidden-phone hidden-tablet"/>
-                           <li>
-                              <a href="#"><img
-                                 src="{$xslt-ressource-url}/img/gCons-mini-white/addressbook.png"
-                                 alt=""/> MyNote </a>
-                           </li>
-                           <li class="divider-vertical hidden-phone hidden-tablet"/>
-                           <li>
-                              <a href="#"><img
-                                 src="{$xslt-ressource-url}/img/gCons-mini-white/pie-chart.png"
-                                 alt=""/> Grades </a>
-                           </li>
-                           <li class="divider-vertical hidden-phone hidden-tablet"/>
-                           <li>
-                              <a href="#"><img
-                                 src="{$xslt-ressource-url}/img/gCons-mini-white/calendar.png"
-                                 alt=""/> Todos </a>
-                           </li>
-                           <li> </li>
-                        </ul>
-                     </div>
-                  </div>
-                  </xsl:if>
-                  <xsl:if test="//Session/Role != 'Student' and //Session/Role != '-1' ">
-                  <div class="navbar-inner">
-                     <div class="container-fluid">
-                        <a class="brand2" href="#"> Teacher</a>
-                        <ul class="nav">
-                           <li>
-                              <a href="#"><img
-                                 src="{$xslt-ressource-url}/img/gCons-mini-white/configuration.png"
-                                 alt=""/> My Teaching </a>
-                           </li>
-                           <li class="divider-vertical hidden-phone hidden-tablet"/>
-                           <li>
-                              <a href="#"><img
-                                 src="{$xslt-ressource-url}/img/gCons-mini-white/multi-agents.png"
-                                 alt=""/> My Class </a>
-                           </li>
-                           <li class="divider-vertical hidden-phone hidden-tablet"/>
-                           <li>
-                              <a href="#"><img
-                                 src="{$xslt-ressource-url}/img/gCons-mini-white/bar-chart.png"
-                                 alt=""/> Manage Grades </a>
-                           </li>
-                           <li> </li>
-                        </ul>
-                     </div>
-                  </div>
-                  </xsl:if>
-               </div>
-            </div>
+            
          </site:navbar>
          <site:content>
                   <xsl:choose>
@@ -171,7 +103,7 @@
                            </div>
                            <div class="faq_right">
                               <h2>Location map</h2>
-                              <iframe width="230" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=46.793927,7.159229&amp;num=1&amp;t=h&amp;ie=UTF8&amp;ll=46.793537,7.159266&amp;spn=0.005142,0.004935&amp;z=16&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?q=46.793927,7.159229&amp;num=1&amp;t=h&amp;ie=UTF8&amp;ll=46.793537,7.159266&amp;spn=0.005142,0.004935&amp;z=16&amp;source=embed" style="color:#0000FF;text-align:left">View Larger Map</a></small>
+                              <iframe width="330" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=46.793927,7.159229&amp;num=1&amp;t=h&amp;ie=UTF8&amp;ll=46.793537,7.159266&amp;spn=0.005142,0.004935&amp;z=16&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?q=46.793927,7.159229&amp;num=1&amp;t=h&amp;ie=UTF8&amp;ll=46.793537,7.159266&amp;spn=0.005142,0.004935&amp;z=16&amp;source=embed" style="color:#0000FF;text-align:left">View Larger Map</a></small>
                               <h2>Address</h2>
                               
                               Plateau de Pérolles 90<br/>

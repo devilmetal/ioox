@@ -33,7 +33,7 @@ let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]
     <Sessions>
     {
     for $s in $data2//Session
-    order by $s/Date
+    order by $s/Date, $s/SessionNumber
     return
         <Session>
             {$s/SessionNumber}

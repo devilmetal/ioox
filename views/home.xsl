@@ -43,13 +43,13 @@
                      <label class="radio inline"><input type="radio" name="ssw_sidebar" id="ssw_sidebar_right" value="sidebar_right" /> Right</label>
                   </div>
                </div>
-               <div class="sepH_c">
+               <!--<div class="sepH_c">
                   <p>Show top menu on:</p>
                   <div class="clearfix">
                      <label class="radio inline"><input type="radio" name="ssw_menu" id="ssw_menu_click" value=""  /> Click</label>
                      <label class="radio inline"><input type="radio" name="ssw_menu" id="ssw_menu_hover" value="menu_hover" /> Hover</label>
                   </div>
-               </div>
+               </div>-->
                
                <div class="gh_button-group">
                   <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>

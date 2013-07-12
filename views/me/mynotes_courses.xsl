@@ -52,10 +52,10 @@
                         </div>
                     </div>
                     
-                    <div class="gh_button-group">
+                    <!--<div class="gh_button-group">
                         <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
                         <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
-                    </div>
+                    </div>-->
                     <div class="hide">
                         <ul id="ssw_styles">
                             <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
@@ -189,7 +189,7 @@
                 
                 <xsl:choose>
                     <xsl:when test="//Root/Session[SessionNumber=$sessionnumber]/SessionNumber &gt; 0">
-                        <div class="ourbox obc0">
+                        <div class="ourbox obc0 bb">
                         <h4><xsl:apply-templates select="child::Topics"/></h4>
                             <span>Date <xsl:if test="Date!=''"><xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if></span>
                             <span>Time <xsl:if test="StartTime!=''"><xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></xsl:if>-<xsl:if test="EndTime!=''"><xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></xsl:if></span><br/>
@@ -203,7 +203,7 @@
                         </div>
                     </xsl:when>
                     <xsl:otherwise>
-                        <div class="ourbox obc2">
+                        <div class="ourbox obc2 bb">
                         <h4><xsl:apply-templates select="Topics"/></h4>
                             <span>Date <xsl:if test="Date!=''"><xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if></span>
                             <span>Time <xsl:if test="StartTime!=''"><xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></xsl:if>-<xsl:if test="EndTime!=''"><xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></xsl:if></span><br/>
