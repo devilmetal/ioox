@@ -51,10 +51,10 @@
                         </div>
                     </div>
                     
-                    <div class="gh_button-group">
+                    <!--<div class="gh_button-group">
                         <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
                         <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
-                    </div>
+                    </div>-->
                     <div class="hide">
                         <ul id="ssw_styles">
                             <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
@@ -75,18 +75,13 @@
                     document.documentElement.className += 'js';
                 </script>
                 <link rel="shortcut icon" href="{$xslt-ressource-url}/img/gCons/connections.png"/>
-                <!-- calendar -->
-                <link rel="stylesheet" href="{$xslt-ressource-url}/lib/fullcalendar/fullcalendar_gebo.css" />	
+                <link rel="stylesheet" href="{$xslt-ressource-url}/lib/datatables/extras/TableTools/media/css/TableTools.css"/>
             </site:header>
             
             <!-- MENU DEFINITION -->
             <site:menu> </site:menu>
             <!-- SITE CONTENT -->
             <site:navbar />
-            
-            
-            
-            
             
             <site:content>
                 <xsl:choose>
@@ -100,7 +95,9 @@
                             cas 1) child = Form => affichage du formulaire (et selon les erreurs associées)
                             cas 2) child = Done => affichage de l'après création, donc mot de pass + username
                         -->
+                        <div class="row-fluid">
                         <xsl:apply-templates select="/Root/Core/child::node()"/>
+                        </div>
                         
                     </xsl:otherwise>
                 </xsl:choose>
@@ -136,10 +133,16 @@
                 <!-- common functions -->
                 <script src="{$xslt-ressource-url}/js/gebo_common.js"></script>
                 
-                <!-- jQuery UI -->
-                <script src="{$xslt-ressource-url}/lib/jquery-ui/jquery-ui-1.10.0.custom.min.js"></script>
-                <!-- touch events for jQuery UI -->
-                <script src="{$xslt-ressource-url}/js/forms/jquery.ui.touch-punch.min.js"></script>
+                <!-- datatable -->
+                <script src="{$xslt-ressource-url}/lib/datatables/jquery.dataTables.min.js"></script>
+                <script src="{$xslt-ressource-url}/lib/datatables/extras/Scroller/media/js/dataTables.scroller.min.js"></script>
+                <!-- datatable table tools -->
+                <script src="{$xslt-ressource-url}/lib/datatables/extras/TableTools/media/js/TableTools.min.js"></script>
+                <script src="{$xslt-ressource-url}/lib/datatables/extras/TableTools/media/js/ZeroClipboard.js"></script>
+                <!-- datatables bootstrap integration -->
+                <script src="{$xslt-ressource-url}/lib/datatables/jquery.dataTables.bootstrap.min.js"></script>
+                <!-- datatable functions -->
+                <script src="{$xslt-ressource-url}/js/gebo_datatables.js"></script>
                 
                 <script>
                     $(document).ready(function() {
@@ -210,44 +213,46 @@
     <xsl:template match="Back">
         <div class="span12">
             <h3 class="heading">Courses</h3>
-            <div class="row-fluid">
+            
+            
+                <table class="table table-striped table-bordered dTableR" id="dt_a">
+                    <thead>
+                        <tr>
+                            <th>CourseNo</th>
+                            <th>Title</th>
+                            <th>Acronym</th>
+                            <th>Period</th>
+                            <th>Action(s)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
                 <xsl:apply-templates select=".//Course"/>
-            </div>
+                    </tbody>
+                </table>
+            
         </div>
     </xsl:template>
     
     <xsl:template match="Course">
-        <div class="span8">
-            <form class="form-horizontal" method="post" action="#">
-                <fieldset>
-                    <div class="control-group formSep">
-                        <label class="control-label">CourseNo</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="CourseNo"/></strong>
-                        </div><br/>
-                        <label class="control-label">Title</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="Title"/></strong>
-                        </div><br/>
-                        <label class="control-label">Acronym</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="Acronym"/></strong>
-                        </div><br/>
-                        <label class="control-label">Period</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="Period"/></strong>
-                        </div><br/>
-                        <div class="controls">
-                            <xsl:variable name="courseid"><xsl:value-of select="CourseId"/></xsl:variable>
-                            <input name="courseid" value="{$courseid}" type="hidden"/>
-                            <button class="btn btn-gebo" type="submit">Delete</button>
-                            <a class="btn btn-gebo" href="{$xslt.base-url}admin/courses/{$courseid}">Modifiy</a>
-                            <a class="btn btn-gebo" href="{$xslt.base-url}admin/courses/new?id={$courseid}">Clone</a>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
+        
+            
+                <tr>
+                    <form class="form-horizontal" method="post" action="#">
+                    <td><xsl:value-of select="CourseNo"/></td>
+                    <td><xsl:value-of select="Title"/></td>
+                    <td><xsl:value-of select="Acronym"/></td>
+                    <td><xsl:value-of select="Period"/></td>
+                    <td class="center">
+                        <xsl:variable name="courseid"><xsl:value-of select="CourseId"/></xsl:variable>
+                        <input name="courseid" value="{$courseid}" type="hidden"/>
+                        <button class="btn btn-danger btn-mini" type="submit">Delete</button><br/>
+                        <a class="btn btn-gebo btn-mini" href="{$xslt.base-url}admin/courses/{$courseid}">Modifiy</a><br/>
+                        <a class="btn btn-gebo btn-mini" href="{$xslt.base-url}admin/courses/new?id={$courseid}">Clone</a>
+                    </td>
+                    </form>
+                </tr>
+            
+        
     </xsl:template>
     
     <!-- Affichage d'une erreure -->

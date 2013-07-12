@@ -51,10 +51,10 @@
                         </div>
                     </div>
                     
-                    <div class="gh_button-group">
+                    <!--<div class="gh_button-group">
                         <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
                         <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
-                    </div>
+                    </div>-->
                     <div class="hide">
                         <ul id="ssw_styles">
                             <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
@@ -75,8 +75,6 @@
                     document.documentElement.className += 'js';
                 </script>
                 <link rel="shortcut icon" href="{$xslt-ressource-url}/img/gCons/connections.png"/>
-                <!-- calendar -->
-                <link rel="stylesheet" href="{$xslt-ressource-url}/lib/fullcalendar/fullcalendar_gebo.css" />	
             </site:header>
             
             <!-- MENU DEFINITION -->
@@ -100,7 +98,9 @@
                             cas 1) child = Form => affichage du formulaire (et selon les erreurs associées)
                             cas 2) child = Done => affichage de l'après création, donc mot de pass + username
                         -->
+                        <div class="row-fluid">
                         <xsl:apply-templates select="/Root/Core/child::node()"/>
+                        </div>
                         
                     </xsl:otherwise>
                 </xsl:choose>
@@ -225,9 +225,15 @@
     </xsl:template>
     
     <xsl:template match="Done">
-        <p>Query ok ! </p>
-        <p>Username : <xsl:value-of select="Username"/></p>
-        <p>Password : <xsl:value-of select="Password"/></p>
+        <div class="span3"></div>
+        <div class="span6">
+        <div class="alert alert-block alert-success fade in">
+            <h3>Well done!</h3>
+        <p>Username : <strong><xsl:value-of select="Username"/></strong></p>
+        <p>Password : <strong><xsl:value-of select="Password"/></strong></p>
+        </div>
+        </div>
+        <div class="span3"></div>
     </xsl:template>
     
     <xsl:template match="Error">

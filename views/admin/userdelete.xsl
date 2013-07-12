@@ -51,10 +51,10 @@
                         </div>
                     </div>
                     
-                    <div class="gh_button-group">
+                    <!--<div class="gh_button-group">
                         <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
                         <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
-                    </div>
+                    </div>-->
                     <div class="hide">
                         <ul id="ssw_styles">
                             <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
@@ -75,8 +75,9 @@
                     document.documentElement.className += 'js';
                 </script>
                 <link rel="shortcut icon" href="{$xslt-ressource-url}/img/gCons/connections.png"/>
-                <!-- calendar -->
-                <link rel="stylesheet" href="{$xslt-ressource-url}/lib/fullcalendar/fullcalendar_gebo.css" />	
+                <link rel="stylesheet" href="{$xslt-ressource-url}/lib/datatables/extras/TableTools/media/css/TableTools.css"/>
+               
+                
             </site:header>
             
             <!-- MENU DEFINITION -->
@@ -100,10 +101,13 @@
                             cas 1) child = Form => affichage du formulaire (et selon les erreurs associées)
                             cas 2) child = Done => affichage de l'après création, donc mot de pass + username
                         -->
+                        <div class="row-fluid">
                         <xsl:apply-templates select="/Root/Core/child::node()"/>
-                        
+                        </div>
                     </xsl:otherwise>
                 </xsl:choose>
+          
+
             </site:content>
             <site:javascript>
                 <script src="{$xslt-ressource-url}/js/jquery.min.js"></script>
@@ -136,10 +140,17 @@
                 <!-- common functions -->
                 <script src="{$xslt-ressource-url}/js/gebo_common.js"></script>
                 
-                <!-- jQuery UI -->
-                <script src="{$xslt-ressource-url}/lib/jquery-ui/jquery-ui-1.10.0.custom.min.js"></script>
-                <!-- touch events for jQuery UI -->
-                <script src="{$xslt-ressource-url}/js/forms/jquery.ui.touch-punch.min.js"></script>
+                <!-- datatable -->
+                <script src="{$xslt-ressource-url}/lib/datatables/jquery.dataTables.min.js"></script>
+                <script src="{$xslt-ressource-url}/lib/datatables/extras/Scroller/media/js/dataTables.scroller.min.js"></script>
+                <!-- datatable table tools -->
+                <script src="{$xslt-ressource-url}/lib/datatables/extras/TableTools/media/js/TableTools.min.js"></script>
+                <script src="{$xslt-ressource-url}/lib/datatables/extras/TableTools/media/js/ZeroClipboard.js"></script>
+                <!-- datatables bootstrap integration -->
+                <script src="{$xslt-ressource-url}/lib/datatables/jquery.dataTables.bootstrap.min.js"></script>
+                <!-- datatable functions -->
+                <script src="{$xslt-ressource-url}/js/gebo_datatables.js"></script>
+                
                 
                 <script>
                     $(document).ready(function() {
@@ -206,42 +217,38 @@
     <xsl:template match="Back">
         <div class="span12">
             <h3 class="heading">Search for an user</h3>
-            <div class="row-fluid">
+            
+            <form action="#" method="post">
+            <table class="table table-striped table-bordered dTableR" id="dt_a">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>First Name</th>
+                        <th>Last Name</th>
+                        <th>UniqueID</th>
+                        <th>Action(s)</th>
+                    </tr>
+                </thead>
+                <tbody>
                 <xsl:apply-templates select=".//Person"/>
-            </div>
+                </tbody>
+            </table>
+            </form>
         </div>
     </xsl:template>
     
     <xsl:template match="Person">
-        <div class="span8">
-            <form class="form-horizontal" method="post" action="#">
-                <fieldset>
-                    <div class="control-group formSep">
-                        <label class="control-label">Username</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="Username"/></strong>
-                        </div><br/>
-                        <label class="control-label">First Name</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="Firstname"/></strong>
-                        </div><br/>
-                        <label class="control-label">Last Name</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="Lastname"/></strong>
-                        </div><br/>
-                        <label class="control-label">UniqueID</label>
-                        <div class="controls text_line">
-                            <strong><xsl:value-of select="UniqueID"/></strong>
-                        </div><br/>
-                        <div class="controls">
-                            <xsl:variable name="username"><xsl:value-of select="Username"/></xsl:variable>
-                            <input name="username" value="{$username}" type="hidden"/>
-                            <button class="btn btn-gebo" type="submit">Delete</button>
-                        </div>
-                    </div>
-                </fieldset>
-            </form>
-        </div>
+    
+        <tr>
+            <td><xsl:value-of select="Username"/></td>
+            <td><xsl:value-of select="Firstname"/></td>
+            <td><xsl:value-of select="Lastname"/></td>
+            <td><xsl:value-of select="UniqueID"/></td>
+            <td><xsl:variable name="username"><xsl:value-of select="Username"/></xsl:variable>
+                <input name="username" value="{$username}" type="hidden"/>
+                <button class="btn btn-gebo" type="submit">Delete</button></td>
+        </tr>
+
     </xsl:template>
     
     <!-- Affichage d'une erreure -->
