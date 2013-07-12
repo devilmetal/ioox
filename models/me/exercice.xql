@@ -60,7 +60,7 @@ let $docCollection := concat(concat(concat(concat('/db/courses/',$courseid),'/')
 let $docName := $session//Deliverables/Deliverable[PersonRef=$id]/File/LinkText/text()
 let $docLink := $session//Deliverables/Deliverable[PersonRef=$id]/File/LinkRef/text()
 
-let $previousDocumentTime := if(exists(concat($docCollection,$docName))) then (xdb:last-modified($docCollection,$docName)) else ('na')        
+let $previousDocumentTime := 'na'(:if(exists(concat($docCollection,$docName))) then (xdb:last-modified($docCollection,$docName)) else ('na')   :)     
  
     return
 
