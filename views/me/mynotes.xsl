@@ -162,7 +162,7 @@
     </xsl:template>
     
     <xsl:template match="Period">
-        <xsl:if test="count(Course/CourseId = //Root/Course/CourseId) &gt; 0">
+        <xsl:if test="true()">
             <h3 class="heading"><xsl:value-of select="Name"/></h3>
             <div class="rowf-luid">
                 <xsl:apply-templates select="Course[CourseId = //Root/Course/CourseId]"></xsl:apply-templates>

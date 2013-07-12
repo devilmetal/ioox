@@ -40,6 +40,8 @@ let $period := doc(concat($collection, "AcademicYears.xml"))//Period[Courses/Cou
         {$p/End}
         {
         for $c in $period/Courses/Course
+        (:This where grant to print only course where at last 1 session note is make:)
+        where $c/CourseId=$notes//Note/CourseRef  
         return
         <Course>{$c/CourseId}{$c/CourseNo}{$c/Title}{$c/Acronym}</Course>
         }
