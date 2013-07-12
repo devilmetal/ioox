@@ -195,18 +195,18 @@
             <xsl:variable name="id"><xsl:value-of select="CourseId"/></xsl:variable>
             <xsl:choose>
                 <xsl:when test="count(.[Role!='Student'])=0">
-                    <div class="ourbox obc1">
+                    <div class="ourbox obc1 bb">
                         
-                            <h4><xsl:value-of select="Title"/></h4>
+                        <h4><xsl:value-of select="Acronym"/></h4>
                             <br/>
                         <a href="{$xslt.base-url}me/courses/{$id}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to</a>
                         
                     </div>
                 </xsl:when>
                 <xsl:otherwise>
-                    <div class="ourbox obc4">
+                    <div class="ourbox obc4 bb">
                         
-                            <h4><xsl:value-of select="Title"/></h4>
+                        <h4><xsl:value-of select="Acronym"/></h4>
                             <br/>
                         <a href="{$xslt.base-url}me/courses/{$id}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to</a>
                         <a href="{$xslt.base-url}me/courses/{$id}/teaching" class="btn btn-warning btn-mini"><i class="splashy-arrow_medium_upper_right"></i> manage</a>
