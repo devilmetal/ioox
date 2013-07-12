@@ -1426,6 +1426,17 @@ footer{
 
 .bb{
 	margin-left: 0 !important;
+	position: relative;
+}
+
+ span.superbackground{
+	font-size:3em;
+	font-weight:bold;
+	color:rgba(21,21,21,.6);
+
+	position: absolute;
+	top:0px;
+	z-index:0;
 }
 
 @media (max-width: 979px) {

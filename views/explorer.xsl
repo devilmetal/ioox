@@ -319,7 +319,7 @@
             </span>
         </xsl:if>
         <ul class="list_b">
-            <xsl:for-each select="./child::node()">
+            <xsl:for-each select="./child::node()[name()!='ListHeader']">
                 <li>
                     <xsl:apply-templates select="."/>
                 </li>
@@ -334,7 +334,7 @@
             </span>
         </xsl:if>
         <ul class="list_c">
-            <xsl:for-each select="./child::node()">
+            <xsl:for-each select="./child::node()[name()!='SubListHeader']">
                 <li>
                     <xsl:apply-templates select="."/>
                 </li>

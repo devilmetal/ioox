@@ -202,7 +202,7 @@
 
       
          <xsl:choose>
-            <xsl:when test="count(./Topics//Topic)!=0">
+            <xsl:when test="./Topics/Topic[1]/Title !=''">
                <div class="span6 bb">
                <div class="ourbox obc0">
                   <h4><xsl:apply-templates select="child::Topics"/></h4>
@@ -210,7 +210,9 @@
                      <xsl:if test="StartTime!=''"> | s: <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></xsl:if><xsl:if test="EndTime!=''"> - e: <xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></xsl:if>]</span><br/>
                   <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/{$sessionnumber}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to sesison</a>
                   <p/>
+                  <span class="superbackground"><xsl:value-of select="SessionNumber"/></span>
                </div>
+                  
                </div>
             </xsl:when>
             <xsl:otherwise>
@@ -221,7 +223,9 @@
                      <xsl:if test="StartTime!=''"> | s: <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></xsl:if><xsl:if test="EndTime!=''"> - e: <xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></xsl:if>]</span><br/>
                   <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/{$sessionnumber}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to sesison</a>
                   <p/>
+                  <span class="superbackground"><xsl:value-of select="SessionNumber"/></span>
                </div>
+                  
                </div>
             </xsl:otherwise>
          </xsl:choose> 
