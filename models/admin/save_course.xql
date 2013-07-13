@@ -46,6 +46,7 @@ let $query := if ($oldId='nan' and not($test)) then
                                 {$newCourse/Acronym}
                                 {$newCourse/Description}
                                 <Evaluation/>
+                                <Quizz/>
                                 <Sessions>
                                     {
                                     for $i in (1 to $MAXNUMBERSESSIONS)
@@ -95,6 +96,7 @@ let $query := if ($oldId='nan' and not($test)) then
                                 {$newCourse/Acronym}
                                 {$newCourse/Description}
                                 {$oldcourse/Evaluation}
+                                {$oldcourse/Quizz}
                                 <Sessions>
                                     {
                                     for $session in $oldcourse/Sessions
@@ -146,6 +148,7 @@ let $query := if ($oldId='nan' and not($test)) then
                                 {$newCourse/Acronym}
                                 {$newCourse/Description}
                                 {$oldcourse/Evaluation}
+                                {$oldcourse/Quizz}
                                 <Sessions>
                                     {
                                     for $session in $oldcourse/Sessions/Session
