@@ -53,6 +53,7 @@ declare variable $code := <code xmlns="http://oppidoc.com/oppidum/install">
       <files pattern="templates/evaluation.xhtml" type="text/xml" preserve="true"/>
       <files pattern="templates/grades.xhtml" type="text/xml" preserve="true"/>
       <files pattern="templates/session.xhtml" type="text/xml" preserve="true"/>
+      <files pattern="templates/quizz.xhtml" type="text/xml" preserve="true"/>
       <files pattern="oppidum:templates/filter.xsl" type="text/xml" preserve="true"/>
     </collection>
   </group>

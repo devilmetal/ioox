@@ -237,6 +237,18 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                     <model src="models/me/course.xql"/>
                     <view src="views/me/course.xsl"/>
                 </action>
+                <!-- Quizz pour le cours -->
+                <item epilogue="standard" supported="modifier" method="POST" template="templates/quizz">
+                    <model src="models/me/quizz.xql"/>
+                    <view src="views/me/quizz.xsl"/>
+                    <action epilogue="standard" name="POST">
+                        <model src="models/save_quizz.xql"/>
+                    </action>
+                    <action epilogue="standard" name="modifier">
+                        <model src="oppidum:actions/edit.xql"/>
+                        <view src="views/edit.xsl"/>
+                    </action>
+                </item>
                 <!-- Détail de chaque exercice (rendu et donnée) -->
                 <item epilogue="standard" method="POST">
                     <model src="models/me/exercice.xql"/>
@@ -327,6 +339,9 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
       <model src="oppidum:models/template.xql"/>
     </item>
     <item name="session" resource="session.xhtml">
+      <model src="oppidum:models/template.xql"/>
+    </item>
+    <item name="quizz" resource="quizz.xhtml">
       <model src="oppidum:models/template.xql"/>
     </item>
   </collection>
