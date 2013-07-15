@@ -206,7 +206,7 @@
                <div class="span6 bb">
                <div class="ourbox obc0">
                   <h4><xsl:apply-templates select="child::Topics"/></h4>
-                  <span><i class="splashy-calendar_week"></i> [<xsl:if test="Date!=''"> d:<xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if>
+                  <span><i class="splashy-calendar_week"></i> [<xsl:if test="(Date!='') and (Date!='YYYY-MM-DD')"> d:<xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if>
                      <xsl:if test="StartTime!=''"> | s: <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></xsl:if><xsl:if test="EndTime!=''"> - e: <xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></xsl:if>]</span><br/>
                   <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/{$sessionnumber}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to sesison</a>
                   <p/>
@@ -219,7 +219,7 @@
                <div class="span6 bb">
                <div class="ourbox obc2">
                   <h4><xsl:value-of select="Topics"/></h4>
-                  <span><i class="splashy-calendar_week"></i> [<xsl:if test="Date!=''"> d:<xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if>
+                  <span><i class="splashy-calendar_week"></i> [<xsl:if test="(Date!='') and (Date!='YYYY-MM-DD')"> d:<xsl:value-of select="format-date(Date, '[D1].[M1].[Y01]')"/></xsl:if>
                      <xsl:if test="StartTime!=''"> | s: <xsl:value-of select="format-time(StartTime,'[H1]:[m01]')"/></xsl:if><xsl:if test="EndTime!=''"> - e: <xsl:value-of select="format-time(EndTime,'[H1]:[m01]')"/></xsl:if>]</span><br/>
                   <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/{$sessionnumber}" class="btn btn-inverse btn-mini"><i class="splashy-arrow_medium_upper_right"></i> go to sesison</a>
                   <p/>

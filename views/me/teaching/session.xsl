@@ -249,7 +249,12 @@
       
       <xsl:if test="count(Data/node())!=0">
          <h5>Files for the Ex</h5>
-      <xsl:apply-templates select="Data/node()"/>
+         <ul>
+         <xsl:for-each select="Data/node()" >
+            <xsl:apply-templates select="."/>
+         </xsl:for-each>
+         </ul>
+      
       </xsl:if>
       
    </xsl:template>
@@ -309,8 +314,11 @@
    </xsl:template>
    
    <xsl:template match="ExternalDoc">
-      <li><xsl:value-of select="Title"/> linkto</li>
+      <xsl:variable name="edurl"><xsl:value-of select="URL"/></xsl:variable>
+      <li><a href="{concat(tokenize($xslt.base-url,'/')[1],$edurl)}" target="_blank"><xsl:value-of select="Title"/></a></li>
    </xsl:template>
+   
+
    
    <xsl:template match="Teachers" mode="teacher">
       <xsl:for-each select="Person">

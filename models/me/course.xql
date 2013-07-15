@@ -27,7 +27,7 @@ let $ref2 := string($ref)
 let $courseBase := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$ref2]
 
 (:On test si la personne n'est pas un prof ( dans ce cas, il ne peux pas se desinscrire comme ça... :)
-let $isteacher := exists($person//Engagment[CoursRef=$ref2][Role='Teacher'])
+let $isteacher := exists($person//Engagment[CoursRef=$ref2][Role='Teacher' or Role='Tutor'])
 (:On test si le cours est dans la période actuelle, ie, la current-date est contenu dans l'intérval donné de la période :)
 let $isAcourse := exists(doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$ref2])
 let $periodstartday := $courseBase/ancestor::Period/Start
@@ -244,7 +244,7 @@ let $means :=   <Means>
                     }
                 </Means>
 let $period := $courseBase/ancestor::Period
-let $error := if ($isgoodperiod) then () else ( <Error>You can not subscrib a course which is in not in the current period</Error>)
+let $error := if ($isgoodperiod or $isteacher) then () else ( <Error>You can not subscrib a course which is in not in the current period</Error>)
     return
         if ($isAcourse) then 
         (

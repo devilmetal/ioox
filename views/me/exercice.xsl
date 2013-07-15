@@ -234,10 +234,19 @@
                     </dl>
                 </div>
                 <div class="doc_view_content">
-                    <dt>Description</dt>
+                    <xsl:if test="exists(Exercise/Description)">
+                    <h4>Description</h4>
                     <xsl:apply-templates select="Exercise/Description"/>
-                    <dt>Data</dt>
-                    <xsl:apply-templates select="Exercise/Data"/>
+                    </xsl:if>
+                    
+                    <xsl:if test="exists(Exercise/Data)">
+                    <h4>Data</h4>
+                        <ul>
+                            <xsl:for-each select="Exercise/Data">
+                                <xsl:apply-templates select="ExternalDoc"/>
+                            </xsl:for-each>
+                        </ul>
+                    </xsl:if>
                     
                 </div>
                 <div class="doc_view_footer clearfix">
@@ -342,16 +351,10 @@
     </xsl:template>
     
     <xsl:template match="ExternalDoc">
-        External document : <br/>
-	<xsl:apply-templates select=".//Access"/><br/>
+        <xsl:variable name="edurl"><xsl:value-of select="URL"/></xsl:variable>
+        <li><a href="{concat(tokenize($xslt.base-url,'/')[1],$edurl)}" target="_blank"><xsl:value-of select="Title"/></a></li>
     </xsl:template>
 	 
-    <xsl:template match="Access">
-    	 <xsl:element name="a">
-            <xsl:attribute name="href"><xsl:value-of select="Location"/></xsl:attribute>
-            <xsl:value-of select="ancestor::ExternalDoc/Title"/>
-        </xsl:element><br/>
-    </xsl:template>
     
     <xsl:template match="Topics">
         

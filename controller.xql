@@ -238,6 +238,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                     <view src="views/me/course.xsl"/>
                 </action>
                 <!-- Quizz pour le cours -->
+                <collection name="quizz" epilogue="standard">
                 <item epilogue="standard" supported="modifier" method="POST" template="templates/quizz">
                     <model src="models/me/quizz.xql"/>
                     <view src="views/me/quizz.xsl"/>
@@ -249,6 +250,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                         <view src="views/edit.xsl"/>
                     </action>
                 </item>
+                </collection>
                 <!-- Détail de chaque exercice (rendu et donnée) -->
                 <item epilogue="standard" method="POST">
                     <model src="models/me/exercice.xql"/>

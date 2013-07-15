@@ -405,7 +405,7 @@
                 <div class="span9">
                     <dl class="dl-horizontal dl-modif">
                 <dt>Date-Time</dt>
-                        <dd><xsl:if test="Date=''">No time date available</xsl:if><xsl:if test="Date!=''">the <xsl:value-of select="format-date(./Date, '[D1].[M1].[Y01]')"/></xsl:if>
+                        <dd><xsl:if test="Date=''">No time date available</xsl:if><xsl:if test="Date!='' and Date!='YYYY-MM-DD'">the <xsl:value-of select="format-date(./Date, '[D1].[M1].[Y01]')"/></xsl:if>
                             <xsl:if test="StartTime!='' and EndTime!=''">
                         , start
                         <xsl:value-of select="format-time(./StartTime,'[H1]:[m01]')"/> - end
@@ -422,11 +422,12 @@
             <div class="span3">
                 <xsl:variable name="Notelocation"><xsl:value-of select="$xslt.base-url"/>me/mynotes/<xsl:value-of select="./ancestor::Course/CourseId"/>/<xsl:value-of select="SessionNumber"/></xsl:variable>
                 <a href="{$Notelocation}" class="btn btn-inverse m0010">Note</a><br/>
-                <xsl:apply-templates select="Exercise" mode="link"/>
+                <xsl:apply-templates select="Exercise" mode="link"/><br/>
+                <xsl:apply-templates select="Quizz" mode="link"/>
             </div>
             
             </div>
-            <xsl:apply-templates select="Topics"/>
+            
             
             <h4 class="heading">Description</h4>
             <xsl:if test="count(Description)=0">
@@ -445,13 +446,13 @@
     </xsl:template>
 
     <xsl:template match="Topic">
-        <dt><xsl:value-of select="."/></dt>
+        <dt><xsl:value-of select="Title"/></dt>
         <dd>
-        <xsl:apply-templates select="./Resources"/>
+        <xsl:apply-templates select="./Ressources"/>
         </dd><br/>
     </xsl:template>
     
-    <xsl:template match="Resources">
+    <xsl:template match="Ressources">
         <xsl:if test="count(Ressource/child::node()) &gt; 0">
             <ul class="list_a">
             <xsl:for-each select="child::Ressource">
@@ -644,12 +645,8 @@
     </xsl:template>
 
     <xsl:template match="ExternalDoc">
-        <xsl:element name="a">
-            <xsl:attribute name="href">
-                <xsl:value-of select="Access/Location"/>
-            </xsl:attribute>
-            <xsl:value-of select="Title"/>
-        </xsl:element>
+        <xsl:variable name="edurl"><xsl:value-of select="URL"/></xsl:variable>
+        <li><a href="{concat(tokenize($xslt.base-url,'/')[1],$edurl)}" target="_blank"><xsl:value-of select="Title"/></a></li>
     </xsl:template>
     
     <xsl:template match="Exercise" mode="link">
@@ -661,6 +658,20 @@
         </xsl:variable>
         
         <a href="{$xslt.base-url}me/courses/{$id1}/{$id2}" class="btn btn-inverse">Exercise</a>
+        
+    </xsl:template>
+    
+    <xsl:template match="Quizz" mode="link">
+        <xsl:if test=".!=''">
+        <xsl:variable name="id1">
+            <xsl:value-of select="ancestor::Course/CourseId"/>
+        </xsl:variable>
+        <xsl:variable name="id2">
+            <xsl:value-of select="ancestor::Session/SessionNumber"/>
+        </xsl:variable>
+        
+        <a href="{$xslt.base-url}me/courses/{$id1}/quizz/{$id2}" class="btn btn-inverse">Exercise</a>
+        </xsl:if>
         
     </xsl:template>
     
