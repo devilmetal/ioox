@@ -18,50 +18,45 @@
         <!-- Date -->
         <dl class="dl-horizontal dl-modif">
           
+          <!-- Date -->
+          <dt>Data</dt>
+          <dd>
+            <xt:use types="text" label="Date"
+              param="filter=date;date_region=fr;date_format=ISO_8601">YYYY-MM-DD</xt:use>
+          </dd>
           <!-- StartTime -->
           <dt>StartTime</dt>
           <dd>
-            <xt:repeat minOccurs="0" maxOccurs="1" label="StartTime">
-              <xt:use types="text">HH:MM:SS</xt:use>
-            </xt:repeat>
+            <xt:use types="text" label="StartTime" option='unset'>HH:MM:SS</xt:use>
           </dd>
           
           <!-- EndTime -->
           <dt>EndTime</dt>
           <dd>
-            <xt:repeat minOccurs="0" maxOccurs="1" label="EndTime">
-              <xt:use types="text">HH:MM:SS</xt:use>
-            </xt:repeat>
+            <xt:use types="text" label="EndTime" option='unset'>HH:MM:SS</xt:use>
           </dd>
           <!-- Room -->
           <dt>Room</dt>
-          <dd><xt:use label="Room" types="text" param='type=input;'/></dd>
+          <dd><xt:use label="Room" types="text" param='type=input;' option='unset'>Room number</xt:use></dd>
         </dl>
         
         <!-- Topics -->
         <h3 class="heading">Topics</h3>
         
-        <xt:repeat minOccurs="1" maxOccurs="1" label="Topics">
+        <xt:repeat minOccurs="0" maxOccurs="*" label="Topics">
+          <xt:use types="Topic" label="Topic"/>
           <xt:menu-marker/>
-          <xt:repeat minOccurs="0" maxOccurs="*" pseudoLabel="Topics">
-            <xt:use types="Topic" label="Topic"/>
-            <xt:menu-marker/>
-          </xt:repeat>
         </xt:repeat>
         
         <!-- Description -->
         <h3 class="heading">Description</h3>
         <blockquote>
           
-          <!--<xt:use types="Description" label="Description"></xt:use>-->
-          
-          <xt:repeat minOccurs="1" maxOccurs="1" label="Description">
-            <xt:menu-marker/>
-            <xt:repeat minOccurs="0" maxOccurs="*" pseudoLabel="DescriptionMask">
-              <xt:use types="Parag List" label="Parag List">Desc</xt:use>
-              <xt:menu-marker/>
-            </xt:repeat>
+          <xt:repeat minOccurs="0" maxOccurs="*" label="Description">
+            <xt:menu-marker></xt:menu-marker>
+            <xt:use types="Parag List" label="Parag List">Desc</xt:use>
           </xt:repeat>
+          
         </blockquote>
         
         
@@ -96,12 +91,7 @@
       
       <!-- Library component -->
       
-      <xt:component name="Description">
-        <xt:repeat minOccurs="0" maxOccurs="*" pseudoLabel="Descriptionmask">
-          <xt:menu-marker></xt:menu-marker>
-          <xt:use types="Parag List" label="Parag List">Desc</xt:use>
-        </xt:repeat>
-      </xt:component>
+      
       
       
       <xt:component name="Topic">
@@ -146,11 +136,11 @@
         <xt:use types="Link ExternalDoc" label="Link ExternalDoc"></xt:use>
       </xt:component>
       
-      <xt:component name="CommentedLink">
+<!--      <xt:component name="CommentedLink">
         <p><xt:use types="Link"></xt:use></p>
         <p>Comment:<br /><xt:use types="text" label="Comment" param="types=textarea;">Comment of the
           link</xt:use></p>
-      </xt:component>
+      </xt:component>-->
       
       <xt:component name="Link">
         <span><xt:use label="LinkText" types="text">LinkText</xt:use> ( <xt:use label="LinkRef"
@@ -162,7 +152,7 @@
       </xt:component>
       
       <xt:component name="Parag">
-        <p> (To edit please click on the dotted square)
+        <p>
           <xt:use types="text" param="types=textarea;filter=wiki;shape=parent"/>
         </p>
       </xt:component>
@@ -228,8 +218,8 @@
   </head>
   <body>
     <h3 class="heading">Session Edit</h3>
-    
+
     <xt:use label="Session" types="Session"></xt:use>
-    
+
   </body>
 </html>

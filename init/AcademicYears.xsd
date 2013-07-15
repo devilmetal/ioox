@@ -132,13 +132,11 @@
                                                   <xs:sequence maxOccurs="unbounded" minOccurs="0">
                                                   <xs:element name="Ressource">
                                                   <xs:complexType>
-                                                  <xs:sequence>
                                                   <xs:choice>
                                                   <xs:element name="Link" type="CommentedLinkType"/>
                                                   <xs:element name="ExternalDoc"
                                                   type="DocumentRefType"/>
                                                   </xs:choice>
-                                                  </xs:sequence>
                                                   </xs:complexType>
                                                   </xs:element>
                                                   </xs:sequence>

@@ -241,20 +241,27 @@
       
    </xsl:template>
    
-   <xsl:template match="Description">
-      <xsl:for-each select="node()"><xsl:apply-templates select="node()"/></xsl:for-each>
-   </xsl:template>
    
    <xsl:template match="Exercise">
       <h3 class="heading">Exercise</h3>
-      <h4>Description</h4>
-      <xsl:apply-templates select="Description"/>
+      <xsl:if test="Description!=''"><h5>Description</h5>
+      <xsl:apply-templates select="Description" mode="mini"/></xsl:if>
       
+      <xsl:if test="count(Data/node())!=0">
+         <h5>Files for the Ex</h5>
       <xsl:apply-templates select="Data/node()"/>
+      </xsl:if>
       
    </xsl:template>
    <xsl:template match="Description">
       <h3 class="heading">Description</h3>
+      <xsl:for-each select="./child::node()">
+         <xsl:apply-templates select="."/>
+      </xsl:for-each>
+      
+   </xsl:template>
+   
+   <xsl:template match="Description" mode="mini">
       <xsl:for-each select="./child::node()">
          <xsl:apply-templates select="."/>
       </xsl:for-each>
@@ -342,13 +349,9 @@
    </xsl:template>
    
    <xsl:template match="List">
-      <xsl:if test="count(./ListHeader)!=0">
-         <span class="ListHeader">
-            <xsl:value-of select="./ListHeader[name()!='ListHeader']"/>
-         </span>
-      </xsl:if>
+      <xsl:apply-templates select="ListHeader"/>
       <ul class="list_b">
-         <xsl:for-each select="./child::node()">
+         <xsl:for-each select="./child::node()[name()!='ListHeader']">
             <li>
                <xsl:apply-templates select="."/>
             </li>
@@ -356,14 +359,21 @@
       </ul>
    </xsl:template>
    
+   <xsl:template match="ListHeader">
+      <span class="ListHeader">
+         <xsl:value-of select="."/>
+      </span>
+   </xsl:template>
+   <xsl:template match="SubListHeader">
+      <span class="ListHeader">
+         <xsl:value-of select="."/>
+      </span>
+   </xsl:template>
+   
    <xsl:template match="SubList">
-      <xsl:if test="count(./SubListHeader)!=0">
-         <span class="ListHeader">
-            <xsl:value-of select="./SubListHeader[name()!='SubListHeader']"/>
-         </span>
-      </xsl:if>
+      <xsl:apply-templates select="SubListHeader"/>
       <ul class="list_c">
-         <xsl:for-each select="./child::node()">
+         <xsl:for-each select="./child::node()[name()!='SubListHeader']">
             <li>
                <xsl:apply-templates select="."/>
             </li>

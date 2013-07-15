@@ -1,14 +1,31 @@
 xquery version "1.0";
-(: --------------------------------------
+(: ------------------------------------------------------------------
+   Oppidum files upload module
 
-   -------------------------------------- :)
-import module namespace session="http://exist-db.org/xquery/session";
-import module namespace request="http://exist-db.org/xquery/request";
-import module namespace xdb = "http://exist-db.org/xquery/xmldb";
+   Author: Stéphane Sire <s.sire@opppidoc.fr>
+
+   Manages files upload.
+   
+   Accepts some parameters from mapping:
+   - group (TO BE DONE)
+   
+   Hard-coded parameters:
+   - collection to contain files is called 'docs'
+   - permissions on both is set to 0744 (rwuw--r--)
+   - permission on uploaded file (TO BE DONE)
+   
+   !!! Due to an eXist bug, it is not possible yet to pass parameter trough request's parameters. 
+   Request's attributes are used instead. FIXME: does it still applies to versions >= 1.41. ?
+
+   March 2012 - (c) Copyright 2012 Oppidoc SARL. All Rights Reserved.
+   ------------------------------------------------------------------ :)
+
+import module namespace request = "http://exist-db.org/xquery/request";
 import module namespace response = "http://exist-db.org/xquery/response";
-import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../../oppidum/lib/util.xqm";
+import module namespace xdb = "http://exist-db.org/xquery/xmldb";
 import module namespace text = "http://exist-db.org/xquery/text";
 import module namespace util = "http://exist-db.org/xquery/util";
+import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../oppidum/lib/util.xqm";
 
 declare option exist:serialize "method=text media-type=text/plain indent=no";
 
@@ -112,13 +129,12 @@ declare function local:validate-name( $name as xs:string ) as xs:string {
   if (string-length($name) = 0) then
     'Vous devez spécifier un nom pour enregistrer le document sur le serveur'
   else
-    
-    let $new := request:get-data()
-    let $sid := $new//Session//SessionNumber   
-    let $ref := request:get-attribute('oppidum.command')/@trail
-    let $courseid := tokenize($ref,'/')[3]
+            let $ref := request:get-attribute('oppidum.command')/@trail
+            let $courseid := tokenize($ref,'/')[3]
+            let $sid := tokenize($ref,'/')[5]
             
-    let $col-ref := concat('/courses/',$courseid,'/',$sid)
+            let $col-ref := concat('/courses/',$courseid,'/',$sid)
+            
     let $doc-uri := concat($col-ref, '/docs/', $name, '.pdf')
 (:    let $log  := oppidum:debug(('checking ', $doc-uri) ):)
     return
@@ -149,13 +165,9 @@ declare function local:upload( $user as xs:string, $group as xs:string, $id as x
           then local:gen-error($mime-check, 400)
           else 
             (: creates docs collection if it does not exist yet :)
-            (:Note : the collection here is recreated:)
-            
-            let $new := request:get-data()
-            let $sid := $new//Session//SessionNumber   
             let $ref := request:get-attribute('oppidum.command')/@trail
             let $courseid := tokenize($ref,'/')[3]
-            
+            let $sid := tokenize($ref,'/')[5]
             let $col-ref := concat('/courses/',$courseid,'/',$sid)
             let $col-uri := local:create-collection-lazy($col-ref, $user, $group)
             return
@@ -164,88 +176,16 @@ declare function local:upload( $user as xs:string, $group as xs:string, $id as x
                 else local:do-upload($col-uri, $user, $group, $id,  $data, $ext)
 };
 
-
-
-declare option exist:serialize "method=xml media-type=text/xml";
-
 (:::::::::::::  BODY  ::::::::::::::)
 
-let $collection := '/sites/ioox/data/'
-let $ref := request:get-attribute('oppidum.command')/@trail
-let $courseid := tokenize($ref,'/')[3]
-
-let $id := if (session:get-attribute('id')) then (
-                            session:get-attribute('id')
-                            )
-                        else(
-                            '-1'
-                            )
-let $cmd := request:get-attribute('oppidum.command')
-let $new := request:get-data()
-let $sid := $new//Session//SessionNumber
-let $old := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]//Session[SessionNumber=$sid]
-let $new2 := $new//Session
-let $tosave := <Session>
-                    {$new2/SessionNumber}
-                    {$new2/Topics}
-                    {$new2/Description}
-                    {$new2/Date}
-                    {$new2/StartTime}
-                    {$new2/EndTime}
-                    {$new2/Room}
-                    {
-                        let $test := exists($new2//Exercise)
-                        return
-                            if ($test) then
-                                (
-                                    <Exercise>
-                                        { if (exists($old/Exercise/ExerciceId)) then 
-                                        ($old/Exercise/ExerciceId)
-                                        else 
-                                        (<ExerciceId>{concat($courseid,'s',$sid)}</ExerciceId>)
-                                        }
-                                        {$new2/Exercise/Description}
-                                        <Data>
-                                            {$new2/Exercise/Data//Link}
-                                            {
-                                                for $ExtDoc in $new2/Exercise/Data//ExternalDoc
-                                                return
-                                                    let $preflight := 'cool'(:request:get-parameter('xt-file-preflight', ''):)
-                                                    let $submitted := if ($preflight) then $preflight else request:get-parameter('xt-file-id', '')
-                                                    let $verdict := local:validate-name(request:get-parameter('xt-file-id', ''))
-                                                    return
-                                                        if ($verdict != 'ok') then
-                                                            local:gen-error($verdict, 409)
-                                                        else
-                                                            if ($preflight) then (: just a preflight request no file to store yet :)
-                                                                local:gen-success($submitted, 'pdf')
-                                                            else
-                                                                local:upload(xdb:get-current-user(), 'site-member', request:get-parameter('xt-file-id', ''))
-                                            }
-                                        </Data>
-                                        {
-                                            let $test := exists($old/Exercise/Deliverables/Deliverable)
-                                            return
-                                            if ($test) then
-                                                (
-                                                    $old/Exercise/Deliverables
-                                                )
-                                                else
-                                                (
-                                                    <Deliverables/>
-                                                )
-                                        }
-                                    </Exercise>
-                                )
-                                else
-                                ((:Rien à faire:))
-                        
-                    }
-                </Session>
-                
-        return (
-        update replace $old with $tosave,
-        oppidum:add-message('ACTION-UPDATE-SUCCESS', '', true()),
-        response:set-status-code(201),
-        response:set-header('Location', concat($cmd/@base-url, $cmd/@trail, if ($cmd/@type='collection') then '/' else ''))
-        )
+let $preflight := request:get-parameter('xt-file-preflight', '')
+let $submitted := if ($preflight) then $preflight else request:get-parameter('xt-file-id', '')
+let $verdict := local:validate-name($submitted)
+return
+  if ($verdict != 'ok') then
+    local:gen-error($verdict, 409)
+  else
+    if ($preflight) then (: just a preflight request no file to store yet :)
+      local:gen-success($submitted, 'pdf')
+    else
+      local:upload(xdb:get-current-user(), 'site-admin', $submitted)
