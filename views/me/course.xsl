@@ -313,13 +313,13 @@
         <xsl:variable name="date">
             
             <xsl:choose>
-                <xsl:when test="empty(Date)"><xsl:value-of select="./Date"/></xsl:when>
+                <xsl:when test="Date!=''"><xsl:value-of select="./Date"/></xsl:when>
                 <xsl:otherwise>1970-01-01</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="precdate">
             <xsl:choose>
-                <xsl:when test="empty(preceding-sibling::Session/Date)"><xsl:value-of select="preceding-sibling::Session/Date"/></xsl:when>
+                <xsl:when test="preceding-sibling::Session/Date!=''"><xsl:value-of select="preceding-sibling::Session/Date"/></xsl:when>
                 <xsl:otherwise>1970-01-01</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
@@ -327,7 +327,9 @@
         <!--  &lt; instead of < and &gt; instead of >, b -->
         <xsl:variable name="current">
             <xsl:choose>
-                <xsl:when test="Session/Date=''"></xsl:when>
+                <xsl:when test="Session/Date=''">
+                    'no'
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
                         <xsl:when test="count(preceding-sibling::Session) = 0">
@@ -356,21 +358,22 @@
             <xsl:value-of select="./SessionNumber"/>
         </xsl:variable>
         <xsl:variable name="date">
-            
             <xsl:choose>
-                <xsl:when test="empty(Date)"><xsl:value-of select="./Date"/></xsl:when>
+                <xsl:when test="Date!=''"><xsl:value-of select="./Date"/></xsl:when>
                 <xsl:otherwise>1970-01-01</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="precdate">
             <xsl:choose>
-                <xsl:when test="empty(preceding-sibling::Session/Date)"><xsl:value-of select="preceding-sibling::Session/Date"/></xsl:when>
+                <xsl:when test="preceding-sibling::Session/Date!=''"><xsl:value-of select="preceding-sibling::Session/Date"/></xsl:when>
                 <xsl:otherwise>1970-01-01</xsl:otherwise>
             </xsl:choose>
         </xsl:variable>
         <xsl:variable name="current">
             <xsl:choose>
-                <xsl:when test="Session/Date=''"></xsl:when>
+                <xsl:when test="Session/Date=''">
+                    'no'
+                </xsl:when>
                 <xsl:otherwise>
                     <xsl:choose>
                         <xsl:when test="Session/Date=''">
@@ -402,7 +405,7 @@
                 <div class="span9">
                     <dl class="dl-horizontal dl-modif">
                 <dt>Date-Time</dt>
-                        <dd><xsl:if test="Date!=''">the <xsl:value-of select="format-date(./Date, '[D1].[M1].[Y01]')"/></xsl:if>
+                        <dd><xsl:if test="Date=''">No time date available</xsl:if><xsl:if test="Date!=''">the <xsl:value-of select="format-date(./Date, '[D1].[M1].[Y01]')"/></xsl:if>
                             <xsl:if test="StartTime!='' and EndTime!=''">
                         , start
                         <xsl:value-of select="format-time(./StartTime,'[H1]:[m01]')"/> - end
@@ -426,6 +429,9 @@
             <xsl:apply-templates select="Topics"/>
             
             <h4 class="heading">Description</h4>
+            <xsl:if test="count(Description)=0">
+                <p>No description available now.</p>
+            </xsl:if>
             <xsl:apply-templates select="Description"/>
         
         </div>

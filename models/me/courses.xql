@@ -20,7 +20,7 @@ let $collection := '/sites/ioox/data/'
                                     {$courses}
                                     {
                                     for $p in $period
-                                    order by $p/Date
+                                    order by $p/Start descending
                                     return 
                                     <Period>
                                         {$p/Name}
