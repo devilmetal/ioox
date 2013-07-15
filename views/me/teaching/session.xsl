@@ -236,6 +236,8 @@
       <xsl:apply-templates select="Exercise"/>
       
       <hr/>
+      <xsl:variable name="url"><xsl:value-of select="$xslt.base-url"/><xsl:text>me/courses/</xsl:text><xsl:value-of select="$courseid"/><xsl:text>/quizz/</xsl:text><xsl:value-of select="$sessionnumber"/><xsl:text>/modifier</xsl:text></xsl:variable>
+      <a href="{$url}" class="btn btn-inverse faq_right">Edit Quizz</a>
       <hr/>
       
       
