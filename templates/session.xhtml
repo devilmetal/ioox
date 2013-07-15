@@ -148,7 +148,7 @@
       </xt:component>
       
       <xt:component name="ExternalDoc">
-        <xt:use types="file" label="LinkRef" param="file_URL=docs;file_gen_name=manual"/>
+        <xt:use types="t_attachements" label="LinkRef" />
       </xt:component>
       
       <xt:component name="Parag">
@@ -213,6 +213,25 @@
       
       <xt:component name="Deadline"> (deadline <xt:use types="text" label="Date"
         param="filter=date;date_region=fr;date_format=ISO_8601">YYYY-MM-DD</xt:use>) </xt:component>
+      
+      <!-- Component upload -->
+      <xt:component name="t_pdflinkref">
+        <xt:use types="file" label="LinkRef" param="file_URL=docs;file_gen_name=manual"/>
+      </xt:component>
+      <xt:component name="t_pdflink">
+        <xt:use types="text" label="LinkText">présentation PDF</xt:use>
+        <span class="axel-hide-if-unselect">
+          <xt:use types="t_pdflinkref"/>
+        </span>
+      </xt:component>
+      <xt:component name="t_attachements">
+        (
+        <xt:repeat minOccurs="0" maxOccurs="1" label="Attachments">
+          <xt:menu-marker/>
+          <xt:use types="t_pdflink" label="PDFLink"/>
+        </xt:repeat>
+        )
+      </xt:component>
       
     </xt:head>
   </head>
