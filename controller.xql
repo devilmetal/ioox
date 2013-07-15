@@ -115,13 +115,6 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                 <action name="POST" epilogue="standard" >
                     <model src="models/admin/save_course.xql"/>
                 </action>
-                <item name="docs" method="POST">
-                <model src="models/admin/course.xql"/>
-                <view src="views/admin/course.xsl"/>
-                    <action name="POST">
-                        <model src="models/upload.xql"/>
-                    </action>
-                </item>
             </item>
         </collection>
         <!-- Cette page permet de lier un cours à un professeur -->
@@ -279,6 +272,13 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                         <action name="POST">
                             <model src="models/me/teaching/save_session.xql"/>
                         </action>
+                        
+                        <item name="docs" method="POST">
+
+                    <action name="POST">
+                        <model src="models/upload.xql"/>
+                    </action>
+                </item>
                     </item>
                     
                     <!-- teacher evaluation manager -->

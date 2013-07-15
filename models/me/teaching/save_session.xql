@@ -187,7 +187,28 @@ let $old := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$cour
 let $new2 := $new//Session
 let $tosave := <Session>
                     {$new2/SessionNumber}
-                    {$new2/Topics}
+                    <Topics>
+                    {
+                        for $topic in $new2/Topics/Topic
+                        return
+                        <Topic>
+                            {$topic/Title}
+                            <Ressources>
+                            {$topic/Ressources/Ressource[Link]}
+                            {
+                            for $ressource in $topic/Ressources/Ressource[ExternalDoc]
+                            return
+                            <Ressource> 
+                                <ExternalDoc>
+                                    <Title>{string($ressource/ExternalDoc/LinkRef/Attachments/PDFLink/LinkRef/@data-input)}</Title>
+                                    <URL>{concat('/exist/rest//db/courses/',$courseid,'/',$sid,'/',$ressource/ExternalDoc/LinkRef/Attachments/PDFLink/LinkRef)}</URL>                 
+                                </ExternalDoc>
+                            </Ressource>
+                            }
+                            </Ressources>
+                        </Topic>
+                    }
+                    </Topics>
                     {$new2/Description}
                     {$new2/Date}
                     {$new2/StartTime}
@@ -209,18 +230,11 @@ let $tosave := <Session>
                                             {$new2/Exercise/Data//Link}
                                             {
                                                 for $ExtDoc in $new2/Exercise/Data//ExternalDoc
-                                                return
-                                                    let $preflight := 'cool'(:request:get-parameter('xt-file-preflight', ''):)
-                                                    let $submitted := if ($preflight) then $preflight else request:get-parameter('xt-file-id', '')
-                                                    let $verdict := local:validate-name(request:get-parameter('xt-file-id', ''))
                                                     return
-                                                        if ($verdict != 'ok') then
-                                                            local:gen-error($verdict, 409)
-                                                        else
-                                                            if ($preflight) then (: just a preflight request no file to store yet :)
-                                                                local:gen-success($submitted, 'pdf')
-                                                            else
-                                                                local:upload(xdb:get-current-user(), 'site-member', request:get-parameter('xt-file-id', ''))
+                                                    <ExternalDoc>
+                                                        <Title>{string($ExtDoc/LinkRef/Attachments/PDFLink/LinkRef/@data-input)}</Title>
+                                                        <URL>{concat('/exist/rest//db/courses/',$courseid,'/',$sid,'/',$ExtDoc/LinkRef/Attachments/PDFLink/LinkRef)}</URL>
+                                                    </ExternalDoc>
                                             }
                                         </Data>
                                         {
