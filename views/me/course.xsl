@@ -223,9 +223,14 @@
                             <!-- end test session -->
                         </div>
                         <div class="tab-pane" id="tab_br2">
+                            
                             <dl class="dl-horizontal">
                                 <xsl:apply-templates select="Evaluation"/>
                             </dl>
+                            <xsl:if test="Quizz!=''">
+                            <h3 class="heading">Quizz for self-evaluation</h3>
+                            <p><xsl:apply-templates select="Quizz" mode="link"/></p>
+                            </xsl:if>
                             <h3 class="heading">Grades</h3>
                             <div id="chart_div"/>
                         </div>
@@ -422,8 +427,8 @@
             <div class="span3">
                 <xsl:variable name="Notelocation"><xsl:value-of select="$xslt.base-url"/>me/mynotes/<xsl:value-of select="./ancestor::Course/CourseId"/>/<xsl:value-of select="SessionNumber"/></xsl:variable>
                 <a href="{$Notelocation}" class="btn btn-inverse m0010">Note</a><br/>
-                <xsl:apply-templates select="Exercise" mode="link"/><br/>
-                <xsl:apply-templates select="Quizz" mode="link"/>
+                <xsl:apply-templates select="Exercise" mode="link"/>
+                
             </div>
             
             </div>
@@ -666,11 +671,8 @@
         <xsl:variable name="id1">
             <xsl:value-of select="ancestor::Course/CourseId"/>
         </xsl:variable>
-        <xsl:variable name="id2">
-            <xsl:value-of select="ancestor::Session/SessionNumber"/>
-        </xsl:variable>
         
-        <a href="{$xslt.base-url}me/courses/{$id1}/quizz/{$id2}" class="btn btn-inverse">Exercise</a>
+        <a href="{$xslt.base-url}me/courses/{$id1}/quizz" class="btn btn-inverse">Go to quizz</a>
         </xsl:if>
         
     </xsl:template>
