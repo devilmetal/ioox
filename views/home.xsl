@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Home View
-        @author:   LC&GL
-        @date:     27.02.2013
+<!-- 
+        @project:  KLAXON
+        @date:     16.07.2013
         @version:  1.0
-        @desc:     home page
+        @desc:     XSLT de la home page. Génère la vue.
                     -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
    xmlns:date="http://exslt.org/dates-and-times" xmlns:xt="http://ns.inria.org/xtiger"

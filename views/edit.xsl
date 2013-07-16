@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Oppidum Framework
-  
-    Author: Stéphane Sire <s.sire@free.fr>
-    
-    Returns a <site:view> for loading the AXEL editor.
-    Template and Resource URI must be given with absolute path (no URL rewriting).
-    
-    OCtober 2011
+<!-- 
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     Page d'édition AXEL générique.
  -->
 
 <xsl:stylesheet version="2.0"
@@ -138,8 +135,6 @@
       </xsl:if>
       <p>Loading...</p>
     </div>
-    <button data-command="validate" data-target="template-container" data-validation-output="errors"
-      data-validation-label="span.label">Validate</button>
   </xsl:template>
   
   <xsl:template match="Edit[error]">
