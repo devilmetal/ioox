@@ -1,5 +1,10 @@
 xquery version "1.0";
-
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL le page page courses admin, cette page permet de chercher dans les cours pour la création/mofification/clonage/suppression d'un cours.
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace session="http://exist-db.org/xquery/session";
 declare namespace xdb = "http://exist-db.org/xquery/xmldb";
@@ -36,7 +41,7 @@ let $core := if ($method='POST' and $role='dba') then
         (: on recherche les utilisateurs :)
         let $courses := doc(concat($collection, "AcademicYears.xml"))//Course[contains(local:scale(./ancestor::Period/Name),$period)][contains(local:scale(CourseNo),$courseno)][contains(local:scale(Title),$title)][contains(local:scale(Acronym),$acronym)]
         (:on les retournes:)
-        (: si la recherche est vide on retourne <Search/> avec une <Error/> sinon la liste des utilisateurs :)
+        (: si la recherche est vide on retourne <Search/> avec une <Error/> sinon la liste des cours :)
         let $test := if ($courses!='') then 
                         (
                             <Back>
@@ -78,7 +83,7 @@ let $core := if ($method='POST' and $role='dba') then
                     ) 
                     else 
                     (
-                    <Message>The course was not in the Database. But it is ok.</Message>
+                    <Message>The course was not in the eXist Database. But it is ok.</Message>
                     )
         (: suppression de la collection dans la base de donnée si elle existe:)
         let $courseCollection := concat('/courses/',$courseid)

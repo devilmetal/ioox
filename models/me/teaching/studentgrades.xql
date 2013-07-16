@@ -1,5 +1,11 @@
 xquery version "1.0";
-
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL pour la modification des notes pour un étudiant, on retourne les notes qui sont déjà rentrées.
+                        Retour des erreurs s'il y a lieu.
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 declare namespace xdb = "http://exist-db.org/xquery/xmldb";
 import module namespace session="http://exist-db.org/xquery/session";

@@ -1,5 +1,10 @@
 xquery version "1.0";
-
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL de la page qui permet la création d'un utilisateur.
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace session="http://exist-db.org/xquery/session";
 declare namespace xdb = "http://exist-db.org/xquery/xmldb";

@@ -12,6 +12,9 @@ import module namespace session="http://exist-db.org/xquery/session";
 
 declare option exist:serialize "method=xml media-type=text/xml";
 
+(:Récupération du flux RSS de la page de l'université. 
+ATTENTION : pour le moment il n'existe pas de moyen de vérifier si l'ordinateur est connecté à Internet avec XQuery !
+:)
 let $doc := if(doc-available('http://www.unifr.ch/webnews/rss2/fr/unifr/')) then (doc('http://www.unifr.ch/webnews/rss2/fr/unifr/')) else (<Empty/>)   
 
     return 

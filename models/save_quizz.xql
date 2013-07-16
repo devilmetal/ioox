@@ -1,6 +1,9 @@
 xquery version "1.0";
 (: --------------------------------------
-
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL pour la sauvegarde d'un quizz modifié
    -------------------------------------- :)
 import module namespace session="http://exist-db.org/xquery/session";
 import module namespace request="http://exist-db.org/xquery/request";
@@ -18,6 +21,7 @@ let $id := if (session:get-attribute('id')) then (
                         else(
                             '-1'
                             )
+(:on prend les infos du cours et on test si la personne connectées est un prof pour ce cours.:)
 let $ref := request:get-attribute('oppidum.command')/@trail
 let $courseid := tokenize($ref,'/')[3]
 let $studentId := tokenize($ref,'/')[6]
@@ -29,6 +33,7 @@ let $old := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$cour
 
 let $tosave :=  $new//Quizz
 
+(:on sauvegarde le quizz modifié si la personne est un prof du cours.:)
 let $query := if($isTeacher) then 
                     (
                      let $query := update replace $old with $tosave

@@ -1,4 +1,10 @@
 xquery version "1.0";
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL de la page eventsjs. On retourne les informations voulues dans la période de temps donnée. Cette periode est passée via des Unix Timestamp par des paramètres en GET.
+:)
 import module namespace session="http://exist-db.org/xquery/session";
 import module namespace functx = "http://www.functx.com" at "../../resources/library/functx.xq";
 declare namespace me="http://me.com/me";
@@ -14,7 +20,7 @@ declare function me:convert-UTS($v) as xs:dateTime
   functx:dateTime('1970','01','01','00','00','00')
   (:les + 10'000 représente un léger scaling:)
   + functx:dayTimeDuration(xs:decimal(0),xs:decimal(0),xs:decimal(0),xs:decimal(number($v)+10000))
-  (:Here we add 10 days to be sur we are in the middle of the month to retrive the month no.:)
+  (:Here we add a few minutes to be sur we are in the middle of the month to retrive the month no.:)
 };
 
 let $collection := '/sites/ioox/data/'
@@ -27,6 +33,7 @@ let $start :=  if ($method = 'GET') then (
 
 let $readblestart := string(me:convert-UTS($start))
 
+(:formattage de quelques dates :)
 let $dateDstart := substring-before($readblestart,'T')
 let $datestart := concat(substring-before($readblestart,'T'),'+00:00')
 let $dateaddMonth := functx:add-months($dateDstart,2)

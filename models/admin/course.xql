@@ -1,11 +1,17 @@
 xquery version "1.0";
-
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL le page page course, cette page permet de créer un cours.
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace session="http://exist-db.org/xquery/session";
 declare namespace xdb = "http://exist-db.org/xquery/xmldb";
 
 declare option exist:serialize "method=xml media-type=text/xml";
 
+(:permet de supprimer les cractère fâcheux comme les espaces et mettre en lowcase:)
 declare function local:scale($string) as xs:string
 {
     let $trim := replace(replace($string,'\s+$',''),'^\s+','')
@@ -13,6 +19,9 @@ declare function local:scale($string) as xs:string
   return 
     $lowcase
 };  
+
+(:Crée un ID aussi unique que possible pour un cours grace à la date:)
+
 declare function local:createID() as xs:string
 {
     let $date := current-dateTime()
@@ -27,8 +36,6 @@ declare function local:createID() as xs:string
     $id
 };  
 
-(:CECI EST UNE VARIABLE DE CREATION POUR LE NOMBRE DE SESSION A CREER DE BASE :)
-let $MAXNUMBERSESSIONS := 14
 
 let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
@@ -91,7 +98,6 @@ let $core := if ($courseid='new') then
 
 (:on prend tous les noms de periodes:)
 (: Note : on passe le OLD ID pour sauvgarder au mieux après.:)
-(: Note : les periodes sont pour la modification :)
     return
     <Root>
         <Role>{$role}</Role>

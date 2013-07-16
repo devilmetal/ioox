@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- 
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XSLT de la page caljs. Cette page génère du javascript via Oppidum. Cela permet d'avoir à ne pas hard-coder certains liens pour la gestion du Calendar dans le Myhome.
+-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:date="http://exslt.org/dates-and-times" xmlns:xt="http://ns.inria.org/xtiger"
     xmlns="http://www.w3.org/1999/xhtml" xmlns:site="http://oppidoc.com/oppidum/site"
@@ -72,6 +78,7 @@
     	},
     	editable: true,
     	theme: false,
+    	<!-- Lien vers la page eventsjs pour la gestion du calendar, c'est la partie que l'on ne voulais pas hard-coder. -->
     	events: '<xsl:value-of select="$xslt.base-url"/>eventsjs',
     	eventColor: '#bcdeee'
     	})

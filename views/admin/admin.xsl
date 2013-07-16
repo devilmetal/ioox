@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Home View
-        @author:   LC&GL
-        @date:     27.02.2013
+<!-- 
+        @project:  KLAXON
+        @date:     16.07.2013
         @version:  1.0
-        @desc:     home page
+        @desc:     XSLT de la page admin. Permet d'afficher quelques boutons pour la navigation.
                     -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:date="http://exslt.org/dates-and-times" xmlns:xt="http://ns.inria.org/xtiger"
@@ -83,11 +83,6 @@
             <site:menu> </site:menu>
             <!-- SITE CONTENT -->
             <site:navbar />
-            
-            
-            
-            
-            
             <site:content>
                 <xsl:choose>
                     <xsl:when test="/Root/Role != 'dba'">
@@ -98,6 +93,7 @@
                         <div class="span12">
                             <h3 class="heading">Admin Panel</h3>
                         
+                            <!-- Boutons de navigation. -->
                             <a href="{$xslt.base-url}admin/usercreation" class="btn btn-inverse m0010">Create an User</a><br/>
                             <a href="{$xslt.base-url}admin/userdelete" class="btn btn-inverse m0010">Delete an User</a><br/>
                             <a href="{$xslt.base-url}admin/courses" class="btn btn-inverse m0010">Courses panel</a><br/>

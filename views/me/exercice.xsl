@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Home View
-        @author:   LC&GL
-        @date:     27.02.2013
+<!--
+        @project:  KLAXON
+        @date:     16.07.2013
         @version:  1.0
-        @desc:     home page
+        @desc:     XSLT pour la gestion d'un exercice
                     -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:date="http://exslt.org/dates-and-times" xmlns:xt="http://ns.inria.org/xtiger"
@@ -83,76 +83,6 @@
             <site:menu> </site:menu>
             <!-- SITE CONTENT -->
             <site:navbar>
-                
-                <div class="main_content">
-                    <div class="navbar">
-                        <xsl:if test="//Session/Role != '-1'">
-                            <div class="navbar-inner">
-                                <div class="container-fluid">
-                                    <!--<a class="brand2" href="#"> Me</a>-->
-                                    <ul class="nav" id="mobile-nav-2">
-                                        <li>
-                                            <a href="#"><img src="{$xslt-ressource-url}/img/gCons-mini-white/home.png" alt=""/>
-                                                MyHome </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/bookmark.png"
-                                                alt=""/> Courses </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/addressbook.png"
-                                                alt=""/> MyNote </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/pie-chart.png"
-                                                alt=""/> Grades </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/calendar.png"
-                                                alt=""/> Todos </a>
-                                        </li>
-                                        <li> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </xsl:if>
-                        <xsl:if test="//Session/Role != 'Student' and //Session/Role != '-1' ">
-                            <div class="navbar-inner">
-                                <div class="container-fluid">
-                                    <a class="brand2" href="#"> Teacher</a>
-                                    <ul class="nav">
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/configuration.png"
-                                                alt=""/> My Teaching </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/multi-agents.png"
-                                                alt=""/> My Class </a>
-                                        </li>
-                                        <li class="divider-vertical hidden-phone hidden-tablet"/>
-                                        <li>
-                                            <a href="#"><img
-                                                src="{$xslt-ressource-url}/img/gCons-mini-white/bar-chart.png"
-                                                alt=""/> Manage Grades </a>
-                                        </li>
-                                        <li> </li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </xsl:if>
-                    </div>
-                </div>
             </site:navbar>
             <site:content>
                 <xsl:choose>
@@ -314,8 +244,6 @@
     
     <xsl:template match="Fragment">
         <xsl:value-of select="."/>
-        <!--<br/>
-         THIS IS TRUE??? -->
     </xsl:template>
     
     <xsl:template match="Link">
@@ -331,7 +259,7 @@
     
     <xsl:template match="ListItem">
         <ol>
-            <xsl:for-each select="./child::node()">
+            <xsl:for-each select="./child::node()[name()!='ListHeader']">
                 <li><xsl:apply-templates select="."/></li>
             </xsl:for-each>
         </ol>
@@ -345,7 +273,7 @@
         </xsl:if>
         <ol>
             <xsl:for-each select="./SubListItem">
-                <li><xsl:apply-templates select="./child::node()"/></li>
+                <li><xsl:apply-templates select="./child::node()[name()!='SubListHeader']"/></li>
             </xsl:for-each>
         </ol>
     </xsl:template>

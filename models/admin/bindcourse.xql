@@ -1,11 +1,17 @@
 xquery version "1.0";
-
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL de la page bindcourse qui permet de lier un prof à un cours
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace session="http://exist-db.org/xquery/session";
 declare namespace xdb = "http://exist-db.org/xquery/xmldb";
 
 declare option exist:serialize "method=xml media-type=text/xml";
 
+(:permet de supprimer les cractère fâcheux comme les espaces et mettre en lowcase:)
 declare function local:scale($string) as xs:string
 {
     let $trim := replace(replace($string,'\s+$',''),'^\s+','')
@@ -13,6 +19,9 @@ declare function local:scale($string) as xs:string
   return 
     $lowcase
 };  
+
+(:Crée un ID aussi unique que possible pour un cours grace à la date:)
+
 declare function local:createID() as xs:string
 {
     let $date := current-dateTime()
@@ -84,6 +93,7 @@ let $core := if ($method='POST' and $role='dba') then
                             )
                             else
                             (
+                            (:On insère le bind:)
                             let $person := doc(concat($collection, "Persons.xml"))//Person[PersonId=$personid]
                             let $query := update insert <Engagment>
                                                             <EngagementId>{local:createID()}</EngagementId>

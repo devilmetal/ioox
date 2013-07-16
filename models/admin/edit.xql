@@ -1,25 +1,16 @@
 xquery version "1.0";
 (: --------------------------------------
-  Oppidum framework
-
-  Author: Stéphane Sire <s.sire@free.fr>
-
-  Generates a model to edit a resource from an XTiger Template. 
-  Raises a 'ACTION-EDIT-NO-TEMPLATE' if the command does not carry 
-  a template declaration .
-
-  See also bootstrap.xql, edit.xsl and edit.js (companion Javascript library)
-  
-  Pre-condition: the reference resource must exists otherwise AXEL will fail 
-  to load the XML data  
-
-  August 2011
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     Version modifiée de l'edit.xql qui permet d'utiliser les paramètres passés en GET pour le clone d'un cours.
   -------------------------------------- :)
 
 import module namespace xdb = "http://exist-db.org/xquery/xmldb";  
 import module namespace oppidum = "http://oppidoc.com/oppidum/util" at "../../../oppidum/lib/util.xqm";   
                                               
 let $cmd := request:get-attribute('oppidum.command')
+(:Paramètre passé via GET:)
 let $param := string(request:get-parameter('id', ''))
 return
   <Edit>

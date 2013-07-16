@@ -1,4 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XSLT de la page eventsjs elle génère le JSON pour remplire le calendrier.
+-->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:date="http://exslt.org/dates-and-times" xmlns:xt="http://ns.inria.org/xtiger"
     xmlns="http://www.w3.org/1999/xhtml" xmlns:site="http://oppidoc.com/oppidum/site"
@@ -18,7 +24,6 @@
                 <xsl:apply-templates select="//SessionEnc"></xsl:apply-templates>
                 <!-- Ajout d'un element de la todolist -->
                 <xsl:apply-templates select="//Task"/>
-                
                 <!-- Ajout des vacances -->
                 <xsl:apply-templates select="//Holiday"/>
             </xsl:when>
@@ -26,7 +31,7 @@
                 {Sorry, no rights},
             </xsl:otherwise>
         </xsl:choose>
-        
+        <!-- Dernier element du tableau Json, permet d'eviter de longs traitement inutiles quand à la position des elements dans le tableau -->
          {}]
     </xsl:template>   
     
@@ -34,7 +39,6 @@
     
     <!-- MISE EN PAGE DES EVENTS D'UN JOUR AFFICHAGE DANS LE CALENDRIER-->
     <xsl:template match="SessionEnc">
-        
         <xsl:variable name="CourseId"><xsl:value-of select="CourseId"/></xsl:variable>
         
             {
@@ -83,13 +87,11 @@
         },
     </xsl:template>
     
+    <!-- Affiche les titres des topics -->
     <xsl:template match="Topics">
-        
         <xsl:apply-templates select="Topic[position()!=last()]" mode="notlast"/>
         <xsl:apply-templates select="Topic[position()=last()]" mode="last"/>
-        
     </xsl:template>
-    
     <xsl:template match="Topic" mode="notlast">
         <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
         <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>

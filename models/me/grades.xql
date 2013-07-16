@@ -1,5 +1,12 @@
 xquery version "1.0";
-
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL pour l'affichage des notes des cours. Il va calculer les moyennes avec les pondérations s'il y a lieu de calculer 
+                        (ie si le cours fait l'évaluation des modules exam/exercices/project)
+ 
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace session="http://exist-db.org/xquery/session";
 
@@ -28,6 +35,7 @@ let $collection := '/sites/ioox/data/'
                                             <Name>{$period/Name/text()}</Name>
                                             <Courses>
                                                 {
+                                                (:ittération sur les cours que contiennent la période:)
                                                 let $courses := $period/Courses/Course[CourseId=$engagment//CoursRef]
                                                 return 
                                                   for $course in $courses

@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Home View
-        @author:   LC&GL
-        @sdate:    27.02.2013
-        @version:  2.0 (01.07.2013)
-        @desc:     Me> cours page
+<!-- 
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XSLT l'affichage du profile. Montre le formulaire et les erreurs/messages s'il y a lieu lors de la sauvegarde.
                     -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:date="http://exslt.org/dates-and-times" xmlns:xt="http://ns.inria.org/xtiger"
@@ -11,11 +11,11 @@
     extension-element-prefixes="date" version="2.0">
     <xsl:output method="xml" media-type="text/xhtml" omit-xml-declaration="yes" indent="no"/>
     <xsl:variable name="xslt-ressource-url"><xsl:value-of select="$xslt.base-url"
-    />static/ioox</xsl:variable>
+        />static/ioox</xsl:variable>
     <xsl:param name="xslt.rights"/>
     <xsl:param name="xslt.base-url">/</xsl:param>
     <xsl:template match="/">
-        
+
         <site:view>
             <site:change>
                 <div class="style_switcher">
@@ -96,7 +96,7 @@
             <!-- MENU DEFINITION -->
             <site:menu> </site:menu>
             <!-- SITE CONTENT -->
-            <site:navbar/>            
+            <site:navbar/>
             <site:content>
                 <xsl:apply-templates select="/Root/Person"/>
             </site:content>
@@ -147,7 +147,7 @@
             </site:javascript>
         </site:view>
     </xsl:template>
-    
+
     <xsl:template match="Person">
         <h3 class="heading">User Profile</h3>
         <div class="row-fluid">
@@ -157,7 +157,9 @@
                         <div class="control-group formSep">
                             <label class="control-label">Username</label>
                             <div class="controls text_line">
-                                <strong><xsl:value-of select="Username"/></strong>
+                                <strong>
+                                    <xsl:value-of select="Username"/>
+                                </strong>
                             </div>
                         </div>
                         <div class="control-group formSep">
@@ -165,47 +167,56 @@
                             <div class="controls">
                                 <div data-provides="fileupload" class="fileupload fileupload-new">
                                     <div class="profile-photo clearfix">
-                                        <xsl:variable name="avatar"><xsl:value-of select="//GravatarHash/response/entry/thumbnailUrl"/>s=80</xsl:variable>
-             
-                                        <img src="{$avatar}" />
-                                        <p><strong><a href="https://gravatar.com">Change your avatar at Gravatar.com</a></strong>.</p>
+                                        <!-- Affichage du Gravatar -->
+                                        <xsl:variable name="avatar"><xsl:value-of
+                                                select="//GravatarHash/response/entry/thumbnailUrl"
+                                            />s=80</xsl:variable>
+
+                                        <img src="{$avatar}"/>
+                                        <p><strong><a href="https://gravatar.com">Change your avatar
+                                                  at Gravatar.com</a></strong>.</p>
                                     </div>
                                 </div>
-                                </div>
+                            </div>
                             <label for="gravemail" class="control-label">Gravatar Email</label>
                             <div class="controls">
                                 <xsl:variable name="firstname" select="GravatarEmail"/>
-                                <input type="text" name="gravemail" id="gravemail" class="input-xlarge" value="{$firstname}" />
+                                <input type="text" name="gravemail" id="gravemail"
+                                    class="input-xlarge" value="{$firstname}"/>
                             </div>
-                            </div>
+                        </div>
                         <div class="control-group formSep">
                             <label for="f_fname" class="control-label">First Name</label>
                             <div class="controls">
                                 <xsl:variable name="firstname" select="Firstname"/>
-                                <input type="text" name="f_name" id="f_fname" class="input-xlarge" value="{$firstname}" />
+                                <input type="text" name="f_name" id="f_fname" class="input-xlarge"
+                                    value="{$firstname}"/>
                             </div>
                         </div>
                         <div class="control-group formSep">
                             <label for="l_fname" class="control-label">Last Name</label>
                             <div class="controls">
                                 <xsl:variable name="lastname" select="Lastname"/>
-                                <input type="text" name ="l_name" id="l_fname" class="input-xlarge" value="{$lastname}" />
+                                <input type="text" name="l_name" id="l_fname" class="input-xlarge"
+                                    value="{$lastname}"/>
                             </div>
                         </div>
                         <div class="control-group formSep">
                             <label for="u_password" class="control-label">Password</label>
                             <div class="controls">
                                 <div class="sepH_b">
-                                    <input type="password" name="pass1" id="u_password" class="input-xlarge" value="my_password" />
+                                    <input type="password" name="pass1" id="u_password"
+                                        class="input-xlarge" value="my_password"/>
                                     <span class="help-block">Enter your password</span>
                                 </div>
-                                <input type="password" name="pass2" id="s_password_re" class="input-xlarge" />
+                                <input type="password" name="pass2" id="s_password_re"
+                                    class="input-xlarge"/>
                                 <span class="help-block">Repeat password</span>
                                 <xsl:apply-templates select="/Root/error"/>
                             </div>
-                                
+
                         </div>
-                        
+
                         <div class="control-group">
                             <div class="controls">
                                 <button class="btn btn-gebo" type="submit">Save changes</button>
@@ -216,15 +227,14 @@
                 </form>
             </div>
         </div>
-        
+
     </xsl:template>
     <xsl:template match="error">
         <div class="alert alert-error">
             <a class="close" data-dismiss="alert">×</a>
-            <strong>Error</strong> You must enter twice the same password
-        </div>
-        
-        
+            <strong>Error</strong> You must enter twice the same password </div>
+
+
     </xsl:template>
 
 </xsl:stylesheet>

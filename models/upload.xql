@@ -1,9 +1,15 @@
 xquery version "1.0";
 (: ------------------------------------------------------------------
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL pour l'upload de documents, version modifiée adaptée au projet KLAXON. Voici la description de base du code :
+   
+   
    Oppidum files upload module
 
    Author: Stéphane Sire <s.sire@opppidoc.fr>
-
+    
    Manages files upload.
    
    Accepts some parameters from mapping:
@@ -129,10 +135,10 @@ declare function local:validate-name( $name as xs:string ) as xs:string {
   if (string-length($name) = 0) then
     'Vous devez spécifier un nom pour enregistrer le document sur le serveur'
   else
+            (:Modification pour le projet KLAXON, on sauvegarde dans /course/$courseId/$sessionNumber/docs:)
             let $ref := request:get-attribute('oppidum.command')/@trail
             let $courseid := tokenize($ref,'/')[3]
             let $sid := tokenize($ref,'/')[5]
-            
             let $col-ref := concat('/courses/',$courseid,'/',$sid)
             
     let $doc-uri := concat($col-ref, '/docs/', $name, '.pdf')
@@ -165,6 +171,7 @@ declare function local:upload( $user as xs:string, $group as xs:string, $id as x
           then local:gen-error($mime-check, 400)
           else 
             (: creates docs collection if it does not exist yet :)
+            (:Modification pour le projet KLAXON, on sauvegarde dans /course/$courseId/$sessionNumber/docs:)
             let $ref := request:get-attribute('oppidum.command')/@trail
             let $courseid := tokenize($ref,'/')[3]
             let $sid := tokenize($ref,'/')[5]

@@ -1,5 +1,10 @@
 xquery version "1.0";
-
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL l'affichage du profil. Permet aussi de sauvegrader ce qui doit l'être en cas de POST. Il calcule aussi le hash pour le profile gravatar et le retourne sous forme XML.
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace xdb="http://exist-db.org/xquery/xmldb";
 
@@ -63,11 +68,14 @@ let $queryGravatar := if($method = 'POST') then (
     return
     update replace $person/GravatarEmail with <GravatarEmail>{$gravemail}</GravatarEmail>
     ) else ((:nothing to do:))
+    
+(:Calcul du Hash gravatar pour récupérer le profile.:)
 let $gravemail := $person/GravatarEmail
 let $trim := replace(replace($gravemail,'\s+$',''),'^\s+','')
 let $lowcase := lower-case($trim)
 let $md5 := util:hash($lowcase, 'md5')
 let $gravatarURI := concat(concat('http://fr.gravatar.com/',$md5),'.xml')
+(:Profile Gravatar:)
 let $gravatarRespons := doc($gravatarURI)
 
     return

@@ -1,5 +1,10 @@
 xquery version "1.0";
-
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL pour la génération du PDF des Mynotes d'un cours.
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace session="http://exist-db.org/xquery/session";
 
@@ -38,6 +43,7 @@ let $asNotes := exists($person//Note[CourseRef=$courseid])
                     let $notesInOrder := 
                                         <Notes>
                                             {
+                                                (:Retour des mynotes mis en ordre suivant les dates des sessions.:)
                                                 let $sessions := $courseBase//Sessions
                                                 for $session in $sessions/Session
                                                 order by $session/Date

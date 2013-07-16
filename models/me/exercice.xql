@@ -1,4 +1,10 @@
 xquery version "1.0";
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL pour la gestion d'upload d'exercise et l'affichage d'un exercice.
+:)
 import module namespace session="http://exist-db.org/xquery/session";
 
 import module namespace request="http://exist-db.org/xquery/request";
@@ -9,6 +15,7 @@ declare option exist:serialize "method=xml media-type=text/xml";
 
 let $collection := '/sites/ioox/data/'
 
+(:Calcul des coursid et sessionNumber:)
 let $ref := request:get-attribute('oppidum.command')/@trail
 let $ref2 := substring-after(substring-after(string($ref),'/'),'/')
 let $courseid := string(substring-before($ref2,'/'))
@@ -60,6 +67,7 @@ let $docCollection := concat(concat(concat(concat('/db/courses/',$courseid),'/')
 let $docName := $session//Deliverables/Deliverable[PersonRef=$id]/File/LinkText/text()
 let $docLink := $session//Deliverables/Deliverable[PersonRef=$id]/File/LinkRef/text()
 
+(:On retourne encore une date 'na' pas de traitement de la dernière modification car problème avec eXist pour avoir la date d'un fichier binaire non XML.:)
 let $previousDocumentTime := 'na' (:if(exists(concat($docCollection,$docName))) then (xdb:last-modified($docCollection,$docName)) else ('na'):)  
  
     return

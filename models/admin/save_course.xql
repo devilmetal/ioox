@@ -1,7 +1,10 @@
 xquery version "1.0";
-(: --------------------------------------
-
-   -------------------------------------- :)
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL pour la sauvegarde d'un cours modifié/cloné/ajouté
+:)
 import module namespace session="http://exist-db.org/xquery/session";
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace xdb = "http://exist-db.org/xquery/xmldb";
@@ -13,6 +16,8 @@ declare option exist:serialize "method=xml media-type=text/xml";
 (:::::::::::::  BODY  ::::::::::::::)
 (:CECI EST UNE VARIABLE DE CREATION POUR LE NOMBRE DE SESSION A CREER DE BASE :)
 let $MAXNUMBERSESSIONS := 14
+
+
 let $collection := '/sites/ioox/data/'
 let $id := if (session:get-attribute('id')) then (
                             session:get-attribute('id')
@@ -27,6 +32,7 @@ let $oldId := $new//OldId
 let $newCourse := $new//Course
 let $newId := $newCourse/CourseId
 let $maxperiodstart := max(doc(concat($collection, "AcademicYears.xml"))//Period/replace(string(Start),'-',''))
+(:Les cours dans la bonne périod, ie la dernière périod disponible:)
 let $courses := doc(concat($collection, "AcademicYears.xml"))//Period[replace(string(Start),'-','')=$maxperiodstart]/Courses
 
 let $test := exists(doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$newId])

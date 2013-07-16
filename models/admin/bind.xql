@@ -1,5 +1,10 @@
 xquery version "1.0";
-
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL de la page bind. Permet d'effectuer une recherche pour trouver les cours à lier avec des professeurs
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace session="http://exist-db.org/xquery/session";
 declare namespace xdb = "http://exist-db.org/xquery/xmldb";
@@ -17,6 +22,7 @@ declare function local:scale($string) as xs:string
 
 let $collection := '/sites/ioox/data/'
 let $method := request:get-method()
+(:récupération du role pour les droits:)
 let $role := xdb:get-user-groups(xdb:get-current-user())
 
 
@@ -47,7 +53,9 @@ let $core := if ($method='POST' and $role='dba') then
                             
                             return
                             <Back>
-                                {for $course in $courses
+                                {
+                                (:On redonnes uniquement les infos qui sont utiles sur le cours en question.:)
+                                for $course in $courses
                                 return
                                     let $id := $course/CourseId
                                     return

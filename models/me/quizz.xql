@@ -1,5 +1,10 @@
 xquery version "1.0";
-
+(:
+        @project:  KLAXON
+        @date:     16.07.2013
+        @version:  1.0
+        @desc:     XQL pour l'affichage du Quizz retourne le quizz et les erreurs de login
+ :)
 import module namespace session="http://exist-db.org/xquery/session";
 
 import module namespace request="http://exist-db.org/xquery/request";
