@@ -1,6 +1,9 @@
 xquery version "1.0";
 (: --------------------------------------
-
+       @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      Query that update the content of the personal todolist
    -------------------------------------- :)
 import module namespace session="http://exist-db.org/xquery/session";
 import module namespace request="http://exist-db.org/xquery/request";
@@ -21,6 +24,7 @@ let $id := if (session:get-attribute('id')) then (
                             )
 let $cmd := request:get-attribute('oppidum.command')
 let $new := request:get-data()
+(: retrive location of the old todolist and replace it with the new one:)
 let $old := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/ToDoList
 let $tosave := $new//ToDoList
         return (

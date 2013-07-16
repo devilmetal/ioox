@@ -1,9 +1,12 @@
 xquery version "1.0";
 
 (: -----------------------------------------------
-   ioox controller
-
-   Author: Carnevale Luca & Luyet Gil / UNIFR
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      This is the epilogue of the project.
+                    This file is a "configuration file"
+                    that is the core of oppidum with the controllor
    ----------------------------------------------- :)
 
 declare namespace site = "http://oppidoc.com/oppidum/site";
@@ -38,6 +41,10 @@ declare function site:branch( $cmd as element(), $source as element(), $view as 
  case element(site:image) return site:image($source)
  default return $view/*[local-name(.) = local-name($source)]/*
  (: default treatment to implicitly manage other modules :)
+ (:     ##############################
+            In this section we have added
+            site:navbar for the navigation menu bar (logged people)
+        ##############################:)
 };
 
 (: ======================================================================
@@ -152,6 +159,10 @@ declare function site:login( $cmd as element() ) as element()*
     
     )
 };
+(:  ##############################
+        In thie section we manage the top menu/global menu common for all user
+        but with 2 state logged or not
+    ##############################:)
 
 (: ======================================================================
    Generates error essages in <site:error>
@@ -223,9 +234,6 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
     <!-- sidebar -->
             <a href="javascript:void(0)" class="sidebar_switch on_switch ttip_r" title="Hide Sidebar">Sidebar switch</a>
             <div class="sidebar">
-				<!--<div class="antiScroll">
-					<div class="antiscroll-inner">
-						<div class="antiscroll-content">-->
 							<div class="sidebar_inner">
 								
 								<div class="globalmenu">
@@ -256,9 +264,6 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
                                         </a>
                                     </li>
 								</ul>
-								<!--</div>
-							</div>
-						</div>-->
 					</div>
 				</div>
 			</div>
@@ -401,7 +406,14 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
          </span>
     )
 };
-
+(:  ############################
+        in this section we manage the laterla menu for 3 state
+        state logged as registred user not admin
+        state logged as admin
+        state not logged
+        in this 3 case via bootstrap we manage the mobile version via special
+        class like "hidden-phone"
+    ############################:)
 declare function site:navbar( $cmd as element(), $view as element() ) as element()*
 {
     let $rights := tokenize(request:get-attribute('oppidum.rights'), ' ')
@@ -473,6 +485,11 @@ declare function site:navbar( $cmd as element(), $view as element() ) as element
             
     </span>
 };
+(:  ###############################
+        In this section we manage the navbar.
+        we add it if and only if the user is logged
+        with 2 state: admin group or member group
+    ###############################:)
 
 declare function site:change( $cmd as element(), $view as element() ) as element()*
 {

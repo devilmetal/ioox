@@ -1,4 +1,10 @@
 xquery version "1.0";
+(:
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      Query that retrive the personal todolist
+:)
 import module namespace session="http://exist-db.org/xquery/session";
 import module namespace request="http://exist-db.org/xquery/request";
 
