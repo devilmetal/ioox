@@ -1,13 +1,15 @@
 xquery version "1.0";
 (: --------------------------------------
-   Oppidum ioox installation
+   Oppidum Klaxon installation
 
    Author: Luca Carnevale <luca.carnevale@unifr.ch> and Gil Luyet <gil.luyet@unifr.ch
    
    Janvier 2013
+   Last modification : 16 Juillet 2013
    -------------------------------------- :)
 
 import module namespace install = "http://oppidoc.com/oppidum/install" at "../../oppidum/lib/install.xqm";   
+import module namespace xdb = "http://exist-db.org/xquery/xmldb";
 
 declare option exist:serialize "method=xhtml media-type=text/html indent=yes";
 
@@ -70,4 +72,12 @@ declare variable $static := <static xmlns="http://oppidoc.com/oppidum/install">
   </group>
 </static>;
 
-install:install("projets/ioox", $policies, $site, $code, $static, "ioox", ())
+install:install("projets/ioox", $policies, $site, $code, $static, "ioox", ()),
+(:Creation de la collection '/courses' :)
+if (not(xdb:collection-available('/courses/'))) then 
+    (
+        xdb:create-collection('/','courses'),
+        xdb:set-collection-permissions('/courses','admin','site-member',util:base-to-integer(0775, 8))
+    )
+    else
+    ()
