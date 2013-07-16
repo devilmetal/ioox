@@ -75,8 +75,7 @@
                document.documentElement.className += 'js';
             </script>
             <link rel="shortcut icon" href="{$xslt-ressource-url}/img/gCons/connections.png"/>
-            <!-- calendar -->
-            <link rel="stylesheet" href="{$xslt-ressource-url}/lib/fullcalendar/fullcalendar_gebo.css" />	
+
          </site:header>
 
          <!-- MENU DEFINITION -->
@@ -101,7 +100,7 @@
                                  <li>Luyet Gil <a href="mailto:gil.luyet@unifr.ch">Send Mail</a></li>
                               </ul>
                            </div>
-                           <div class="faq_right">
+                           <div class="faq_right well">
                               <h2>Location map</h2>
                               <iframe width="330" height="350" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=46.793927,7.159229&amp;num=1&amp;t=h&amp;ie=UTF8&amp;ll=46.793537,7.159266&amp;spn=0.005142,0.004935&amp;z=16&amp;output=embed"></iframe><br /><small><a href="https://maps.google.com/maps?q=46.793927,7.159229&amp;num=1&amp;t=h&amp;ie=UTF8&amp;ll=46.793537,7.159266&amp;spn=0.005142,0.004935&amp;z=16&amp;source=embed" style="color:#0000FF;text-align:left">View Larger Map</a></small>
                               <h2>Address</h2>

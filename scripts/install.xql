@@ -22,7 +22,6 @@ declare variable $site := <site xmlns="http://oppidoc.com/oppidum/install">
   <collection name="/db/sites/ioox" policy="read"/>
   <group name="data">
     <collection name="/db/sites/ioox/data" policy="write" inherit="true">
-      <files pattern="init/Calendar.xml"/>
       <files pattern="init/AcademicYears.xml"/>
       <files pattern="init/Persons.xml"/>
     </collection>

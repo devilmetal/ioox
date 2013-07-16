@@ -247,7 +247,7 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
 								
 								    <li class="gitem">
 								    <a href="{$cmd/@base-url}faq" >
-										<img src="{$cmd/@base-url}static/ioox/img/gCons/push-pin.png" alt="" /> FAQ
+										<img src="{$cmd/@base-url}static/ioox/img/gCons/push-pin.png" alt="" /> Contact
 									</a>
 									</li>
                                     <li class="gitem visible-phone visible-tablet">
@@ -299,7 +299,7 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
 								
 								    <li class="gitem">
 								    <a href="{$cmd/@base-url}faq" >
-										<img src="{$cmd/@base-url}static/ioox/img/gCons/push-pin.png" alt="" /> FAQ
+										<img src="{$cmd/@base-url}static/ioox/img/gCons/push-pin.png" alt="" /> Contact
 									</a>
 									</li>
 									
@@ -356,7 +356,7 @@ declare function site:menu( $cmd as element(), $view as element() ) as element()
 								
 								    <li class="gitem">
 								    <a href="{$cmd/@base-url}faq" >
-										<img src="{$cmd/@base-url}static/ioox/img/gCons/push-pin.png" alt="" /> FAQ
+										<img src="{$cmd/@base-url}static/ioox/img/gCons/push-pin.png" alt="" /> Contact
 									</a>
 									</li>
 									
