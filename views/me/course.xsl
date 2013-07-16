@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Home View
-        @author:   LC&GL
-        @sdate:    27.02.2013
-        @version:  2.0 (01.07.2013)
-        @desc:     Me> cours page
+<!-- 
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      Present the data of the selected course
                     -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:date="http://exslt.org/dates-and-times" xmlns:xt="http://ns.inria.org/xtiger"
@@ -108,6 +108,7 @@
                     </xsl:when>
                     <xsl:otherwise>
                         <h3 class="heading">Course detail</h3>
+                        <!-- print error if there are (generate from subscription fail or other -->
                         <xsl:apply-templates select="/Root/Error"></xsl:apply-templates>
                         <xsl:apply-templates select="/Root/Course" mode="restyle"/>
                     </xsl:otherwise>
@@ -164,17 +165,16 @@
 
 
     </xsl:template>
+    
+    <!-- Print the course information -->
     <xsl:template match="Course" mode="restyle">
-        
-
-            <!-- test -->
-            
                 <h3 class="heading">
                     <xsl:value-of select="//Root/Period/Courses/Course[CourseId=//Root/Course/CourseId]/Title"/>
                 </h3>
                 <div class="tabbable">
                     <ul class="nav nav-tabs">
                         
+                        <!-- Generate the menu -->
                         <!-- Traitement d'affichage -->
                         <xsl:choose>
                             <xsl:when test="Sessions and Evaluation">
@@ -203,25 +203,28 @@
                         </xsl:choose>
                         
                     </ul>
+                    <!-- Generate the tabs -->
                     <div class="tab-content">
                         <!-- Traitement d'affichage -->
                         <xsl:variable name="compltcourse"><xsl:if test="Sessions and Evaluation">active</xsl:if></xsl:variable>
                         <xsl:variable name="noInscCourse"><xsl:if test="not(Sessions and Evaluation)">active</xsl:if></xsl:variable>
                         <div class="tab-pane {$compltcourse}" id="tab_br1">
-                            <!-- testo session -->
+                            <!-- Generate a subtab for each session -->
                             <div class="tabbable tabs-left">
                                 <ul class="nav nav-tabs">
-
+                                    <!-- Generate the sidemenu bar for access to session -->
                                     <xsl:apply-templates select="Sessions/Session" mode="explorer"/>
 
                                 </ul>
+                                    <!--  Generate the content of each session-->
                                 <div class="tab-content">
                                     <xsl:apply-templates select="Sessions/Session" mode="print"/>
                                 </div>
                             </div>
 
-                            <!-- end test session -->
+                            
                         </div>
+                        <!-- Generate the evaluation tab -->
                         <div class="tab-pane" id="tab_br2">
                             
                             <dl class="dl-horizontal">
@@ -236,7 +239,7 @@
                         </div>
                         <div class="tab-pane {$noInscCourse}" id="tab_br3">
 
-    
+                        <!-- Print general information on the course -->
                             <dl class="dl-horizontal">
                                 <dt>Cours name</dt>
                                 <dd>
@@ -264,10 +267,8 @@
                                     <xsl:apply-templates select="Description"/>
                                 </dd>
                             </dl>
-
-
-                            
                         </div>
+                        <!-- Tab operation allow subscription and other -->
                         <div class="tab-pane" id="tab_br4">
                             <dl class="dl-horizontal">
                                 <dt>Status</dt>
@@ -330,6 +331,7 @@
         </xsl:variable>
 
         <!--  &lt; instead of < and &gt; instead of >, b -->
+        <!-- Identify the current session -->
         <xsl:variable name="current">
             <xsl:choose>
                 <xsl:when test="Session/Date=''">
@@ -358,6 +360,8 @@
         </li>
     </xsl:template>
 
+    <!-- Print the session -->
+    
     <xsl:template match="Session" mode="print">
         <xsl:variable name="nr">
             <xsl:value-of select="./SessionNumber"/>
@@ -495,6 +499,7 @@
         </xsl:apply-templates>
     </xsl:template>
 
+    <!-- Print information on the Exam, all % are recalculed on the base of the ponderation point write in the evaluation description -->
     <xsl:template match="Exam">
         <xsl:param name="Total"/>
 
@@ -511,6 +516,7 @@
 
     </xsl:template>
 
+    <!-- template to print project information in the template is called -->
     <xsl:template match="Project">
         <xsl:param name="Total"/>
         <dt>Project</dt>
@@ -567,7 +573,7 @@
         </dd>
     </xsl:template>
     
-
+    <!-- template to print execices information in the evaluation section-->
     <xsl:template match="Exercices">
         <xsl:param name="Total"/>
         <dt>Exercices</dt>
@@ -591,7 +597,7 @@
 
     </xsl:template>
 
-    <!-- Affichage d'un content type -->
+    <!-- Affichage d'un content type -not commented -->
     <xsl:template match="Description">
         <xsl:for-each select="./child::node()">
             <xsl:apply-templates select="."/>
@@ -609,11 +615,11 @@
     <xsl:template match="List">
         <xsl:if test="count(./ListHeader)!=0">
             <span class="ListHeader">
-                <xsl:value-of select="./ListHeader[name()!='ListHeader']"/>
+                <xsl:value-of select="./ListHeader"/>
             </span>
         </xsl:if>
         <ul class="list_b">
-            <xsl:for-each select="./child::node()">
+            <xsl:for-each select="./child::node()[name()!='ListHeader']">
                 <li>
                     <xsl:apply-templates select="."/>
                 </li>
@@ -624,11 +630,11 @@
     <xsl:template match="SubList">
         <xsl:if test="count(./SubListHeader)!=0">
             <span class="ListHeader">
-                <xsl:value-of select="./SubListHeader[name()!='SubListHeader']"/>
+                <xsl:value-of select="./SubListHeader"/>
             </span>
         </xsl:if>
         <ul class="list_c">
-            <xsl:for-each select="./child::node()">
+            <xsl:for-each select="./child::node()[name()!='SubListHeader']">
                 <li>
                     <xsl:apply-templates select="."/>
                 </li>

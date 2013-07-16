@@ -1,5 +1,12 @@
 xquery version "1.0";
 
+(:
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      Generate the data for the xplorer.page
+                    if a search query is posted serach in the database 
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace session="http://exist-db.org/xquery/session";
 
@@ -16,7 +23,7 @@ let $id := if (session:get-attribute('id')) then (
                             '-1'
                             )
                             
-
+(:  case no exist a search query -> interpret :)
 let $search := if($method = 'GET') then (
 
     (: retirive GET parameter and filtre him :)
@@ -30,8 +37,8 @@ let $search := if($method = 'GET') then (
 )else(
         <Search/>
 )
-    
-    
+
+(:  retrive information :)    
 let $data0 := doc(concat($collection, "AcademicYears.xml"))//Period[$curr-date >= ./End] 
 let $data1 := doc(concat($collection, "AcademicYears.xml"))//Period[($curr-date >= ./Start) and ($curr-date <= ./End)]
 let $data2 := doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments
@@ -39,9 +46,6 @@ let $data3 := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagme
 
     return
     <Root>
-        
-        
-        
         <PastPeriod>
         {   for $p in doc(concat($collection, "AcademicYears.xml"))//Period[$curr-date >= ./End] 
             order by $p/End descending
@@ -51,9 +55,6 @@ let $data3 := doc(concat($collection, "Persons.xml"))//Person/Engagments/Engagme
         <CurrentPeriod>{$data1}</CurrentPeriod>
         <Person>{$data2}</Person>
         <Teacher>{$data3}</Teacher>
-        
-        
-        
         <Session>
             <Connected>{session:get-attribute('id')}</Connected>
             <ID>{$id}</ID>

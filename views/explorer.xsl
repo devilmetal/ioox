@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!--
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      Explorer page give the opportunitiy to search
+                    a courses in the database and visit it.
+ -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
     xmlns:date="http://exslt.org/dates-and-times" xmlns:xt="http://ns.inria.org/xtiger"
     xmlns="http://www.w3.org/1999/xhtml" xmlns:site="http://oppidoc.com/oppidum/site"
@@ -6,7 +13,7 @@
     <xsl:output method="xml" media-type="text/html" omit-xml-declaration="yes" indent="no"/>
     <xsl:variable name="xslt-ressource-url"><xsl:value-of select="$xslt.base-url"
         />static/ioox</xsl:variable>
-    
+
     <xsl:param name="xslt.base-url">/</xsl:param>
     <xsl:template match="/">
         <site:view>
@@ -70,44 +77,61 @@
                 </div>
             </site:change>
             <!-- </site:header>-->
-            
+
             <site:navbar/>
-            
+
             <site:content>
                 <!-- main content -->
-                <xsl:variable name="query"><xsl:value-of select="//Search/Query"/></xsl:variable>
+                <xsl:variable name="query">
+                    <xsl:value-of select="//Search/Query"/>
+                </xsl:variable>
                 <div id="contentwrapper">
 
-                    
+
                     <div class="row-fluid">
 
+                        <!-- Search input -->
                         <div class="input-append">
                             <form action="explorer">
-                                <input type="text" class="span3 offset8" name="search" placeholder="search terms" value="{$query}"/>
+                                <input type="text" class="span3 offset8" name="search"
+                                    placeholder="search terms" value="{$query}"/>
                                 <button type="submit" class="btn">Search</button>
                             </form>
                         </div>
+
+                        <!-- If in the pipeline there are data of a previuws search print the result -->
                         <xsl:if test="not(//Search/Query='')">
                             <div class="row-fluid">
                                 <div class="span12">
-                                    
-                                    <h3 class="heading">Result search for: <xsl:value-of select="$query"/></h3>
+                                    <h3 class="heading">Result search for: <xsl:value-of
+                                            select="$query"/></h3>
+
+                                    <!-- If there are no course in search result say not found -->
                                     <xsl:if test="count(//Search/Period/Courses/Course) = 0">
                                         <p>Not found</p>
                                     </xsl:if>
+
+                                    <!-- If there are period in the search result print it -->
                                     <xsl:apply-templates select="//Search/Period" mode="full"/>
-                                    
+
                                 </div>
                             </div>
                         </xsl:if>
                     </div>
-                    
+
                     <h3 class="heading"> Explorer </h3>
                     <div class="row-fluid">
 
                         <div class="span12">
 
+                            <!--    The viev like tabs is done via CSS and HTML
+                                to implement this function special id and a href to this id is done
+                        
+                                Structure:  ul menu with a to a href
+                                            div with the correspondig id -->
                             <div class="tabbable">
+
+                                <!-- Generate the menu based on the available period and add some static tabs -->
                                 <ul class="nav nav-tabs">
                                     <!-- Generate the tab menu ofr the current and other tabs -->
                                     <xsl:apply-templates select="//CurrentPeriod"/>
@@ -117,6 +141,8 @@
                                     </li>
 
                                 </ul>
+
+                                <!-- Generate the tab conent -->
                                 <div class="tab-content">
                                     <xsl:apply-templates select="//CurrentPeriod/Period[1]"
                                         mode="full">
@@ -126,8 +152,10 @@
                                     <div class="tab-pane" id="legend">
                                         <dl class="dl-horizontal">
                                             <dt>Color indicator</dt>
-                                            <dd><span class="square_sub">.</span>you are subscribed on the cours</dd>
-                                            <dd><span class="square_unsub">.</span>you was subscibed on the cours</dd>
+                                            <dd><span class="square_sub">.</span>you are subscribed
+                                                on the cours</dd>
+                                            <dd><span class="square_unsub">.</span>you was subscibed
+                                                on the cours</dd>
                                         </dl>
                                     </div>
                                 </div>
@@ -166,18 +194,21 @@
         </site:view>
     </xsl:template>
 
+    <!-- Identify the current period and active it for the visualisation -->
     <xsl:template match="CurrentPeriod">
         <xsl:apply-templates select="Period[1]" mode="tab">
             <xsl:with-param name="class">active</xsl:with-param>
         </xsl:apply-templates>
     </xsl:template>
 
+    <!-- Print the successive period and generate a dropdown menu fo the period 4,5,6,... -->
     <xsl:template match="PastPeriod">
         <xsl:apply-templates select="Period[1]" mode="tab"/>
         <xsl:apply-templates select="Period[2]" mode="tab"/>
         <xsl:apply-templates select="Period[3]" mode="dropdown"/>
     </xsl:template>
 
+    <!-- template that generate a the li element of the menu -->
     <xsl:template match="Period" mode="tab">
         <xsl:param name="class"/>
         <li class="{$class}">
@@ -189,6 +220,7 @@
         </li>
     </xsl:template>
 
+    <!-- Template that generate the dropdown menu (archive period) -->
     <xsl:template match="Period" mode="dropdown">
         <li class="dropdown">
             <a href="#" data-toggle="dropdown" class="dropdown-toggle">Archive <b class="caret"
@@ -215,6 +247,7 @@
         </li>
     </xsl:template>
 
+    <!-- Template that print the period in the full forms -->
     <xsl:template match="Period" mode="full">
         <xsl:param name="class"/>
         <xsl:variable name="id_tab">
@@ -226,6 +259,7 @@
 
     </xsl:template>
 
+    <!-- For each course print the content -->
     <xsl:template match="Courses">
         <div id="accordion1" class="accordion">
             <xsl:for-each select="Course">
@@ -236,7 +270,8 @@
                         <xsl:value-of select="./CourseId"/>
                     </xsl:variable>
                     <xsl:variable name="class">
-                        <xsl:value-of select="//Root/Person/Engagments/Engagment[CoursRef=$CN]/Role"/>
+                        <xsl:value-of select="//Root/Person/Engagments/Engagment[CoursRef=$CN]/Role"
+                        />
                     </xsl:variable>
 
                     <div class="accordion-heading">
@@ -297,7 +332,7 @@
 
 
 
-    <!-- code copie -->
+    <!-- reused code from other page - not commented -->
     <xsl:template match="Description">
         <xsl:for-each select="./child::node()">
             <xsl:apply-templates select="."/>
@@ -382,11 +417,12 @@
         <xsl:variable name="cid">
             <xsl:value-of select="."/>
         </xsl:variable>
-        <xsl:apply-templates select="//Root/Teacher/Person/Engagments/Engagment[CoursRef=$cid][Role!='Student']"
+        <xsl:apply-templates
+            select="//Root/Teacher/Person/Engagments/Engagment[CoursRef=$cid][Role!='Student']"
             mode="teacher"/>
-        <xsl:if test="count(//Root/Teacher/Person/Engagments/Engagment[CoursRef=$cid][Role!='Student'])=0">
-            no teacher now
-        </xsl:if>
+        <xsl:if
+            test="count(//Root/Teacher/Person/Engagments/Engagment[CoursRef=$cid][Role!='Student'])=0"
+            > no teacher now </xsl:if>
     </xsl:template>
 
     <xsl:template match="Engagment" mode="teacher">

@@ -1,4 +1,10 @@
 xquery version "1.0";
+(:
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      Retrive data for the rappresentation of all subscribed courses
+:)
 import module namespace session="http://exist-db.org/xquery/session";
 
 import module namespace request="http://exist-db.org/xquery/request";
@@ -8,6 +14,11 @@ declare option exist:serialize "method=xml media-type=text/xml";
 
 let $collection := '/sites/ioox/data/'
 
+(:  if the user is logeged retrive his ID and his personal information from the database
+    second retrive all course where is engaged and not unsubscribed
+    retrive the information of the period.
+    
+    In the for will be unified the information between the engagement and the person for return a structure Period/ info period + course subscribed of the period:)
     return
     <Root>
         {if (session:get-attribute('id')) then (

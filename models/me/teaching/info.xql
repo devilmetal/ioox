@@ -1,5 +1,10 @@
 xquery version "1.0";
-
+(:
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      This query give the information about the evaluation of the cours
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 declare namespace xdb = "http://exist-db.org/xquery/xmldb";
 import module namespace session="http://exist-db.org/xquery/session";
@@ -20,9 +25,10 @@ let $id := if (session:get-attribute('id')) then (
                             '-1'
                             )
 
-
+(:retrive data:)
 let $data2 := doc(concat($collection, "AcademicYears.xml"))//Course[CourseId=$courseid]/Evaluation
 
+(: check if is teacher... :)
 let $teacher := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Teacher'][CoursRef=$courseid])
 let $tutor := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Tutor'][CoursRef=$courseid])
 let $user := count(doc(concat($collection, "Persons.xml"))//Person[PersonId=$id]/Engagments/Engagment[Role='Student'][CoursRef=$courseid])

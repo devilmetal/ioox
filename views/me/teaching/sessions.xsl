@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Home View
-        @author:   LC&GL
-        @date:     27.02.2013
-        @version:  1.0
-        @desc:     home page
+<!-- 
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      This page, visible and editable only by tutor and teacher
+                     give the possibility to  show the list of session.
+                     A differentiation is done by color (already edited and not edited session)
+                     For more info read in the documentation the section about the implementation
                     -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
    xmlns:date="http://exslt.org/dates-and-times" xmlns:xt="http://ns.inria.org/xtiger"
@@ -51,10 +54,10 @@
                   </div>
                </div>
                
-               <div class="gh_button-group">
+               <!--<div class="gh_button-group">
                   <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
                   <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
-               </div>
+               </div>-->
                <div class="hide">
                   <ul id="ssw_styles">
                      <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
@@ -75,8 +78,7 @@
                document.documentElement.className += 'js';
             </script>
             <link rel="shortcut icon" href="{$xslt-ressource-url}/img/gCons/connections.png"/>
-            <!-- calendar -->
-            <link rel="stylesheet" href="{$xslt-ressource-url}/lib/fullcalendar/fullcalendar_gebo.css" />	
+
          </site:header>
 
          <!-- MENU DEFINITION -->
@@ -101,7 +103,7 @@
                      
                      <div class="navbar-inner">
                         <div class="container-fluid">
-                           
+                           <!-- Teacher menu hardcoded -->
                            <ul class="nav">
                               <li>
                                  <a href="{$xslt.base-url}me/courses/{$courseid}/teaching"><img
@@ -130,6 +132,7 @@
                            <h3 class="heading">Sessions</h3>
                         <p>This is the overview of all session with the possibility to entry in edit mode</p>
                   <div class="row-fluid">
+                     <!-- Print the session box -->
                      <xsl:apply-templates select="//Sessions"/>  
                   </div>
                   
@@ -186,22 +189,21 @@
 
    </xsl:template>
    
+   
    <xsl:template match="Sessions">
       <div class="row-fluid">
          <xsl:apply-templates select="Session" mode="app"/>
       </div>
    </xsl:template>
 
-   
-   
-   
-   <!--  COPIATO DA PRIMA -->
+   <!-- session like app generation -->
    <xsl:template match="Session" mode="app">
       <xsl:variable name="courseid"><xsl:value-of select="//sysinfo/CourseId"/></xsl:variable>
       <xsl:variable name="sessionnumber"><xsl:value-of select="SessionNumber"/></xsl:variable>
 
       
          <xsl:choose>
+            <!-- Case already edited -->
             <xsl:when test="./Topics/Topic[1]/Title !=''">
                <div class="span6 bb">
                <div class="ourbox obc0">
@@ -215,6 +217,7 @@
                   
                </div>
             </xsl:when>
+            <!-- case not edited -->
             <xsl:otherwise>
                <div class="span6 bb">
                <div class="ourbox obc2">
@@ -235,7 +238,7 @@
    
    
    
-   
+   <!-- print the topics -->
    <xsl:template match="Topics">
       <xsl:if test="count(Topic)!=0">
          <xsl:apply-templates select="Topic[position()!=last()]" mode="notlast"/>
@@ -244,11 +247,9 @@
       <xsl:if test="count(Topic)=0">
          No topic for now
       </xsl:if>
-      
-      
-      
    </xsl:template>
    
+   <!-- 2 special case... edited or not -->
    <xsl:template match="Topic" mode="notlast">
       <xsl:variable name="t"><xsl:text>"</xsl:text></xsl:variable>
       <xsl:variable name="newt"><xsl:text>“</xsl:text></xsl:variable>

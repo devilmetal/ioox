@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Home View
-        @author:   LC&GL
-        @date:     27.02.2013
-        @version:  1.0
-        @desc:     home page
+<!-- 
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      This page, visible and editable only by tutor and teacher
+                     give the possibility to the show and edit
+                     the evaluation information of the cours
+                     The evaluation is base on points ponderation
+                     on multiple level.
+                     For more info read in the documentation the section implementation
                     -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
    xmlns:date="http://exslt.org/dates-and-times" xmlns:xt="http://ns.inria.org/xtiger"
@@ -51,10 +56,10 @@
                   </div>
                </div>
                
-               <div class="gh_button-group">
+               <!--<div class="gh_button-group">
                   <a href="#" id="showCss" class="btn btn-primary btn-mini">Show CSS</a>
                   <a href="#" id="resetDefault" class="btn btn-mini">Reset</a>
-               </div>
+               </div>-->
                <div class="hide">
                   <ul id="ssw_styles">
                      <li class="small ssw_mbColor sepH_a" style="display:none">body {<span class="ssw_mColor sepH_a" style="display:none"> color: #<span></span>;</span> <span class="ssw_bColor" style="display:none">background-color: #<span></span> </span>}</li>
@@ -96,7 +101,7 @@
                      </xsl:when>
                      <xsl:otherwise>
                         
-                           
+                           <!-- Menu for teacher hardcoded -->
                               <div class="navbar">
                                  
                                  <div class="navbar-inner">
@@ -131,12 +136,28 @@
                         <div class="row-fluid">
                            <div class="span5">
                               <div class="alert alert-block alert-warning fade in">
+                                 <!-- Small description/how to -->
                                  <h4 class="alert-heading">Instruction</h4>
-                                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris vitae tristique erat.</p>
+                                 <p>In this session you can show and edit the Evaluation structure.
+                                    The structure is based on:
+                                 <ul>
+                                    <li>Exam</li>
+                                    <li>Project - divised
+                                       <ul>
+                                          <li>Rapport</li>
+                                          <li>Project code</li>
+                                          <li>Presentation</li>
+                                       </ul>
+                                    </li>
+                                    <li>Exercises</li>
+                                 </ul>
+                                 </p>
+                                 <!-- link for the edition -->
                                  <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/info/modifier" class="btn btn-inverse"><i class="splashy-document_a4_edit"></i> Edit</a>
                               </div>
                            </div>
                            <div class="span7">
+                              <!-- call template for cascade print -->
                               <xsl:apply-templates select="//Evaluation"/>
                            </div>
                         </div>
@@ -195,9 +216,11 @@
 
    </xsl:template>
    
+   <!-- For each node in evaluation print the  -->
    <xsl:template match="Evaluation">
       <xsl:apply-templates select="node()"/>
    </xsl:template>
+   <!-- at the same time produce the "global viariable" with the data for the ponderation point  -->
    <xsl:template match="Evaluation">
       <xsl:variable name="NbrOfEvalUnit">
          <xsl:value-of select="count(child::node()/Weight)"/>
@@ -213,6 +236,7 @@
       
    </xsl:template>
    
+   <!-- Print exam section -->
    <xsl:template match="Exam">
       <xsl:param name="Total"/>
       
@@ -229,6 +253,7 @@
       
    </xsl:template>
    
+   <!-- Print Pj section and hist sub point -->
    <xsl:template match="Project">
       <xsl:param name="Total"/>
       <dt>Project</dt>
@@ -257,11 +282,13 @@
       </dd>
    </xsl:template>
    
+   <!-- Print Report section -->
    <xsl:template match="Report">
       <dt class="minititle">Report</dt>
          <xsl:apply-templates select="child::node()" mode="small"/>
    </xsl:template>
    
+   <!-- Usesfull template for print in cascade mode the content - not commented -->
    <xsl:template match="Presentation">
       <dt class="minititle">Presentation</dt>
       <xsl:apply-templates select="child::node()" mode="small"/>
