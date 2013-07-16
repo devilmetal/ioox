@@ -1,11 +1,11 @@
 xquery version "1.0";
 (: --------------------------------------
-   Oppidum Klaxon installation
-
-   Author: Luca Carnevale <luca.carnevale@unifr.ch> and Gil Luyet <gil.luyet@unifr.ch
    
-   Janvier 2013
-   Last modification : 16 Juillet 2013
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      Oppidum Klaxon installer
+
    -------------------------------------- :)
 
 import module namespace install = "http://oppidoc.com/oppidum/install" at "../../oppidum/lib/install.xqm";   
