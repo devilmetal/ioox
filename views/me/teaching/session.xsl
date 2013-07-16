@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- Home View
-        @author:   LC&GL
-        @date:     27.02.2013
-        @version:  1.0
-        @desc:     home page
+<!-- 
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      This page, visible and editable only by tutor and teacher
+                     give the possibility to  show and edit
+                     the session of a cours.
+                     For more info read in the documentation the section about implementation
                     -->
 <xsl:stylesheet xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
    xmlns:date="http://exslt.org/dates-and-times" xmlns:xt="http://ns.inria.org/xtiger"
@@ -94,7 +97,7 @@
                </xsl:when>
                <xsl:otherwise>
                   
-                  
+                  <!-- The teacher admin menu - hardcoded -->
                   <div class="navbar">
                      
                      <div class="navbar-inner">
@@ -126,8 +129,10 @@
                   </div>
 
                   <div class="row-fluid">
+                     
+                     <!-- Print session -->
                      <xsl:apply-templates select="//Root/Session"/> 
-
+                     <!-- Print the list of the exercice done by the students -->
                      <xsl:apply-templates select="/Root/sysinfo/Persons" mode="exerciseTable"/>
                   </div>
 
@@ -181,6 +186,8 @@
 
    </xsl:template>
    
+   
+   <!-- template that print the persons list with the delivrables -->
    <xsl:template match="Persons" mode="exerciseTable">
       <h3 class="heading">Delivery exercises</h3>
          <table class="table table-striped">
@@ -216,7 +223,7 @@
       
    </xsl:template>
    
-   
+   <!-- Print the session inforation and content -->
    <xsl:template match="Session">
       <xsl:variable name="courseid"><xsl:value-of select="//sysinfo/CourseId"/></xsl:variable>
       <xsl:variable name="sessionnumber"><xsl:value-of select="//sysinfo/SessionNumber"/></xsl:variable>
@@ -243,7 +250,7 @@
       
    </xsl:template>
    
-   
+   <!-- Print the exercise and his ressources -->
    <xsl:template match="Exercise">
       <h3 class="heading">Exercise</h3>
       <xsl:if test="Description!=''"><h5>Description</h5>
@@ -260,6 +267,8 @@
       </xsl:if>
       
    </xsl:template>
+   
+   <!-- Ussesfull template not commented -->
    <xsl:template match="Description">
       <h3 class="heading">Description</h3>
       <xsl:for-each select="./child::node()">

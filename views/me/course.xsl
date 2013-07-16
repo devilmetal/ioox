@@ -615,11 +615,11 @@
     <xsl:template match="List">
         <xsl:if test="count(./ListHeader)!=0">
             <span class="ListHeader">
-                <xsl:value-of select="./ListHeader[name()!='ListHeader']"/>
+                <xsl:value-of select="./ListHeader"/>
             </span>
         </xsl:if>
         <ul class="list_b">
-            <xsl:for-each select="./child::node()">
+            <xsl:for-each select="./child::node()[name()!='ListHeader']">
                 <li>
                     <xsl:apply-templates select="."/>
                 </li>
@@ -630,11 +630,11 @@
     <xsl:template match="SubList">
         <xsl:if test="count(./SubListHeader)!=0">
             <span class="ListHeader">
-                <xsl:value-of select="./SubListHeader[name()!='SubListHeader']"/>
+                <xsl:value-of select="./SubListHeader"/>
             </span>
         </xsl:if>
         <ul class="list_c">
-            <xsl:for-each select="./child::node()">
+            <xsl:for-each select="./child::node()[name()!='SubListHeader']">
                 <li>
                     <xsl:apply-templates select="."/>
                 </li>
