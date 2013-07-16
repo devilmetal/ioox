@@ -1,5 +1,12 @@
 xquery version "1.0";
 
+(:
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      Retrive the data for the course (id retrived by url via oppidum)
+                    this page implement the action of register in a cours
+:)
 import module namespace request="http://exist-db.org/xquery/request";
 import module namespace session="http://exist-db.org/xquery/session";
 

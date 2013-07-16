@@ -1,4 +1,10 @@
 xquery version "1.0";
+(:
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      Retrive data for specific note of a session in the current cours
+:)
 
 import module namespace session="http://exist-db.org/xquery/session";
 
