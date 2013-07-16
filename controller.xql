@@ -1,8 +1,10 @@
 xquery version "1.0";
 (: -----------------------------------------------
-   ioox controller
-
-   Author: Carnevale Luca & Luyet Gil / UNIFR
+        @project:   KLAXON
+        @date:      16.07.2013
+        @version:   1.0
+        @desc:      Controller du website, définit la structure REST du site.
+        
    ----------------------------------------------- :)
 
 import module namespace gen = "http://oppidoc.com/oppidum/generator" at "../oppidum/lib/pipeline.xqm";
@@ -73,12 +75,14 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
     
     <!--admin page -->
     <item name="admin" epilogue="standard" method="POST">
+        <!-- Page de base pour l'admin-->
         <model src="models/admin/admin.xql"/>
         <view src="views/admin/admin.xsl"/>
         <action name="POST" epilogue="standard">
             <model src="models/admin/admin.xql"/>
             <view src="views/admin/admin.xsl"/>
         </action>
+        <!-- Création d'utilisateurs-->
         <item name="usercreation" epilogue="standard" method="POST">
             <model src="models/admin/createuser.xql"/>
             <view src="views/admin/createuser.xsl"/>
@@ -87,6 +91,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                 <view src="views/admin/createuser.xsl"/>
             </action>
         </item>
+        <!-- Suppression d'utilisateurs -->
         <item name="userdelete" epilogue="standard" method="POST">
             <model src="models/admin/userdelete.xql"/>
             <view src="views/admin/userdelete.xsl"/>
@@ -95,13 +100,14 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                 <view src="views/admin/userdelete.xsl"/>
             </action>
         </item>
+        <!-- Gestion des cours -->
         <collection name="courses" epilogue="standard" method="POST">
             <!-- vue global des cours, demande pour en créer un formulaire de recherche POST : formulaire de recherche et suppression du cours.-->
             <model src="models/admin/courses.xql"/>
             <view src="views/admin/courses.xsl"/>
             <action name="POST" epilogue="standard">
-                    <model src="models/admin/courses.xql"/>
-                    <view src="views/admin/courses.xsl"/>
+                <model src="models/admin/courses.xql"/>
+                <view src="views/admin/courses.xsl"/>
             </action>
             <!-- vu détaillée par cours, modification via Axel et création si item demandé n'exist pas, POST=sauvgarde de modification 
             Dans le cas d'une demande de clone, on arrive avec un paramêtre GET sur la page avec l'id du cours à clôner-->
@@ -136,12 +142,6 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                 </action>
             </item>
         </collection>
-    </item>
-  
-    <!-- /contact page -->
-    <item name="contact" epilogue="standard">
-        <model src="models/contact.xql"/>
-    <view src="views/contact.xsl"/>
     </item>
   
     <!-- /me page (home page of ME section)-->
@@ -213,12 +213,12 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
           </collection>
           
         <!-- /me/docs page -->
-        <!-- permet de transformer les mynotes en PDF (merci jsPDF :D)-->
+        <!-- permet de transformer les mynotes en PDF -->
         <collection name="docs" epilogue="standard">
-            <!-- Vue global des notes / modification si prof-->
+            <!-- Vue global de tous les cours avec des Mynotes -->
             <model src="models/me/docs.xql"/>
             <view src="views/me/docs.xsl"/>
-            <!-- détail de chaque note (note précise + compte rendu du prof, On renvoye sur la page du cours ??? )-->
+            <!-- PDF du cours demandé-->
             <item epilogue="standard2">
                 <model src="models/me/docscourse.xql"/>
                 <view src="views/me/docscourse.xsl"/>
@@ -237,8 +237,8 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                     <model src="models/me/course.xql"/>
                     <view src="views/me/course.xsl"/>
                 </action>
-                <!-- Quizz pour le cours -->
                 
+                <!-- Quizz pour le cours -->
                 <item name="quizz" epilogue="standard" supported="modifier" method="POST" template="templates/quizz">
                     <model src="models/me/quizz.xql"/>
                     <view src="views/me/quizz.xsl"/>
@@ -250,7 +250,6 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                         <view src="views/edit.xsl"/>
                     </action>
                 </item>
-                
                 <!-- Détail de chaque exercice (rendu et donnée) -->
                 <item epilogue="standard" method="POST">
                     <model src="models/me/exercice.xql"/>
@@ -260,10 +259,11 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                         <view src="views/me/exercice.xsl"/>
                     </action>
                 </item>
- <!-- teacher edit mode of the course -->
+                <!-- teacher edit mode of the course -->
                 <collection epilogue="standard" name="teaching">
                     <model src="models/me/teaching/sessions.xql"/>
                     <view src="views/me/teaching/sessions.xsl"/>
+                    <!-- Edition de chaque session -->
                     <item epilogue="standard" supported="modifier" method="POST" template="templates/session">
                         <model src="models/me/teaching/session.xql"/>
                         <view src="views/me/teaching/session.xsl"/>
@@ -274,15 +274,12 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                         <action name="POST">
                             <model src="models/me/teaching/save_session.xql"/>
                         </action>
-                        
                         <item name="docs" method="POST">
-
-                    <action name="POST">
-                        <model src="models/upload.xql"/>
-                    </action>
-                </item>
+                            <action name="POST">
+                                <model src="models/upload.xql"/>
+                            </action>
+                        </item>
                     </item>
-                    
                     <!-- teacher evaluation manager -->
                     <item name="info" epilogue="standard" supported="modifier" method="POST" template="templates/evaluation">
                         <model src="models/me/teaching/info.xql"/>
@@ -295,7 +292,6 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                             <model src="models/me/teaching/save_info.xql"/>
                         </action>
                     </item>
-                    
                     <!-- teacher grades manager -->
                     <item epilogue="standard" name="grades">
                         <!-- vue de base avec l'affichage de tous les étudiants du cours -->
@@ -319,17 +315,18 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
           </collection>
     </item>
     
+    
+    <!-- Utilées pour la génération des events dans la page Myhome pour le FullCalendar-->
     <item name="eventsjs">
         <model src="models/js/eventsjs.xql"/>
         <view src="views/js/eventsjs.xsl"/>
     </item>
-    
     <item name="caljs">
         <model src="models/js/caljs.xql"/>
         <view src="views/js/caljs.xsl"/>
     </item>
     
-    
+    <!-- Templates -->
   <collection name="templates" db="/db/www/ioox" collection="templates">
     <model src="oppidum:models/templates.xql"/>
     <item name="note" resource="note.xhtml">
@@ -354,7 +351,6 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
       <model src="oppidum:models/template.xql"/>
     </item>
   </collection>
-  
 </site>;
 
 (: call oppidum:process with false() to disable ?debug=true mode :)
