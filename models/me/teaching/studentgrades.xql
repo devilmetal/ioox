@@ -93,7 +93,13 @@ let $core := if ($testStudent and $isTeacher and $isAcourse ) then
                                     )
                                     else
                                     (
-                                        (:il n'y a pas d'exercice pour cette session:)
+                                        <Exercice>
+                                            <Topics>
+                                            <Topic>No Exercises</Topic>
+                                            </Topics>
+                                            <ExerciceId>0</ExerciceId>
+                                            <ExerciceGrade/>
+                                        </Exercice>
                                     )
                             }
                             </ExercicesGrades>
