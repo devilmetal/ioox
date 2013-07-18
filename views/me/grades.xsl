@@ -314,7 +314,7 @@
                                 <!-- Calcul pour l'examen pondéré -->
                                 <xsl:variable name="ExamG">
                                     <xsl:choose>
-                                        <xsl:when test="ExamGrade/Grade">
+                                        <xsl:when test="ExamGrade/Grade!=''">
                                             <xsl:value-of
                                                 select="ExamGrade/Grade * $ExamW div $TotalW"/>
                                         </xsl:when>
@@ -324,7 +324,7 @@
                                 <!-- Calcul pour le project pondéré -->
                                 <xsl:variable name="ProjG">
                                     <xsl:choose>
-                                        <xsl:when test="ProjectGrades/Grades/ProjectMean">
+                                        <xsl:when test="ProjectGrades/Grades/ProjectMean!=''">
                                             <xsl:value-of
                                                 select="ProjectGrades/Grades/ProjectMean * $ProjW div $TotalW"
                                             />
@@ -335,7 +335,7 @@
                                 <!-- Calcul pour les exercices pondéré -->
                                 <xsl:variable name="ExerG">
                                     <xsl:choose>
-                                        <xsl:when test="ExercicesGrades/Grades/ExerciceMean">
+                                        <xsl:when test="ExercicesGrades/Grades/ExerciceMean!=''">
                                             <xsl:value-of
                                                 select="ExercicesGrades/Grades/ExerciceMean * $ExerW div $TotalW"
                                             />
