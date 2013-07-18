@@ -288,7 +288,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                         </action>
                     </item>
                     <!-- teacher grades manager -->
-                    <item epilogue="standard" name="grades">
+                    <collection epilogue="standard" name="grades">
                         <!-- vue de base avec l'affichage de tous les étudiants du cours -->
                         <model src="models/me/teaching/grades.xql"/>
                         <view src="views/me/teaching/grades.xsl"/>
@@ -304,7 +304,7 @@ declare variable $mapping := <site db="/db/sites/ioox" confbase="/db/www/ioox" s
                             <model src="models/me/teaching/save_grades.xql"/>
                         </action>
                         </item>
-                    </item>
+                    </collection>
                 </collection>
             </item>
           </collection>
