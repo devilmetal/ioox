@@ -163,6 +163,9 @@
             function drawChart() {
             var data = google.visualization.arrayToDataTable([
             ['Type', 'Grade']
+            <xsl:if test="ExamGrade='' and ProjectGrades/Grades/ProjectMean='' and ExercicesGrades/Grades/ExerciceMean=''">
+                ,['No grade yet' ,0]
+            </xsl:if>
             <!--
             On applique les templates pour le calcul sur les exam / project / exercices//-->
             <xsl:apply-templates select="ExamGrade" mode="javascript"/>
