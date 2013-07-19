@@ -163,7 +163,7 @@
             function drawChart() {
             var data = google.visualization.arrayToDataTable([
             ['Type', 'Grade']
-            <xsl:if test="ExamGrade='' and ProjectGrades/Grades/ProjectMean='' and ExercicesGrades/Grades/ExerciceMean=''">
+            <xsl:if test="(./ExamGrade/Grade='' and ./ProjectGrades/Grades/ProjectMean='' and ./ExercicesGrades/Grades/ExerciceMean='') or (not(exists(./ExamGrade/Grade)) and not(exists(./ProjectGrades/Grades/ProjectMean)) and not(exists(./ExercicesGrades/Grades/ExerciceMean)))">
                 ,['No grade yet' ,0]
             </xsl:if>
             <!--
