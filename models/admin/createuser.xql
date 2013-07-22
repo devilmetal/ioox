@@ -119,7 +119,8 @@ let $core := if($method='POST') then
                                                                 <Activity/>
                                                             </ToDoList>
                                                             <Notes/>
-                                                            <Tokken/>
+                                                            <Token/>
+                                                            <GravatarEmail/>
                                                         </Person> into $persons
                             return 'pass'
                             )

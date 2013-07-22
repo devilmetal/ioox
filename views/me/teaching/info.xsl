@@ -151,6 +151,8 @@
                                     </li>
                                     <li>Exercises</li>
                                  </ul>
+                                    <xsl:variable name="url"><xsl:value-of select="$xslt.base-url"/><xsl:text>me/courses/</xsl:text><xsl:value-of select="$courseid"/><xsl:text>/quizz</xsl:text><xsl:text>/modifier</xsl:text></xsl:variable>
+                                    <a href="{$url}" class="btn btn-inverse faq_right">Edit Quizz</a>
                                  </p>
                                  <!-- link for the edition -->
                                  <a href="{$xslt.base-url}me/courses/{$courseid}/teaching/info/modifier" class="btn btn-inverse"><i class="splashy-document_a4_edit"></i> Edit</a>
